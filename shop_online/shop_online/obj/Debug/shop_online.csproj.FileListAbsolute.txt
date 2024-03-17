@@ -1,0 +1,10 @@
+C:\partitia d\Visual Studio\visual studio proiecte\online_shop\shop_online\shop_online\bin\Debug\shop_online.exe.config
+C:\partitia d\Visual Studio\visual studio proiecte\online_shop\shop_online\shop_online\bin\Debug\shop_online.exe
+C:\partitia d\Visual Studio\visual studio proiecte\online_shop\shop_online\shop_online\bin\Debug\shop_online.pdb
+C:\partitia d\Visual Studio\visual studio proiecte\online_shop\shop_online\shop_online\obj\Debug\shop_online.csprojAssemblyReference.cache
+C:\partitia d\Visual Studio\visual studio proiecte\online_shop\shop_online\shop_online\obj\Debug\shop_online.FormLogin.resources
+C:\partitia d\Visual Studio\visual studio proiecte\online_shop\shop_online\shop_online\obj\Debug\shop_online.Properties.Resources.resources
+C:\partitia d\Visual Studio\visual studio proiecte\online_shop\shop_online\shop_online\obj\Debug\shop_online.csproj.GenerateResource.cache
+C:\partitia d\Visual Studio\visual studio proiecte\online_shop\shop_online\shop_online\obj\Debug\shop_online.csproj.CoreCompileInputs.cache
+C:\partitia d\Visual Studio\visual studio proiecte\online_shop\shop_online\shop_online\obj\Debug\shop_online.exe
+C:\partitia d\Visual Studio\visual studio proiecte\online_shop\shop_online\shop_online\obj\Debug\shop_online.pdb
