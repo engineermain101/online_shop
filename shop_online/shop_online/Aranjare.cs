@@ -1,7 +1,58 @@
 ﻿using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace shop_online
+{/*putem folosi si dictionar. Asta mi-a spus chatul.
+    
+     public class Aranjare
 {
+    public Dictionary<string, bool> ElementeVizibile { get; set; }
+
+    public Aranjare()
+    {
+        ElementeVizibile = new Dictionary<string, bool>
+        {
+            { "panelMenu", true },
+            { "panelSignUp", false },
+            { "labelParola", true },
+            { "textBoxParola", true },
+            { "labelTelefon", true },
+            { "textBoxTelefon", true },
+            { "buttonAcces", true },
+            { "buttonBack", true }
+            // Adaugă alte elemente după nevoie
+
+
+     TexteElemente = new Dictionary<string, string>
+    {
+        { "labelTelefonText", "Telefon" }, // Textul pentru label
+    }
+        };
+    }
+
+     private void SetPanelState(Aranjare config)//asa ar arata functia de SetPanel. Este mai simplu dar nu stiu cum se foloseste mai exact
+    {
+        foreach (var element in config.ElementeVizibile)
+        {
+             Control control = Controls[element.Key]; // Accesarea controlului după cheie
+        if (control != null)
+        {
+            control.Visible = element.Value;
+        }
+        }
+
+     foreach (var element in config.TexteElemente)
+    {
+        Control control = Controls[element.Key]; // Accesarea controlului după cheie
+        if (control is Label label)
+        {
+            label.Text = element.Value;
+        }
+    }
+    }
+}
+
+     */
 
     public class Aranjare
     {
@@ -14,34 +65,34 @@ namespace shop_online
         {
             get; set;
         }
-        /* public string UserButtonStergeText
-         {
-             get; set;
-         }
-         public bool IsISBNReadOnly
-         {
-             get; set;
-         }
-         public bool IsEdituraDropDown
-         {
-             get; set;
-         }
-         public bool IsNrCopiiVisible
-         {
-             get; set;
-         }
-         public string CautaButtonText
-         {
-             get; set;
-         }
-         public bool IsAdaugasiStergeVisible
-         {
-             get; set;
-         }
-         public string AdaugasiStergeButtonText
-         {
-             get; set;
-         }*/
+        public bool labelParolaVisible
+        {
+            get; set;
+        }
+        public bool textBoxParolaVisible
+        {
+            get; set;
+        }
+        public bool labelTelefonVisible
+        {
+            get; set;
+        }
+        public bool textBoxTelefonVisible
+        {
+            get; set;
+        }
+        public string labelTelefonText
+        {
+            get; set;
+        }
+        public bool buttonAccesVisible
+        {
+            get; set;
+        }
+        public bool buttonBackVisible
+        {
+            get; set;
+        }
 
         public Aranjare()
         {//DE FIECARE DATA CAND FACETI O NOUA METODA SAU CEVA PUNETI 
@@ -50,6 +101,19 @@ namespace shop_online
 
             panelMenuVisible = true;
             panelSignUpVisible = false;
+            labelParolaVisible = true;
+            textBoxParolaVisible = true;
+            labelTelefonVisible = true;
+            textBoxTelefonVisible = true;
+            labelTelefonText = "";
+            buttonAccesVisible = true;
+            buttonBackVisible = true;
+
+
+
+
+
+
             /*Exemplu de la aplicatia cu Biblioteca
              * IsComboBoxRolAdminVisible = false;
             PanelName = "cartiPanelCartiApasat";
@@ -76,7 +140,7 @@ namespace shop_online
         }
         public static bool IsValidEmail( string email )
         {
-            if (string.IsNullOrWhiteSpace(email))
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrEmpty(email))
                 return false;
             email.Trim();
 
@@ -98,9 +162,23 @@ namespace shop_online
             // Verifică dacă numărul de telefon respectă formatul
             return Regex.IsMatch(telefon, pattern);
         }
-
-
-
+        public static void ToateObicteledinPanelVisible( Panel panel, bool vis )
+        {
+            foreach (Control control in panel.Controls)
+            {
+                control.Visible = vis;
+            }
+        }
+        public static void ToateTextBoxurileledinPanelGoale( Panel panel )
+        {
+            foreach (Control control in panel.Controls)
+            {
+                if (control is TextBox textBox)
+                {
+                    textBox.Text = string.Empty;
+                }
+            }
+        }
 
 
 

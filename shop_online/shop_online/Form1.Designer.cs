@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.panelMenu = new System.Windows.Forms.Panel();
-            this.buttonSignUp = new System.Windows.Forms.Button();
             this.buttonLogin = new System.Windows.Forms.Button();
+            this.buttonSignUp = new System.Windows.Forms.Button();
             this.panelSignUp = new System.Windows.Forms.Panel();
             this.buttonBack = new System.Windows.Forms.Button();
             this.textBoxNumar_Strada = new System.Windows.Forms.TextBox();
@@ -64,6 +64,16 @@
             this.panelMenu.Size = new System.Drawing.Size(505, 277);
             this.panelMenu.TabIndex = 0;
             // 
+            // buttonLogin
+            // 
+            this.buttonLogin.Location = new System.Drawing.Point(13, 78);
+            this.buttonLogin.Name = "buttonLogin";
+            this.buttonLogin.Size = new System.Drawing.Size(155, 116);
+            this.buttonLogin.TabIndex = 0;
+            this.buttonLogin.Text = "Login";
+            this.buttonLogin.UseVisualStyleBackColor = true;
+            this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
+            // 
             // buttonSignUp
             // 
             this.buttonSignUp.Location = new System.Drawing.Point(174, 65);
@@ -73,15 +83,6 @@
             this.buttonSignUp.Text = "SignUp";
             this.buttonSignUp.UseVisualStyleBackColor = true;
             this.buttonSignUp.Click += new System.EventHandler(this.buttonSignUp_Click);
-            // 
-            // buttonLogin
-            // 
-            this.buttonLogin.Location = new System.Drawing.Point(13, 78);
-            this.buttonLogin.Name = "buttonLogin";
-            this.buttonLogin.Size = new System.Drawing.Size(155, 116);
-            this.buttonLogin.TabIndex = 0;
-            this.buttonLogin.Text = "Login";
-            this.buttonLogin.UseVisualStyleBackColor = true;
             // 
             // panelSignUp
             // 
