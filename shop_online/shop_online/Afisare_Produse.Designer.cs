@@ -39,7 +39,7 @@
             this.produsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.furnizorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.adminToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanelProduse = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +52,7 @@
             this.stergereToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(807, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(841, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -126,20 +126,24 @@
             this.adminToolStripMenuItem1.Size = new System.Drawing.Size(137, 26);
             this.adminToolStripMenuItem1.Text = "Admin";
             // 
-            // flowLayoutPanel1
+            // flowLayoutPanelProduse
             // 
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 28);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(814, 439);
-            this.flowLayoutPanel1.TabIndex = 1;
+            this.flowLayoutPanelProduse.AutoScroll = true;
+            this.flowLayoutPanelProduse.AutoSize = true;
+            this.flowLayoutPanelProduse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.flowLayoutPanelProduse.Location = new System.Drawing.Point(0, 29);
+            this.flowLayoutPanelProduse.Name = "flowLayoutPanelProduse";
+            this.flowLayoutPanelProduse.Padding = new System.Windows.Forms.Padding(2);
+            this.flowLayoutPanelProduse.Size = new System.Drawing.Size(814, 439);
+            this.flowLayoutPanelProduse.TabIndex = 1;
             // 
             // Afisare_Produse
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(807, 463);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.ClientSize = new System.Drawing.Size(841, 510);
+            this.Controls.Add(this.flowLayoutPanelProduse);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Afisare_Produse";
@@ -166,6 +170,6 @@
         private System.Windows.Forms.ToolStripMenuItem produsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem furnizorToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelProduse;
     }
 }

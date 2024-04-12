@@ -86,6 +86,10 @@
       <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="Interogari.cs" />
+    <Compile Include="ProductControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProdusItem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Adauga_Produse.resx">
