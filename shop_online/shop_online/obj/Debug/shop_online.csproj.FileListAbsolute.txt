@@ -127,3 +127,5 @@ C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\System.Security.Cryptography.ProtectedData.xml
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\obj\Debug\shop_online.csproj.CopyComplete
+C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\obj\Debug\shop_online.Afisare_Produse.resources
+C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\obj\Debug\shop_online.Adauga_Produse.resources

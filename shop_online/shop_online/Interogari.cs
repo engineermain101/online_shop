@@ -23,9 +23,9 @@ namespace shop_online
                     string checkQuery = @" SELECT COUNT(*)
                                         FROM Useri AS u
                                         JOIN Adresa AS a ON u.id_adresa = a.id_adresa
-                                        WHERE u.nume = @nume
+                                        WHERE u.username = @nume
                                             AND (u.telefon = @telefon OR u.email = @email)
-                                            ANDu.parola = @parola 
+                                            AND u.parola = @parola 
                                             AND a.judet = @judet
                                             AND a.oras = @oras
                                             AND a.strada = @strada
@@ -70,7 +70,7 @@ namespace shop_online
                     }
 
                     string insertUserQuery = @"INSERT INTO Useri
-                                    (nume, email, parola, telefon,id_adresa) 
+                                    (username, email, parola, telefon,id_adresa) 
                                     VALUES (@nume, @email, @parola, @telefon,@id_adresa);                                   "; // Obținem ID-ul utilizatorului inserat
 
                     using (SqlCommand insertUserCommand = new SqlCommand(insertUserQuery, connection))
