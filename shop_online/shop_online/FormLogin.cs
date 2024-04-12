@@ -11,7 +11,7 @@ namespace shop_online
         private int width;
         private bool signupApasat = false;
         //bool backlaCarti = false;
-        //private Carti cartiForm = null;// Form nou
+        private Afisare_Produse afisare_Produse = null;// Form nou
 
         public FormLogin()
         {
@@ -172,52 +172,54 @@ namespace shop_online
 
 
         private void CloseCurrentFormAndOpenNewFormAsync( string nume, string email, string parola,
-            string telefon, string judet, string oras, string strada, int numar )
+        string telefon, string judet, string oras, string strada, int numar )
         {
-            // Creează o instanță a noului form      
-            /*
-            inaltime panel=451  latime panel=455
-            inaltime menu=24  latime menu=476
-            min inaltime=535  min latime=492
-            inaltime form=294  latime form=375              
-            */
-
-
-            /*
-
-            bibliotecaPanelTextBoxNume.Clear();
-            bibliotecaPanelTextBoxPrenume.Clear();
-            bibliotecaPanelTextBoxEmail.Clear();
-            bibliotecaPanelTextBoxParola.Clear();
-            bibliotecaPanelTextBoxTelefon.Clear();
+            Hide();
+            Aranjare.ToateTextBoxurileledinPanelGoale(panelSignUp);
             butonuldeBack();
 
-            if (cartiForm == null)
+            if (afisare_Produse == null)
             {
-                /*cartiForm = new Carti(nume, prenume, email, parola, telefon)
+                afisare_Produse = new Afisare_Produse(email, parola, telefon)
                 {
                     MinimumSize = new Size(490, 535)
                 };
-                cartiForm = new Carti("a", "a", "a@a.a", "a", telefon)
-                {
-                    MinimumSize = new Size(490, 535)
-                };
-                //cartiForm.LoadUser(nume, prenume, email, parola, telefon);
-                cartiForm.Size = cartiForm.MinimumSize;
-                cartiForm.FormClosed += ( sender, e ) => { cartiForm = null; }; // Resetare referință când formularul este închis
+                /*   afisare_Produse = new Afisare_Produse("a@a.a", "a", telefon)
+                   {
+                       MinimumSize = new Size(490, 535)
+                   };*/
+                afisare_Produse.Size = afisare_Produse.MinimumSize;
+                afisare_Produse.FormClosed += ( sender, e ) => { afisare_Produse = null; }; // Resetare referință când formularul este închis
             }
 
-            if (!cartiForm.Visible)
+            if (!afisare_Produse.Visible)
             {
-                cartiForm.Visible = true;
+                afisare_Produse.Visible = true;
 
-                if (Application.OpenForms ["Biblioteca"] != null)
+                if (Application.OpenForms ["FormLogin"] != null)
                 {
-                    Application.OpenForms ["Biblioteca"].Hide(); // Ascunde formularul Biblioteca
+                    Application.OpenForms ["FormLogin"].Hide();
                 }
             }
-            //cartiForm.LoadUser(nume, prenume, email, parola, telefon);
-            cartiForm.LoadUser("a", "a", "a@a.a", "a", telefon);*/
+            afisare_Produse.LoadUser(email, parola, telefon);
+
+
+
+
+
+            /*      if (afisare_Produse == null)
+                  {
+                      afisare_Produse = new Afisare_Produse(email, parola, telefon)
+                      {
+                          MinimumSize = new Size(490, 535),
+                          Size = new Size(490, 535)
+                      };
+                      afisare_Produse.FormClosed += ( sender, e ) => { afisare_Produse = null; }; // Resetare referință când formularul este închis
+                  }*/
+
+            //afisare_Produse.LoadUser("a@a.a", "a", telefon);
+            afisare_Produse.Show();
+            afisare_Produse.Focus();
         }
 
         private void buttonLogin_Click( object sender, EventArgs e )

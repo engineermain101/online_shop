@@ -262,7 +262,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1180, 757);
+            this.ClientSize = new System.Drawing.Size(1177, 697);
             this.Controls.Add(this.panelSignUp);
             this.Controls.Add(this.panelMenu);
             this.Name = "FormLogin";
