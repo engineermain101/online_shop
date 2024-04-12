@@ -1,4 +1,7 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace shop_online
@@ -180,7 +183,31 @@ namespace shop_online
             }
         }
 
+        public static ImageFormat GetImageFormat( string fileName )
+        {
+            // Obține extensia fișierului
+            string extension = Path.GetExtension(fileName);
 
+            // Verifică dacă extensia este validă și obține formatul corespunzător
+            switch (extension.ToLower())
+            {
+                case ".jpg":
+                case ".jpeg":
+                    return ImageFormat.Jpeg;
+                case ".png":
+                    return ImageFormat.Png;
+                case ".gif":
+                    return ImageFormat.Gif;
+                case ".bmp":
+                    return ImageFormat.Bmp;
+                case ".tiff":
+                    return ImageFormat.Tiff;
+                case ".ico":
+                    return ImageFormat.Icon;
+                default:
+                    throw new NotSupportedException("Extensia fișierului nu este suportată.");
+            }
+        }
 
 
 
