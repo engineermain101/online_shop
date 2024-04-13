@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace shop_online
@@ -13,6 +15,7 @@ namespace shop_online
         private string telefonUtilizator = "01";
         private int utilizatorCurentId = -1;
         private bool admin = false;
+        private Adauga_Produse adauga_Produse = null;// Form nou
 
         public Afisare_Produse()
         {
@@ -26,7 +29,7 @@ namespace shop_online
             parolaUtilizator = parola;
             telefonUtilizator = telefon;
         }
-
+        //Roli
         private void Afisare_Produse_Load( object sender, EventArgs e )
         {
             LoadUser(emailUtilizator, parolaUtilizator, telefonUtilizator);
@@ -136,7 +139,14 @@ namespace shop_online
                 }*/
             }
         }
+        private void produsToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
+            int id_furnizor = Interogari.GetFurnizorId(connectionString, utilizatorCurentId);
 
+            if (id_furnizor > 0)
+                CloseCurrentFormAndOpenNewFormAsync(id_furnizor);
+        }
 
         private void Adaugare_in_flowLayoutPanelProduse()
         {
@@ -150,18 +160,22 @@ namespace shop_online
                 {
                     // Extrage datele din DataRow
                     int id_produs = (int)row ["id_produs"];
-                    Image [] imagelist = Interogari.SelectImagine(connectionString, id_produs);
-                   
-                    Image image=Image.FromFile("C:/Users/Roland/Desktop/FACULTATE/AN 3/zpoze/Examen_EP_2024.jpg");
-                                                          
-                    if (imagelist != null && imagelist.Length > 0)
+                    Dictionary<string, Image> imagedictionary = Interogari.SelectImagines(connectionString, id_produs);
+
+
+                    string extensie = "0";
+
+                    Image image = Image.FromFile("C:/Users/Roland/Desktop/FACULTATE/AN 3/zpoze/Examen_EP_2024.jpg");
+
+                    if (imagedictionary.Count > 0)
                     {
-                        image = imagelist [0];
+                        KeyValuePair<string, Image> firstEntry = imagedictionary.First();
+                        image = firstEntry.Value;
+                        extensie = firstEntry.Key;
                     }
 
                     string title = (string)row ["nume"];
-                    decimal pretMoney = (decimal)row ["pret"];
-                    int pret = (int)pretMoney;
+                    decimal pret = (decimal)row ["pret"];
                     int [] medie = Interogari.MedieRecenzii(connectionString, id_produs);
                     int medie_review = medie [0];
                     int nr_recenzii = medie [1];
@@ -183,6 +197,41 @@ namespace shop_online
 
 
 
+        private void CloseCurrentFormAndOpenNewFormAsync( int id_furnizor )
+        {
+            Hide();
 
+
+            if (adauga_Produse == null)
+            {
+                adauga_Produse = new Adauga_Produse(id_furnizor)
+                {
+                    MinimumSize = new Size(490, 535)
+                };
+                adauga_Produse.Size = adauga_Produse.MinimumSize;
+                adauga_Produse.FormClosed += ( sender, e ) => { adauga_Produse = null; }; // Resetare referință când formularul este închis
+            }
+
+            if (!adauga_Produse.Visible)
+            {
+                adauga_Produse.Visible = true;
+
+                if (Application.OpenForms ["Afisare_Produse"] != null)
+                {
+                    Application.OpenForms ["Afisare_Produse"].Hide();
+                }
+            }
+            adauga_Produse.LoadUser(id_furnizor);
+            adauga_Produse.Show();
+            adauga_Produse.Focus();
+        }
+
+
+
+        //Claudiu
+
+        //Puia
+
+        //Horia
     }
 }

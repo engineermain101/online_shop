@@ -19,7 +19,7 @@ namespace shop_online
         {
             get; set;
         }
-        public int Pret
+        public decimal Pret
         {
             get; set;
         }
@@ -40,7 +40,7 @@ namespace shop_online
             get; set;
         }
 
-        public ProdusItem( Image image, string title, int pret, int nota_rewiu, int nr_recenzii )
+        public ProdusItem( Image image, string title, decimal pret, int nota_rewiu, int nr_recenzii )
         {
             Image = image;
             Title = title;

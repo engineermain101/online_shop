@@ -67,7 +67,7 @@
             // categoriiToolStripMenuItem
             // 
             this.categoriiToolStripMenuItem.Name = "categoriiToolStripMenuItem";
-            this.categoriiToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
+            this.categoriiToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.categoriiToolStripMenuItem.Text = "Categorii";
             // 
             // adaugareToolStripMenuItem
@@ -83,19 +83,20 @@
             // produsToolStripMenuItem
             // 
             this.produsToolStripMenuItem.Name = "produsToolStripMenuItem";
-            this.produsToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.produsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.produsToolStripMenuItem.Text = "Produs";
+            this.produsToolStripMenuItem.Click += new System.EventHandler(this.produsToolStripMenuItem_Click);
             // 
             // furnizorToolStripMenuItem
             // 
             this.furnizorToolStripMenuItem.Name = "furnizorToolStripMenuItem";
-            this.furnizorToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.furnizorToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.furnizorToolStripMenuItem.Text = "Furnizor";
             // 
             // adminToolStripMenuItem
             // 
             this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
-            this.adminToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.adminToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.adminToolStripMenuItem.Text = "Admin";
             // 
             // stergereToolStripMenuItem
@@ -111,19 +112,19 @@
             // produsToolStripMenuItem1
             // 
             this.produsToolStripMenuItem1.Name = "produsToolStripMenuItem1";
-            this.produsToolStripMenuItem1.Size = new System.Drawing.Size(137, 26);
+            this.produsToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
             this.produsToolStripMenuItem1.Text = "Produs";
             // 
             // furnizorToolStripMenuItem1
             // 
             this.furnizorToolStripMenuItem1.Name = "furnizorToolStripMenuItem1";
-            this.furnizorToolStripMenuItem1.Size = new System.Drawing.Size(137, 26);
+            this.furnizorToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
             this.furnizorToolStripMenuItem1.Text = "Furnizor";
             // 
             // adminToolStripMenuItem1
             // 
             this.adminToolStripMenuItem1.Name = "adminToolStripMenuItem1";
-            this.adminToolStripMenuItem1.Size = new System.Drawing.Size(137, 26);
+            this.adminToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
             this.adminToolStripMenuItem1.Text = "Admin";
             // 
             // flowLayoutPanelProduse
@@ -147,7 +148,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Afisare_Produse";
-            this.Text = "Afisare_Produse";
+            this.Text = "Afisare Produse";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Afisare_Produse_FormClosed);
             this.Load += new System.EventHandler(this.Afisare_Produse_Load);
             this.menuStrip1.ResumeLayout(false);
