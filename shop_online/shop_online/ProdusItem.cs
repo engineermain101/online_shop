@@ -1,10 +1,6 @@
-﻿/*using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;*/
-using System;
+﻿using System;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace shop_online
@@ -19,7 +15,7 @@ namespace shop_online
         {
             get; set;
         }
-        public int Pret
+        public decimal Pret
         {
             get; set;
         }
@@ -33,18 +29,23 @@ namespace shop_online
         }
         public Button ButonAdaugaCos
         {
-            get; 
+            get;
         }
         public Label LabelInStoc
         {
             get; set;
         }
-
-        public ProdusItem( Image image, string title, int pret, int nota_rewiu, int nr_recenzii )
+        public int Id_produs
         {
+            get; set;
+        }
+
+        public ProdusItem( Image image, string title, decimal pret, int nota_rewiu, int nr_recenzii, int id_produs )
+        {
+            Id_produs = id_produs;
             Image = image;
             Title = title;
-            Pret = pret;
+            Pret = Convert.ToDecimal(pret.ToString("N2", new CultureInfo("ro-RO")));
             Nota_Review = nota_rewiu;
             Nr_recenzii = nr_recenzii;
             //Buton_Adauga_Cos= buton_adauga_cos

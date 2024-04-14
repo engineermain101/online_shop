@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -151,8 +152,9 @@ namespace shop_online
             return false;
         }
 
-        public static void InsertImagine( string connectionString, Image imagine, int id_produs, ImageFormat format )
+        public static void InsertImagine( string connectionString, Image imagine, int id_produs, string nume_imagine_cu_extensie )
         {
+            ImageFormat format = Aranjare.GetImageFormat(nume_imagine_cu_extensie);
             try
             {
                 byte [] imageData;// Convertirea imaginii într-un array de bytes
@@ -168,13 +170,14 @@ namespace shop_online
                     imageData = ms.ToArray();
                 }
 
-                string query = "INSERT INTO Imagini (imagine,id_produs) VALUES (@ImageData,@id_produs)";
+                string query = "INSERT INTO Imagini (imagine,id_produs,nume) VALUES (@ImageData,@id_produs,@Nume)";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@ImageData", imageData);
                         command.Parameters.AddWithValue("@id_produs", id_produs);
+                        command.Parameters.AddWithValue("@Nume", nume_imagine_cu_extensie);
                         connection.Open();
                         command.ExecuteNonQuery();
                     }
@@ -186,40 +189,54 @@ namespace shop_online
             }
         }
 
-        public static Image [] SelectImagine( string connectionString, int id_produs )
+        public static Dictionary<string, Image> SelectImagines( string connectionString, int id_produs )
         {
-            //throw new NotImplementedException("Trebuie sa aflam formatul din baza de date!!!!!");
             try
             {
-                byte [] imageDataFromDatabase;
+                Dictionary<string, Image> imagesDictionary = new Dictionary<string, Image>();
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string query = "SELECT imagine FROM Imagini WHERE id_produs = @ProductId";
-                    SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@ProductId", id_produs);
                     connection.Open();
-                    imageDataFromDatabase = (byte [])command.ExecuteScalar();
+                    string query = "SELECT imagine, nume FROM Imagini WHERE id_produs = @ProductId";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@ProductId", id_produs);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                byte [] imageDataFromDatabase = (byte [])reader ["imagine"];
+                                string imageName = reader ["nume"].ToString();
+                                ImageFormat format = Aranjare.GetImageFormat(imageName);
+
+                                using (MemoryStream ms = new MemoryStream(imageDataFromDatabase))
+                                {
+                                    Image imageFromDatabase = Image.FromStream(ms);
+                                    using (MemoryStream convertedMs = new MemoryStream())
+                                    {
+                                        // Salvează imaginea în formatul corespunzător
+                                        imageFromDatabase.Save(convertedMs, format);
+
+                                        // Poziționează fluxul la început pentru a putea citi datele
+                                        convertedMs.Seek(0, SeekOrigin.Begin);
+
+                                        // Creează o nouă imagine din fluxul convertit
+                                        Image convertedImage = Image.FromStream(convertedMs);
+
+                                        // Adaugă imaginea convertită în dictionar
+                                        imagesDictionary.Add(imageName, convertedImage);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
 
-                // Verificăm dacă am primit date de la baza de date
-                if (imageDataFromDatabase == null || imageDataFromDatabase.Length == 0)
-                {
-                    //MessageBox.Show("Nu există imagini pentru produsul cu ID-ul specificat.");
-                    Console.WriteLine("Nu există imagini pentru produsul cu ID-ul specificat.");
-                    return null; // Nu există imagini disponibile
-                }
-
-                // Convertim array-ul de bytes într-o imagine
-                using (MemoryStream ms = new MemoryStream(imageDataFromDatabase))
-                {
-                    Image imageFromDatabase = Image.FromStream(ms);
-                    return new Image [] { imageFromDatabase };
-                }
-
+                return imagesDictionary;
             }
             catch (Exception e)
             {
-                MessageBox.Show("Eroare la inserare imagine: " + e.Message);
+                MessageBox.Show("Eroare la selectarea imaginii: " + e.Message);
                 return null;
             }
         }
@@ -289,11 +306,9 @@ namespace shop_online
             return null;
         }
 
-
-
         public static int GetUserID( string connectionString, string email, string telefon, string parola )
         {
-            
+
             try
             {
                 string query = "SELECT id_user FROM Useri WHERE parola = @parola";
@@ -349,7 +364,38 @@ namespace shop_online
             }
         }
 
+        public static int GetFurnizorId( string connectionString, int user_Id )
+        {
+            try
+            {
+                string query = "SELECT id_furnizor FROM Furnizori WHERE id_user=@id_user";
 
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id_user", user_Id);
+                    connection.Open();
+
+                    object result = command.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        return (int)result;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Autentificare eșuată. Verificați datele de autentificare sau nu v-ați conectat încă.");
+                        return -1;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A apărut o eroare la autentificare: " + ex.Message);
+                return -1;
+            }
+        }
 
 
 

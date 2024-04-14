@@ -182,7 +182,7 @@ namespace shop_online
             {
                 afisare_Produse = new Afisare_Produse(email, parola, telefon)
                 {
-                    MinimumSize = new Size(490, 535)
+                    MinimumSize = new Size(520*2, 138*4)
                 };
                 /*   afisare_Produse = new Afisare_Produse("a@a.a", "a", telefon)
                    {
