@@ -44,7 +44,6 @@ namespace shop_online
 
         public void LoadUser( string email, string parola, string telefon )
         {
-            InitializeComponent();
             telefonUtilizator = telefon;
             parolaUtilizator = parola;
             emailUtilizator = email;
@@ -139,7 +138,8 @@ namespace shop_online
                 }*/
             }
         }
-        private void produsToolStripMenuItem_Click( object sender, EventArgs e )
+
+        private void adaugaProdusToolStripMenuItem_Click( object sender, EventArgs e )
         {
             string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
             int id_furnizor = Interogari.GetFurnizorId(connectionString, utilizatorCurentId);
@@ -161,11 +161,13 @@ namespace shop_online
                     // Extrage datele din DataRow
                     int id_produs = (int)row ["id_produs"];
                     Dictionary<string, Image> imagedictionary = Interogari.SelectImagines(connectionString, id_produs);
-
-
                     string extensie = "0";
-
-                    Image image = Image.FromFile("C:/Users/Roland/Desktop/FACULTATE/AN 3/zpoze/Examen_EP_2024.jpg");
+                    Image image = null;
+                    try
+                    {
+                        image = Image.FromFile("C:/Users/Roland/Desktop/FACULTATE/AN 3/zpoze/Examen_EP_2024.jpg");
+                    }
+                    catch (Exception e) { Console.Write(e.ToString()); }
 
                     if (imagedictionary.Count > 0)
                     {
@@ -181,11 +183,16 @@ namespace shop_online
                     int nr_recenzii = medie [1];
 
                     // Creează un nou ProdusItem și adaugă-l direct în flowLayoutPanelProduse
-                    ProdusItem produs = new ProdusItem(image, title, pret, medie_review, nr_recenzii);
-                    Panel pan = new Panel();
-                    pan.BackColor = Color.Pink;
-                    pan.Controls.Add(new ProductControl(produs));
-                    flowLayoutPanelProduse.Controls.Add(pan);
+
+
+                    ProdusItem produs = new ProdusItem(image, title, pret, medie_review, nr_recenzii, id_produs);
+                    //Panel pan = new Panel();
+                    //pan.BackColor = Color.Pink;
+                    //pan.Controls.Add(new ProductControl(produs));
+                    flowLayoutPanelProduse.Controls.Add(new ProductControl(produs));
+                    //flowLayoutPanelProduse.Container.Add(new ProductControl(produs));
+                    flowLayoutPanelProduse.SendToBack();
+
                 }
             }
 
@@ -225,6 +232,8 @@ namespace shop_online
             adauga_Produse.Show();
             adauga_Produse.Focus();
         }
+
+
 
 
 
