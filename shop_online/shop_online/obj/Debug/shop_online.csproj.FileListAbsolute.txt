@@ -130,3 +130,28 @@ C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\obj\Debug\shop_online.Afisare_Produse.resources
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\obj\Debug\shop_online.Adauga_Produse.resources
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\obj\Debug\shop_online.ProductControl.resources
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\bin\Debug\shop_online.exe.config
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\bin\Debug\shop_online.exe
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\bin\Debug\shop_online.pdb
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\bin\Debug\System.Buffers.dll
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\bin\Debug\System.Memory.dll
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\bin\Debug\System.Security.Cryptography.ProtectedData.dll
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\bin\Debug\System.Buffers.xml
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\bin\Debug\System.Memory.xml
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\bin\Debug\System.Security.Cryptography.ProtectedData.xml
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\obj\Debug\shop_online.csproj.AssemblyReference.cache
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\obj\Debug\shop_online.Adauga_Produse.resources
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\obj\Debug\shop_online.Afisare_Produse.resources
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\obj\Debug\shop_online.FormLogin.resources
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\obj\Debug\shop_online.ProductControl.resources
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\obj\Debug\shop_online.Properties.Resources.resources
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\obj\Debug\shop_online.csproj.GenerateResource.cache
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\obj\Debug\shop_online.csproj.CoreCompileInputs.cache
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\obj\Debug\shop_onl.1721B023.Up2Date
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\obj\Debug\shop_online.exe
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\obj\Debug\shop_online.pdb
