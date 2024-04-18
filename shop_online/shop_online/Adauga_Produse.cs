@@ -1,4 +1,7 @@
-﻿using System.Configuration;
+﻿using System.Collections.Generic;
+using System.Configuration;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace shop_online
@@ -115,5 +118,28 @@ namespace shop_online
             }
         }
 
+
+
+
+        //Puia
+        private void buttonAdaugaProdus_Click( object sender, System.EventArgs e )
+        {
+            int Cantitate = int.Parse(textBoxCantitate.Text);
+
+            decimal Pret = decimal.Parse(textBoxPret.Text);
+            string Descriere = textBoxDescriere.Text;
+            List<string> Numelistaspecificatii = textBoxDenumireSpecificatie.Text.Split(',').Select(s => s.Trim()).ToList();
+            List<string> ValoareListaSpecificatii = textBoxValoareSpecificatie.Text.Split(',').Select(s => s.Trim()).ToList();
+            int id_Categorie = int.Parse(comboBoxCategorie.Text);
+            Image image = pictureBoxImagine.Image;
+            string NumeProdus = textBoxDenumire.Text;
+            string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
+
+
+            Interogari.InsertProdus(connectionString, image, id_Categorie, user_id_furnizor, NumeProdus, Cantitate, Pret, Descriere, Numelistaspecificatii, ValoareListaSpecificatii);
+        }
+
+
+        //Horia
     }
 }

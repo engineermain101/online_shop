@@ -402,6 +402,65 @@ namespace shop_online
         //Claudiu
 
         //Puia
+        public static void InsertProdus( string connectionString, Image image, int id_Categorie, int id_Furnizor, string NumeProdus, int Cantitate, decimal Pret, string Descriere, List<string> NumeListaSpecificatii, List<string> ValoareListaSpecificatii )
+        {
+            try
+            {
+                NumeProdus = Aranjare.FormatName(NumeProdus);
+                Descriere = Aranjare.FormatName(Descriere);
+                foreach (string s in NumeListaSpecificatii)
+                {
+                    string specificatieFormatata = s.ToLower().Trim();
+                    //pt fiecare numespecificatii se apelaeaza aranjare.FormatName
+                }
+                foreach (string s in ValoareListaSpecificatii)
+                {
+                    string valoarespecificatie = s.ToLower().Trim();
+                    //pt fiecare numespecificatii se apelaeaza aranjare.FormatName
+                }
+
+                if (string.IsNullOrWhiteSpace(NumeProdus) ||
+
+                    string.IsNullOrWhiteSpace(Descriere))
+                {
+                    MessageBox.Show("Toate câmpurile trebuie completate.");
+                    return;
+                }
+                //apelare metoda adauga imagini. verifica daca toate sunt goale nu tr lasa sa adaugi produsul
+                //implementatre intergari:-insert image apelare, -adauga specificatii (o alta functie pt adaugare specificatii) apelare foreach
+                //
+
+                string query = @"INSERT INTO Produse (nume, pret, id_categorie, cantitate, descriere, id_furnizor) " +
+                                      "VALUES (@Nume, @Pret, @Categorie, @Cantitate, @Descriere, @Furnizor)";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+
+                    cmd.CommandText = @"INSERT INTO Produse (nume, pret, id_categorie, cantitate, descriere, id_furnizor) " +
+                                      "VALUES (@Nume, @Pret, @Categorie, @Cantitate, @Descriere, @Furnizor)";
+
+                    cmd.Parameters.AddWithValue("@Nume", NumeProdus);
+                    cmd.Parameters.AddWithValue("@Pret", (Pret));
+                    cmd.Parameters.AddWithValue("@Categorie", id_Categorie);
+                    cmd.Parameters.AddWithValue("@Furnizor", id_Furnizor);
+                    cmd.Parameters.AddWithValue("@Cantitate", (Cantitate));
+                    cmd.Parameters.AddWithValue("@Descriere", Descriere);
+
+
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Produsul a fost adăugat cu succes în baza de date!");
+                }
+
+                throw new Exception("apelare metoda adauga imagini,implementatre intergari:-insert image apelare, -adauga specificatii ");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Eroare la adăugarea produsului în baza de date: " + ex.Message);
+            }
+        }
 
         //Horia
     }
