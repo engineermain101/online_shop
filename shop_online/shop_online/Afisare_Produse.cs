@@ -15,6 +15,7 @@ namespace shop_online
         private string telefonUtilizator = "01";
         private int utilizatorCurentId = -1;
         private bool admin = false;
+        private bool furnizor = false;
         private Adauga_Produse adauga_Produse = null;// Form nou
 
         public Afisare_Produse()
@@ -44,18 +45,54 @@ namespace shop_online
 
         public void LoadUser( string email, string parola, string telefon )
         {
+            adaugaToolStripMenuItem.Visible = false;
+            adaugaProdusToolStripMenuItem.Visible = false;
+            adaugaFurnizorToolStripMenuItem.Visible = false;
+            adaugaAdminToolStripMenuItem.Visible = false;
+
+            stergereToolStripMenuItem.Visible = false;
+            stergereProdusToolStripMenuItem.Visible = false;
+            stergereFurnizorToolStripMenuItem.Visible = false;
+            stergereAdminToolStripMenuItem.Visible = false;
+
             telefonUtilizator = telefon;
             parolaUtilizator = parola;
             emailUtilizator = email;
+
             string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
-
-
             utilizatorCurentId = Interogari.GetUserID(connectionString, emailUtilizator, telefonUtilizator, parolaUtilizator);
 
             if (utilizatorCurentId < 1)
+            {
+                Application.Exit();
                 return;
+            }
 
             Adaugare_in_flowLayoutPanelProduse();
+
+            if (Interogari.GetFurnizorId(connectionString, utilizatorCurentId) > 0)
+            {
+                adaugaToolStripMenuItem.Visible = true;
+                adaugaProdusToolStripMenuItem.Visible = true;
+                stergereToolStripMenuItem.Visible = true;
+                stergereProdusToolStripMenuItem.Visible = true;
+                furnizor = true;
+                return;
+            }
+
+            if (Interogari.GetAdminId(connectionString, utilizatorCurentId) > 0)
+            {
+                admin = true;
+                adaugaToolStripMenuItem.Visible = true;
+                adaugaFurnizorToolStripMenuItem.Visible = true;
+                adaugaAdminToolStripMenuItem.Visible = true;
+                stergereToolStripMenuItem.Visible = true;
+                stergereProdusToolStripMenuItem.Visible = true;
+                stergereFurnizorToolStripMenuItem.Visible = true;
+                stergereAdminToolStripMenuItem.Visible = true;
+
+                return;
+            }
 
 
             // Acum lista 'produse' conține obiecte ProdusItem populate cu datele din DataTable
@@ -207,8 +244,7 @@ namespace shop_online
         private void CloseCurrentFormAndOpenNewFormAsync( int id_furnizor )
         {
             Hide();
-
-
+            
             if (adauga_Produse == null)
             {
                 adauga_Produse = new Adauga_Produse(id_furnizor)

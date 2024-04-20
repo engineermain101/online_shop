@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
 using System.Linq;
@@ -124,19 +125,23 @@ namespace shop_online
         //Puia
         private void buttonAdaugaProdus_Click( object sender, System.EventArgs e )
         {
-            int Cantitate = int.Parse(textBoxCantitate.Text);
+            try
+            {
+                int Cantitate = int.Parse(textBoxCantitate.Text.Trim());
+                decimal Pret = decimal.Parse(textBoxPret.Text.Trim());
+                string Descriere = textBoxDescriere.Text.Trim();
+                List<string> Numelistaspecificatii = textBoxDenumireSpecificatie.Text.Split(',').Select(s => s.Trim()).ToList();
+                List<string> ValoareListaSpecificatii = textBoxValoareSpecificatie.Text.Split(',').Select(s => s.Trim()).ToList();
+                int id_Categorie = int.Parse(comboBoxCategorie.Text.Trim());
+                throw new Exception("Id categorie nu este acelasi cu ce e in combobox. Trebuie sa faceti o metoda get Id_categorie in clasa Interogari!");
+                Image image = pictureBoxImagine.Image;
+                string NumeProdus = textBoxDenumire.Text;
+                string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
 
-            decimal Pret = decimal.Parse(textBoxPret.Text);
-            string Descriere = textBoxDescriere.Text;
-            List<string> Numelistaspecificatii = textBoxDenumireSpecificatie.Text.Split(',').Select(s => s.Trim()).ToList();
-            List<string> ValoareListaSpecificatii = textBoxValoareSpecificatie.Text.Split(',').Select(s => s.Trim()).ToList();
-            int id_Categorie = int.Parse(comboBoxCategorie.Text);
-            Image image = pictureBoxImagine.Image;
-            string NumeProdus = textBoxDenumire.Text;
-            string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
 
-
-            Interogari.InsertProdus(connectionString, image, id_Categorie, user_id_furnizor, NumeProdus, Cantitate, Pret, Descriere, Numelistaspecificatii, ValoareListaSpecificatii);
+                Interogari.InsertProdus(connectionString, image, id_Categorie, user_id_furnizor, NumeProdus, Cantitate, Pret, Descriere, Numelistaspecificatii, ValoareListaSpecificatii);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
         }
 
 
