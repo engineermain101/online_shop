@@ -7,10 +7,9 @@ namespace shop_online
 {
     public partial class FormLogin : Form
     {
-        private int height;
-        private int width;
-        private bool signupApasat = false;
-        //bool backlaCarti = false;
+        //private int height;
+        //private int width;
+        // private bool signupApasat = false;
         private Afisare_Produse afisare_Produse = null;// Form nou
 
         public FormLogin()
@@ -21,40 +20,19 @@ namespace shop_online
         //Roli   
         private void FormLogin_Load( object sender, EventArgs e )
         {
-            //Aranjare.ToateTextBoxurileledinPanelGoale(panelSignUp);
-            //panelSignUp.Hide();
-
-            panelSignUp.Visible = false;
-            //panelSignUp.Visible = true;
-            labelParola.Visible = true;
-            textBoxParola.Visible = true;
-            labelTelefon.Text = "Telefon sau Email";
-            labelTelefon.Visible = true;
-            textBoxTelefon.Visible = true;
-            buttonAcces.Visible = true;
-            buttonBack.Visible = true;
-            buttonLogin.Visible = false;
+            Aranjare.ToateTextBoxurileledinPanelGoale(panelSignUp);
+            Aranjare.ToateTextBoxurileledinPanelGoale(panelMenu);
+            panelSignUp.Hide();
+            panelMenu.Show();
+            buttonLoginPanelMenu.Visible = true;
             MinimumSize = new Size(panelMenu.Width + 50, panelMenu.Height + 50);
-            this.Size = new Size(panelMenu.Width + 50, panelMenu.Height + 50);
+            Size = new Size(panelMenu.Width + 50, panelMenu.Height + 50);
 
-
-            //panelMenu.Anchor = AnchorStyles.None; // Debifează orice ancorare existentă pentru panel menu
-            // panelMenu.Dock = DockStyle.None; // Dezactivează orice ancorare existentă pentru panel menu
-            /*
-            int xp = (ClientSize.Width - buttonLogin.Width) / 2;
-            int yp = (ClientSize.Height - panelMenu.Height) / 2;
-            //panelMenu.Location = new Point(xp - 125, yp);
-
-            int x = (panelMenu.ClientSize.Width - buttonLogin.Width) / 2;
-            int y = (panelMenu.ClientSize.Height - buttonLogin.Height) / 2;
-
-            // Setează locația și ancorajul butoanelor în panel-ul Menu
-            buttonLogin.Location = new Point(x - 125, y);
-            buttonLogin.Anchor = AnchorStyles.None;
-
-            buttonSignUp.Location = new Point(buttonLogin.Right + 100, buttonLogin.Top);
-            buttonSignUp.Anchor = AnchorStyles.None;
-            */
+            panelMenu.Anchor = AnchorStyles.None; // Debifează orice ancorare existentă pentru panel menu
+            panelMenu.Dock = DockStyle.None; // Dezactivează orice ancorare existentă pentru panel menu
+            Size = panelMenu.Size;
+            panelMenu.Location = new Point(0, 0);
+            MinimumSize = new Size(panelMenu.Width, panelMenu.Height);
             butonuldeBack();
         }
         private void butonuldeBack()
@@ -65,138 +43,55 @@ namespace shop_online
             // panelMenu.Width = 505;
 
             FormBorderStyle = FormBorderStyle.Sizable;
-            Aranjare panelConfiguration = new Aranjare
-            {
-                //panelMenuVisible = true,
-                panelSignUpVisible = false,
-                buttonAccesVisible = true,
-                
-            };
-            buttonSignUp.Visible = true;
-            SetPanelState(panelConfiguration);
-            panelSignUp.Visible = false;
-            labelTelefon.Text = "Telefon sau Email";
-            signupApasat = false;
+            panelMenu.Show();
+            panelSignUp.Hide();
             MinimumSize = new Size(panelMenu.Width + 50, panelMenu.Height + 50);
-
         }
         private void buttonSignUp_Click( object sender, EventArgs e )
         {
-            Console.WriteLine("Ati apasat SignUp!");
             Aranjare.ToateTextBoxurileledinPanelGoale(panelSignUp);
             SignUpButton();
-            ShiftUpSignUpButtons();
         }
         private void SignUpButton()
         {
-            signupApasat = true;
-            //labelTelefon.Location = new Point(labelTelefon.Location.X, labelTelefon.Location.Y + 20);
-           /* panelMenu.Anchor = AnchorStyles.None;
-            panelMenu.Dock = DockStyle.None;
-
-            Size = panelMenu.Size;
-            panelMenu.Location = new Point(0, 0);
-            MinimumSize = new Size(panelSignUp.Width, panelSignUp.Height);*/
-
-            Aranjare panelConfiguration = new Aranjare
-            {
-                panelMenuVisible = true,
-                panelSignUpVisible = true,
-                labelTelefonText = "Telefon",
-                buttonAccesVisible = false,
-                
-            };
-
-            labelNume.Visible = true;
-            buttonSignUp.Visible = false;
-
-            SetPanelState(panelConfiguration);
-            //FormBorderStyle = FormBorderStyle.FixedSingle;
-            MinimumSize = new Size(panelSignUp.Width, panelMenu.Height + panelSignUp.Height - 50);
+            panelMenu.Hide();
+            panelSignUp.Show();
+            panelSignUp.Anchor = AnchorStyles.None;
+            panelSignUp.Dock = DockStyle.None;
+            MinimumSize = new Size(panelSignUp.Width + 50, panelSignUp.Height + 50);
+            Size = new Size(panelSignUp.Width + 50, panelSignUp.Height + 50);
+            FormBorderStyle = FormBorderStyle.Sizable;
+            panelSignUp.Location = new Point(0, 0);
             Aranjare.ToateObicteledinPanelVisible(panelSignUp, true);
         }
         private void buttonBack_Click( object sender, EventArgs e )
         {
             butonuldeBack();
-            ShiftDownSignUpButtons();
-            this.Size = new Size(panelMenu.Width + 50, panelMenu.Height + 50);
+            Size = new Size(panelMenu.Width + 50, panelMenu.Height + 50);
         }
         private void buttonAcces_Click( object sender, EventArgs e )
         {
-            string nume = Aranjare.FormatName(textBoxNume.Text);
-            string email = Aranjare.FormatName(textBoxEmail.Text);
             string parola = textBoxParola.Text;
             string telefon = textBoxTelefon.Text.Trim();
-            string judet = Aranjare.FormatName(textBoxJudet.Text);
-            string oras = Aranjare.FormatName(textBoxOras.Text);
-            string strada = Aranjare.FormatName(textBoxStrada.Text);
-            int numar;
-
             string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
+            string tel = string.Empty, email_sus = string.Empty;
 
-            if (signupApasat)
-            {//Logica butonului de signUp
-
-                if (!Aranjare.IsValidTelefon(telefon))
-                {
-                    MessageBox.Show("Introduceți un telefon valid.");
-                    return;
-                }
-
-                if (!int.TryParse(textBoxNumar_Strada.Text, out numar) || numar < 1)
-                {
-                    MessageBox.Show("Introduceți un număr valid pentru stradă.");
-                    return;
-                }
-                if (string.IsNullOrWhiteSpace(nume) || string.IsNullOrWhiteSpace(parola) ||
-                    string.IsNullOrWhiteSpace(judet) || string.IsNullOrWhiteSpace(oras) ||
-                    string.IsNullOrWhiteSpace(strada) || numar < 1)
-                {
-                    MessageBox.Show("Trebuie completate câmpurile!");
-                    return;
-                }
-                if (!Aranjare.IsValidEmail(email))//optional
-                {
-                    MessageBox.Show("Introduceți un email de email valid.");
-                    return;
-                }
-                if (Interogari.SignUp(connectionString, nume, email, parola, telefon, judet, oras, strada, numar))
-                {
-                    CloseCurrentFormAndOpenNewFormAsync(nume, email, parola, telefon, judet, oras, strada, numar);
-                }
-            }
+            if (Aranjare.IsValidTelefon(telefon))
+                tel = telefon;
+            else if (Aranjare.IsValidEmail(telefon))
+                email_sus = telefon;
             else
-            {// Logica pentru Login
-                string tel = string.Empty, email_sus = string.Empty;
+            {
+                MessageBox.Show("Introduceți un email sau telefon valid.");
+                return;
+            }
 
-                if (string.IsNullOrWhiteSpace(parola))
-                {
-                    MessageBox.Show("Trebuie completat câmpul parolă");
-                    return;
-                }
-
-                if (Aranjare.IsValidTelefon(telefon))
-                {
-                    tel = telefon;
-                }
-                else if (Aranjare.IsValidEmail(telefon))
-                {
-                    email_sus = telefon;
-                }
-                else
-                {
-                    MessageBox.Show("Introduceți un email sau telefon valid.");
-                    return;
-                }
-
-                if (Interogari.Login(connectionString, email_sus, tel, parola))
-                {
-                    numar = -1;
-                    CloseCurrentFormAndOpenNewFormAsync(nume, email_sus, parola, tel, judet, oras, strada, numar);
-                }
+            if (Interogari.Login(connectionString, email_sus, tel, parola))
+            {
+                CloseCurrentFormAndOpenNewFormAsync("", email_sus, parola, tel, "", "", "", -1);
             }
         }
-               
+
 
         private void CloseCurrentFormAndOpenNewFormAsync( string nume, string email, string parola,
         string telefon, string judet, string oras, string strada, int numar )
@@ -209,7 +104,7 @@ namespace shop_online
             {
                 afisare_Produse = new Afisare_Produse(email, parola, telefon)
                 {
-                    MinimumSize = new Size(520*2, 138*4)
+                    MinimumSize = new Size(520 * 2, 138 * 4)
                 };
                 /*   afisare_Produse = new Afisare_Produse("a@a.a", "a", telefon)
                    {
@@ -245,35 +140,6 @@ namespace shop_online
             afisare_Produse.Focus();
         }
 
-        private void buttonLogin_Click( object sender, EventArgs e )
-        {
-            //Console.WriteLine("Ati apasat Login!");
-            /*panelMenu.Anchor = AnchorStyles.None;
-            panelMenu.Dock = DockStyle.None;
-            Size = panelMenu.Size;
-            panelMenu.Location = new Point(0, 0);
-            MinimumSize = new Size(panelSignUp.Width, panelSignUp.Height);
-            */
-
-            Aranjare.ToateTextBoxurileledinPanelGoale(panelSignUp);
-            Aranjare.ToateObicteledinPanelVisible(panelSignUp, false);
-            Aranjare panelConfiguration = new Aranjare
-            {
-                /*panelMenuVisible = false,
-                panelSignUpVisible = true,
-                labelParolaVisible = true,
-                textBoxParolaVisible = true,
-                labelTelefonVisible = true,
-                textBoxTelefonVisible = true,
-                buttonAccesVisible = true,
-                buttonBackVisible = true,
-                labelTelefonText = "Telefon sau Email",*/
-
-            };
-            SetPanelState(panelConfiguration);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-        }
-
         private void SetPanelState( Aranjare config )
         {
             panelMenu.Visible = config.panelMenuVisible;
@@ -283,7 +149,7 @@ namespace shop_online
             labelTelefon.Visible = config.labelTelefonVisible;
             textBoxTelefon.Visible = config.textBoxTelefonVisible;
             labelTelefon.Text = config.labelTelefonText;
-            buttonAcces.Visible = config.buttonAccesVisible;
+            buttonLoginPanelMenu.Visible = config.buttonAccesVisible;
             buttonBack.Visible = config.buttonBackVisible;
             /*List<string> panelKeys = panelStates.Keys.ToList();
 
@@ -334,65 +200,43 @@ namespace shop_online
 
 
         //Horia
-private void buttonSignUp2_Click(object sender, EventArgs e)
+        private void buttonSignUp2_Click( object sender, EventArgs e )
         {
             string nume = Aranjare.FormatName(textBoxNume.Text);
             string email = Aranjare.FormatName(textBoxEmail.Text);
-            string parola = textBoxParola.Text;
-            string telefon = textBoxTelefon.Text.Trim();
+            string parola = textBoxParola2.Text.Trim();
+            string telefon = textBoxTelefon2.Text.Trim();
             string judet = Aranjare.FormatName(textBoxJudet.Text);
             string oras = Aranjare.FormatName(textBoxOras.Text);
             string strada = Aranjare.FormatName(textBoxStrada.Text);
-            int numar;
 
-            string connectionString = ConfigurationManager.ConnectionStrings["DatadeBaza"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
 
-            if (signupApasat)
-            {//Logica butonului de signUp
+            if (!int.TryParse(textBoxNumar_Strada.Text, out int numar) || numar < 1)
+            {
+                MessageBox.Show("Introduceți un număr valid pentru stradă.");
+                return;
+            }
 
-                if (!Aranjare.IsValidTelefon(telefon))
-                {
-                    MessageBox.Show("Introduceți un telefon valid.");
-                    return;
-                }
-
-                if (!int.TryParse(textBoxNumar_Strada.Text, out numar) || numar < 1)
-                {
-                    MessageBox.Show("Introduceți un număr valid pentru stradă.");
-                    return;
-                }
-                if (string.IsNullOrWhiteSpace(nume) || string.IsNullOrWhiteSpace(parola) ||
-                    string.IsNullOrWhiteSpace(judet) || string.IsNullOrWhiteSpace(oras) ||
-                    string.IsNullOrWhiteSpace(strada) || numar < 1)
-                {
-                    MessageBox.Show("Trebuie completate câmpurile!");
-                    return;
-                }
-                if (!Aranjare.IsValidEmail(email))//optional
-                {
-                    MessageBox.Show("Introduceți un email de email valid.");
-                    return;
-                }
-                if (Interogari.SignUp(connectionString, nume, email, parola, telefon, judet, oras, strada, numar))
-                {
-                    CloseCurrentFormAndOpenNewFormAsync(nume, email, parola, telefon, judet, oras, strada, numar);
-                }
+            if (Interogari.SignUp(connectionString, nume, email, parola, telefon, judet, oras, strada, numar))
+            {
+                CloseCurrentFormAndOpenNewFormAsync(nume, email, parola, telefon, judet, oras, strada, numar);
             }
         }
 
-        private void ShiftUpSignUpButtons() //functia asta muta text-box-urile cu tot cu label-uri mai sus pt ca sa arate mai bine ecranu de sign up
-        {
-            panelSignUp.Location = new Point(0, this.Location.Y - 20);
-            //panelMenu.Location = new Point(0, this.Location.Y + 65);
+        /*  private void ShiftUpSignUpButtons() //functia asta muta text-box-urile cu tot cu label-uri mai sus pt ca sa arate mai bine ecranu de sign up
+          {
+              panelSignUp.Location = new Point(0, Location.Y - 20);
+              //panelMenu.Location = new Point(0, this.Location.Y + 65);
 
-        }
+          }
 
-        private void ShiftDownSignUpButtons() //functia asta muta text-box-urile cu tot cu label-uri mai jos pt ca sa arate mai bine ecranu de login
-        {
-            panelSignUp.Location = new Point(0, this.Location.Y + 20);
-            //panelMenu.Location = new Point(0, this.Location.Y - 65);
-        }
-
+          private void ShiftDownSignUpButtons() //functia asta muta text-box-urile cu tot cu label-uri mai jos pt ca sa arate mai bine ecranu de login
+          {
+              panelSignUp.Location = new Point(0, Location.Y + 20);
+              //panelMenu.Location = new Point(0, this.Location.Y - 65);
+          }
+          */
 
 
 

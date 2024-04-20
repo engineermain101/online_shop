@@ -143,7 +143,7 @@ namespace shop_online
         }
         public static bool IsValidEmail( string email )
         {
-            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrEmpty(email))
+            if (string.IsNullOrWhiteSpace(email))
                 return false;
             email.Trim();
 
@@ -182,7 +182,6 @@ namespace shop_online
                 }
             }
         }
-
         public static ImageFormat GetImageFormat( string fileName )
         {
             // Obține extensia fișierului

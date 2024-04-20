@@ -13,20 +13,43 @@ namespace shop_online
     {
         //Roli
         public static bool SignUp( string connectionString, string nume, string email, string parola,
-      string telefon, string judet, string oras, string strada, int numar )
+        string telefon, string judet, string oras, string strada, int numar )
         {
+            if (string.IsNullOrWhiteSpace(nume) || string.IsNullOrWhiteSpace(parola) ||
+                  string.IsNullOrWhiteSpace(judet) || string.IsNullOrWhiteSpace(oras) ||
+                  string.IsNullOrWhiteSpace(strada) || numar < 1)
+            {
+                MessageBox.Show("Trebuie completate câmpurile!");
+                return false;
+            }
+
+            if (!Aranjare.IsValidTelefon(telefon))
+            {
+                MessageBox.Show("Introduceți un telefon valid.");
+                return false;
+            }
+
+            if (!string.IsNullOrWhiteSpace(email) && !Aranjare.IsValidEmail(email))//optional
+            {
+                MessageBox.Show("Introduceți un email valid.");
+                return false;
+            }
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                try
+                connection.Open();
+                using (SqlTransaction transaction = connection.BeginTransaction())
+                using (SqlCommand checkCommand = connection.CreateCommand())
+                using (SqlCommand insertAddressCommand = connection.CreateCommand())
+                using (SqlCommand insertUserCommand = connection.CreateCommand())
                 {
-                    connection.Open();
-                    /* string checkQuery = @"SELECT COUNT(*) FROM Useri
-                                   WHERE nume = @nume AND  parola = @parola
-                                   AND ( telefon = @telefon OR email = @email) 
-                                   AND judet = @judet AND oras = @oras 
-                                   AND strada = @strada AND numar = @numar";*/
+                    checkCommand.Transaction = transaction;
+                    insertAddressCommand.Transaction = transaction;
+                    insertUserCommand.Transaction = transaction;
 
-                    string checkQuery = @" SELECT COUNT(*)
+                    try
+                    {
+                        string checkQuery = @" SELECT COUNT(*)
                                         FROM Useri AS u
                                         JOIN Adresa AS a ON u.id_adresa = a.id_adresa
                                         WHERE u.username = @nume
@@ -37,10 +60,7 @@ namespace shop_online
                                             AND a.strada = @strada
                                             AND a.numar = @numar";
 
-
-                    // Verifică dacă utilizatorul există deja în baza de date
-                    using (SqlCommand checkCommand = new SqlCommand(checkQuery, connection))
-                    {
+                        checkCommand.CommandText = checkQuery;
                         checkCommand.Parameters.AddWithValue("@nume", nume);
                         checkCommand.Parameters.AddWithValue("@telefon", telefon);
                         checkCommand.Parameters.AddWithValue("@parola", parola);
@@ -51,36 +71,30 @@ namespace shop_online
                         checkCommand.Parameters.AddWithValue("@numar", numar);
 
                         int existingUserCount = (int)checkCommand.ExecuteScalar();
-
                         if (existingUserCount > 0)
                         {
                             MessageBox.Show("Utilizatorul există deja în baza de date.");
                             return false;
                         }
-                    }
-                    string insertAddressQuery = @"INSERT INTO Adresa 
+
+                        string insertAddressQuery = @"INSERT INTO Adresa 
                                           (judet, oras, strada, numar) 
                                           VALUES (@judet, @oras, @strada, @numar); 
                                           SELECT SCOPE_IDENTITY();";
-                    int userId;
-                    using (SqlCommand insertAddressCommand = new SqlCommand(insertAddressQuery, connection))
-                    {
 
+                        insertAddressCommand.CommandText = insertAddressQuery;
                         insertAddressCommand.Parameters.AddWithValue("@judet", judet);
                         insertAddressCommand.Parameters.AddWithValue("@oras", oras);
                         insertAddressCommand.Parameters.AddWithValue("@strada", strada);
                         insertAddressCommand.Parameters.AddWithValue("@numar", numar);
+                        int userId = Convert.ToInt32(insertAddressCommand.ExecuteScalar());
 
-                        // Obținem ID-ul 
-                        userId = Convert.ToInt32(insertAddressCommand.ExecuteScalar());
-                    }
 
-                    string insertUserQuery = @"INSERT INTO Useri
+                        string insertUserQuery = @"INSERT INTO Useri
                                     (username, email, parola, telefon,id_adresa) 
                                     VALUES (@nume, @email, @parola, @telefon,@id_adresa);                                   "; // Obținem ID-ul utilizatorului inserat
 
-                    using (SqlCommand insertUserCommand = new SqlCommand(insertUserQuery, connection))
-                    {
+                        insertUserCommand.CommandText = insertUserQuery;
                         insertUserCommand.Parameters.AddWithValue("@nume", nume);
                         insertUserCommand.Parameters.AddWithValue("@email", email);
                         insertUserCommand.Parameters.AddWithValue("@parola", parola);
@@ -88,22 +102,28 @@ namespace shop_online
                         insertUserCommand.Parameters.AddWithValue("@id_adresa", userId);
 
                         insertUserCommand.ExecuteNonQuery();
+
+                        transaction.Commit();
+                        // MessageBox.Show("Utilizatorul a fost adăugat cu succes în baza de date.");
+                        return true;
                     }
-
-                    MessageBox.Show("Utilizatorul a fost adăugat cu succes în baza de date.");
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("A apărut o eroare la inserarea în baza de date: " + ex.Message);
-
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        MessageBox.Show("A apărut o eroare la inserarea în baza de date: " + ex.Message);
+                        return false;
+                    }
                 }
             }
-            return false;
         }
 
         public static bool Login( string connectionString, string email, string telefon, string parola )
         {
+            if (string.IsNullOrWhiteSpace(parola))
+            {
+                MessageBox.Show("Trebuie completat câmpul parolă");
+                return false;
+            }
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -111,11 +131,11 @@ namespace shop_online
                     connection.Open();
                     string query = @"SELECT COUNT(*) FROM Useri WHERE parola = @parola";
 
-                    if (!string.IsNullOrEmpty(email))
+                    if (Aranjare.IsValidEmail(email))
                     {
                         query += " AND email = @email";
                     }
-                    else if (!string.IsNullOrEmpty(telefon))
+                    else if (Aranjare.IsValidTelefon(telefon))
                     {
                         query += " AND telefon = @telefon";
                     }
@@ -152,6 +172,9 @@ namespace shop_online
             return false;
         }
 
+        /// <summary>
+        /// Insereaza o imagine in tabela Imagine.
+        /// </summary>
         public static void InsertImagine( string connectionString, Image imagine, int id_produs, string nume_imagine_cu_extensie )
         {
             ImageFormat format = Aranjare.GetImageFormat(nume_imagine_cu_extensie);
@@ -241,6 +264,9 @@ namespace shop_online
             }
         }
 
+        /// <summary>
+        /// Returneaza 2 parametri:1)AverageRating, 2)NumberOfReviews
+        /// </summary>
         public static int [] MedieRecenzii( string connectionString, int id_produs )
         {
             try
@@ -308,7 +334,6 @@ namespace shop_online
 
         public static int GetUserID( string connectionString, string email, string telefon, string parola )
         {
-
             try
             {
                 string query = "SELECT id_user FROM Useri WHERE parola = @parola";
@@ -323,7 +348,6 @@ namespace shop_online
                 }
                 else
                 {
-                    // Fără criterii de căutare valide
                     MessageBox.Show("Autentificare eșuată. Verificați datele de autentificare sau nu v-ați conectat încă.");
                     return -1;
                 }
@@ -384,7 +408,7 @@ namespace shop_online
                     }
                     else
                     {
-                        MessageBox.Show("Autentificare eșuată. Verificați datele de autentificare sau nu v-ați conectat încă.");
+                        //MessageBox.Show("Autentificare eșuată. Verificați datele de autentificare sau nu v-ați conectat încă.");
                         return -1;
                     }
 
@@ -397,6 +421,38 @@ namespace shop_online
             }
         }
 
+        public static int GetAdminId( string connectionString, int user_Id )
+        {
+            try
+            {
+                string query = "SELECT id_admin FROM Admini WHERE id_user=@id_user";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id_user", user_Id);
+                    connection.Open();
+
+                    object result = command.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        return (int)result;
+                    }
+                    else
+                    {
+                        //MessageBox.Show("Autentificare eșuată. Verificați datele de autentificare sau nu v-ați conectat încă.");
+                        return -1;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A apărut o eroare la autentificare: " + ex.Message);
+                return -1;
+            }
+        }
 
 
         //Claudiu
