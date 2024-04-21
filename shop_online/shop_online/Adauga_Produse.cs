@@ -34,8 +34,12 @@ namespace shop_online
         {
             InitializeComponent();
             user_id_furnizor = id_furnizor;
-            string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
-
+            //string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
+            try
+            {
+                string connectionString = Aranjare.GetConnectionString();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
 
 
             // Acum lista 'produse' conține obiecte ProdusItem populate cu datele din DataTable

@@ -80,6 +80,18 @@
       <DependentUpon>Afisare_Produse.cs</DependentUpon>
     </Compile>
     <Compile Include="Aranjare.cs" />
+    <Compile Include="Cos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cos.Designer.cs">
+      <DependentUpon>Cos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DetaliiProdus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetaliiProdus.Designer.cs">
+      <DependentUpon>DetaliiProdus.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +110,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Afisare_Produse.resx">
       <DependentUpon>Afisare_Produse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cos.resx">
+      <DependentUpon>Cos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DetaliiProdus.resx">
+      <DependentUpon>DetaliiProdus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>

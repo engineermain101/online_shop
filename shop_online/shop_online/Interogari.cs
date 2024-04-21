@@ -454,6 +454,79 @@ namespace shop_online
             }
         }
 
+        public static void AdaugainCos( string connectionString, int nr_bucati, decimal pret, int id_user, int id_produs )
+        {
+            bool productExists = CheckIfProductExistsInCart(connectionString, id_user, id_produs);
+
+            if (productExists)
+            {
+                UpdateProductInCart(connectionString, id_user, id_produs, nr_bucati, pret * nr_bucati);
+            }
+            else
+            {
+                AddProductToCart(connectionString, id_user, id_produs, nr_bucati, pret * nr_bucati);
+            }
+        }
+
+        private static bool CheckIfProductExistsInCart( string connectionString, int id_user, int id_produs )
+        {
+            string query = "SELECT COUNT(*) FROM Cos WHERE id_user = @id_user AND id_produs = @id_produs";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id_user", id_user);
+                    command.Parameters.AddWithValue("@id_produs", id_produs);
+
+                    int count = (int)command.ExecuteScalar();
+                    return count > 0;
+                }
+            }
+        }
+
+        private static void UpdateProductInCart( string connectionString, int id_user, int id_produs, int nr_bucati, decimal total_pret )
+        {
+            string query = "UPDATE Cos SET nr_bucati = nr_bucati + @nr_bucati, total_pret = total_pret + @total_pret WHERE id_user = @id_user AND id_produs = @id_produs";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@nr_bucati", nr_bucati);
+                    command.Parameters.AddWithValue("@total_pret", total_pret);
+                    command.Parameters.AddWithValue("@id_user", id_user);
+                    command.Parameters.AddWithValue("@id_produs", id_produs);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private static void AddProductToCart( string connectionString, int id_user, int id_produs, int nr_bucati, decimal total_pret )
+        {
+            string query = "INSERT INTO Cos (id_user, id_produs, nr_bucati, total_pret) VALUES (@id_user, @id_produs, @nr_bucati, @total_pret)";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id_user", id_user);
+                    command.Parameters.AddWithValue("@id_produs", id_produs);
+                    command.Parameters.AddWithValue("@nr_bucati", nr_bucati);
+                    command.Parameters.AddWithValue("@total_pret", total_pret);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
 
         //Claudiu
 

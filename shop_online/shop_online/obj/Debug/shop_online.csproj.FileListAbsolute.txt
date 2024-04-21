@@ -155,3 +155,5 @@ C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PRO
 C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\obj\Debug\shop_onl.1721B023.Up2Date
 C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\obj\Debug\shop_online.exe
 C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\obj\Debug\shop_online.pdb
+C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\obj\Debug\shop_online.DetaliiProdus.resources
+C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\obj\Debug\shop_online.Cos.resources

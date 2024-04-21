@@ -7,7 +7,7 @@ namespace shop_online
 {
     public class ProdusItem
     {
-        public Image Image
+        public Image[] Image
         {
             get; set;
         }
@@ -40,7 +40,7 @@ namespace shop_online
             get; set;
         }
 
-        public ProdusItem( Image image, string title, decimal pret, int nota_rewiu, int nr_recenzii, int id_produs )
+        public ProdusItem( Image[] image, string title, decimal pret, int nota_rewiu, int nr_recenzii, int id_produs )
         {
             Id_produs = id_produs;
             Image = image;
@@ -61,6 +61,7 @@ namespace shop_online
         }
         private void ButonAdaugaCos_Click( object sender, EventArgs e )
         {
+            throw new NotImplementedException();
             // Adaugă logica pentru adăugarea în coș aici
             // Poți accesa informațiile despre produs folosind proprietățile clasei
         }

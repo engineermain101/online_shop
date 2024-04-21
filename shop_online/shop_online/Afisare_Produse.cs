@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace shop_online
@@ -13,7 +11,7 @@ namespace shop_online
         private string emailUtilizator = "bbbb";
         private string parolaUtilizator = "0";
         private string telefonUtilizator = "01";
-        private int utilizatorCurentId = -1;
+        private static int utilizatorCurentId = -1;
         private bool admin = false;
         private bool furnizor = false;
         private Adauga_Produse adauga_Produse = null;// Form nou
@@ -59,7 +57,8 @@ namespace shop_online
             parolaUtilizator = parola;
             emailUtilizator = email;
 
-            string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
+            // string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
+            string connectionString = Aranjare.GetConnectionString();
             utilizatorCurentId = Interogari.GetUserID(connectionString, emailUtilizator, telefonUtilizator, parolaUtilizator);
 
             if (utilizatorCurentId < 1)
@@ -178,7 +177,8 @@ namespace shop_online
 
         private void adaugaProdusToolStripMenuItem_Click( object sender, EventArgs e )
         {
-            string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
+            //string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
+            string connectionString = Aranjare.GetConnectionString();
             int id_furnizor = Interogari.GetFurnizorId(connectionString, utilizatorCurentId);
 
             if (id_furnizor > 0)
@@ -188,7 +188,7 @@ namespace shop_online
         private void Adaugare_in_flowLayoutPanelProduse()
         {
             flowLayoutPanelProduse.Controls.Clear();
-            string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
+            string connectionString = Aranjare.GetConnectionString();
             DataTable data = Interogari.SelectTop30Produse(connectionString);
             foreach (DataRow row in data.Rows)
             {
@@ -198,19 +198,21 @@ namespace shop_online
                     // Extrage datele din DataRow
                     int id_produs = (int)row ["id_produs"];
                     Dictionary<string, Image> imagedictionary = Interogari.SelectImagines(connectionString, id_produs);
-                    string extensie = "0";
-                    Image image = null;
-                    try
-                    {
-                        image = Image.FromFile("C:/Users/Roland/Desktop/FACULTATE/AN 3/zpoze/Examen_EP_2024.jpg");
-                    }
-                    catch (Exception e) { Console.Write(e.ToString()); }
+                    Image [] images = null;
 
-                    if (imagedictionary.Count > 0)
+                    if (imagedictionary.Count == 0)
                     {
-                        KeyValuePair<string, Image> firstEntry = imagedictionary.First();
-                        image = firstEntry.Value;
-                        extensie = firstEntry.Key;
+                        images = new Image [1];
+                        images [0] = SystemIcons.WinLogo.ToBitmap();
+                    }
+                    else
+                    {
+                        images = new Image [imagedictionary.Count];
+                        int i = 0;
+                        foreach (KeyValuePair<string, Image> kvp in imagedictionary)
+                        {
+                            images [i++] = kvp.Value;
+                        }
                     }
 
                     string title = (string)row ["nume"];
@@ -222,21 +224,19 @@ namespace shop_online
                     // Creează un nou ProdusItem și adaugă-l direct în flowLayoutPanelProduse
 
 
-                    ProdusItem produs = new ProdusItem(image, title, pret, medie_review, nr_recenzii, id_produs);
-                    //Panel pan = new Panel();
-                    //pan.BackColor = Color.Pink;
-                    //pan.Controls.Add(new ProductControl(produs));
+                    ProdusItem produs = new ProdusItem(images, title, pret, medie_review, nr_recenzii, id_produs);
                     flowLayoutPanelProduse.Controls.Add(new ProductControl(produs));
                     //flowLayoutPanelProduse.Container.Add(new ProductControl(produs));
-                    flowLayoutPanelProduse.SendToBack();
+                    //flowLayoutPanelProduse.SendToBack();
 
                 }
             }
-
-            // MessageBox.Show("Adaugare in flow panel.");
         }
 
-
+        public static int GetUtilizatorID()
+        {
+            return utilizatorCurentId;
+        }
 
 
 
@@ -244,7 +244,7 @@ namespace shop_online
         private void CloseCurrentFormAndOpenNewFormAsync( int id_furnizor )
         {
             Hide();
-            
+
             if (adauga_Produse == null)
             {
                 adauga_Produse = new Adauga_Produse(id_furnizor)
@@ -267,6 +267,11 @@ namespace shop_online
             adauga_Produse.LoadUser(id_furnizor);
             adauga_Produse.Show();
             adauga_Produse.Focus();
+        }
+
+        private void cosToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+
         }
 
 

@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Configuration;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace shop_online
-{/*putem folosi si dictionar. Asta mi-a spus chatul.
+{
+    /*putem folosi si dictionar. Asta mi-a spus chatul.
     
      public class Aranjare
 {
@@ -99,7 +103,7 @@ namespace shop_online
 
         public Aranjare()
         {//DE FIECARE DATA CAND FACETI O NOUA METODA SAU CEVA PUNETI 
-            //SI IN FUNCTIA   SetPanelState( Aranjare config ) DIN FormLogin
+         //SI IN FUNCTIA   SetPanelState( Aranjare config ) DIN FormLogin
 
 
             panelMenuVisible = true;
@@ -208,6 +212,67 @@ namespace shop_online
             }
         }
 
+        public static string GetConnectionString()
+        {
+            ConnectionStringSettingsCollection connectionStrings = ConfigurationManager.ConnectionStrings;
+            string computerName = Environment.MachineName;
+
+            foreach (ConnectionStringSettings connectionString in connectionStrings)
+            {
+                // Verifică dacă connection string-ul conține numele calculatorului
+                if (connectionString.ConnectionString.Contains(computerName))
+                {
+                    // Aici ai găsit connection string-ul potrivit pentru calculatorul curent
+                    //Console.WriteLine(connectionString.ConnectionString);
+                    return connectionString.ConnectionString;
+
+                    // Poți folosi connectionName și connectionValue aici în funcție de necesități
+                    // De exemplu, poți utiliza connectionValue pentru a crea o conexiune la baza de date
+                    // break; // Ieși din iterație după ce ai găsit connection string-ul potrivit
+                }
+            }
+
+            //  return ConfigurationManager.ConnectionStrings [connectionName].ConnectionString;
+            throw new Exception("Nu s-a găsit niciun connection string potrivit pentru acest calculator.");
+        }
+
+        public static void CloseCurrentFormAndOpenNewFormAsync<T>( int id_furnizor, params object [] args ) where T : Form, new()
+        {
+            throw new NotImplementedException();
+
+            // Închide forma curentă
+            Form currentForm = Application.OpenForms.OfType<T>().FirstOrDefault();
+            currentForm?.Hide();
+
+            // Creează o nouă instanță a formei specificate
+            T newForm = Activator.CreateInstance<T>();
+
+            // Setează argumentele formei, dacă sunt furnizate
+            System.Reflection.MethodInfo loadUserMethod = typeof(T).GetMethod("LoadUser", new [] { typeof(int) });
+            if (loadUserMethod != null)
+            {
+                loadUserMethod.Invoke(newForm, new object [] { id_furnizor });
+            }
+
+            // Setează dimensiunea minimă a formei
+            newForm.MinimumSize = new Size(490, 535);
+
+            // Închide forma nouă când este închisă
+            newForm.FormClosed += ( sender, e ) => { newForm = null; };
+
+            // Ascunde orice altă formă deschisă a aceleiași clase
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == typeof(T) && form != newForm)
+                {
+                    form.Hide();
+                }
+            }
+
+            // Afișează și focalizează noua formă
+            newForm.Show();
+            newForm.Focus();
+        }
 
 
 
