@@ -40,6 +40,7 @@
             this.stergereProdusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stergereFurnizorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stergereAdminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripAdaugaProduse.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,7 +61,8 @@
             this.menuStripAdaugaProduse.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.produsToolStripMenuItem,
             this.adaugaToolStripMenuItem,
-            this.stergereToolStripMenuItem});
+            this.stergereToolStripMenuItem,
+            this.cosToolStripMenuItem});
             this.menuStripAdaugaProduse.Location = new System.Drawing.Point(0, 0);
             this.menuStripAdaugaProduse.Name = "menuStripAdaugaProduse";
             this.menuStripAdaugaProduse.Size = new System.Drawing.Size(724, 28);
@@ -138,6 +140,13 @@
             this.stergereAdminToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.stergereAdminToolStripMenuItem.Text = "Admin";
             // 
+            // cosToolStripMenuItem
+            // 
+            this.cosToolStripMenuItem.Name = "cosToolStripMenuItem";
+            this.cosToolStripMenuItem.Size = new System.Drawing.Size(45, 24);
+            this.cosToolStripMenuItem.Text = "Cos";
+            this.cosToolStripMenuItem.Click += new System.EventHandler(this.cosToolStripMenuItem_Click);
+            // 
             // Afisare_Produse
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -170,5 +179,6 @@
         private System.Windows.Forms.ToolStripMenuItem stergereProdusToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stergereFurnizorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stergereAdminToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cosToolStripMenuItem;
     }
 }

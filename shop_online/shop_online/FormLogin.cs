@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -71,10 +70,17 @@ namespace shop_online
         }
         private void buttonAcces_Click( object sender, EventArgs e )
         {
+            //string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
+
             string parola = textBoxParola.Text;
             string telefon = textBoxTelefon.Text.Trim();
-            string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
             string tel = string.Empty, email_sus = string.Empty;
+            string connectionString = null;
+            try
+            {
+                connectionString = Aranjare.GetConnectionString();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.ToString()); return; }
 
             if (Aranjare.IsValidTelefon(telefon))
                 tel = telefon;
@@ -210,8 +216,14 @@ namespace shop_online
             string oras = Aranjare.FormatName(textBoxOras.Text);
             string strada = Aranjare.FormatName(textBoxStrada.Text);
 
-            string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
-
+            // string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
+            string connectionString = null;
+            try
+            {
+                connectionString = Aranjare.GetConnectionString();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
+                       
             if (!int.TryParse(textBoxNumar_Strada.Text, out int numar) || numar < 1)
             {
                 MessageBox.Show("Introduceți un număr valid pentru stradă.");
