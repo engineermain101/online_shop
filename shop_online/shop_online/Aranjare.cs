@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -211,7 +213,6 @@ namespace shop_online
                     throw new NotSupportedException("Extensia fișierului nu este suportată.");
             }
         }
-
         public static string GetConnectionString()
         {
             ConnectionStringSettingsCollection connectionStrings = ConfigurationManager.ConnectionStrings;
@@ -235,6 +236,89 @@ namespace shop_online
             //  return ConfigurationManager.ConnectionStrings [connectionName].ConnectionString;
             throw new Exception("Nu s-a găsit niciun connection string potrivit pentru acest calculator.");
         }
+
+        public static void Adaugare_in_flowLayoutPanel( FlowLayoutPanel flowLayoutPanelProduse, DataTable data, bool buttonVisible )
+        {
+            flowLayoutPanelProduse.Controls.Clear();
+            string connectionString = GetConnectionString();
+
+            foreach (DataRow row in data.Rows)
+            {
+                int cantitate = (int)row ["cantitate"];
+                if (cantitate > 0)
+                {
+                    // Extrage datele din DataRow
+                    int id_produs = (int)row ["id_produs"];
+                    Dictionary<string, Image> imagedictionary = Interogari.SelectImagines(connectionString, id_produs);
+                    Image [] images = null;
+
+                    if (imagedictionary.Count == 0)
+                    {
+                        images = new Image [1];
+                        images [0] = SystemIcons.WinLogo.ToBitmap();
+                    }
+                    else
+                    {
+                        images = new Image [imagedictionary.Count];
+                        int i = 0;
+                        foreach (KeyValuePair<string, Image> kvp in imagedictionary)
+                        {
+                            images [i++] = kvp.Value;
+                        }
+                    }
+
+                    string title = (string)row ["nume"];
+                    decimal pret = (decimal)row ["pret"];
+                    int [] medie = Interogari.MedieRecenzii(connectionString, id_produs);
+                    int medie_review = medie [0];
+                    int nr_recenzii = medie [1];
+
+                    // Creează un nou ProdusItem și adaugă-l direct în flowLayoutPanelProduse
+
+                    ProdusItem produs = new ProdusItem(images, title, pret, medie_review, nr_recenzii, id_produs);
+                    flowLayoutPanelProduse.Controls.Add(new ProductControl(produs, buttonVisible));
+                }
+            }
+        }
+
+        public static void ResetColorProductControl( FlowLayoutPanel flowLayoutPanel )
+        {
+            bool clickedOutsideProductControl = true;
+            Point cursorPosition = flowLayoutPanel.PointToClient(Cursor.Position);
+
+            foreach (Control control in flowLayoutPanel.Controls)
+            {
+                if (control.Bounds.Contains(cursorPosition))
+                {
+                    clickedOutsideProductControl = false;
+                    break;
+                }
+            }
+
+            // Dacă s-a făcut clic în afara unui ProductControl, dezactivează toate ProductControl-urile
+            if (clickedOutsideProductControl)
+            {
+                foreach (Control control in flowLayoutPanel.Controls)
+                {
+                    if (control is ProductControl productControl)
+                        productControl.BackColor = Color.OrangeRed;
+                }
+            }
+        }
+
+        public static int GetIdProdusSelectat( FlowLayoutPanel panel )
+        {
+            if (panel == null)
+                return -1;
+
+            foreach (Control control in panel.Controls)
+            {
+                if (control is ProductControl productControl && productControl.BackColor == Color.OrangeRed)
+                    return productControl.GetProdus_ID();
+            }
+            return -1;
+        }
+
 
         public static void CloseCurrentFormAndOpenNewFormAsync<T>( int id_furnizor, params object [] args ) where T : Form, new()
         {
@@ -273,8 +357,6 @@ namespace shop_online
             newForm.Show();
             newForm.Focus();
         }
-
-
 
         //Claudiu
 
