@@ -308,7 +308,7 @@ namespace shop_online
                                 SELECT id_produs, AVG(nr_stele) AS AvgRating
                                 FROM Review
                                 GROUP BY id_produs
-                            ) r ON p.id_produs = r.id_produs
+                            ) r ON p.id_produs = r.id_produs and p.cantitate>0
                             ORDER BY r.AvgRating DESC";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -527,6 +527,70 @@ namespace shop_online
             }
         }
 
+        public static DataTable GetCos( string connectionString, int idUser )
+        {
+            DataTable dataTable = new DataTable();
+            string query = @"
+            SELECT p.*, c.*
+            FROM Produse p
+            INNER JOIN (
+                SELECT id_produs, id_user
+                FROM Cos
+                WHERE id_user = @idUser
+                GROUP BY id_produs, id_user
+            ) c ON p.id_produs = c.id_produs
+            ORDER BY p.id_produs DESC";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@idUser", idUser);
+                        SqlDataAdapter adapter = new SqlDataAdapter(command);
+                        adapter.Fill(dataTable);
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Poți trata diferite tipuri de excepții SQL aici
+                Console.WriteLine($"A apărut o excepție SQL: {ex.Message}");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                // Poți trata alte excepții aici
+                Console.WriteLine($"A apărut o excepție: {ex.Message}");
+                return null;
+            }
+
+            return dataTable;
+        }
+
+        public static void DeleteProdusdinCos( string connectionString, int id_user, int id_produs )
+        {
+            string query = "DELETE FROM Cos WHERE id_user = @id_user AND id_produs = @id_produs";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@id_user", id_user);
+                        command.Parameters.AddWithValue("@id_produs", id_produs);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A apărut o eroare la ștergerea produsului din coș: " + ex.Message);
+            }
+        }
 
         //Claudiu
 

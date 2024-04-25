@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -15,6 +14,7 @@ namespace shop_online
         private bool admin = false;
         private bool furnizor = false;
         private Adauga_Produse adauga_Produse = null;// Form nou
+        private Cos cos = null;
 
         public Afisare_Produse()
         {
@@ -29,10 +29,6 @@ namespace shop_online
             telefonUtilizator = telefon;
         }
         //Roli
-        private void Afisare_Produse_Load( object sender, EventArgs e )
-        {
-            LoadUser(emailUtilizator, parolaUtilizator, telefonUtilizator);
-        }
         private void Afisare_Produse_FormClosed( object sender, FormClosedEventArgs e )
         {
             if (e.CloseReason == CloseReason.UserClosing)
@@ -40,7 +36,10 @@ namespace shop_online
                 Application.Exit();
             }
         }
-
+        private void Afisare_Produse_Load( object sender, EventArgs e )
+        {
+            LoadUser(emailUtilizator, parolaUtilizator, telefonUtilizator);
+        }
         public void LoadUser( string email, string parola, string telefon )
         {
             adaugaToolStripMenuItem.Visible = false;
@@ -66,8 +65,8 @@ namespace shop_online
                 Application.Exit();
                 return;
             }
-
-            Adaugare_in_flowLayoutPanelProduse();
+            DataTable data = Interogari.SelectTop30Produse(connectionString);
+            Aranjare.Adaugare_in_flowLayoutPanel(flowLayoutPanelProduse, data, true);
 
             if (Interogari.GetFurnizorId(connectionString, utilizatorCurentId) > 0)
             {
@@ -174,7 +173,10 @@ namespace shop_online
                 }*/
             }
         }
-
+        private void flowLayoutPanelProduse_Click( object sender, EventArgs e )
+        {
+            Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
+        }
         private void adaugaProdusToolStripMenuItem_Click( object sender, EventArgs e )
         {
             //string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
@@ -182,55 +184,19 @@ namespace shop_online
             int id_furnizor = Interogari.GetFurnizorId(connectionString, utilizatorCurentId);
 
             if (id_furnizor > 0)
-                CloseCurrentFormAndOpenNewFormAsync(id_furnizor);
+                CloseCurrentFormAndOpenAdaugaProdus(id_furnizor);
         }
-
-        private void Adaugare_in_flowLayoutPanelProduse()
+        private void cosToolStripMenuItem_Click( object sender, EventArgs e )
         {
-            flowLayoutPanelProduse.Controls.Clear();
-            string connectionString = Aranjare.GetConnectionString();
-            DataTable data = Interogari.SelectTop30Produse(connectionString);
-            foreach (DataRow row in data.Rows)
+            foreach (Control control in flowLayoutPanelProduse.Controls)
             {
-                int cantitate = (int)row ["cantitate"];
-                if (cantitate > 0)
+                if (control is ProductControl)
                 {
-                    // Extrage datele din DataRow
-                    int id_produs = (int)row ["id_produs"];
-                    Dictionary<string, Image> imagedictionary = Interogari.SelectImagines(connectionString, id_produs);
-                    Image [] images = null;
-
-                    if (imagedictionary.Count == 0)
-                    {
-                        images = new Image [1];
-                        images [0] = SystemIcons.WinLogo.ToBitmap();
-                    }
-                    else
-                    {
-                        images = new Image [imagedictionary.Count];
-                        int i = 0;
-                        foreach (KeyValuePair<string, Image> kvp in imagedictionary)
-                        {
-                            images [i++] = kvp.Value;
-                        }
-                    }
-
-                    string title = (string)row ["nume"];
-                    decimal pret = (decimal)row ["pret"];
-                    int [] medie = Interogari.MedieRecenzii(connectionString, id_produs);
-                    int medie_review = medie [0];
-                    int nr_recenzii = medie [1];
-
-                    // Creează un nou ProdusItem și adaugă-l direct în flowLayoutPanelProduse
-
-
-                    ProdusItem produs = new ProdusItem(images, title, pret, medie_review, nr_recenzii, id_produs);
-                    flowLayoutPanelProduse.Controls.Add(new ProductControl(produs));
-                    //flowLayoutPanelProduse.Container.Add(new ProductControl(produs));
-                    //flowLayoutPanelProduse.SendToBack();
-
+                    (control as ProductControl).BackColor = Color.OrangeRed;
                 }
             }
+            if (utilizatorCurentId > 0)
+                CloseCurrentFormAndOpenCos(utilizatorCurentId);
         }
 
         public static int GetUtilizatorID()
@@ -241,7 +207,7 @@ namespace shop_online
 
 
 
-        private void CloseCurrentFormAndOpenNewFormAsync( int id_furnizor )
+        private void CloseCurrentFormAndOpenAdaugaProdus( int id_furnizor )
         {
             Hide();
 
@@ -269,11 +235,33 @@ namespace shop_online
             adauga_Produse.Focus();
         }
 
-        private void cosToolStripMenuItem_Click( object sender, EventArgs e )
+        private void CloseCurrentFormAndOpenCos( int utilizatorId )
         {
+            Hide();
 
+            if (cos == null)
+            {
+                cos = new Cos(utilizatorId)
+                {
+                    MinimumSize = new Size(750, 560)
+                };
+                cos.Size = cos.MinimumSize;
+                cos.FormClosed += ( sender, e ) => { cos = null; }; // Resetare referință când formularul este închis
+            }
+
+            if (!cos.Visible)
+            {
+                cos.Visible = true;
+
+                if (Application.OpenForms ["Afisare_Produse"] != null)
+                {
+                    Application.OpenForms ["Afisare_Produse"].Hide();
+                }
+            }
+            cos.LoadUser(utilizatorId);
+            cos.Show();
+            cos.Focus();
         }
-
 
 
 

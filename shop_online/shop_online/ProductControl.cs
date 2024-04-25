@@ -17,8 +17,10 @@ namespace shop_online
         private Label labelStele;
         private Label labelNrRecenzii;
         private Label labelinStoc;
-
+        private Label labelBucati;
         private DetaliiProdus detaliiProdus = null;// Form nou
+        private int nr_bucati;
+        private decimal pret_total;
 
         public ProductControl( ProdusItem product )
         {
@@ -26,7 +28,23 @@ namespace shop_online
             SetProductInfo(product);
             produs = product;
         }
-
+        public ProductControl( ProdusItem product, bool visible )
+        {
+            InitializeComponent();
+            produs = product;
+            buttonAdaugaCos.Visible = visible;
+            SetProductInfo(product);
+        }
+        public ProductControl( ProdusItem product, bool visible, bool bucatiVisible, int nr_bucati, decimal pret_total )
+        {
+            InitializeComponent();
+            produs = product;
+            buttonAdaugaCos.Visible = visible;
+            labelBucati.Visible = bucatiVisible;
+            this.nr_bucati = nr_bucati;
+            this.pret_total = pret_total;
+            SetProductInfo(product);
+        }
         private void SetProductInfo( ProdusItem product )
         {
             pictureBoxImagine.Image = product.Image [0];
@@ -45,13 +63,14 @@ namespace shop_online
 
         private void InitializeComponent()
         {
-            buttonAdaugaCos = new Button();
+            buttonAdaugaCos = new System.Windows.Forms.Button();
             pictureBoxImagine = new System.Windows.Forms.PictureBox();
             labelTitle = new System.Windows.Forms.Label();
             labelPret = new System.Windows.Forms.Label();
             labelStele = new System.Windows.Forms.Label();
             labelNrRecenzii = new System.Windows.Forms.Label();
             labelinStoc = new System.Windows.Forms.Label();
+            labelBucati = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(pictureBoxImagine)).BeginInit();
             SuspendLayout();
             // 
@@ -114,15 +133,25 @@ namespace shop_online
             // labelinStoc
             // 
             labelinStoc.AutoSize = true;
-            labelinStoc.Location = new System.Drawing.Point(16, 102);
+            labelinStoc.Location = new System.Drawing.Point(16, 108);
             labelinStoc.Name = "labelinStoc";
-            labelinStoc.Size = new System.Drawing.Size(51, 17);
+            labelinStoc.Size = new System.Drawing.Size(55, 17);
             labelinStoc.TabIndex = 6;
-            labelinStoc.Text = "In Stoc";
+            labelinStoc.Text = "In Stoc:";
+            // 
+            // labelBucati
+            // 
+            labelBucati.AutoSize = true;
+            labelBucati.Location = new System.Drawing.Point(84, 108);
+            labelBucati.Name = "labelBucati";
+            labelBucati.Size = new System.Drawing.Size(60, 17);
+            labelBucati.TabIndex = 7;
+            labelBucati.Text = "() bucati";
             // 
             // ProductControl
             // 
-            BackColor = System.Drawing.SystemColors.ActiveCaption;
+            BackColor = System.Drawing.Color.OrangeRed;
+            Controls.Add(labelBucati);
             Controls.Add(labelinStoc);
             Controls.Add(labelNrRecenzii);
             Controls.Add(labelStele);
@@ -132,18 +161,52 @@ namespace shop_online
             Controls.Add(buttonAdaugaCos);
             Name = "ProductControl";
             Size = new System.Drawing.Size(505, 138);
+            Load += new System.EventHandler(ProductControl_Load);
             Click += new System.EventHandler(ProductControl_Click);
+            DoubleClick += new System.EventHandler(ProductControl_DoubleClick);
+            Leave += new System.EventHandler(ProductControl_Leave);
             ((System.ComponentModel.ISupportInitialize)(pictureBoxImagine)).EndInit();
             ResumeLayout(false);
             PerformLayout();
 
         }
-
+        private void ProductControl_Load( object sender, System.EventArgs e )
+        {
+            ProductControl selectedProductControl = sender as ProductControl;
+            selectedProductControl.BackColor = Color.OrangeRed;
+        }
         private void ProductControl_Click( object sender, System.EventArgs e )
+        {
+            ProductControl selectedProductControl = sender as ProductControl;
+            // Evidențiază selecția schimbând aspectul ProductControl-ului, de exemplu schimbând culoarea fundalului sau grosimea marginilor
+            selectedProductControl.BackColor = Color.LightGray; // Exemplu de schimbare a culorii fundalului pentru evidențiere
+
+        }
+        private void ProductControl_DoubleClick( object sender, System.EventArgs e )
         {
             CloseCurrentFormAndOpenNewFormAsync(produs);
         }
+        private void ProductControl_Leave( object sender, System.EventArgs e )
+        {
+            ProductControl selectedProductControl = sender as ProductControl;
+            // Evidențiază selecția schimbând aspectul ProductControl-ului, de exemplu schimbând culoarea fundalului sau grosimea marginilor
+            selectedProductControl.BackColor = Color.OrangeRed; // Exemplu de schimbare a culorii fundalului pentru evidențiere
 
+        }
+        public int GetProdus_ID()
+        {
+            return produs.Id_produs;
+        }
+        public decimal GetProdus_Pret()
+        {
+            return produs.Pret;
+        }
+
+
+        public void ButtonVisible( bool visible )
+        {
+            buttonAdaugaCos.Visible = visible;
+        }
 
         private void CloseCurrentFormAndOpenNewFormAsync( ProdusItem produss )
         {
