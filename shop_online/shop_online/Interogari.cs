@@ -530,7 +530,7 @@ namespace shop_online
         public static DataTable GetCos( string connectionString, int idUser )
         {
             DataTable dataTable = new DataTable();
-            string query = @"
+           /* string query = @"
             SELECT p.*, c.*
             FROM Produse p
             INNER JOIN (
@@ -539,7 +539,19 @@ namespace shop_online
                 WHERE id_user = @idUser
                 GROUP BY id_produs, id_user
             ) c ON p.id_produs = c.id_produs
-            ORDER BY p.id_produs DESC";
+            ORDER BY p.id_produs DESC";*/
+
+
+            string query = @"
+            SELECT p.*, c.nr_bucati, c.total_pret
+            FROM Produse p
+            INNER JOIN (
+                SELECT id_produs, nr_bucati, total_pret
+                FROM Cos
+                WHERE id_user = 3
+                GROUP BY id_produs, nr_bucati, total_pret
+            ) c ON p.id_produs = c.id_produs
+            ORDER BY p.id_produs DESC;";
 
             try
             {

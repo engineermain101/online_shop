@@ -57,7 +57,13 @@ namespace shop_online
             emailUtilizator = email;
 
             // string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
-            string connectionString = Aranjare.GetConnectionString();
+            string connectionString = null;
+            try
+            {
+                connectionString = Aranjare.GetConnectionString();
+            }
+            catch (Exception) { return; }
+
             utilizatorCurentId = Interogari.GetUserID(connectionString, emailUtilizator, telefonUtilizator, parolaUtilizator);
 
             if (utilizatorCurentId < 1)
@@ -180,7 +186,12 @@ namespace shop_online
         private void adaugaProdusToolStripMenuItem_Click( object sender, EventArgs e )
         {
             //string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
-            string connectionString = Aranjare.GetConnectionString();
+            string connectionString = null;
+            try
+            {
+                connectionString = Aranjare.GetConnectionString();
+            }
+            catch (Exception) { return; }
             int id_furnizor = Interogari.GetFurnizorId(connectionString, utilizatorCurentId);
 
             if (id_furnizor > 0)
@@ -192,7 +203,7 @@ namespace shop_online
             {
                 if (control is ProductControl)
                 {
-                    (control as ProductControl).BackColor = Color.OrangeRed;
+                    (control as ProductControl).ResetBackColor();
                 }
             }
             if (utilizatorCurentId > 0)
@@ -203,7 +214,6 @@ namespace shop_online
         {
             return utilizatorCurentId;
         }
-
 
 
 
@@ -263,6 +273,17 @@ namespace shop_online
             cos.Focus();
         }
 
+        private void flowLayoutPanelProduse_DoubleClick( object sender, EventArgs e )
+        {
+            Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
+        }
+
+        public void ResetFlowLayoutPanelProduse()
+        {
+            //FlowLayoutPanel fl = Afisare_Produse.flowLayoutPanelProduse;
+            if (flowLayoutPanelProduse != null)
+                Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
+        }
 
 
 

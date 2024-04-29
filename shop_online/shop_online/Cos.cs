@@ -36,30 +36,57 @@ namespace shop_online
                 return;
             }
             utilizatorId = userId;
-
-            string connectionString = Aranjare.GetConnectionString();
+            string connectionString = null;
+            try
+            {
+                connectionString = Aranjare.GetConnectionString();
+            }
+            catch (Exception) { MessageBox.Show("Nu aveti autorizatie."); Application.Exit(); return; }
             DataTable data = Interogari.GetCos(connectionString, utilizatorId);
             Aranjare.Adaugare_in_flowLayoutPanel(flowLayoutPanelProduse, data, false);
 
-            decimal pret_total = flowLayoutPanelProduse.Controls.OfType<ProductControl>().Sum(pc => pc.GetProdus_Pret());
-            labelPretTotal.Text ="Pret total: "+ pret_total;
-        }
+            CalculatePretTotal();
 
+        }
         private void Cos_Click( object sender, EventArgs e )
         {
             Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
         }
-
         private void flowLayoutPanelProduse_Click( object sender, EventArgs e )
         {
             Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
         }
-
         private void buttonElimina_Click( object sender, EventArgs e )
         {
             int id_produs = Aranjare.GetIdProdusSelectat(flowLayoutPanelProduse);
-            string con = Aranjare.GetConnectionString();
+            Aranjare.Delete_from_flowLayoutPanel(flowLayoutPanelProduse, id_produs);
+            string con = null;
+            try
+            {
+                con = Aranjare.GetConnectionString();
+            }
+            catch (Exception) { return; }
             Interogari.DeleteProdusdinCos(con, utilizatorId, id_produs);
+            CalculatePretTotal();
         }
+
+
+        private void buttonCumpara_Click( object sender, EventArgs e )
+        {
+
+        }
+
+        private void CalculatePretTotal()
+        {
+            decimal pret_total = flowLayoutPanelProduse.Controls.OfType<ProductControl>().Sum(pc => pc.GetProdus_Pret() * pc.GetNrBucatiCos());
+            labelPretTotal.Text = "Pret total: " + pret_total + " lei";
+        }
+
+        public void ResetFlowLayoutPanelProduse()
+        {
+            if (flowLayoutPanelProduse != null)
+                Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
+        }
+
     }
 }
