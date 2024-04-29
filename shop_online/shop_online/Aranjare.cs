@@ -239,8 +239,19 @@ namespace shop_online
 
         public static void Adaugare_in_flowLayoutPanel( FlowLayoutPanel flowLayoutPanelProduse, DataTable data, bool buttonVisible )
         {
+            if (data == null)
+            {
+                MessageBox.Show("Nu s-au gasit produse.");
+                return;
+            }
             flowLayoutPanelProduse.Controls.Clear();
-            string connectionString = GetConnectionString();
+            string connectionString = null;
+            bool visible = false;
+            try
+            {
+                connectionString = GetConnectionString();
+            }
+            catch (Exception) { return; }
 
             foreach (DataRow row in data.Rows)
             {
@@ -249,6 +260,7 @@ namespace shop_online
                 {
                     // Extrage datele din DataRow
                     int id_produs = (int)row ["id_produs"];
+                    int nr_bucati = 0;
                     Dictionary<string, Image> imagedictionary = Interogari.SelectImagines(connectionString, id_produs);
                     Image [] images = null;
 
@@ -267,57 +279,122 @@ namespace shop_online
                         }
                     }
 
+                    string descriere = (string)row ["descriere"];
                     string title = (string)row ["nume"];
-                    decimal pret = (decimal)row ["pret"];
+                    decimal pret = (decimal)row ["pret"], total_pret = -1;
                     int [] medie = Interogari.MedieRecenzii(connectionString, id_produs);
                     int medie_review = medie [0];
                     int nr_recenzii = medie [1];
 
+                    /*  if (row.Equals("nr_bucati"))
+                      {
+                          nr_bucati = (int)row ["nr_bucati"];
+                          visible = true;
+                      }
+                      if (row.Equals("total_pret"))
+                      {
+                          visible = true;
+                          total_pret = (decimal)row ["total_pret"];
+                      }*/
+
+                    if (row.Table.Columns.Contains("nr_bucati"))
+                    {
+                        nr_bucati = (int)row ["nr_bucati"];
+                        visible = true;
+                    }
+                    if (row.Table.Columns.Contains("total_pret"))
+                    {
+                        visible = true;
+                        total_pret = (decimal)row ["total_pret"];
+                    }
+
+
                     // Creează un nou ProdusItem și adaugă-l direct în flowLayoutPanelProduse
 
-                    ProdusItem produs = new ProdusItem(images, title, pret, medie_review, nr_recenzii, id_produs);
-                    flowLayoutPanelProduse.Controls.Add(new ProductControl(produs, buttonVisible));
+                    ProdusItem produs = new ProdusItem(images, title, pret, medie_review, nr_recenzii, id_produs, cantitate, descriere);
+                    flowLayoutPanelProduse.Controls.Add(new ProductControl(produs, buttonVisible, nr_bucati, total_pret));
                 }
+            }
+        }
+
+        public static void Delete_from_flowLayoutPanel( FlowLayoutPanel flowLayoutPanelProduse, int id_produs )
+        {
+            if (flowLayoutPanelProduse == null)
+                return;
+            ProductControl controlToDelete = null;
+
+            foreach (Control control in flowLayoutPanelProduse.Controls)
+            {
+                if (control is ProductControl productControl && productControl.GetProdus_ID() == id_produs)
+                {
+                    controlToDelete = productControl;
+                    break;
+                }
+            }
+
+            if (controlToDelete != null)
+            {
+                flowLayoutPanelProduse.Controls.Remove(controlToDelete);
             }
         }
 
         public static void ResetColorProductControl( FlowLayoutPanel flowLayoutPanel )
         {
-            bool clickedOutsideProductControl = true;
-            Point cursorPosition = flowLayoutPanel.PointToClient(Cursor.Position);
+            /*  bool clickedOutsideProductControl = true;
+              Point cursorPosition = flowLayoutPanel.PointToClient(Cursor.Position);
 
-            foreach (Control control in flowLayoutPanel.Controls)
-            {
-                if (control.Bounds.Contains(cursorPosition))
-                {
-                    clickedOutsideProductControl = false;
-                    break;
-                }
-            }
+              foreach (Control control in flowLayoutPanel.Controls)
+              {
+                  if (control.Bounds.Contains(cursorPosition))
+                  {
+                      clickedOutsideProductControl = false;
+                      break;
+                  }
+              }
 
-            // Dacă s-a făcut clic în afara unui ProductControl, dezactivează toate ProductControl-urile
-            if (clickedOutsideProductControl)
+              // Dacă s-a făcut clic în afara unui ProductControl, dezactivează toate ProductControl-urile
+              if (clickedOutsideProductControl)*/
             {
                 foreach (Control control in flowLayoutPanel.Controls)
                 {
                     if (control is ProductControl productControl)
-                        productControl.BackColor = Color.OrangeRed;
+                        productControl.ResetBackColor();
                 }
             }
         }
 
         public static int GetIdProdusSelectat( FlowLayoutPanel panel )
-        {
+        {//poate trebuie sa punem functia in clasa cu formul Cos
             if (panel == null)
                 return -1;
 
             foreach (Control control in panel.Controls)
             {
-                if (control is ProductControl productControl && productControl.BackColor == Color.OrangeRed)
+                if (control is ProductControl productControl && productControl.BackColor == productControl.GetSelectedColor())
                     return productControl.GetProdus_ID();
             }
             return -1;
         }
+        public static void ResetFlowLayoutPanelProduse( string formName )
+        {
+            if (Application.OpenForms [formName] is Form form)
+            {
+                if (form is Afisare_Produse || form is Cos)
+                {
+                    (form as dynamic).ResetFlowLayoutPanelProduse();
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
 
 
         public static void CloseCurrentFormAndOpenNewFormAsync<T>( int id_furnizor, params object [] args ) where T : Form, new()

@@ -157,3 +157,4 @@ C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PRO
 C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\obj\Debug\shop_online.pdb
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\obj\Debug\shop_online.DetaliiProdus.resources
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\obj\Debug\shop_online.Cos.resources
+C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\obj\Debug\shop_online.ProdusCos.resources

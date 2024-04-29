@@ -42,6 +42,7 @@
             this.buttonCumpara.TabIndex = 0;
             this.buttonCumpara.Text = "Cumpara";
             this.buttonCumpara.UseVisualStyleBackColor = true;
+            this.buttonCumpara.Click += new System.EventHandler(this.buttonCumpara_Click);
             // 
             // flowLayoutPanelProduse
             // 

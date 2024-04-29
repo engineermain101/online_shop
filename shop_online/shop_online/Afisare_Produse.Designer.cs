@@ -46,8 +46,8 @@
             // 
             // flowLayoutPanelProduse
             // 
-            this.flowLayoutPanelProduse.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.flowLayoutPanelProduse.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanelProduse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.flowLayoutPanelProduse.Location = new System.Drawing.Point(0, 29);
@@ -55,11 +55,12 @@
             this.flowLayoutPanelProduse.Size = new System.Drawing.Size(724, 468);
             this.flowLayoutPanelProduse.TabIndex = 1;
             this.flowLayoutPanelProduse.Click += new System.EventHandler(this.flowLayoutPanelProduse_Click);
+            this.flowLayoutPanelProduse.DoubleClick += new System.EventHandler(this.flowLayoutPanelProduse_DoubleClick);
             // 
             // menuStripAdaugaProduse
             // 
             this.menuStripAdaugaProduse.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStripAdaugaProduse.Items.AddRange(new System.Windows.Forms.ToolStripItem [] {
+            this.menuStripAdaugaProduse.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.produsToolStripMenuItem,
             this.adaugaToolStripMenuItem,
             this.stergereToolStripMenuItem,
@@ -72,7 +73,7 @@
             // 
             // produsToolStripMenuItem
             // 
-            this.produsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem [] {
+            this.produsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.categorieToolStripMenuItem});
             this.produsToolStripMenuItem.Name = "produsToolStripMenuItem";
             this.produsToolStripMenuItem.Size = new System.Drawing.Size(66, 24);
@@ -86,7 +87,7 @@
             // 
             // adaugaToolStripMenuItem
             // 
-            this.adaugaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem [] {
+            this.adaugaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.adaugaProdusToolStripMenuItem,
             this.adaugaFurnizorToolStripMenuItem,
             this.adaugaAdminToolStripMenuItem});
@@ -115,7 +116,7 @@
             // 
             // stergereToolStripMenuItem
             // 
-            this.stergereToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem [] {
+            this.stergereToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.stergereProdusToolStripMenuItem,
             this.stergereFurnizorToolStripMenuItem,
             this.stergereAdminToolStripMenuItem});
