@@ -10,14 +10,14 @@ namespace shop_online
         {
             get; set;
         }
-        public string Title
+        public string Nume
         {
             get; set;
         }
         public decimal Pret
         {
-            get; set;
-        }
+            get;
+        } = -1;
         public int Nota_Review
         {
             get; set;
@@ -26,10 +26,10 @@ namespace shop_online
         {
             get; set;
         }
-        public int Id_produs
+        public int Id_Produs
         {
-            get; set;
-        }
+            get;
+        } = -1;
         public int Cantitate
         {
             get; set;
@@ -38,17 +38,28 @@ namespace shop_online
         {
             get; set;
         }
-
-        public ProdusItem( Image [] image, string title, decimal pret, int nota_rewiu, int nr_recenzii, int id_produs, int cantitate, string descriere )
+        public int Id_Furnizor
         {
-            Id_produs = id_produs;
+            get;
+        } = -1;
+        public int Id_Categorie
+        {
+            get;
+        } = -1;
+
+
+        public ProdusItem( Image [] image, string title, decimal pret, int nota_rewiu, int nr_recenzii, int id_produs, int cantitate, string descriere, int id_furnizor, int id_categorie )
+        {
+            Id_Produs = id_produs;
             Image = image;
-            Title = title;
+            Nume = title;
             Pret = Convert.ToDecimal(pret.ToString("N2", new CultureInfo("ro-RO")));
             Nota_Review = nota_rewiu;
             Nr_recenzii = nr_recenzii;
             Cantitate = cantitate;
             Descriere = descriere;
+            Id_Furnizor = id_furnizor;
+            Id_Categorie = id_categorie;
         }
 
     }

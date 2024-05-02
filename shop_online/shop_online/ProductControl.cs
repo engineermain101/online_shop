@@ -60,12 +60,15 @@ namespace shop_online
         private void SetProductInfo( ProdusItem product )
         {
             pictureBoxImagine.Image = product.Image [0];
-            labelTitle.Text = product.Title;
+            labelTitle.Text = product.Nume;
             labelPret.Text = product.Pret.ToString();
             labelStele.Text = "Nota recenzie: " + product.Nota_Review.ToString();
             labelNrRecenzii.Text = "(" + product.Nr_recenzii.ToString() + ")";
             labelinStoc.Text = "In stoc";
             labelBucati.Text = "(" + product.Cantitate + ")";
+            if (nr_bucati_in_cos > product.Cantitate)
+                nr_bucati_in_cos = product.Cantitate;
+            numericUpDownBucati_Cos.Maximum = product.Cantitate;
             numericUpDownBucati_Cos.Value = nr_bucati_in_cos;
         }
         private void buttonAdaugaCos_Click( object sender, System.EventArgs e )
@@ -74,7 +77,7 @@ namespace shop_online
             {
                 int id_user = Afisare_Produse.GetUtilizatorID();
                 string connectionString = Aranjare.GetConnectionString();
-                Interogari.AdaugainCos(connectionString, 1, produs.Pret, id_user, produs.Id_produs);
+                Interogari.AdaugainCos(connectionString, nr_bucati_in_cos + 1, produs.Pret, id_user, produs.Id_Produs);
             }
             catch (Exception) { MessageBox.Show("Nu s-a putut adauga in cos."); }
         }
@@ -250,19 +253,38 @@ namespace shop_online
         {
             CloseCurrentFormAndOpenNewFormAsync(produs);
         }
+        private void numericUpDownBucati_Cos_ValueChanged( object sender, EventArgs e )
+        {
+            if (!(Application.OpenForms ["Cos"] is Cos cosForm))
+                return;
+
+            int nouaValoareBucati = Convert.ToInt32(numericUpDownBucati_Cos.Value);
+            int diferentaBucati = nouaValoareBucati - nr_bucati_in_cos;
+            nr_bucati_in_cos = nouaValoareBucati;
+            pret_total_cos = nr_bucati_in_cos * produs.Pret;
+
+            // Actualizează textul din labelPretTotal în formularul "Cos"
+            if (cosForm.Controls ["labelPretTotal"] is Label labelPretTotal && labelPretTotal.Text != "Pret total: ")
+            {
+                decimal pretTotalDecimal = Convert.ToDecimal(labelPretTotal.Text.Replace("Pret total: ", "").Replace(" lei", ""));
+                pretTotalDecimal += diferentaBucati * produs.Pret;
+                labelPretTotal.Text = "Pret total: " + pretTotalDecimal + " lei";
+            }
+        }
 
 
+
+        public ProdusItem GetProdus()
+        {
+            return produs;
+        }
         public int GetProdus_ID()
         {
-            return produs.Id_produs;
+            return produs.Id_Produs;
         }
         public decimal GetProdus_Pret()
         {
             return produs.Pret;
-        }
-        public int GetCantitate()
-        {
-            return produs.Cantitate;
         }
         public int GetNrBucatiCos()
         {
@@ -272,6 +294,15 @@ namespace shop_online
         {
             return selectedColor;
         }
+        public int GetBucatiProdusdinCos()
+        {
+            return Convert.ToInt32(numericUpDownBucati_Cos.Value);
+        }
+        public decimal GetPretTotalCos()
+        {
+            return pret_total_cos;
+        }
+
         public void SetBackColor( Color culoare )
         {
             BackColor = culoare;
@@ -289,6 +320,7 @@ namespace shop_online
             labelBucati_cos.Visible = vis;
             numericUpDownBucati_Cos.Visible = vis;
         }
+
 
         private void CloseCurrentFormAndOpenNewFormAsync( ProdusItem produss )
         {
@@ -315,26 +347,8 @@ namespace shop_online
             detaliiProdus.Focus();
         }
 
-        private void numericUpDownBucati_Cos_ValueChanged( object sender, EventArgs e )
-        {
-            if (!(Application.OpenForms ["Cos"] is Cos cosForm))
-                return;
 
-            int nouaValoareBucati = Convert.ToInt32(numericUpDownBucati_Cos.Value);
-            int diferentaBucati = nouaValoareBucati - nr_bucati_in_cos;
-            nr_bucati_in_cos = nouaValoareBucati;
-            pret_total_cos = nr_bucati_in_cos * produs.Pret;
 
-            // Actualizează textul din labelPretTotal în formularul "Cos"
-            if (cosForm.Controls ["labelPretTotal"] is Label labelPretTotal && labelPretTotal.Text != "Pret total: ")
-            {
-                decimal pretTotalDecimal = Convert.ToDecimal(labelPretTotal.Text.Replace("Pret total: ", "").Replace(" lei", ""));
-                pretTotalDecimal += diferentaBucati * produs.Pret;
-                labelPretTotal.Text = "Pret total: " + pretTotalDecimal + " lei";
-            }
-        }
-
-  
 
         /*public void SetBackColor( ProductControl selectedProductControl, Color culoare )
              {
