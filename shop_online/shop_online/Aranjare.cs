@@ -308,10 +308,11 @@ namespace shop_online
                         total_pret = (decimal)row ["total_pret"];
                     }
 
-
+                    int id_furnizor = (int)row ["id_furnizor"];
+                    int id_categorie = (int)row ["id_categorie"];
                     // Creează un nou ProdusItem și adaugă-l direct în flowLayoutPanelProduse
 
-                    ProdusItem produs = new ProdusItem(images, title, pret, medie_review, nr_recenzii, id_produs, cantitate, descriere);
+                    ProdusItem produs = new ProdusItem(images, title, pret, medie_review, nr_recenzii, id_produs, cantitate, descriere, id_furnizor, id_categorie);
                     flowLayoutPanelProduse.Controls.Add(new ProductControl(produs, buttonVisible, nr_bucati, total_pret));
                 }
             }

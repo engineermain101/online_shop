@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace shop_online
 {
-    class Interogari
+    static class Interogari
     {
         //Roli
         public static bool SignUp( string connectionString, string nume, string email, string parola,
@@ -456,18 +456,26 @@ namespace shop_online
 
         public static void AdaugainCos( string connectionString, int nr_bucati, decimal pret, int id_user, int id_produs )
         {
-            bool productExists = CheckIfProductExistsInCart(connectionString, id_user, id_produs);
+            if (id_user <= 0 || id_produs <= 0)
+            {
+                MessageBox.Show("Eroare la adaugarea in cos.");
+                return;
+            }
+            try
+            {
+                bool productExists = CheckIfProductExistsInCart(connectionString, id_user, id_produs);
 
-            if (productExists)
-            {
-                UpdateProductInCart(connectionString, id_user, id_produs, nr_bucati, pret * nr_bucati);
+                if (productExists)
+                {
+                    UpdateProductInCart(connectionString, id_user, id_produs, nr_bucati, pret * nr_bucati);
+                }
+                else
+                {
+                    AddProductToCart(connectionString, id_user, id_produs, nr_bucati, pret * nr_bucati);
+                }
             }
-            else
-            {
-                AddProductToCart(connectionString, id_user, id_produs, nr_bucati, pret * nr_bucati);
-            }
+            catch (Exception ex) { MessageBox.Show("Eroare la adaugare in cos. " + ex.ToString()); }
         }
-
         private static bool CheckIfProductExistsInCart( string connectionString, int id_user, int id_produs )
         {
             string query = "SELECT COUNT(*) FROM Cos WHERE id_user = @id_user AND id_produs = @id_produs";
@@ -486,10 +494,10 @@ namespace shop_online
                 }
             }
         }
-
         private static void UpdateProductInCart( string connectionString, int id_user, int id_produs, int nr_bucati, decimal total_pret )
         {
-            string query = "UPDATE Cos SET nr_bucati = nr_bucati + @nr_bucati, total_pret = total_pret + @total_pret WHERE id_user = @id_user AND id_produs = @id_produs";
+            // string query = "UPDATE Cos SET nr_bucati = nr_bucati + @nr_bucati, total_pret = total_pret + @total_pret WHERE id_user = @id_user AND id_produs = @id_produs";
+            string query = "UPDATE Cos SET nr_bucati = @nr_bucati, total_pret = @total_pret WHERE id_user = @id_user AND id_produs = @id_produs";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -506,7 +514,6 @@ namespace shop_online
                 }
             }
         }
-
         private static void AddProductToCart( string connectionString, int id_user, int id_produs, int nr_bucati, decimal total_pret )
         {
             string query = "INSERT INTO Cos (id_user, id_produs, nr_bucati, total_pret) VALUES (@id_user, @id_produs, @nr_bucati, @total_pret)";
@@ -530,16 +537,16 @@ namespace shop_online
         public static DataTable GetCos( string connectionString, int idUser )
         {
             DataTable dataTable = new DataTable();
-           /* string query = @"
-            SELECT p.*, c.*
-            FROM Produse p
-            INNER JOIN (
-                SELECT id_produs, id_user
-                FROM Cos
-                WHERE id_user = @idUser
-                GROUP BY id_produs, id_user
-            ) c ON p.id_produs = c.id_produs
-            ORDER BY p.id_produs DESC";*/
+            /* string query = @"
+             SELECT p.*, c.*
+             FROM Produse p
+             INNER JOIN (
+                 SELECT id_produs, id_user
+                 FROM Cos
+                 WHERE id_user = @idUser
+                 GROUP BY id_produs, id_user
+             ) c ON p.id_produs = c.id_produs
+             ORDER BY p.id_produs DESC";*/
 
 
             string query = @"
@@ -603,6 +610,102 @@ namespace shop_online
                 MessageBox.Show("A apărut o eroare la ștergerea produsului din coș: " + ex.Message);
             }
         }
+
+
+
+
+
+        public static void TranzactieCumparareProdus( string connectionString, int id_user, List<ProductControl> produse )
+        {
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new ArgumentNullException(nameof(connectionString), "Connection string is null or empty.");
+            }
+            if (produse == null || produse.Count == 0)
+            {
+                throw new ArgumentException("Nu aveti produse in cos.");
+            }
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                if (connection.State != ConnectionState.Open)
+                {
+                    throw new Exception("Failed to open database connection.");
+                }
+                using (SqlTransaction transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        // VerificaCard(connection, transaction, card);
+                        /*private static void VerificaCard( SqlConnection connection, SqlTransaction transaction, Card card )
+                        {
+                            throw new NotImplementedException("This is not implemented");
+                        }*/
+
+
+                        UpdateProducts(connection, transaction, produse);
+                        DeleteAllUserProductsFromCart(connection, transaction, id_user);
+
+                        // Alte operații pe care doriți să le efectuați în cadrul tranzacției
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw new Exception("Transaction rolled back due to error: " + ex.Message);
+                    }
+                }
+            }
+        }
+        private static void UpdateProducts( SqlConnection connection, SqlTransaction transaction, List<ProductControl> produse )
+        {
+            string query = "UPDATE Produse SET pret = @pret, cantitate = cantitate - @cantitate WHERE id_produs = @id_produs";
+
+            foreach (ProductControl produs in produse)
+            {
+                int cantitateDisponibila = GetAvailableQuantity(connection, transaction, produs.GetProdus_ID());
+
+                if (cantitateDisponibila < produs.GetBucatiProdusdinCos())
+                {
+                    // Dacă cantitatea din listă depășește cantitatea disponibilă în baza de date,
+                    // poți gestiona situația aici, cum ar fi generarea unei excepții sau afișarea unui mesaj de avertizare.
+                    throw new Exception($"Cantitatea pentru produsul: {produs.GetProdus().Nume} depășește cantitatea disponibilă în stoc.");
+                }
+
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.Transaction = transaction;
+                    command.CommandText = query;
+                    command.Parameters.AddWithValue("@pret", produs.GetProdus_Pret());
+                    command.Parameters.AddWithValue("@cantitate", produs.GetBucatiProdusdinCos());
+                    command.Parameters.AddWithValue("@id_produs", produs.GetProdus_ID());
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+        private static int GetAvailableQuantity( SqlConnection connection, SqlTransaction transaction, int idProdus )
+        {
+            string query = "SELECT cantitate FROM Produse WHERE id_produs = @id_produs";
+
+            using (SqlCommand command = new SqlCommand(query, connection, transaction))
+            {
+                command.Parameters.AddWithValue("@id_produs", idProdus);
+                return (int)command.ExecuteScalar();
+            }
+        }
+        private static void DeleteAllUserProductsFromCart( SqlConnection connection, SqlTransaction transaction, int id_user )
+        {
+            string query = "DELETE FROM Cos WHERE id_user = @id_user";
+
+            using (SqlCommand command = new SqlCommand(query, connection, transaction))
+            {
+                command.Parameters.AddWithValue("@id_user", id_user);
+                command.ExecuteNonQuery();
+            }
+        }
+
 
         //Claudiu
 
