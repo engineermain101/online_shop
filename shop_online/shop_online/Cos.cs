@@ -71,14 +71,22 @@ namespace shop_online
         }
         private void buttonElimina_Click( object sender, EventArgs e )
         {
+            if (flowLayoutPanelProduse.Controls.Count == 0)
+                return;
+
             int id_produs = Aranjare.GetIdProdusSelectat(flowLayoutPanelProduse);
-            Aranjare.Delete_from_flowLayoutPanel(flowLayoutPanelProduse, id_produs);
+            if (id_produs < 1)
+                return;
+
             string con = null;
             try
             {
                 con = Aranjare.GetConnectionString();
+                if (con == null)
+                    return;
             }
             catch (Exception) { return; }
+            Aranjare.Delete_from_flowLayoutPanel(flowLayoutPanelProduse, id_produs);
             Interogari.DeleteProdusdinCos(con, utilizatorId, id_produs);
             CalculatePretTotal();
         }
@@ -86,29 +94,31 @@ namespace shop_online
 
         private void buttonCumpara_Click( object sender, EventArgs e )
         {
+            if (flowLayoutPanelProduse.Controls.Count == 0)
+                return;
+
             string connectionString = null;
             try
             {
                 connectionString = Aranjare.GetConnectionString();
+                if (connectionString == null)
+                    throw new Exception();
             }
             catch (Exception ex) { MessageBox.Show("Eroare la cumpararea produsului." + ex.Message); return; }
 
             DialogResult result = MessageBox.Show("Doriți să cumpărați produsele selectate?", "Confirmare cumpărare", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.No)
-            {
                 return;
-            }
 
             try
             {
                 List<ProductControl> lista = new List<ProductControl>();
-
                 foreach (ProductControl control in flowLayoutPanelProduse.Controls)
                 {
                     lista.Add(control);
                 }
-
-                Interogari.TranzactieCumparareProdus(connectionString, utilizatorId, lista);
+                Aranjare.Delete_from_flowLayoutPanel(flowLayoutPanelProduse);
+                Interogari.TranzactieCumparareProdus(connectionString, utilizatorId, lista, "cash");
                 MessageBox.Show("Tranzactia a fost realizata cu succes.");
                 flowLayoutPanelProduse.Controls.Clear();
                 Close();

@@ -615,7 +615,7 @@ namespace shop_online
 
 
 
-        public static void TranzactieCumparareProdus( string connectionString, int id_user, List<ProductControl> produse )
+        public static void TranzactieCumparareProdus( string connectionString, int id_user, List<ProductControl> produse, string metoda_plata )
         {
             if (string.IsNullOrEmpty(connectionString))
             {
@@ -642,7 +642,7 @@ namespace shop_online
                         {
                             throw new NotImplementedException("This is not implemented");
                         }*/
-
+                        SaveTranzactie(connection, transaction, id_user, produse, metoda_plata);
 
                         UpdateProducts(connection, transaction, produse);
                         DeleteAllUserProductsFromCart(connection, transaction, id_user);
@@ -704,6 +704,56 @@ namespace shop_online
                 command.Parameters.AddWithValue("@id_user", id_user);
                 command.ExecuteNonQuery();
             }
+        }
+        private static void SaveTranzactie( SqlConnection connection, SqlTransaction transaction, int id_user, List<ProductControl> produse, string metoda_plata )
+        {
+            if (connection == null || transaction == null)
+            {
+                throw new ArgumentNullException("connection or transaction", "Connection or transaction is null.");
+            }
+
+            if (produse == null || produse.Count == 0)
+            {
+                throw new ArgumentException("Product list is null or empty.", nameof(produse));
+            }
+
+            string query = @"INSERT INTO Tranzactii (id_user, id_furnizor, id_produs, data, metoda_plata, suma, status) 
+                     VALUES (@id_user, @id_furnizor, @id_produs, @data_tranzactie, @metoda_plata, @suma, @status);";
+
+            DateTime dataTranzactie = DateTime.Now;
+            using (SqlCommand insertCommand = connection.CreateCommand())
+            {
+                insertCommand.Transaction = transaction;
+                insertCommand.CommandText = query;
+
+                foreach (ProductControl produs in produse)
+                {
+                    insertCommand.Parameters.Clear(); 
+                    insertCommand.Parameters.AddWithValue("@id_user", id_user);
+                    insertCommand.Parameters.AddWithValue("@id_furnizor", produs.GetProdus().Id_Furnizor);
+                    insertCommand.Parameters.AddWithValue("@id_produs", produs.GetProdus_ID());
+                    insertCommand.Parameters.AddWithValue("@data_tranzactie", dataTranzactie);
+                    insertCommand.Parameters.AddWithValue("@metoda_plata", metoda_plata);
+                    insertCommand.Parameters.AddWithValue("@suma", produs.GetProdus_Pret() * produs.GetBucatiProdusdinCos());
+                    insertCommand.Parameters.AddWithValue("@status", "In curs");
+
+                    insertCommand.ExecuteNonQuery();
+                }
+            }
+            /*foreach (ProductControl produs in produse)
+            {
+                using (SqlCommand insertCommand = new SqlCommand(query, connection, transaction))
+                {
+                    insertCommand.Parameters.AddWithValue("@id_user", id_user);
+                    insertCommand.Parameters.AddWithValue("@id_furnizor", produs.GetProdus().Id_Furnizor);
+                    insertCommand.Parameters.AddWithValue("@id_produs", produs.GetProdus_ID());
+                    insertCommand.Parameters.AddWithValue("@data_tranzactie", dataTranzactie);
+                    insertCommand.Parameters.AddWithValue("@metoda_plata", metoda_plata);
+                    insertCommand.Parameters.AddWithValue("@suma", produs.GetProdus_Pret() * produs.GetBucatiProdusdinCos());
+                    insertCommand.Parameters.AddWithValue("@status", "In curs");
+                    insertCommand.ExecuteNonQuery();
+                }
+            }*/
         }
 
 
