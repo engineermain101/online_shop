@@ -318,26 +318,41 @@ namespace shop_online
             }
         }
 
-        public static void Delete_from_flowLayoutPanel( FlowLayoutPanel flowLayoutPanelProduse, int id_produs )
+        /// <summary>
+        /// Dacă idProdus este specificat, șterge elementul corespunzător din FlowLayoutPanel.
+        /// În caz contrar, șterge toate produsele cu cantitatea zero din coș.
+        /// </summary>
+        /// <param name="flowLayoutPanelProduse">FlowLayoutPanel-ul din care să fie șterse elementele.</param>
+        /// <param name="idProdus">ID-ul produsului de șters (opțional).</param>
+        public static void Delete_from_flowLayoutPanel( FlowLayoutPanel flowLayoutPanelProduse, int? idProdus = null )
         {
             if (flowLayoutPanelProduse == null)
                 return;
-            ProductControl controlToDelete = null;
 
-            foreach (Control control in flowLayoutPanelProduse.Controls)
+            List<ProductControl> controlsToDelete;
+
+            if (idProdus != null)
             {
-                if (control is ProductControl productControl && productControl.GetProdus_ID() == id_produs)
-                {
-                    controlToDelete = productControl;
-                    break;
-                }
+                controlsToDelete = flowLayoutPanelProduse.Controls.OfType<ProductControl>()
+                                                                  .Where(pc => pc.GetProdus_ID() == idProdus)
+                                                                  .ToList();
+            }
+            else
+            {
+                controlsToDelete = flowLayoutPanelProduse.Controls.OfType<ProductControl>()
+                                                                  .Where(pc => pc.GetBucatiProdusdinCos() == 0)
+                                                                  .ToList();
             }
 
-            if (controlToDelete != null)
+            if (controlsToDelete.Count == 0)
+                return;
+
+            foreach (ProductControl controlToDelete in controlsToDelete)
             {
                 flowLayoutPanelProduse.Controls.Remove(controlToDelete);
             }
         }
+
 
         public static void ResetColorProductControl( FlowLayoutPanel flowLayoutPanel )
         {
