@@ -84,138 +84,138 @@ namespace shop_online
 
         private void InitializeComponent()
         {
-            this.buttonAdaugaCos = new System.Windows.Forms.Button();
-            this.pictureBoxImagine = new System.Windows.Forms.PictureBox();
-            this.labelTitle = new System.Windows.Forms.Label();
-            this.labelPret = new System.Windows.Forms.Label();
-            this.labelStele = new System.Windows.Forms.Label();
-            this.labelNrRecenzii = new System.Windows.Forms.Label();
-            this.labelinStoc = new System.Windows.Forms.Label();
-            this.labelBucati = new System.Windows.Forms.Label();
-            this.numericUpDownBucati_Cos = new System.Windows.Forms.NumericUpDown();
-            this.labelBucati_cos = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImagine)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBucati_Cos)).BeginInit();
-            this.SuspendLayout();
+            buttonAdaugaCos = new System.Windows.Forms.Button();
+            pictureBoxImagine = new System.Windows.Forms.PictureBox();
+            labelTitle = new System.Windows.Forms.Label();
+            labelPret = new System.Windows.Forms.Label();
+            labelStele = new System.Windows.Forms.Label();
+            labelNrRecenzii = new System.Windows.Forms.Label();
+            labelinStoc = new System.Windows.Forms.Label();
+            labelBucati = new System.Windows.Forms.Label();
+            numericUpDownBucati_Cos = new System.Windows.Forms.NumericUpDown();
+            labelBucati_cos = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(pictureBoxImagine)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(numericUpDownBucati_Cos)).BeginInit();
+            SuspendLayout();
             // 
             // buttonAdaugaCos
             // 
-            this.buttonAdaugaCos.Location = new System.Drawing.Point(222, 96);
-            this.buttonAdaugaCos.Name = "buttonAdaugaCos";
-            this.buttonAdaugaCos.Size = new System.Drawing.Size(113, 40);
-            this.buttonAdaugaCos.TabIndex = 0;
-            this.buttonAdaugaCos.Text = "Adaugă in Coș";
-            this.buttonAdaugaCos.UseVisualStyleBackColor = true;
-            this.buttonAdaugaCos.Click += new System.EventHandler(this.buttonAdaugaCos_Click);
+            buttonAdaugaCos.Location = new System.Drawing.Point(222, 96);
+            buttonAdaugaCos.Name = "buttonAdaugaCos";
+            buttonAdaugaCos.Size = new System.Drawing.Size(113, 40);
+            buttonAdaugaCos.TabIndex = 0;
+            buttonAdaugaCos.Text = "Adaugă in Coș";
+            buttonAdaugaCos.UseVisualStyleBackColor = true;
+            buttonAdaugaCos.Click += new System.EventHandler(buttonAdaugaCos_Click);
             // 
             // pictureBoxImagine
             // 
-            this.pictureBoxImagine.Location = new System.Drawing.Point(358, 13);
-            this.pictureBoxImagine.Name = "pictureBoxImagine";
-            this.pictureBoxImagine.Padding = new System.Windows.Forms.Padding(10);
-            this.pictureBoxImagine.Size = new System.Drawing.Size(144, 122);
-            this.pictureBoxImagine.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxImagine.TabIndex = 1;
-            this.pictureBoxImagine.TabStop = false;
-            this.pictureBoxImagine.Click += new System.EventHandler(this.pictureBoxImagine_Click);
-            this.pictureBoxImagine.DoubleClick += new System.EventHandler(this.pictureBoxImagine_DoubleClick);
+            pictureBoxImagine.Location = new System.Drawing.Point(358, 13);
+            pictureBoxImagine.Name = "pictureBoxImagine";
+            pictureBoxImagine.Padding = new System.Windows.Forms.Padding(10);
+            pictureBoxImagine.Size = new System.Drawing.Size(144, 122);
+            pictureBoxImagine.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            pictureBoxImagine.TabIndex = 1;
+            pictureBoxImagine.TabStop = false;
+            pictureBoxImagine.Click += new System.EventHandler(pictureBoxImagine_Click);
+            pictureBoxImagine.DoubleClick += new System.EventHandler(pictureBoxImagine_DoubleClick);
             // 
             // labelTitle
             // 
-            this.labelTitle.AutoSize = true;
-            this.labelTitle.Location = new System.Drawing.Point(16, 13);
-            this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(35, 17);
-            this.labelTitle.TabIndex = 2;
-            this.labelTitle.Text = "Titlu";
+            labelTitle.AutoSize = true;
+            labelTitle.Location = new System.Drawing.Point(16, 13);
+            labelTitle.Name = "labelTitle";
+            labelTitle.Size = new System.Drawing.Size(35, 17);
+            labelTitle.TabIndex = 2;
+            labelTitle.Text = "Titlu";
             // 
             // labelPret
             // 
-            this.labelPret.AutoSize = true;
-            this.labelPret.Location = new System.Drawing.Point(16, 59);
-            this.labelPret.Name = "labelPret";
-            this.labelPret.Size = new System.Drawing.Size(34, 17);
-            this.labelPret.TabIndex = 3;
-            this.labelPret.Text = "Pret";
+            labelPret.AutoSize = true;
+            labelPret.Location = new System.Drawing.Point(16, 59);
+            labelPret.Name = "labelPret";
+            labelPret.Size = new System.Drawing.Size(34, 17);
+            labelPret.TabIndex = 3;
+            labelPret.Text = "Pret";
             // 
             // labelStele
             // 
-            this.labelStele.AutoSize = true;
-            this.labelStele.Location = new System.Drawing.Point(16, 108);
-            this.labelStele.Name = "labelStele";
-            this.labelStele.Size = new System.Drawing.Size(65, 17);
-            this.labelStele.TabIndex = 4;
-            this.labelStele.Text = "Nr stele: ";
+            labelStele.AutoSize = true;
+            labelStele.Location = new System.Drawing.Point(16, 108);
+            labelStele.Name = "labelStele";
+            labelStele.Size = new System.Drawing.Size(65, 17);
+            labelStele.TabIndex = 4;
+            labelStele.Text = "Nr stele: ";
             // 
             // labelNrRecenzii
             // 
-            this.labelNrRecenzii.AutoSize = true;
-            this.labelNrRecenzii.Location = new System.Drawing.Point(87, 108);
-            this.labelNrRecenzii.Name = "labelNrRecenzii";
-            this.labelNrRecenzii.Size = new System.Drawing.Size(18, 17);
-            this.labelNrRecenzii.TabIndex = 5;
-            this.labelNrRecenzii.Text = "()";
+            labelNrRecenzii.AutoSize = true;
+            labelNrRecenzii.Location = new System.Drawing.Point(87, 108);
+            labelNrRecenzii.Name = "labelNrRecenzii";
+            labelNrRecenzii.Size = new System.Drawing.Size(18, 17);
+            labelNrRecenzii.TabIndex = 5;
+            labelNrRecenzii.Text = "()";
             // 
             // labelinStoc
             // 
-            this.labelinStoc.AutoSize = true;
-            this.labelinStoc.Location = new System.Drawing.Point(16, 85);
-            this.labelinStoc.Name = "labelinStoc";
-            this.labelinStoc.Size = new System.Drawing.Size(51, 17);
-            this.labelinStoc.TabIndex = 6;
-            this.labelinStoc.Text = "In Stoc";
+            labelinStoc.AutoSize = true;
+            labelinStoc.Location = new System.Drawing.Point(16, 85);
+            labelinStoc.Name = "labelinStoc";
+            labelinStoc.Size = new System.Drawing.Size(51, 17);
+            labelinStoc.TabIndex = 6;
+            labelinStoc.Text = "In Stoc";
             // 
             // labelBucati
             // 
-            this.labelBucati.AutoSize = true;
-            this.labelBucati.Location = new System.Drawing.Point(87, 85);
-            this.labelBucati.Name = "labelBucati";
-            this.labelBucati.Size = new System.Drawing.Size(18, 17);
-            this.labelBucati.TabIndex = 7;
-            this.labelBucati.Text = "()";
+            labelBucati.AutoSize = true;
+            labelBucati.Location = new System.Drawing.Point(87, 85);
+            labelBucati.Name = "labelBucati";
+            labelBucati.Size = new System.Drawing.Size(18, 17);
+            labelBucati.TabIndex = 7;
+            labelBucati.Text = "()";
             // 
             // numericUpDownBucati_Cos
             // 
-            this.numericUpDownBucati_Cos.Location = new System.Drawing.Point(222, 68);
-            this.numericUpDownBucati_Cos.Name = "numericUpDownBucati_Cos";
-            this.numericUpDownBucati_Cos.Size = new System.Drawing.Size(88, 22);
-            this.numericUpDownBucati_Cos.TabIndex = 8;
-            this.numericUpDownBucati_Cos.Visible = false;
-            this.numericUpDownBucati_Cos.ValueChanged += new System.EventHandler(this.numericUpDownBucati_Cos_ValueChanged);
+            numericUpDownBucati_Cos.Location = new System.Drawing.Point(222, 68);
+            numericUpDownBucati_Cos.Name = "numericUpDownBucati_Cos";
+            numericUpDownBucati_Cos.Size = new System.Drawing.Size(88, 22);
+            numericUpDownBucati_Cos.TabIndex = 8;
+            numericUpDownBucati_Cos.Visible = false;
+            numericUpDownBucati_Cos.ValueChanged += new System.EventHandler(numericUpDownBucati_Cos_ValueChanged);
             // 
             // labelBucati_cos
             // 
-            this.labelBucati_cos.AutoSize = true;
-            this.labelBucati_cos.Location = new System.Drawing.Point(222, 45);
-            this.labelBucati_cos.Name = "labelBucati_cos";
-            this.labelBucati_cos.Size = new System.Drawing.Size(88, 17);
-            this.labelBucati_cos.TabIndex = 9;
-            this.labelBucati_cos.Text = "Bucati in cos";
-            this.labelBucati_cos.Visible = false;
+            labelBucati_cos.AutoSize = true;
+            labelBucati_cos.Location = new System.Drawing.Point(222, 45);
+            labelBucati_cos.Name = "labelBucati_cos";
+            labelBucati_cos.Size = new System.Drawing.Size(88, 17);
+            labelBucati_cos.TabIndex = 9;
+            labelBucati_cos.Text = "Bucati in cos";
+            labelBucati_cos.Visible = false;
             // 
             // ProductControl
             // 
-            this.BackColor = System.Drawing.Color.OrangeRed;
-            this.Controls.Add(this.labelBucati_cos);
-            this.Controls.Add(this.numericUpDownBucati_Cos);
-            this.Controls.Add(this.labelBucati);
-            this.Controls.Add(this.labelinStoc);
-            this.Controls.Add(this.labelNrRecenzii);
-            this.Controls.Add(this.labelStele);
-            this.Controls.Add(this.labelPret);
-            this.Controls.Add(this.labelTitle);
-            this.Controls.Add(this.pictureBoxImagine);
-            this.Controls.Add(this.buttonAdaugaCos);
-            this.Name = "ProductControl";
-            this.Size = new System.Drawing.Size(505, 138);
-            this.Load += new System.EventHandler(this.ProductControl_Load);
-            this.Click += new System.EventHandler(this.ProductControl_Click);
-            this.DoubleClick += new System.EventHandler(this.ProductControl_DoubleClick);
-            this.Leave += new System.EventHandler(this.ProductControl_Leave);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImagine)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBucati_Cos)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            BackColor = System.Drawing.Color.OrangeRed;
+            Controls.Add(labelBucati_cos);
+            Controls.Add(numericUpDownBucati_Cos);
+            Controls.Add(labelBucati);
+            Controls.Add(labelinStoc);
+            Controls.Add(labelNrRecenzii);
+            Controls.Add(labelStele);
+            Controls.Add(labelPret);
+            Controls.Add(labelTitle);
+            Controls.Add(pictureBoxImagine);
+            Controls.Add(buttonAdaugaCos);
+            Name = "ProductControl";
+            Size = new System.Drawing.Size(505, 138);
+            Load += new System.EventHandler(ProductControl_Load);
+            Click += new System.EventHandler(ProductControl_Click);
+            DoubleClick += new System.EventHandler(ProductControl_DoubleClick);
+            Leave += new System.EventHandler(ProductControl_Leave);
+            ((System.ComponentModel.ISupportInitialize)(pictureBoxImagine)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(numericUpDownBucati_Cos)).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
         private void ProductControl_Load( object sender, System.EventArgs e )
@@ -237,7 +237,8 @@ namespace shop_online
         }
         private void ProductControl_DoubleClick( object sender, System.EventArgs e )
         {
-            CloseCurrentFormAndOpenNewFormAsync(produs);
+            Size MinimumSize = new Size(920, 635);
+            Aranjare.HideCurrentFormAndOpenNewForm(FindForm(), detaliiProdus, produs, MinimumSize);
         }
         private void ProductControl_Leave( object sender, System.EventArgs e )
         {
@@ -251,7 +252,8 @@ namespace shop_online
         }
         private void pictureBoxImagine_DoubleClick( object sender, System.EventArgs e )
         {
-            CloseCurrentFormAndOpenNewFormAsync(produs);
+            Size MinimumSize = new Size(920, 635);
+            Aranjare.HideCurrentFormAndOpenNewForm(FindForm(), detaliiProdus, produs, MinimumSize);
         }
         private void numericUpDownBucati_Cos_ValueChanged( object sender, EventArgs e )
         {
@@ -328,7 +330,7 @@ namespace shop_online
             {
                 detaliiProdus = new DetaliiProdus(produss)
                 {
-                    MinimumSize = new Size(490, 535)
+                    MinimumSize = new Size(920, 635)
                 };
                 detaliiProdus.Size = detaliiProdus.MinimumSize;
                 detaliiProdus.FormClosed += ( sender, e ) => { detaliiProdus = null; }; // Resetare referință când formularul este închis

@@ -22,19 +22,24 @@ namespace shop_online
         }
         private void Cos_FormClosed( object sender, FormClosedEventArgs e )
         {
-            string con = null;
             try
             {
-                con = Aranjare.GetConnectionString();
-            }
-            catch (Exception ee) { MessageBox.Show("Eroare" + ee.ToString()); }
+                // Obțineți conexiunea la baza de date
+                string con = Aranjare.GetConnectionString();
 
-            foreach (ProductControl control in flowLayoutPanelProduse.Controls)
+                // Iterați prin toate controalele de produs din flowLayoutPanelProduse și adăugați-le în coșul utilizatorului în baza de date
+                foreach (ProductControl control in flowLayoutPanelProduse.Controls.OfType<ProductControl>())
+                {
+                    Interogari.AdaugainCos(con, control.GetBucatiProdusdinCos(), control.GetProdus_Pret(), utilizatorId, control.GetProdus_ID());
+                }
+            }
+            catch (Exception ee)
             {
-                Interogari.AdaugainCos(con, control.GetBucatiProdusdinCos(), control.GetProdus_Pret(), utilizatorId, control.GetProdus_ID());
+                MessageBox.Show("Eroare" + ee.ToString());
             }
 
-            Application.OpenForms ["Afisare_Produse"].Show();
+            if (Application.OpenForms ["Afisare_Produse"] != null)
+                Application.OpenForms ["Afisare_Produse"].Show();
         }
         private void Cos_Load( object sender, EventArgs e )
         {
