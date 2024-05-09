@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 
@@ -6,7 +7,7 @@ namespace shop_online
 {
     public class ProdusItem
     {
-        public Image [] Image
+        public List<Image> Image
         {
             get; set;
         }
@@ -48,7 +49,7 @@ namespace shop_online
         } = -1;
 
 
-        public ProdusItem( Image [] image, string title, decimal pret, int nota_rewiu, int nr_recenzii, int id_produs, int cantitate, string descriere, int id_furnizor, int id_categorie )
+        public ProdusItem( List<Image> image, string title, decimal pret, int nota_rewiu, int nr_recenzii, int id_produs, int cantitate, string descriere, int id_furnizor, int id_categorie )
         {
             Id_Produs = id_produs;
             Image = image;

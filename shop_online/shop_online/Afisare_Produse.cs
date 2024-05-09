@@ -115,7 +115,12 @@ namespace shop_online
             int id_furnizor = Interogari.GetFurnizorId(connectionString, utilizatorCurentId);
 
             if (id_furnizor > 0)
-                CloseCurrentFormAndOpenAdaugaProdus(id_furnizor);
+            {
+                Size minimumSize = new Size(490, 535);
+                Aranjare.HideCurrentFormAndOpenNewForm(this, adauga_Produse, (object)id_furnizor, minimumSize);
+                //CloseCurrentFormAndOpenAdaugaProdus(id_furnizor);
+            }
+
         }
         private void cosToolStripMenuItem_Click( object sender, EventArgs e )
         {
@@ -127,7 +132,12 @@ namespace shop_online
                 }
             }
             if (utilizatorCurentId > 0)
-                CloseCurrentFormAndOpenCos(utilizatorCurentId);
+            {
+                Size minimumSize = new Size(750, 560);
+                Aranjare.HideCurrentFormAndOpenNewForm(this, cos, (object)utilizatorCurentId, minimumSize);
+                //CloseCurrentFormAndOpenCos(utilizatorCurentId);
+            }
+
         }
 
         public static int GetUtilizatorID()
@@ -165,7 +175,7 @@ namespace shop_online
             adauga_Produse.Focus();
         }
 
-        private void CloseCurrentFormAndOpenCos( int utilizatorId )
+        /*private void CloseCurrentFormAndOpenCos( int utilizatorId )
         {
             Hide();
 
@@ -192,7 +202,7 @@ namespace shop_online
             cos.Show();
             cos.Focus();
         }
-
+        */
         private void flowLayoutPanelProduse_DoubleClick( object sender, EventArgs e )
         {
             Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
@@ -200,9 +210,13 @@ namespace shop_online
 
         public void ResetFlowLayoutPanelProduse()
         {
-            //FlowLayoutPanel fl = Afisare_Produse.flowLayoutPanelProduse;
             if (flowLayoutPanelProduse != null)
                 Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
+        }
+
+        private void adaugaFurnizorToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+
         }
 
 

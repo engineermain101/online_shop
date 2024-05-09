@@ -98,20 +98,21 @@
             // adaugaProdusToolStripMenuItem
             // 
             this.adaugaProdusToolStripMenuItem.Name = "adaugaProdusToolStripMenuItem";
-            this.adaugaProdusToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.adaugaProdusToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.adaugaProdusToolStripMenuItem.Text = "Produs";
             this.adaugaProdusToolStripMenuItem.Click += new System.EventHandler(this.adaugaProdusToolStripMenuItem_Click);
             // 
             // adaugaFurnizorToolStripMenuItem
             // 
             this.adaugaFurnizorToolStripMenuItem.Name = "adaugaFurnizorToolStripMenuItem";
-            this.adaugaFurnizorToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.adaugaFurnizorToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.adaugaFurnizorToolStripMenuItem.Text = "Furnizor";
+            this.adaugaFurnizorToolStripMenuItem.Click += new System.EventHandler(this.adaugaFurnizorToolStripMenuItem_Click);
             // 
             // adaugaAdminToolStripMenuItem
             // 
             this.adaugaAdminToolStripMenuItem.Name = "adaugaAdminToolStripMenuItem";
-            this.adaugaAdminToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.adaugaAdminToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.adaugaAdminToolStripMenuItem.Text = "Admin";
             // 
             // stergereToolStripMenuItem

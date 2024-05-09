@@ -237,87 +237,6 @@ namespace shop_online
             throw new Exception("Nu s-a găsit niciun connection string potrivit pentru acest calculator.");
         }
 
-        public static void Adaugare_in_flowLayoutPanel( FlowLayoutPanel flowLayoutPanelProduse, DataTable data, bool buttonVisible )
-        {
-            if (data == null)
-            {
-                MessageBox.Show("Nu s-au gasit produse.");
-                return;
-            }
-            flowLayoutPanelProduse.Controls.Clear();
-            string connectionString = null;
-            bool visible = false;
-            try
-            {
-                connectionString = GetConnectionString();
-            }
-            catch (Exception) { return; }
-
-            foreach (DataRow row in data.Rows)
-            {
-                int cantitate = (int)row ["cantitate"];
-                if (cantitate > 0)
-                {
-                    // Extrage datele din DataRow
-                    int id_produs = (int)row ["id_produs"];
-                    int nr_bucati = 0;
-                    Dictionary<string, Image> imagedictionary = Interogari.SelectImagines(connectionString, id_produs);
-                    Image [] images = null;
-
-                    if (imagedictionary.Count == 0)
-                    {
-                        images = new Image [1];
-                        images [0] = SystemIcons.WinLogo.ToBitmap();
-                    }
-                    else
-                    {
-                        images = new Image [imagedictionary.Count];
-                        int i = 0;
-                        foreach (KeyValuePair<string, Image> kvp in imagedictionary)
-                        {
-                            images [i++] = kvp.Value;
-                        }
-                    }
-
-                    string descriere = (string)row ["descriere"];
-                    string title = (string)row ["nume"];
-                    decimal pret = (decimal)row ["pret"], total_pret = -1;
-                    int [] medie = Interogari.MedieRecenzii(connectionString, id_produs);
-                    int medie_review = medie [0];
-                    int nr_recenzii = medie [1];
-
-                    /*  if (row.Equals("nr_bucati"))
-                      {
-                          nr_bucati = (int)row ["nr_bucati"];
-                          visible = true;
-                      }
-                      if (row.Equals("total_pret"))
-                      {
-                          visible = true;
-                          total_pret = (decimal)row ["total_pret"];
-                      }*/
-
-                    if (row.Table.Columns.Contains("nr_bucati"))
-                    {
-                        nr_bucati = (int)row ["nr_bucati"];
-                        visible = true;
-                    }
-                    if (row.Table.Columns.Contains("total_pret"))
-                    {
-                        visible = true;
-                        total_pret = (decimal)row ["total_pret"];
-                    }
-
-                    int id_furnizor = (int)row ["id_furnizor"];
-                    int id_categorie = (int)row ["id_categorie"];
-                    // Creează un nou ProdusItem și adaugă-l direct în flowLayoutPanelProduse
-
-                    ProdusItem produs = new ProdusItem(images, title, pret, medie_review, nr_recenzii, id_produs, cantitate, descriere, id_furnizor, id_categorie);
-                    flowLayoutPanelProduse.Controls.Add(new ProductControl(produs, buttonVisible, nr_bucati, total_pret));
-                }
-            }
-        }
-
         /// <summary>
         /// Dacă idProdus este specificat, șterge elementul corespunzător din FlowLayoutPanel.
         /// În caz contrar, șterge toate produsele cu cantitatea zero din coș.
@@ -403,53 +322,150 @@ namespace shop_online
         }
 
 
-
-
-
-
-
-
-
-
-
-
-        public static void CloseCurrentFormAndOpenNewFormAsync<T>( int id_furnizor, params object [] args ) where T : Form, new()
+        public static void Adaugare_in_flowLayoutPanel( FlowLayoutPanel flowLayoutPanelProduse, DataTable data, bool buttonVisible )
         {
-            throw new NotImplementedException();
-
-            // Închide forma curentă
-            Form currentForm = Application.OpenForms.OfType<T>().FirstOrDefault();
-            currentForm?.Hide();
-
-            // Creează o nouă instanță a formei specificate
-            T newForm = Activator.CreateInstance<T>();
-
-            // Setează argumentele formei, dacă sunt furnizate
-            System.Reflection.MethodInfo loadUserMethod = typeof(T).GetMethod("LoadUser", new [] { typeof(int) });
-            if (loadUserMethod != null)
+            if (data == null || flowLayoutPanelProduse == null)
             {
-                loadUserMethod.Invoke(newForm, new object [] { id_furnizor });
+                MessageBox.Show("Nu s-au gasit produse.");
+                return;
             }
 
-            // Setează dimensiunea minimă a formei
-            newForm.MinimumSize = new Size(490, 535);
+            flowLayoutPanelProduse.Controls.Clear();
 
-            // Închide forma nouă când este închisă
-            newForm.FormClosed += ( sender, e ) => { newForm = null; };
-
-            // Ascunde orice altă formă deschisă a aceleiași clase
-            foreach (Form form in Application.OpenForms)
+            string connectionString = null;
+            try
             {
-                if (form.GetType() == typeof(T) && form != newForm)
+                connectionString = GetConnectionString();
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
+            foreach (DataRow row in data.Rows)
+            {
+                AdaugaProdusInFlowLayoutPanel(flowLayoutPanelProduse, row, connectionString, buttonVisible);
+            }
+        }
+        private static void AdaugaProdusInFlowLayoutPanel( FlowLayoutPanel flowLayoutPanelProduse, DataRow row, string connectionString, bool buttonVisible )
+        {
+            int cantitate = (int)row ["cantitate"];
+            if (cantitate <= 0)
+            {
+                return;
+            }
+
+            int id_produs = (int)row ["id_produs"];
+            Dictionary<string, Image> imagedictionary = Interogari.SelectImagines(connectionString, id_produs);
+            List<Image> images = GetProductImages(imagedictionary);
+
+            string descriere = (string)row ["descriere"];
+            string title = (string)row ["nume"];
+            decimal pret = (decimal)row ["pret"];
+            int [] medie = Interogari.MedieRecenzii(connectionString, id_produs);
+            int medie_review = medie [0];
+            int nr_recenzii = medie [1];
+
+            int nr_bucati = 0;
+            decimal total_pret = -1;
+            bool visible = false;
+
+            if (row.Table.Columns.Contains("nr_bucati"))
+            {
+                nr_bucati = (int)row ["nr_bucati"];
+                visible = true;
+            }
+
+            if (row.Table.Columns.Contains("total_pret"))
+            {
+                visible = true;
+                total_pret = (decimal)row ["total_pret"];
+            }
+
+            int id_furnizor = (int)row ["id_furnizor"];
+            int id_categorie = (int)row ["id_categorie"];
+
+            ProdusItem produs = new ProdusItem(images, title, pret, medie_review, nr_recenzii, id_produs, cantitate, descriere, id_furnizor, id_categorie);
+            flowLayoutPanelProduse.Controls.Add(new ProductControl(produs, buttonVisible, nr_bucati, total_pret));
+        }
+        private static List<Image> GetProductImages( Dictionary<string, Image> imagedictionary )
+        {
+            List<Image> images = new List<Image>();
+
+            if (imagedictionary.Count == 0)
+            {
+                images.Add(SystemIcons.WinLogo.ToBitmap());
+            }
+            else
+            {
+                foreach (KeyValuePair<string, Image> kvp in imagedictionary)
                 {
-                    form.Hide();
+                    images.Add(kvp.Value);
                 }
             }
 
-            // Afișează și focalizează noua formă
+            return images;
+        }
+
+
+
+        /// <summary>
+        /// Face invizibil un form și deschide altul.  
+        /// </summary>
+        /// <example>
+        /// Aranjare.CloseCurrentFormAndOpenForm(FindForm(), detaliiProdus, produs, MinimumSize);
+        /// </example>
+        public static void HideCurrentFormAndOpenNewForm<T, A>( Form oldForm, T newForm, A id, Size minimumSize )
+where T : Form
+where A : class
+        {
+            oldForm?.Hide();
+
+            if (newForm == null)
+            {
+                /* if (newForm is Adauga_Produse)
+                 {
+                     newForm = new Adauga_Produse(id);
+                 }
+                 else if (newForm is Cos)
+                 {
+                     newForm = new Cos(id);
+                 }*/
+                newForm = (T)Activator.CreateInstance(typeof(T), id);
+
+                newForm.MinimumSize = minimumSize;
+                newForm.Size = newForm.MinimumSize;
+
+                newForm.FormClosed += ( sender, e ) => { newForm = null; };
+            }
+
+            newForm.Visible = true;
+            if (oldForm != null && oldForm.Visible)
+            {
+                oldForm.Hide();
+            }
+
+            /*  if (newForm is Adauga_Produse adaugaProduse)
+              {
+                  adaugaProduse.LoadUser(id);
+              }
+              else if (newForm is Cos cos)
+              {
+                  cos.LoadUser(id);
+              }
+
+              // if (newForm is ILoadUser loadUserForm)
+              // {
+              //     loadUserForm.LoadUser(id as int? ?? 0);
+              // }*/
+
             newForm.Show();
             newForm.Focus();
         }
+
+
+
+
 
         //Claudiu
 
