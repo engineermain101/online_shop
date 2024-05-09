@@ -1,14 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\",
+  "WorkspaceRootPath": "C:\\GITHUB\\online_shop\\shop_online\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|c:\\users\\botah\\documents\\facultate\\anul_3\\semestru_2\\informatica_industriala\\proiect\\online_shop\\shop_online\\shop_online\\formlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|solutionrelative:shop_online\\formlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|c:\\github\\online_shop\\shop_online\\shop_online\\test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|solutionrelative:shop_online\\test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\formlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|solutionrelative:shop_online\\formlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|C:\\GITHUB\\online_shop\\shop_online\\shop_online\\interogari.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|solutionrelative:shop_online\\interogari.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|C:\\GITHUB\\online_shop\\shop_online\\shop_online\\FormLogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|solutionrelative:shop_online\\FormLogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|C:\\GITHUB\\online_shop\\shop_online\\shop_online\\formlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|solutionrelative:shop_online\\formlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,36 +26,55 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Test.cs",
+              "DocumentMoniker": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\Test.cs",
+              "RelativeDocumentMoniker": "shop_online\\Test.cs",
+              "ToolTip": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\Test.cs",
+              "RelativeToolTip": "shop_online\\Test.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACYAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-08T15:16:00.711Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "FormLogin.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\FormLogin.cs",
-              "RelativeDocumentMoniker": "shop_online\\FormLogin.cs",
-              "ToolTip": "C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\FormLogin.cs [Design]",
-              "RelativeToolTip": "shop_online\\FormLogin.cs [Design]",
+              "Title": "Interogari.cs",
+              "DocumentMoniker": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\Interogari.cs",
+              "RelativeDocumentMoniker": "shop_online\\Interogari.cs",
+              "ToolTip": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\Interogari.cs",
+              "RelativeToolTip": "shop_online\\Interogari.cs",
+              "ViewState": "AQIAAKsAAAAAAAAAAAAYwLQAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T10:35:08.275Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2024-05-08T08:17:58.621Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FormLogin.cs",
-              "DocumentMoniker": "C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\FormLogin.cs",
+              "DocumentIndex": 2,
+              "Title": "FormLogin.cs [Design]",
+              "DocumentMoniker": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\FormLogin.cs",
               "RelativeDocumentMoniker": "shop_online\\FormLogin.cs",
-              "ToolTip": "C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\FormLogin.cs",
-              "RelativeToolTip": "shop_online\\FormLogin.cs",
-              "ViewState": "AQIAAHABAAAAAAAAAAAswIQBAAAAAAAA",
+              "ToolTip": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\FormLogin.cs [Design]",
+              "RelativeToolTip": "shop_online\\FormLogin.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T09:56:43.483Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-17T10:35:08.275Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FormLogin.cs",
+              "DocumentMoniker": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\FormLogin.cs",
+              "RelativeDocumentMoniker": "shop_online\\FormLogin.cs",
+              "ToolTip": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\FormLogin.cs",
+              "RelativeToolTip": "shop_online\\FormLogin.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAAAEBAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-17T09:56:43.483Z"
             }
           ]
         }

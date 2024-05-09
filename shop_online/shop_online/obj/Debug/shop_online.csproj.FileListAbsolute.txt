@@ -158,3 +158,45 @@ C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PRO
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\obj\Debug\shop_online.DetaliiProdus.resources
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\obj\Debug\shop_online.Cos.resources
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\obj\Debug\shop_online.ProdusCos.resources
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\shop_online.exe.config
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\shop_online.exe
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\shop_online.pdb
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\System.Buffers.dll
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\System.Memory.dll
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\System.Numerics.Vectors.dll
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\System.Security.Cryptography.ProtectedData.dll
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\System.Buffers.xml
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\System.Memory.xml
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\System.Numerics.Vectors.xml
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\System.Security.Cryptography.ProtectedData.xml
+C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_online.csproj.AssemblyReference.cache
+C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_online.Adauga_Produse.resources
+C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_online.Afisare_Produse.resources
+C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_online.Cos.resources
+C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_online.DetaliiProdus.resources
+C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_online.FormLogin.resources
+C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_online.ProductControl.resources
+C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_online.ProdusCos.resources
+C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_online.Properties.Resources.resources
+C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_online.csproj.GenerateResource.cache
+C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_online.csproj.CoreCompileInputs.cache
+C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_onl.1721B023.Up2Date
+C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_online.exe
+C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_online.pdb
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\nunit.framework.dll
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\nunit.framework.legacy.dll
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\xunit.abstractions.dll
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\xunit.assert.dll
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\xunit.core.dll
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\xunit.execution.desktop.dll
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\nunit.framework.xml
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\nunit.framework.legacy.xml
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\xunit.abstractions.xml
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\xunit.assert.xml
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\xunit.core.xml
+C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\xunit.execution.desktop.xml
