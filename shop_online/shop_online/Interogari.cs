@@ -820,6 +820,68 @@ namespace shop_online
             }
         }
 
+        public static void GestionareAdmin(string connectionString, string operatie, int idAdmin, int idUser = 0, string rol = null)
+        {
+            try
+            {
+                string query = "";
+
+                switch (operatie.ToLower())
+                {
+                    case "insert":
+                        query = @"INSERT INTO Admini (id_admin, id_user, rol) VALUES (@IdAdmin, @IdUser, @Rol)";
+                        break;
+                    case "update":
+                        query = @"UPDATE Admini SET id_user = @IdUser, rol = @Rol WHERE id_admin = @IdAdmin";
+                        break;
+                    case "delete":
+                        query = @"DELETE FROM Admini WHERE id_admin = @IdAdmin";
+                        break;
+                    default:
+                        MessageBox.Show("Operația specificată nu este validă.");
+                        return;
+                }
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@IdAdmin", idAdmin);
+
+                    if (operatie.ToLower() != "delete")
+                    {
+                        cmd.Parameters.AddWithValue("@IdUser", idUser);
+                        cmd.Parameters.AddWithValue("@Rol", rol);
+                    }
+
+                    connection.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    switch (operatie.ToLower())
+                    {
+                        case "insert":
+                            MessageBox.Show("Adminul a fost adăugat cu succes în baza de date!");
+                            break;
+                        case "update":
+                            if (rowsAffected > 0)
+                                MessageBox.Show("Adminul a fost actualizat cu succes în baza de date!");
+                            else
+                                MessageBox.Show("Adminul cu id-ul specificat nu a fost găsit în baza de date!");
+                            break;
+                        case "delete":
+                            if (rowsAffected > 0)
+                                MessageBox.Show("Adminul a fost șters cu succes din baza de date!");
+                            else
+                                MessageBox.Show("Adminul cu id-ul specificat nu a fost găsit în baza de date!");
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Eroare în gestionarea adminului în baza de date: " + ex.Message);
+            }
+        }
+
         //Horia
     }
 }
