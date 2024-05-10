@@ -200,3 +200,15 @@ C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\xunit.abstractions.xml
 C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\xunit.assert.xml
 C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\xunit.core.xml
 C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\xunit.execution.desktop.xml
+C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\xunit.abstractions.dll
+C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\xunit.assert.dll
+C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\xunit.core.dll
+C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\xunit.execution.desktop.dll
+C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\xunit.abstractions.xml
+C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\xunit.assert.xml
+C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\xunit.core.xml
+C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\xunit.execution.desktop.xml
+C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\nunit.framework.dll
+C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\nunit.framework.xml

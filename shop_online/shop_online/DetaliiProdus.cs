@@ -7,7 +7,7 @@ namespace shop_online
 {
     public partial class DetaliiProdus : Form
     {
-        ProdusItem produs;
+        private ProdusItem produs;
         public DetaliiProdus( ProdusItem produs )
         {
             InitializeComponent();
@@ -61,6 +61,12 @@ namespace shop_online
                  listViewImaginiProdus.Items.Add(item);
                  listBoxImaginiProdus.Items.Add(miniatura);
              }*/
+
+
+
+
+
+
         }
 
         private void listBoxImaginiProdus_SelectedIndexChanged( object sender, EventArgs e )
