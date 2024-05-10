@@ -36,9 +36,9 @@
               "RelativeDocumentMoniker": "shop_online\\Test.cs",
               "ToolTip": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\Test.cs",
               "RelativeToolTip": "shop_online\\Test.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACYAAAAFAAAA",
+              "ViewState": "AQIAAEUAAAAAAAAAAAAiwFgAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T15:16:00.711Z",
+              "WhenOpened": "2024-05-10T14:14:08.896Z",
               "EditorCaption": ""
             },
             {
@@ -49,9 +49,10 @@
               "RelativeDocumentMoniker": "shop_online\\Interogari.cs",
               "ToolTip": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\Interogari.cs",
               "RelativeToolTip": "shop_online\\Interogari.cs",
-              "ViewState": "AQIAAKsAAAAAAAAAAAAYwLQAAAAPAAAA",
+              "ViewState": "AQIAAHAAAAAAAAAAAAAQwBYAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T08:17:58.621Z"
+              "WhenOpened": "2024-05-08T08:17:58.621Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -62,7 +63,8 @@
               "ToolTip": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\FormLogin.cs [Design]",
               "RelativeToolTip": "shop_online\\FormLogin.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T10:35:08.275Z"
+              "WhenOpened": "2024-04-17T10:35:08.275Z",
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
@@ -74,7 +76,8 @@
               "RelativeToolTip": "shop_online\\FormLogin.cs",
               "ViewState": "AQIAAA8AAAAAAAAAAAAAAAEBAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T09:56:43.483Z"
+              "WhenOpened": "2024-04-17T09:56:43.483Z",
+              "EditorCaption": ""
             }
           ]
         }
