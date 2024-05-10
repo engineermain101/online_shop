@@ -15,6 +15,8 @@ namespace shop_online
         private bool furnizor = false;
         private Adauga_Produse adauga_Produse = null;// Form nou
         private Cos cos = null;
+        private Adauga_Stergere_Admin adauga_Stergere_Admin = null;
+
 
         public Afisare_Produse()
         {
@@ -217,6 +219,18 @@ namespace shop_online
         private void adaugaFurnizorToolStripMenuItem_Click( object sender, EventArgs e )
         {
 
+        }
+
+        private void adaugaAdminToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            Size size = new Size(700, 400);
+            Aranjare.HideCurrentFormAndOpenNewForm(this, adauga_Stergere_Admin, (object)true, size);
+        }
+
+        private void stergereAdminToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            Size size = new Size(700, 400);
+            Aranjare.HideCurrentFormAndOpenNewForm(this, adauga_Stergere_Admin, (object)false, size);
         }
 
 

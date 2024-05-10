@@ -6,9 +6,6 @@ namespace shop_online
 {
     public partial class FormLogin : Form
     {
-        //private int height;
-        //private int width;
-        // private bool signupApasat = false;
         private Afisare_Produse afisare_Produse = null;// Form nou
 
         public FormLogin()
@@ -36,11 +33,6 @@ namespace shop_online
         }
         private void butonuldeBack()
         {
-            //Width = 681;
-            //Height = 423;
-            //panelMenu.Height = 277;
-            // panelMenu.Width = 505;
-
             FormBorderStyle = FormBorderStyle.Sizable;
             panelMenu.Show();
             panelSignUp.Hide();
@@ -70,8 +62,6 @@ namespace shop_online
         }
         private void buttonAcces_Click( object sender, EventArgs e )
         {
-            //string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
-
             string parola = textBoxParola.Text;
             string telefon = textBoxTelefon.Text.Trim();
             string tel = string.Empty, email_sus = string.Empty;
@@ -112,10 +102,6 @@ namespace shop_online
                 {
                     MinimumSize = new Size(520 * 2, 138 * 4)
                 };
-                /*   afisare_Produse = new Afisare_Produse("a@a.a", "a", telefon)
-                   {
-                       MinimumSize = new Size(490, 535)
-                   };*/
                 afisare_Produse.Size = afisare_Produse.MinimumSize;
                 afisare_Produse.FormClosed += ( sender, e ) => { afisare_Produse = null; }; // Resetare referință când formularul este închis
             }
@@ -130,18 +116,6 @@ namespace shop_online
                 }
             }
             afisare_Produse.LoadUser(email, parola, telefon);
-
-            /*      if (afisare_Produse == null)
-                  {
-                      afisare_Produse = new Afisare_Produse(email, parola, telefon)
-                      {
-                          MinimumSize = new Size(490, 535),
-                          Size = new Size(490, 535)
-                      };
-                      afisare_Produse.FormClosed += ( sender, e ) => { afisare_Produse = null; }; // Resetare referință când formularul este închis
-                  }*/
-
-            //afisare_Produse.LoadUser("a@a.a", "a", telefon);
             afisare_Produse.Show();
             afisare_Produse.Focus();
         }
@@ -223,7 +197,7 @@ namespace shop_online
                 connectionString = Aranjare.GetConnectionString();
             }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
-                       
+
             if (!int.TryParse(textBoxNumar_Strada.Text, out int numar) || numar < 1)
             {
                 MessageBox.Show("Introduceți un număr valid pentru stradă.");
@@ -235,23 +209,6 @@ namespace shop_online
                 CloseCurrentFormAndOpenNewFormAsync(nume, email, parola, telefon, judet, oras, strada, numar);
             }
         }
-
-        /*  private void ShiftUpSignUpButtons() //functia asta muta text-box-urile cu tot cu label-uri mai sus pt ca sa arate mai bine ecranu de sign up
-          {
-              panelSignUp.Location = new Point(0, Location.Y - 20);
-              //panelMenu.Location = new Point(0, this.Location.Y + 65);
-
-          }
-
-          private void ShiftDownSignUpButtons() //functia asta muta text-box-urile cu tot cu label-uri mai jos pt ca sa arate mai bine ecranu de login
-          {
-              panelSignUp.Location = new Point(0, Location.Y + 20);
-              //panelMenu.Location = new Point(0, this.Location.Y - 65);
-          }
-          */
-
-
-
 
     }
 }

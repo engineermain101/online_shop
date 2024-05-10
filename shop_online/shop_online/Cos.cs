@@ -92,7 +92,10 @@ namespace shop_online
             }
             catch (Exception) { return; }
             Aranjare.Delete_from_flowLayoutPanel(flowLayoutPanelProduse, id_produs);
-            Interogari.DeleteProdusdinCos(con, utilizatorId, id_produs);
+            bool deleted = Interogari.DeleteProdusdinCos(con, utilizatorId, id_produs);
+            if (!deleted)
+                return;
+
             CalculatePretTotal();
         }
 

@@ -415,7 +415,7 @@ namespace shop_online
         /// <example>
         /// Aranjare.CloseCurrentFormAndOpenForm(FindForm(), detaliiProdus, produs, MinimumSize);
         /// </example>
-        public static void HideCurrentFormAndOpenNewForm<T, A>( Form oldForm, T newForm, A id, Size minimumSize )
+        public static void HideCurrentFormAndOpenNewForm<T, A>( Form oldForm, T newForm, A constructor_value, Size minimumSize )
 where T : Form
 where A : class
         {
@@ -423,15 +423,7 @@ where A : class
 
             if (newForm == null)
             {
-                /* if (newForm is Adauga_Produse)
-                 {
-                     newForm = new Adauga_Produse(id);
-                 }
-                 else if (newForm is Cos)
-                 {
-                     newForm = new Cos(id);
-                 }*/
-                newForm = (T)Activator.CreateInstance(typeof(T), id);
+                newForm = (T)Activator.CreateInstance(typeof(T), constructor_value);
 
                 newForm.MinimumSize = minimumSize;
                 newForm.Size = newForm.MinimumSize;
