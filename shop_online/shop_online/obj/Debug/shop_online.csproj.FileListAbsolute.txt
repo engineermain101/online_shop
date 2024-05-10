@@ -212,3 +212,4 @@ C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\xunit.execution.desktop.xml
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\nunit.framework.dll
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\nunit.framework.xml
+C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\obj\Debug\shop_online.Adauga_Stergere_Admin.resources

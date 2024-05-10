@@ -82,7 +82,7 @@
             // categorieToolStripMenuItem
             // 
             this.categorieToolStripMenuItem.Name = "categorieToolStripMenuItem";
-            this.categorieToolStripMenuItem.Size = new System.Drawing.Size(149, 26);
+            this.categorieToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.categorieToolStripMenuItem.Text = "Categorie";
             // 
             // adaugaToolStripMenuItem
@@ -114,6 +114,7 @@
             this.adaugaAdminToolStripMenuItem.Name = "adaugaAdminToolStripMenuItem";
             this.adaugaAdminToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.adaugaAdminToolStripMenuItem.Text = "Admin";
+            this.adaugaAdminToolStripMenuItem.Click += new System.EventHandler(this.adaugaAdminToolStripMenuItem_Click);
             // 
             // stergereToolStripMenuItem
             // 
@@ -128,20 +129,21 @@
             // stergereProdusToolStripMenuItem
             // 
             this.stergereProdusToolStripMenuItem.Name = "stergereProdusToolStripMenuItem";
-            this.stergereProdusToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.stergereProdusToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.stergereProdusToolStripMenuItem.Text = "Produs";
             // 
             // stergereFurnizorToolStripMenuItem
             // 
             this.stergereFurnizorToolStripMenuItem.Name = "stergereFurnizorToolStripMenuItem";
-            this.stergereFurnizorToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.stergereFurnizorToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.stergereFurnizorToolStripMenuItem.Text = "Furnizor";
             // 
             // stergereAdminToolStripMenuItem
             // 
             this.stergereAdminToolStripMenuItem.Name = "stergereAdminToolStripMenuItem";
-            this.stergereAdminToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.stergereAdminToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.stergereAdminToolStripMenuItem.Text = "Admin";
+            this.stergereAdminToolStripMenuItem.Click += new System.EventHandler(this.stergereAdminToolStripMenuItem_Click);
             // 
             // cosToolStripMenuItem
             // 
