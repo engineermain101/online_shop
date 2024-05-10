@@ -324,7 +324,7 @@ namespace shop_online
         }
 
 
-        private void CloseCurrentFormAndOpenNewFormAsync( ProdusItem produss )
+        /*private void CloseCurrentFormAndOpenNewFormAsync( ProdusItem produss )
         {
             if (detaliiProdus == null)
             {
@@ -348,7 +348,7 @@ namespace shop_online
             detaliiProdus.Show();
             detaliiProdus.Focus();
         }
-
+        */
 
 
 

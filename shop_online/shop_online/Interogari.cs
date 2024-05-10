@@ -496,7 +496,6 @@ namespace shop_online
         }
         private static void UpdateProductInCart( string connectionString, int id_user, int id_produs, int nr_bucati, decimal total_pret )
         {
-            // string query = "UPDATE Cos SET nr_bucati = nr_bucati + @nr_bucati, total_pret = total_pret + @total_pret WHERE id_user = @id_user AND id_produs = @id_produs";
             string query = "UPDATE Cos SET nr_bucati = @nr_bucati, total_pret = @total_pret WHERE id_user = @id_user AND id_produs = @id_produs";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -537,17 +536,6 @@ namespace shop_online
         public static DataTable GetCos( string connectionString, int idUser )
         {
             DataTable dataTable = new DataTable();
-            /* string query = @"
-             SELECT p.*, c.*
-             FROM Produse p
-             INNER JOIN (
-                 SELECT id_produs, id_user
-                 FROM Cos
-                 WHERE id_user = @idUser
-                 GROUP BY id_produs, id_user
-             ) c ON p.id_produs = c.id_produs
-             ORDER BY p.id_produs DESC";*/
-
 
             string query = @"
             SELECT p.*, c.nr_bucati, c.total_pret
@@ -610,9 +598,6 @@ namespace shop_online
                 MessageBox.Show("A apărut o eroare la ștergerea produsului din coș: " + ex.Message);
             }
         }
-
-
-
 
 
         public static void TranzactieCumparareProdus( string connectionString, int id_user, List<ProductControl> produse, string metoda_plata )
@@ -728,7 +713,7 @@ namespace shop_online
 
                 foreach (ProductControl produs in produse)
                 {
-                    insertCommand.Parameters.Clear(); 
+                    insertCommand.Parameters.Clear();
                     insertCommand.Parameters.AddWithValue("@id_user", id_user);
                     insertCommand.Parameters.AddWithValue("@id_furnizor", produs.GetProdus().Id_Furnizor);
                     insertCommand.Parameters.AddWithValue("@id_produs", produs.GetProdus_ID());
@@ -755,6 +740,53 @@ namespace shop_online
                 }
             }*/
         }
+
+
+        public static DataTable GetSpecificatii( string connectionString, int idProdus )
+        {
+           // throw new NotImplementedException();
+
+            DataTable dataTable = new DataTable();
+
+            string query = @"
+            SELECT p.*, c.nr_bucati, c.total_pret
+            FROM Produse p
+            INNER JOIN (
+                SELECT id_produs, nr_bucati, total_pret
+                FROM Cos
+                WHERE id_user = 3
+                GROUP BY id_produs, nr_bucati, total_pret
+            ) c ON p.id_produs = c.id_produs
+            ORDER BY p.id_produs DESC;";
+
+          
+
+            return dataTable;
+        }
+        public static DataTable GetRecenzii( string connectionString, int idProdus )
+        {
+            // throw new NotImplementedException();
+
+            DataTable dataTable = new DataTable();
+
+            string query = @"
+            SELECT p.*, c.nr_bucati, c.total_pret
+            FROM Produse p
+            INNER JOIN (
+                SELECT id_produs, nr_bucati, total_pret
+                FROM Cos
+                WHERE id_user = 3
+                GROUP BY id_produs, nr_bucati, total_pret
+            ) c ON p.id_produs = c.id_produs
+            ORDER BY p.id_produs DESC;";
+
+
+
+            return dataTable;
+        }
+
+
+
 
 
         //Claudiu
@@ -820,7 +852,7 @@ namespace shop_online
             }
         }
 
-        public static void GestionareAdmin(string connectionString, string operatie, int idAdmin, int idUser = 0, string rol = null)
+        public static void GestionareAdmin( string connectionString, string operatie, int idAdmin, int idUser = 0, string rol = null )
         {
             try
             {
