@@ -17,7 +17,8 @@ namespace shop_online
         private Adauga_Produse adauga_Produse = null;// Form nou
         private Cos cos = null;
         private Adauga_Stergere_Admin adauga_Stergere_Admin = null;
-
+        private Adauga_Furnizor Adauga_Furnizor = null;
+        private FormLogin formlogin = null;
 
         public Afisare_Produse()
         {
@@ -127,18 +128,11 @@ namespace shop_online
         }
         private void cosToolStripMenuItem_Click( object sender, EventArgs e )
         {
-            foreach (Control control in flowLayoutPanelProduse.Controls)
-            {
-                if (control is ProductControl)
-                {
-                    (control as ProductControl).ResetBackColor();
-                }
-            }
+            Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
             if (utilizatorCurentId > 0)
             {
                 Size minimumSize = new Size(750, 560);
                 Aranjare.HideCurrentFormAndOpenNewForm(this, cos, (object)utilizatorCurentId, minimumSize);
-                //CloseCurrentFormAndOpenCos(utilizatorCurentId);
             }
 
         }
@@ -150,62 +144,62 @@ namespace shop_online
 
 
 
-        private void CloseCurrentFormAndOpenAdaugaProdus( int id_furnizor )
-        {
-            Hide();
+        /* private void CloseCurrentFormAndOpenAdaugaProdus( int id_furnizor )
+         {
+             Hide();
 
-            if (adauga_Produse == null)
-            {
-                adauga_Produse = new Adauga_Produse(id_furnizor)
-                {
-                    MinimumSize = new Size(490, 535)
-                };
-                adauga_Produse.Size = adauga_Produse.MinimumSize;
-                adauga_Produse.FormClosed += ( sender, e ) => { adauga_Produse = null; }; // Resetare referință când formularul este închis
-            }
+             if (adauga_Produse == null)
+             {
+                 adauga_Produse = new Adauga_Produse(id_furnizor)
+                 {
+                     MinimumSize = new Size(490, 535)
+                 };
+                 adauga_Produse.Size = adauga_Produse.MinimumSize;
+                 adauga_Produse.FormClosed += ( sender, e ) => { adauga_Produse = null; }; // Resetare referință când formularul este închis
+             }
 
-            if (!adauga_Produse.Visible)
-            {
-                adauga_Produse.Visible = true;
+             if (!adauga_Produse.Visible)
+             {
+                 adauga_Produse.Visible = true;
 
-                if (Application.OpenForms ["Afisare_Produse"] != null)
-                {
-                    Application.OpenForms ["Afisare_Produse"].Hide();
-                }
-            }
-            adauga_Produse.LoadUser(id_furnizor);
-            adauga_Produse.Show();
-            adauga_Produse.Focus();
-        }
+                 if (Application.OpenForms ["Afisare_Produse"] != null)
+                 {
+                     Application.OpenForms ["Afisare_Produse"].Hide();
+                 }
+             }
+             adauga_Produse.LoadUser(id_furnizor);
+             adauga_Produse.Show();
+             adauga_Produse.Focus();
+         }
 
-        /*private void CloseCurrentFormAndOpenCos( int utilizatorId )
-        {
-            Hide();
+         private void CloseCurrentFormAndOpenCos( int utilizatorId )
+         {
+             Hide();
 
-            if (cos == null)
-            {
-                cos = new Cos(utilizatorId)
-                {
-                    MinimumSize = new Size(750, 560)
-                };
-                cos.Size = cos.MinimumSize;
-                cos.FormClosed += ( sender, e ) => { cos = null; }; // Resetare referință când formularul este închis
-            }
+             if (cos == null)
+             {
+                 cos = new Cos(utilizatorId)
+                 {
+                     MinimumSize = new Size(750, 560)
+                 };
+                 cos.Size = cos.MinimumSize;
+                 cos.FormClosed += ( sender, e ) => { cos = null; }; // Resetare referință când formularul este închis
+             }
 
-            if (!cos.Visible)
-            {
-                cos.Visible = true;
+             if (!cos.Visible)
+             {
+                 cos.Visible = true;
 
-                if (Application.OpenForms ["Afisare_Produse"] != null)
-                {
-                    Application.OpenForms ["Afisare_Produse"].Hide();
-                }
-            }
-            cos.LoadUser(utilizatorId);
-            cos.Show();
-            cos.Focus();
-        }
-        */
+                 if (Application.OpenForms ["Afisare_Produse"] != null)
+                 {
+                     Application.OpenForms ["Afisare_Produse"].Hide();
+                 }
+             }
+             cos.LoadUser(utilizatorId);
+             cos.Show();
+             cos.Focus();
+         }
+         */
         private void flowLayoutPanelProduse_DoubleClick( object sender, EventArgs e )
         {
             Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
@@ -219,29 +213,36 @@ namespace shop_online
 
         private void adaugaFurnizorToolStripMenuItem_Click( object sender, EventArgs e )
         {
-
+            Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
+            Size size = new Size(700, 500);
+            Aranjare.HideCurrentFormAndOpenNewForm(this, Adauga_Furnizor, (object)utilizatorCurentId, size);
         }
 
         private void adaugaAdminToolStripMenuItem_Click( object sender, EventArgs e )
         {
+            Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
             Size size = new Size(700, 400);
             Aranjare.HideCurrentFormAndOpenNewForm(this, adauga_Stergere_Admin, (object)true, size);
         }
 
         private void stergereAdminToolStripMenuItem_Click( object sender, EventArgs e )
         {
+            Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
             Size size = new Size(700, 400);
             Aranjare.HideCurrentFormAndOpenNewForm(this, adauga_Stergere_Admin, (object)false, size);
         }
 
-        private void delogheazateToolStripMenuItem_Click(object sender, EventArgs e)
+        private void delogheazateToolStripMenuItem_Click( object sender, EventArgs e )
         {
-            this.Hide();
-            var form2 = new FormLogin();
-            form2.Closed += (s, args) => this.Close();
+            Hide();
+            FormLogin form2 = new FormLogin();
+            form2.Closed += ( s, args ) => Close();
             form2.Show();
             string filePath = "log_info.txt";
             File.WriteAllText(filePath, string.Empty);
+
+            /* Size size = new Size(500, 300);
+             Aranjare.HideCurrentFormAndOpenNewForm(FindForm(), formlogin, (object)-1, size);*/
 
         }
 

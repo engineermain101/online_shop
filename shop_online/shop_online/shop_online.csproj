@@ -90,6 +90,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adauga_Furnizor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Adauga_Furnizor.Designer.cs">
+      <DependentUpon>Adauga_Furnizor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Adauga_Produse.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +149,9 @@
     <Compile Include="Test.cs" />
     <Compile Include="TestClassAttribute.cs" />
     <Compile Include="TestMethodAttribute.cs" />
+    <EmbeddedResource Include="Adauga_Furnizor.resx">
+      <DependentUpon>Adauga_Furnizor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Adauga_Produse.resx">
       <DependentUpon>Adauga_Produse.cs</DependentUpon>
     </EmbeddedResource>
