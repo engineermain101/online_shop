@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -127,25 +128,38 @@ namespace shop_online
 
 
         //Puia
-        private void buttonAdaugaProdus_Click( object sender, System.EventArgs e )
+        private void buttonAdaugaProdus_Click(object sender, System.EventArgs e)
         {
-            try
-            {
-                int Cantitate = int.Parse(textBoxCantitate.Text.Trim());
-                decimal Pret = decimal.Parse(textBoxPret.Text.Trim());
-                string Descriere = textBoxDescriere.Text.Trim();
-                List<string> Numelistaspecificatii = textBoxDenumireSpecificatie.Text.Split(',').Select(s => s.Trim()).ToList();
-                List<string> ValoareListaSpecificatii = textBoxValoareSpecificatie.Text.Split(',').Select(s => s.Trim()).ToList();
-                int id_Categorie = int.Parse(comboBoxCategorie.Text.Trim());
-                throw new Exception("Id categorie nu este acelasi cu ce e in combobox. Trebuie sa faceti o metoda get Id_categorie in clasa Interogari!");
-                Image image = pictureBoxImagine.Image;
-                string NumeProdus = textBoxDenumire.Text;
-                string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
+
+            string connectionString = Aranjare.GetConnectionString();
+            string denumire = textBoxDenumire.Text.ToString();
+            if (denumire.Length == 0) { MessageBox.Show("Va rog introduceti o denumire valida!"); return; }
+
+            if (comboBoxCategorie.SelectedIndex == -1) { MessageBox.Show("Va rog selectati o categorie"); return; }
+            string categorie = comboBoxCategorie.Text.ToString();
+
+            string descriere = textBoxDescriere.Text.ToString();
+            if (descriere.Length == 0) { MessageBox.Show("Va rog introduceti o descriere"); return; }
+
+            Image image = pictureBoxImagine.Image;
+            string filename = pictureBoxImagine.ImageLocation;
+            string extension = Path.GetExtension(filename);
 
 
-                Interogari.InsertProdus(connectionString, image, id_Categorie, user_id_furnizor, NumeProdus, Cantitate, Pret, Descriere, Numelistaspecificatii, ValoareListaSpecificatii);
-            }
-            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
+            string denumireS = textBoxDenumireSpecificatie.Text.ToString();
+            string valoareS = textBoxValoareSpecificatie.Text.ToString();
+
+            double pret = double.Parse(textBoxPret.Text);
+            if (pret <= 0) { MessageBox.Show("Pret negativ sau 0"); return; }
+
+
+            int cantitate = int.Parse(textBoxCantitate.Text);
+            if (cantitate <= 0) { MessageBox.Show("Cantitate negativa sau 0"); return; }
+
+
+            Interogari.InsertProdus(connectionString, image, denumire, cantitate, pret, descriere, denumireS, valoareS, comboBoxCategorie.SelectedIndex, filename + extension, user_id_furnizor);
+
+
         }
 
 
