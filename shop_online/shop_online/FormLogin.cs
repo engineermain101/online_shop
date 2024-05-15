@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace shop_online
@@ -11,11 +12,14 @@ namespace shop_online
         public FormLogin()
         {
             InitializeComponent();
+            this.Shown += new EventHandler(autoLogin);    
         }
 
         //Roli   
-        private void FormLogin_Load( object sender, EventArgs e )
+        private void FormLogin_Load(object sender, EventArgs e)
         {
+            
+            
             Aranjare.ToateTextBoxurileledinPanelGoale(panelSignUp);
             Aranjare.ToateTextBoxurileledinPanelGoale(panelMenu);
             panelSignUp.Hide();
@@ -29,7 +33,9 @@ namespace shop_online
             Size = panelMenu.Size;
             panelMenu.Location = new Point(0, 0);
             MinimumSize = new Size(panelMenu.Width, panelMenu.Height);
-            butonuldeBack();
+
+
+
         }
         private void butonuldeBack()
         {
@@ -38,7 +44,7 @@ namespace shop_online
             panelSignUp.Hide();
             MinimumSize = new Size(panelMenu.Width + 50, panelMenu.Height + 50);
         }
-        private void buttonSignUp_Click( object sender, EventArgs e )
+        private void buttonSignUp_Click(object sender, EventArgs e)
         {
             Aranjare.ToateTextBoxurileledinPanelGoale(panelSignUp);
             SignUpButton();
@@ -55,12 +61,12 @@ namespace shop_online
             panelSignUp.Location = new Point(0, 0);
             Aranjare.ToateObicteledinPanelVisible(panelSignUp, true);
         }
-        private void buttonBack_Click( object sender, EventArgs e )
+        private void buttonBack_Click(object sender, EventArgs e)
         {
             butonuldeBack();
             Size = new Size(panelMenu.Width + 50, panelMenu.Height + 50);
         }
-        private void buttonAcces_Click( object sender, EventArgs e )
+        private void buttonAcces_Click(object sender, EventArgs e)
         {
             string parola = textBoxParola.Text;
             string telefon = textBoxTelefon.Text.Trim();
@@ -84,13 +90,15 @@ namespace shop_online
 
             if (Interogari.Login(connectionString, email_sus, tel, parola))
             {
+                stayLogged(telefon, parola);
                 CloseCurrentFormAndOpenNewFormAsync("", email_sus, parola, tel, "", "", "", -1);
             }
+
         }
 
 
-        private void CloseCurrentFormAndOpenNewFormAsync( string nume, string email, string parola,
-        string telefon, string judet, string oras, string strada, int numar )
+        private void CloseCurrentFormAndOpenNewFormAsync(string nume, string email, string parola,
+        string telefon, string judet, string oras, string strada, int numar)
         {
             Hide();
             Aranjare.ToateTextBoxurileledinPanelGoale(panelSignUp);
@@ -103,24 +111,24 @@ namespace shop_online
                     MinimumSize = new Size(520 * 2, 138 * 4)
                 };
                 afisare_Produse.Size = afisare_Produse.MinimumSize;
-                afisare_Produse.FormClosed += ( sender, e ) => { afisare_Produse = null; }; // Resetare referință când formularul este închis
+                afisare_Produse.FormClosed += (sender, e) => { afisare_Produse = null; }; // Resetare referință când formularul este închis
             }
 
             if (!afisare_Produse.Visible)
             {
                 afisare_Produse.Visible = true;
 
-                if (Application.OpenForms ["FormLogin"] != null)
+                if (Application.OpenForms["FormLogin"] != null)
                 {
-                    Application.OpenForms ["FormLogin"].Hide();
+                    Application.OpenForms["FormLogin"].Hide();
                 }
             }
-            afisare_Produse.LoadUser(email, parola, telefon);
+            //afisare_Produse.LoadUser(email, parola, telefon);
             afisare_Produse.Show();
             afisare_Produse.Focus();
         }
 
-        private void SetPanelState( Aranjare config )
+        private void SetPanelState(Aranjare config)
         {
             panelMenu.Visible = config.panelMenuVisible;
             panelSignUp.Visible = config.panelSignUpVisible;
@@ -174,13 +182,48 @@ namespace shop_online
         }
 
         //Claudiu
-
+        private void stayLogged(string user, string parola)
+        {
+            string filePath = "log_info.txt";
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(filePath))
+                {
+                    writer.WriteLine(user);
+                    writer.WriteLine(parola);
+                }
+               // MessageBox.Show("Text written to file successfully.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error writing to file: " + ex.Message);
+            }
+        }
+        private void autoLogin(object sender, EventArgs e)
+        {
+            string filePath = "log_info.txt";
+            FileInfo fileInfo = new FileInfo(filePath);
+            if (fileInfo.Exists && fileInfo.Length != 0)
+            {
+                string[] lines = File.ReadAllLines(filePath);
+                string telefon = lines[0];
+                string parola = lines[1];
+                string tel = string.Empty;
+                string email_sus = string.Empty;
+                if (Aranjare.IsValidTelefon(telefon))
+                    tel = telefon;
+                else if (Aranjare.IsValidEmail(telefon))
+                    email_sus = telefon;
+                    
+                CloseCurrentFormAndOpenNewFormAsync("", email_sus, parola, tel, "", "", "", -1);
+            }
+        }
 
         //Puia
 
 
         //Horia
-        private void buttonSignUp2_Click( object sender, EventArgs e )
+        private void buttonSignUp2_Click(object sender, EventArgs e)
         {
             string nume = Aranjare.FormatName(textBoxNume.Text);
             string email = Aranjare.FormatName(textBoxEmail.Text);

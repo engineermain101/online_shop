@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace shop_online
@@ -231,6 +232,17 @@ namespace shop_online
         {
             Size size = new Size(700, 400);
             Aranjare.HideCurrentFormAndOpenNewForm(this, adauga_Stergere_Admin, (object)false, size);
+        }
+
+        private void delogheazateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var form2 = new FormLogin();
+            form2.Closed += (s, args) => this.Close();
+            form2.Show();
+            string filePath = "log_info.txt";
+            File.WriteAllText(filePath, string.Empty);
+
         }
 
 

@@ -1099,63 +1099,53 @@ namespace shop_online
         //Claudiu
 
         //Puia
-        public static void InsertProdus( string connectionString, Image image, int id_Categorie, int id_Furnizor, string NumeProdus, int Cantitate, decimal Pret, string Descriere, List<string> NumeListaSpecificatii, List<string> ValoareListaSpecificatii )
+        public static void InsertProdus(string connectionString, Image image, string NumeProdus, int Cantitate, double Pret, string Descriere, string NumeListaSpecificatii, string ValoareListaSpecificatii, int idCategorie, string numeImage, int id_furnizor)
         {
-            try
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                NumeProdus = Aranjare.FormatName(NumeProdus);
-                Descriere = Aranjare.FormatName(Descriere);
-                foreach (string s in NumeListaSpecificatii)
+                connection.Open();
+                SqlTransaction transaction = connection.BeginTransaction();
+                try
                 {
-                    string specificatieFormatata = s.ToLower().Trim();
-                    //pt fiecare numespecificatii se apelaeaza aranjare.FormatName
+                    SqlCommand sqlProdus = new SqlCommand("INSERT INTO Produse (nume,cantitate,pret,descriere,id_categorie,id_furnizor) VALUES (@nume,@cantitate,@pret,@descriere,@id_categorie,@id_furnizor)" +
+                                                            "SELECT SCOPE_IDENTITY();", connection, transaction);
+                    sqlProdus.Parameters.AddWithValue("@nume", NumeProdus);
+                    sqlProdus.Parameters.AddWithValue("@cantitate", Cantitate);
+                    sqlProdus.Parameters.AddWithValue("@pret", Pret);
+                    sqlProdus.Parameters.AddWithValue("@descriere", Descriere);
+                    sqlProdus.Parameters.AddWithValue("@id_categorie", idCategorie);
+                    sqlProdus.Parameters.AddWithValue("@id_furnizor", id_furnizor);
+                    int produsId = Convert.ToInt32(sqlProdus.ExecuteScalar());
+
+                    SqlCommand sqlSpecificatii = new SqlCommand("INSERT INTO Specificatii (id_produs,nume,valoare)" +
+                                                    "VALUES (@id,@nume,@valoare)", connection, transaction);
+                    sqlSpecificatii.Parameters.AddWithValue("@id", produsId);
+                    sqlSpecificatii.Parameters.AddWithValue("@nume", NumeListaSpecificatii);
+                    sqlSpecificatii.Parameters.AddWithValue("@valoare", ValoareListaSpecificatii);
+
+                    SqlCommand sqlImagini = new SqlCommand("INSERT INTO Imagini (id_produs,imagine,nume)" +
+                                                    "VALUES (@id,@imagine,@nume)", connection, transaction);
+                    sqlSpecificatii.Parameters.AddWithValue("@id", produsId);
+                    sqlSpecificatii.Parameters.AddWithValue("@imagine", image);
+                    sqlSpecificatii.Parameters.AddWithValue("@nume", numeImage);
+
                 }
-                foreach (string s in ValoareListaSpecificatii)
+                catch (Exception ex)
                 {
-                    string valoarespecificatie = s.ToLower().Trim();
-                    //pt fiecare numespecificatii se apelaeaza aranjare.FormatName
-                }
-
-                if (string.IsNullOrWhiteSpace(NumeProdus) ||
-
-                    string.IsNullOrWhiteSpace(Descriere))
-                {
-                    MessageBox.Show("Toate câmpurile trebuie completate.");
-                    return;
-                }
-                //apelare metoda adauga imagini. verifica daca toate sunt goale nu tr lasa sa adaugi produsul
-                //implementatre intergari:-insert image apelare, -adauga specificatii (o alta functie pt adaugare specificatii) apelare foreach
-                //
-
-                string query = @"INSERT INTO Produse (nume, pret, id_categorie, cantitate, descriere, id_furnizor) " +
-                                      "VALUES (@Nume, @Pret, @Categorie, @Cantitate, @Descriere, @Furnizor)";
-
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                using (SqlCommand cmd = new SqlCommand(query, connection))
-                {
-
-                    cmd.CommandText = @"INSERT INTO Produse (nume, pret, id_categorie, cantitate, descriere, id_furnizor) " +
-                                      "VALUES (@Nume, @Pret, @Categorie, @Cantitate, @Descriere, @Furnizor)";
-
-                    cmd.Parameters.AddWithValue("@Nume", NumeProdus);
-                    cmd.Parameters.AddWithValue("@Pret", (Pret));
-                    cmd.Parameters.AddWithValue("@Categorie", id_Categorie);
-                    cmd.Parameters.AddWithValue("@Furnizor", id_Furnizor);
-                    cmd.Parameters.AddWithValue("@Cantitate", (Cantitate));
-                    cmd.Parameters.AddWithValue("@Descriere", Descriere);
-
-
-                    cmd.ExecuteNonQuery();
-
-                    MessageBox.Show("Produsul a fost adăugat cu succes în baza de date!");
+                    // Rollback the transaction if any error occurs
+                    Console.WriteLine("Error: " + ex.Message);
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception exRollback)
+                    {
+                        Console.WriteLine("Rollback Error: " + exRollback.Message);
+                    }
                 }
 
-                throw new Exception("apelare metoda adauga imagini,implementatre intergari:-insert image apelare, -adauga specificatii ");
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Eroare la adăugarea produsului în baza de date: " + ex.Message);
+                //Horia
             }
         }
 
