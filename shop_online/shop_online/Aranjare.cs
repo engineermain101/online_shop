@@ -236,6 +236,22 @@ namespace shop_online
             //  return ConfigurationManager.ConnectionStrings [connectionName].ConnectionString;
             throw new Exception("Nu s-a găsit niciun connection string potrivit pentru acest calculator.");
         }
+        public static void CenteredPanel( Form form, Panel panel, Size? offcentered = null )
+        {
+            panel.Anchor = AnchorStyles.None;
+            panel.Dock = DockStyle.None;
+
+            int x = (form.ClientSize.Width - panel.Width) / 2;
+            int y = (form.ClientSize.Height - panel.Height) / 2;
+
+            if (offcentered != null)
+            {
+                x += offcentered.Value.Width;
+                y += offcentered.Value.Height;
+            }
+
+            panel.Location = new Point(x, y);
+        }
 
         /// <summary>
         /// Dacă idProdus este specificat, șterge elementul corespunzător din FlowLayoutPanel.

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace shop_online
@@ -24,8 +26,10 @@ namespace shop_online
         }
         private void Adauga_Stergere_Admin_Load( object sender, EventArgs e )
         {
-            buttonAdauga_Sterge.Text = Adauga ? "Adauga" : "Sterge";
+            Aranjare.CenteredPanel(this, panelAdauga_Sterge_Admin);
+            MinimumSize = panelAdauga_Sterge_Admin.Size + new Size(0, 40);
 
+            buttonAdauga_Sterge.Text = Adauga ? "Adauga" : "Sterge";
             string connectionString = null;
             try
             {
@@ -37,6 +41,7 @@ namespace shop_online
                 List<string> emails = Interogari.GetAllUserEmails(connectionString);
                 if (emails != null)
                 {
+                    emails = emails.Where(email => !string.IsNullOrWhiteSpace(email)).ToList();
                     comboBoxEmail.Items.AddRange(emails.ToArray());
                 }
             }
@@ -45,6 +50,7 @@ namespace shop_online
                 List<string> emails = Interogari.GetAdminUserEmails(connectionString);
                 if (emails != null)
                 {
+                    emails = emails.Where(email => !string.IsNullOrWhiteSpace(email)).ToList();
                     comboBoxEmail.Items.AddRange(emails.ToArray());
                 }
             }
@@ -68,6 +74,8 @@ namespace shop_online
             catch (Exception) { MessageBox.Show("Eroare la obținerea șirului de conexiune."); return; }
 
             int iduser = Interogari.GetUserIDbyEmail(connectionString, email);
+            if (iduser <= 0)
+                return;
 
             if (!Adauga)
             {
@@ -75,7 +83,7 @@ namespace shop_online
                     MessageBox.Show("Adminul a fost șters cu succes.");
                 else
                     MessageBox.Show("Eroare la ștergerea administratorului.");
-
+                return;
             }
 
             if (Interogari.CheckIfAdminExists(connectionString, iduser))

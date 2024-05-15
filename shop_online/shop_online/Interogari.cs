@@ -456,39 +456,6 @@ namespace shop_online
             return emails;
         }
 
-        public static int GetFurnizorId( string connectionString, int user_Id )
-        {
-            try
-            {
-                string query = "SELECT id_furnizor FROM Furnizori WHERE id_user=@id_user";
-
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@id_user", user_Id);
-                    connection.Open();
-
-                    object result = command.ExecuteScalar();
-
-                    if (result != null)
-                    {
-                        return (int)result;
-                    }
-                    else
-                    {
-                        //MessageBox.Show("Autentificare eșuată. Verificați datele de autentificare sau nu v-ați conectat încă.");
-                        return -1;
-                    }
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("A apărut o eroare la autentificare: " + ex.Message);
-                return -1;
-            }
-        }
-
         public static int GetAdminId( string connectionString, int user_Id )
         {
             try
@@ -1094,12 +1061,204 @@ namespace shop_online
             return true;
         }
 
+        public static int GetFurnizorId( string connectionString, int user_Id )
+        {
+            try
+            {
+                string query = "SELECT id_furnizor FROM Furnizori WHERE id_user=@id_user";
 
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id_user", user_Id);
+                    connection.Open();
+
+                    object result = command.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        return (int)result;
+                    }
+                    else
+                    {
+                        //MessageBox.Show("Autentificare eșuată. Verificați datele de autentificare sau nu v-ați conectat încă.");
+                        return -1;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A apărut o eroare la autentificare: " + ex.Message);
+                return -1;
+            }
+        }
+        public static bool AdaugaFurnizor( string connectionString, int id_user, string iban, string nume_firma, string judet, string oras, string strada, int numar )
+        {
+            if (string.IsNullOrWhiteSpace(connectionString) || string.IsNullOrWhiteSpace(iban) ||
+                string.IsNullOrWhiteSpace(nume_firma) || string.IsNullOrWhiteSpace(judet) ||
+                string.IsNullOrWhiteSpace(oras) || string.IsNullOrWhiteSpace(strada) || numar < 1 || id_user < 1)
+            {
+                return false;
+            }
+            nume_firma = Aranjare.FormatName(nume_firma);
+            judet = Aranjare.FormatName(judet);
+            oras = Aranjare.FormatName(oras);
+            strada = Aranjare.FormatName(strada);
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlTransaction transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        string query = "INSERT INTO Furnizori (id_user, iban, nume_firma, id_adresa) VALUES (@IdUser, @Iban, @NumeFirma, @IdAdresa)";
+                        using (SqlCommand command = new SqlCommand(query, connection, transaction))
+                        {
+                            command.Parameters.AddWithValue("@IdUser", id_user);
+                            command.Parameters.AddWithValue("@Iban", iban);
+                            command.Parameters.AddWithValue("@NumeFirma", nume_firma);
+
+                            int id_adresa = GetAdresaID(connectionString, transaction, judet, oras, strada, numar);
+                            if (id_adresa < 1)
+                            {
+                                bool adresaAdaugata = AdaugaAdresa(connectionString, transaction, judet, oras, strada, numar);
+                                if (!adresaAdaugata)
+                                {
+                                    transaction.Rollback();
+                                    return false;
+                                }
+
+                                id_adresa = GetAdresaID(connectionString, transaction, judet, oras, strada, numar);
+                            }
+                            command.Parameters.AddWithValue("@IdAdresa", id_adresa);
+
+                            command.ExecuteNonQuery();
+                            transaction.Commit();
+                            return true;
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        MessageBox.Show("A apărut o eroare la adăugarea furnizorului: " + ex.Message);
+                        return false;
+                    }
+                }
+            }
+        }
+        public static bool StergeFurnizorDupaNume( string connectionString, SqlTransaction transaction, string numeFirma )
+        {
+            if (string.IsNullOrWhiteSpace(connectionString) || string.IsNullOrWhiteSpace(numeFirma) || transaction == null)
+            {
+                return false;
+            }
+
+            string query = "DELETE FROM Furnizori WHERE NumeFirma = @NumeFirma";
+            try
+            {
+                using (SqlCommand command = new SqlCommand(query, transaction.Connection, transaction))
+                {
+                    command.Parameters.AddWithValue("@NumeFirma", numeFirma);
+                    return command.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private static int VerificaAdresaExistenta( string connectionString, SqlTransaction transaction, string judet, string oras, string strada, int numar )
+        {
+            if (string.IsNullOrWhiteSpace(connectionString) || string.IsNullOrWhiteSpace(judet) || transaction == null ||
+                string.IsNullOrWhiteSpace(oras) || string.IsNullOrWhiteSpace(strada) || numar < 1)
+            {
+                return -1;
+            }
+            string query = "SELECT id_adresa FROM Adresa WHERE judet = @Judet AND oras = @Oras AND strada = @Strada AND numar = @Numar";
+            try
+            {
+                using (SqlCommand command = new SqlCommand(query, transaction.Connection, transaction))
+                {
+                    command.Parameters.AddWithValue("@Judet", judet);
+                    command.Parameters.AddWithValue("@Oras", oras);
+                    command.Parameters.AddWithValue("@Strada", strada);
+                    command.Parameters.AddWithValue("@Numar", numar);
+
+                    object result = command.ExecuteScalar();
+                    if (result != null && result != DBNull.Value)
+                    {
+                        return (int)result;
+                    }
+                    else
+                    {
+                        return -1;
+                    }
+                }
+            }
+            catch (Exception) { return -1; }
+        }
+        private static bool AdaugaAdresa( string connectionString, SqlTransaction transaction, string judet, string oras, string strada, int numar )
+        {
+            if (string.IsNullOrWhiteSpace(connectionString) || string.IsNullOrWhiteSpace(judet) || transaction == null ||
+                string.IsNullOrWhiteSpace(oras) || string.IsNullOrWhiteSpace(strada) || numar < 1)
+            {
+                return false;
+            }
+
+            string query = "INSERT INTO Adresa (judet, oras, strada, numar) VALUES (@Judet, @Oras, @Strada, @Numar)";
+            try
+            {
+                using (SqlCommand command = new SqlCommand(query, transaction.Connection, transaction))
+                {
+                    command.Parameters.AddWithValue("@Judet", judet);
+                    command.Parameters.AddWithValue("@Oras", oras);
+                    command.Parameters.AddWithValue("@Strada", strada);
+                    command.Parameters.AddWithValue("@Numar", numar);
+
+                    return command.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public static int GetAdresaID( string connectionString, SqlTransaction transaction, string judet, string oras, string strada, int numar )
+        {
+            if (string.IsNullOrWhiteSpace(connectionString) || string.IsNullOrWhiteSpace(judet) || transaction == null ||
+                string.IsNullOrWhiteSpace(oras) || string.IsNullOrWhiteSpace(strada) || numar < 1)
+            {
+                return -1;
+            }
+
+            string query = "SELECT id_adresa FROM Adresa WHERE judet = @Judet AND oras = @Oras AND strada = @Strada AND numar = @Numar";
+            try
+            {
+                using (SqlCommand command = new SqlCommand(query, transaction.Connection, transaction))
+                {
+                    command.Parameters.AddWithValue("@Judet", judet);
+                    command.Parameters.AddWithValue("@Oras", oras);
+                    command.Parameters.AddWithValue("@Strada", strada);
+                    command.Parameters.AddWithValue("@Numar", numar);
+
+                    object result = command.ExecuteScalar();
+                    return (result != null && result != DBNull.Value) ? (int)result : -1;
+                }
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+        }
 
         //Claudiu
 
         //Puia
-        public static void InsertProdus(string connectionString, Image image, string NumeProdus, int Cantitate, double Pret, string Descriere, string NumeListaSpecificatii, string ValoareListaSpecificatii, int idCategorie, string numeImage, int id_furnizor)
+        public static void InsertProdus( string connectionString, Image image, string NumeProdus, int Cantitate, double Pret, string Descriere, string NumeListaSpecificatii, string ValoareListaSpecificatii, int idCategorie, string numeImage, int id_furnizor )
         {
 
             using (SqlConnection connection = new SqlConnection(connectionString))
