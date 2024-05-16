@@ -8,17 +8,27 @@ namespace shop_online
     public partial class FormLogin : Form
     {
         private Afisare_Produse afisare_Produse = null;// Form nou
- 
+
         public FormLogin()
         {
+            // Shown += new EventHandler(autoLogin);
             InitializeComponent();
-            Shown += new EventHandler(autoLogin);
         }
-      
+        public FormLogin( int userid )
+        {
+            InitializeComponent();
+        }
+
         //Roli   
+        private void FormLogin_FormClosed( object sender, FormClosedEventArgs e )
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                Application.Exit();
+            }
+        }
         private void FormLogin_Load( object sender, EventArgs e )
         {
-
             Aranjare.ToateTextBoxurileledinPanelGoale(panelSignUp);
             Aranjare.ToateTextBoxurileledinPanelGoale(panelMenu);
             panelSignUp.Hide();
@@ -268,6 +278,7 @@ namespace shop_online
                 CloseCurrentFormAndOpenNewFormAsync(nume, email, parola, telefon, judet, oras, strada, numar);
             }
         }
+
 
     }
 }
