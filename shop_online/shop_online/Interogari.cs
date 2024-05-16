@@ -334,6 +334,8 @@ namespace shop_online
 
         public static int GetUserID( string connectionString, string email, string telefon, string parola )
         {
+            if (string.IsNullOrWhiteSpace(connectionString))
+                return -1;
             try
             {
                 string query = "SELECT id_user FROM Useri WHERE parola = @parola";
@@ -423,7 +425,7 @@ namespace shop_online
                 return -1;
             }
         }
-        public static List<string> GetAllUserEmails( string connectionString )
+        public static List<string> GetAllUserEmails( string connectionString, string omitThisEmail = null )
         {
             if (string.IsNullOrWhiteSpace(connectionString))
                 return null;
@@ -432,10 +434,19 @@ namespace shop_online
             try
             {
                 string query = "SELECT email FROM Useri";
+                if (!string.IsNullOrWhiteSpace(omitThisEmail))
+                {
+                    query += " WHERE email != @OmitThisEmail";
+                }
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
+                    if (!string.IsNullOrWhiteSpace(omitThisEmail))
+                    {
+                        command.Parameters.AddWithValue("@OmitThisEmail", omitThisEmail);
+                    }
+
                     connection.Open();
 
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -455,6 +466,41 @@ namespace shop_online
 
             return emails;
         }
+        public static string GetUserEmailbyID( string connectionString, int id_user )
+        {
+            if (string.IsNullOrWhiteSpace(connectionString) || id_user < 1)
+            {
+                return null;
+            }
+
+            try
+            {
+                string query = "SELECT email FROM Useri WHERE id_user = @Id_user";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id_user", id_user);
+                    connection.Open();
+                    object result = command.ExecuteScalar();
+
+                    if (result != null && result != DBNull.Value)
+                    {
+                        return Convert.ToString(result);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A apărut o eroare la obținerea adresei de email a utilizatorului: " + ex.Message);
+                return null;
+            }
+        }
+
 
         public static int GetAdminId( string connectionString, int user_Id )
         {
@@ -1149,19 +1195,43 @@ namespace shop_online
                 }
             }
         }
-        public static bool StergeFurnizorDupaNume( string connectionString, SqlTransaction transaction, string numeFirma )
+        public static bool StergeFurnizor( string connectionString, SqlTransaction transaction, string numeFirma = null, string emailFirma = null )
         {
-            if (string.IsNullOrWhiteSpace(connectionString) || string.IsNullOrWhiteSpace(numeFirma) || transaction == null)
+            if (string.IsNullOrWhiteSpace(connectionString) || transaction == null ||
+                (numeFirma != null && string.IsNullOrWhiteSpace(numeFirma)))
             {
                 return false;
             }
+            if (emailFirma != null && !Aranjare.IsValidEmail(emailFirma))
+                return false;
 
-            string query = "DELETE FROM Furnizori WHERE NumeFirma = @NumeFirma";
+            string query = "DELETE FROM Furnizori";
+            bool hasCondition = false;
+
+            if (!string.IsNullOrWhiteSpace(numeFirma))
+            {
+                query += " WHERE NumeFirma = @NumeFirma";
+                hasCondition = true;
+            }
+
+            if (!string.IsNullOrWhiteSpace(emailFirma))
+            {
+                query += hasCondition ? " AND" : " WHERE";
+                query += " id_user IN (SELECT id_user FROM Useri WHERE email = @Email)";
+            }
+
             try
             {
                 using (SqlCommand command = new SqlCommand(query, transaction.Connection, transaction))
                 {
-                    command.Parameters.AddWithValue("@NumeFirma", numeFirma);
+                    if (!string.IsNullOrWhiteSpace(numeFirma))
+                    {
+                        command.Parameters.AddWithValue("@NumeFirma", numeFirma);
+                    }
+                    if (!string.IsNullOrWhiteSpace(emailFirma))
+                    {
+                        command.Parameters.AddWithValue("@Email", emailFirma);
+                    }
                     return command.ExecuteNonQuery() > 0;
                 }
             }
@@ -1170,6 +1240,40 @@ namespace shop_online
                 return false;
             }
         }
+        public static List<string> GetAllNumeFurnizori( string connectionString )
+        {
+            if (string.IsNullOrWhiteSpace(connectionString))
+                return null;
+
+            List<string> numeFirme = new List<string>();
+
+            try
+            {
+                string query = "SELECT nume_firma FROM Furnizori";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            numeFirme.Add(reader.GetString(0));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A apărut o eroare la extragerea numelor firmelor: " + ex.Message);
+                return null;
+            }
+
+            return numeFirme;
+        }
+
 
         private static int VerificaAdresaExistenta( string connectionString, SqlTransaction transaction, string judet, string oras, string strada, int numar )
         {

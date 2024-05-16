@@ -38,7 +38,7 @@ namespace shop_online
             catch (Exception) { MessageBox.Show("Eroare la obținerea șirului de conexiune."); return; }
             if (Adauga)
             {
-                List<string> emails = Interogari.GetAllUserEmails(connectionString);
+                List<string> emails = Interogari.GetAllUserEmails(connectionString, Afisare_Produse.GetUtilizatorEmail());
                 if (emails != null)
                 {
                     emails = emails.Where(email => !string.IsNullOrWhiteSpace(email)).ToList();

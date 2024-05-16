@@ -324,7 +324,9 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormLogin";
             this.Text = "Login";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormLogin_FormClosed);
             this.Load += new System.EventHandler(this.FormLogin_Load);
+            //this.Shown += new System.EventHandler(this.autoLogin);
             this.panelMenu.ResumeLayout(false);
             this.panelMenu.PerformLayout();
             this.panelSignUp.ResumeLayout(false);
