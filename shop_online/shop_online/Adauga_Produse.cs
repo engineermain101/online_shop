@@ -127,7 +127,7 @@ namespace shop_online
 
 
 
-        //Puia
+        //Claudiu
         private void buttonAdaugaProdus_Click(object sender, System.EventArgs e)
         {
 
@@ -159,6 +159,27 @@ namespace shop_online
 
             Interogari.InsertProdus(connectionString, image, denumire, cantitate, pret, descriere, denumireS, valoareS, comboBoxCategorie.SelectedIndex, filename + extension, user_id_furnizor);
 
+
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            listView1.View = View.Details;
+            string denumire = textBoxDenumireSpecificatie.Text.ToString();
+            string specificatie = textBoxValoareSpecificatie.Text.ToString();
+            MessageBox.Show(denumire);
+
+            ListViewItem listViewItem = new ListViewItem(denumire);
+            listViewItem.SubItems.Add(specificatie);
+
+            listView1.Items.Add(listViewItem);
+
+            
 
         }
 

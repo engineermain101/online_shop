@@ -356,3 +356,4 @@ C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\sho
 =======
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\obj\Debug\shop_online.Adauga_Furnizor.resources
 >>>>>>> Stashed changes
+C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.Adauga_Furnizor.resources
