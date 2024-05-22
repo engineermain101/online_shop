@@ -21,6 +21,7 @@ namespace shop_online
                 Application.Run(new Afisare_Produse(a [0], a [1], a [0]));
             else
                 Application.Run(new FormLogin());
+
         }
 
         private static List<string> AutoLogin()

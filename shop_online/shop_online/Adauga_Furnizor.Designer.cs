@@ -88,7 +88,7 @@
             this.labelNumeFirma.AutoSize = true;
             this.labelNumeFirma.Location = new System.Drawing.Point(21, 35);
             this.labelNumeFirma.Name = "labelNumeFirma";
-            this.labelNumeFirma.Size = new System.Drawing.Size(84, 17);
+            this.labelNumeFirma.Size = new System.Drawing.Size(80, 16);
             this.labelNumeFirma.TabIndex = 25;
             this.labelNumeFirma.Text = "Nume Firma";
             // 
@@ -113,7 +113,7 @@
             this.labelEmailFirma.AutoSize = true;
             this.labelEmailFirma.Location = new System.Drawing.Point(21, 94);
             this.labelEmailFirma.Name = "labelEmailFirma";
-            this.labelEmailFirma.Size = new System.Drawing.Size(81, 17);
+            this.labelEmailFirma.Size = new System.Drawing.Size(78, 16);
             this.labelEmailFirma.TabIndex = 28;
             this.labelEmailFirma.Text = "Email Firma";
             // 
@@ -140,7 +140,7 @@
             this.labelNumar_Strada.AutoSize = true;
             this.labelNumar_Strada.Location = new System.Drawing.Point(21, 389);
             this.labelNumar_Strada.Name = "labelNumar_Strada";
-            this.labelNumar_Strada.Size = new System.Drawing.Size(50, 17);
+            this.labelNumar_Strada.Size = new System.Drawing.Size(47, 16);
             this.labelNumar_Strada.TabIndex = 23;
             this.labelNumar_Strada.Text = "Număr";
             // 
@@ -157,7 +157,7 @@
             this.labelStrada.AutoSize = true;
             this.labelStrada.Location = new System.Drawing.Point(21, 330);
             this.labelStrada.Name = "labelStrada";
-            this.labelStrada.Size = new System.Drawing.Size(50, 17);
+            this.labelStrada.Size = new System.Drawing.Size(47, 16);
             this.labelStrada.TabIndex = 21;
             this.labelStrada.Text = "Stradă";
             // 
@@ -174,7 +174,7 @@
             this.labelOras.AutoSize = true;
             this.labelOras.Location = new System.Drawing.Point(21, 271);
             this.labelOras.Name = "labelOras";
-            this.labelOras.Size = new System.Drawing.Size(39, 17);
+            this.labelOras.Size = new System.Drawing.Size(36, 16);
             this.labelOras.TabIndex = 19;
             this.labelOras.Text = "Oraș";
             // 
@@ -191,7 +191,7 @@
             this.labelJudet.AutoSize = true;
             this.labelJudet.Location = new System.Drawing.Point(21, 212);
             this.labelJudet.Name = "labelJudet";
-            this.labelJudet.Size = new System.Drawing.Size(43, 17);
+            this.labelJudet.Size = new System.Drawing.Size(40, 16);
             this.labelJudet.TabIndex = 17;
             this.labelJudet.Text = "Județ";
             // 
@@ -200,7 +200,7 @@
             this.labelIBAN.AutoSize = true;
             this.labelIBAN.Location = new System.Drawing.Point(21, 153);
             this.labelIBAN.Name = "labelIBAN";
-            this.labelIBAN.Size = new System.Drawing.Size(39, 17);
+            this.labelIBAN.Size = new System.Drawing.Size(38, 16);
             this.labelIBAN.TabIndex = 0;
             this.labelIBAN.Text = "IBAN";
             // 
@@ -215,6 +215,7 @@
             this.panelStergeFurnizor.Name = "panelStergeFurnizor";
             this.panelStergeFurnizor.Size = new System.Drawing.Size(415, 504);
             this.panelStergeFurnizor.TabIndex = 30;
+            this.panelStergeFurnizor.Paint += new System.Windows.Forms.PaintEventHandler(this.panelStergeFurnizor_Paint);
             // 
             // comboBoxNumefirmaDelete
             // 
@@ -237,7 +238,7 @@
             this.labelEmailDelete.AutoSize = true;
             this.labelEmailDelete.Location = new System.Drawing.Point(23, 200);
             this.labelEmailDelete.Name = "labelEmailDelete";
-            this.labelEmailDelete.Size = new System.Drawing.Size(81, 17);
+            this.labelEmailDelete.Size = new System.Drawing.Size(78, 16);
             this.labelEmailDelete.TabIndex = 28;
             this.labelEmailDelete.Text = "Email Firma";
             // 
@@ -256,7 +257,7 @@
             this.labelNumeFirmaDelete.AutoSize = true;
             this.labelNumeFirmaDelete.Location = new System.Drawing.Point(23, 138);
             this.labelNumeFirmaDelete.Name = "labelNumeFirmaDelete";
-            this.labelNumeFirmaDelete.Size = new System.Drawing.Size(84, 17);
+            this.labelNumeFirmaDelete.Size = new System.Drawing.Size(80, 16);
             this.labelNumeFirmaDelete.TabIndex = 25;
             this.labelNumeFirmaDelete.Text = "Nume Firma";
             // 

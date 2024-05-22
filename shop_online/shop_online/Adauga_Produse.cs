@@ -170,7 +170,7 @@ namespace shop_online
         private void button2_Click(object sender, EventArgs e)
         {
             listView1.View = View.Details;
-            string denumire = textBoxDenumireSpecificatie.Text.ToString();
+            string denumire = textBoxDenumireSpecificatie.Text;
             string specificatie = textBoxValoareSpecificatie.Text.ToString();
             MessageBox.Show(denumire);
 
