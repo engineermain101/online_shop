@@ -115,7 +115,7 @@ namespace shop_online
             string specificatie = textBoxValoareSpecificatie.Text;
             if (string.IsNullOrWhiteSpace(denumire) || string.IsNullOrWhiteSpace(specificatie))
             {
-                MessageBox.Show("Introduceti o denumire si o specificate!");
+                MessageBox.Show("Introduceti o denumire si o specificatie!");
                 return;
             }
 
