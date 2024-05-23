@@ -49,6 +49,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.textBoxDenumireSpecificatie = new System.Windows.Forms.TextBox();
             this.panelAdaugaProdus = new System.Windows.Forms.Panel();
+            this.buttonAddImage = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.labelCounter = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImagine)).BeginInit();
             this.panelAdaugaProdus.SuspendLayout();
             this.SuspendLayout();
@@ -58,6 +61,7 @@
             this.pictureBoxImagine.Location = new System.Drawing.Point(40, 60);
             this.pictureBoxImagine.Name = "pictureBoxImagine";
             this.pictureBoxImagine.Size = new System.Drawing.Size(210, 169);
+            this.pictureBoxImagine.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxImagine.TabIndex = 0;
             this.pictureBoxImagine.TabStop = false;
             // 
@@ -229,6 +233,9 @@
             // 
             // panelAdaugaProdus
             // 
+            this.panelAdaugaProdus.Controls.Add(this.labelCounter);
+            this.panelAdaugaProdus.Controls.Add(this.label8);
+            this.panelAdaugaProdus.Controls.Add(this.buttonAddImage);
             this.panelAdaugaProdus.Controls.Add(this.label5);
             this.panelAdaugaProdus.Controls.Add(this.listView1);
             this.panelAdaugaProdus.Controls.Add(this.label4);
@@ -251,6 +258,34 @@
             this.panelAdaugaProdus.Name = "panelAdaugaProdus";
             this.panelAdaugaProdus.Size = new System.Drawing.Size(1014, 689);
             this.panelAdaugaProdus.TabIndex = 21;
+            // 
+            // buttonAddImage
+            // 
+            this.buttonAddImage.Location = new System.Drawing.Point(40, 31);
+            this.buttonAddImage.Name = "buttonAddImage";
+            this.buttonAddImage.Size = new System.Drawing.Size(116, 23);
+            this.buttonAddImage.TabIndex = 21;
+            this.buttonAddImage.Text = "Adauga Imagine";
+            this.buttonAddImage.UseVisualStyleBackColor = true;
+            this.buttonAddImage.Click += new System.EventHandler(this.buttonAddImage_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(40, 250);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(114, 16);
+            this.label8.TabIndex = 22;
+            this.label8.Text = "Imagini adaugate:";
+            // 
+            // labelCounter
+            // 
+            this.labelCounter.AutoSize = true;
+            this.labelCounter.Location = new System.Drawing.Point(161, 250);
+            this.labelCounter.Name = "labelCounter";
+            this.labelCounter.Size = new System.Drawing.Size(14, 16);
+            this.labelCounter.TabIndex = 23;
+            this.labelCounter.Text = "0";
             // 
             // Adauga_Produse
             // 
@@ -292,5 +327,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.TextBox textBoxDenumireSpecificatie;
         private System.Windows.Forms.Panel panelAdaugaProdus;
+        private System.Windows.Forms.Button buttonAddImage;
+        private System.Windows.Forms.Label labelCounter;
+        private System.Windows.Forms.Label label8;
     }
 }

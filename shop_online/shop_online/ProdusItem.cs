@@ -54,7 +54,7 @@ namespace shop_online
             Id_Produs = id_produs;
             Image = image;
             Nume = title;
-            Pret = Convert.ToDecimal(pret.ToString("N2", new CultureInfo("ro-RO")));
+            Pret = pret;//Convert.ToDecimal(pret.ToString("N2", new CultureInfo("ro-RO")));
             Nota_Review = nota_rewiu;
             Nr_recenzii = nr_recenzii;
             Cantitate = cantitate;
