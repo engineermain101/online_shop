@@ -80,7 +80,7 @@ namespace shop_online
                 Application.Exit();
                 return;
             }
-            DataTable data = Interogari.SelectTop30Produse(connectionString);
+            DataTable data = Interogari.SelectTopProduse(connectionString, 30);
             Aranjare.Adaugare_in_flowLayoutPanel(flowLayoutPanelProduse, data, true);
 
             if (Interogari.GetFurnizorId(connectionString, utilizatorCurentId) > 0)
@@ -179,7 +179,7 @@ namespace shop_online
           FormLogin form2 = new FormLogin();
            form2.Closed += ( s, args ) => Close();
            form2.Show();*/
-            string filePath = "log_info.txt";
+            string filePath = "logInfo.txt";
             File.WriteAllText(filePath, string.Empty);
 
             Size size = new Size(500, 300);
@@ -197,7 +197,7 @@ namespace shop_online
             catch (Exception) { return; }
 
             ToolStripMenuItem clickedItem = sender as ToolStripMenuItem;
-            string category = clickedItem.Text;
+            string category = clickedItem.Text.Trim();
             DataTable products = Interogari.GetProductsByCategory(con, category);
             Aranjare.Adaugare_in_flowLayoutPanel(flowLayoutPanelProduse, products, true);
         }
@@ -233,10 +233,6 @@ namespace shop_online
             }
         }
 
-        private void adaugaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
 
         //Claudiu
 

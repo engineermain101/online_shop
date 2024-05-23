@@ -97,7 +97,7 @@ namespace shop_online
 
                 if (success)
                 {
-                    MessageBox.Show("Furnizorul a fost adăugat cu aucces.");
+                    MessageBox.Show("Furnizorul a fost adăugat cu succes.");
                 }
                 else
                 {
@@ -139,9 +139,5 @@ namespace shop_online
             catch (Exception ex) { MessageBox.Show("Eroare. Nu se poate sterge furnizorul.\n" + ex.Message); }
         }
 
-        private void panelStergeFurnizor_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }
