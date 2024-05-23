@@ -31,7 +31,6 @@
             this.pictureBoxImagine = new System.Windows.Forms.PictureBox();
             this.textBoxDenumire = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxDescriere = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -49,12 +48,14 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button2 = new System.Windows.Forms.Button();
             this.textBoxDenumireSpecificatie = new System.Windows.Forms.TextBox();
+            this.panelAdaugaProdus = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImagine)).BeginInit();
+            this.panelAdaugaProdus.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBoxImagine
             // 
-            this.pictureBoxImagine.Location = new System.Drawing.Point(52, 73);
+            this.pictureBoxImagine.Location = new System.Drawing.Point(40, 60);
             this.pictureBoxImagine.Name = "pictureBoxImagine";
             this.pictureBoxImagine.Size = new System.Drawing.Size(210, 169);
             this.pictureBoxImagine.TabIndex = 0;
@@ -62,7 +63,7 @@
             // 
             // textBoxDenumire
             // 
-            this.textBoxDenumire.Location = new System.Drawing.Point(539, 73);
+            this.textBoxDenumire.Location = new System.Drawing.Point(527, 60);
             this.textBoxDenumire.Name = "textBoxDenumire";
             this.textBoxDenumire.Size = new System.Drawing.Size(182, 22);
             this.textBoxDenumire.TabIndex = 1;
@@ -70,25 +71,16 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(444, 73);
+            this.label1.Location = new System.Drawing.Point(432, 60);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 16);
             this.label1.TabIndex = 2;
             this.label1.Text = "Denumire";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(52, 595);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 74);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Back";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 395);
+            this.label2.Location = new System.Drawing.Point(3, 375);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 16);
             this.label2.TabIndex = 5;
@@ -96,7 +88,7 @@
             // 
             // textBoxDescriere
             // 
-            this.textBoxDescriere.Location = new System.Drawing.Point(114, 383);
+            this.textBoxDescriere.Location = new System.Drawing.Point(102, 363);
             this.textBoxDescriere.Multiline = true;
             this.textBoxDescriere.Name = "textBoxDescriere";
             this.textBoxDescriere.Size = new System.Drawing.Size(334, 191);
@@ -105,7 +97,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(444, 134);
+            this.label3.Location = new System.Drawing.Point(432, 118);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 16);
             this.label3.TabIndex = 7;
@@ -113,7 +105,7 @@
             // 
             // textBoxPret
             // 
-            this.textBoxPret.Location = new System.Drawing.Point(539, 134);
+            this.textBoxPret.Location = new System.Drawing.Point(527, 115);
             this.textBoxPret.Name = "textBoxPret";
             this.textBoxPret.Size = new System.Drawing.Size(182, 22);
             this.textBoxPret.TabIndex = 6;
@@ -121,7 +113,15 @@
             // comboBoxCategorie
             // 
             this.comboBoxCategorie.FormattingEnabled = true;
-            this.comboBoxCategorie.Location = new System.Drawing.Point(539, 191);
+            this.comboBoxCategorie.Items.AddRange(new object[] {
+            "Electronice",
+            "Laptopuri",
+            "Calculatoare",
+            "Mancare",
+            "Medicina",
+            "Electrocasnice",
+            "Diverse"});
+            this.comboBoxCategorie.Location = new System.Drawing.Point(527, 177);
             this.comboBoxCategorie.Name = "comboBoxCategorie";
             this.comboBoxCategorie.Size = new System.Drawing.Size(182, 24);
             this.comboBoxCategorie.TabIndex = 8;
@@ -129,7 +129,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(444, 198);
+            this.label4.Location = new System.Drawing.Point(432, 177);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 16);
             this.label4.TabIndex = 9;
@@ -138,7 +138,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(444, 249);
+            this.label5.Location = new System.Drawing.Point(432, 236);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 16);
             this.label5.TabIndex = 11;
@@ -146,7 +146,7 @@
             // 
             // textBoxCantitate
             // 
-            this.textBoxCantitate.Location = new System.Drawing.Point(539, 249);
+            this.textBoxCantitate.Location = new System.Drawing.Point(527, 230);
             this.textBoxCantitate.Name = "textBoxCantitate";
             this.textBoxCantitate.Size = new System.Drawing.Size(182, 22);
             this.textBoxCantitate.TabIndex = 10;
@@ -154,7 +154,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(536, 411);
+            this.label6.Location = new System.Drawing.Point(524, 398);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(138, 16);
             this.label6.TabIndex = 14;
@@ -163,7 +163,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(763, 411);
+            this.label7.Location = new System.Drawing.Point(755, 398);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(128, 16);
             this.label7.TabIndex = 16;
@@ -171,14 +171,14 @@
             // 
             // textBoxValoareSpecificatie
             // 
-            this.textBoxValoareSpecificatie.Location = new System.Drawing.Point(753, 452);
+            this.textBoxValoareSpecificatie.Location = new System.Drawing.Point(741, 439);
             this.textBoxValoareSpecificatie.Name = "textBoxValoareSpecificatie";
             this.textBoxValoareSpecificatie.Size = new System.Drawing.Size(182, 22);
             this.textBoxValoareSpecificatie.TabIndex = 15;
             // 
             // buttonAdaugaProdus
             // 
-            this.buttonAdaugaProdus.Location = new System.Drawing.Point(816, 111);
+            this.buttonAdaugaProdus.Location = new System.Drawing.Point(821, 97);
             this.buttonAdaugaProdus.Name = "buttonAdaugaProdus";
             this.buttonAdaugaProdus.Size = new System.Drawing.Size(119, 115);
             this.buttonAdaugaProdus.TabIndex = 17;
@@ -192,7 +192,7 @@
             this.columnHeader1,
             this.columnHeader2});
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(526, 509);
+            this.listView1.Location = new System.Drawing.Point(514, 496);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(409, 111);
             this.listView1.TabIndex = 18;
@@ -212,7 +212,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(664, 480);
+            this.button2.Location = new System.Drawing.Point(649, 467);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(137, 23);
             this.button2.TabIndex = 19;
@@ -222,42 +222,50 @@
             // 
             // textBoxDenumireSpecificatie
             // 
-            this.textBoxDenumireSpecificatie.Location = new System.Drawing.Point(539, 452);
+            this.textBoxDenumireSpecificatie.Location = new System.Drawing.Point(514, 439);
             this.textBoxDenumireSpecificatie.Name = "textBoxDenumireSpecificatie";
-            this.textBoxDenumireSpecificatie.Size = new System.Drawing.Size(182, 22);
+            this.textBoxDenumireSpecificatie.Size = new System.Drawing.Size(170, 22);
             this.textBoxDenumireSpecificatie.TabIndex = 20;
+            // 
+            // panelAdaugaProdus
+            // 
+            this.panelAdaugaProdus.Controls.Add(this.label5);
+            this.panelAdaugaProdus.Controls.Add(this.listView1);
+            this.panelAdaugaProdus.Controls.Add(this.label4);
+            this.panelAdaugaProdus.Controls.Add(this.button2);
+            this.panelAdaugaProdus.Controls.Add(this.label3);
+            this.panelAdaugaProdus.Controls.Add(this.textBoxDenumireSpecificatie);
+            this.panelAdaugaProdus.Controls.Add(this.label2);
+            this.panelAdaugaProdus.Controls.Add(this.label1);
+            this.panelAdaugaProdus.Controls.Add(this.buttonAdaugaProdus);
+            this.panelAdaugaProdus.Controls.Add(this.pictureBoxImagine);
+            this.panelAdaugaProdus.Controls.Add(this.textBoxDescriere);
+            this.panelAdaugaProdus.Controls.Add(this.label7);
+            this.panelAdaugaProdus.Controls.Add(this.textBoxDenumire);
+            this.panelAdaugaProdus.Controls.Add(this.label6);
+            this.panelAdaugaProdus.Controls.Add(this.textBoxPret);
+            this.panelAdaugaProdus.Controls.Add(this.comboBoxCategorie);
+            this.panelAdaugaProdus.Controls.Add(this.textBoxValoareSpecificatie);
+            this.panelAdaugaProdus.Controls.Add(this.textBoxCantitate);
+            this.panelAdaugaProdus.Location = new System.Drawing.Point(12, 13);
+            this.panelAdaugaProdus.Name = "panelAdaugaProdus";
+            this.panelAdaugaProdus.Size = new System.Drawing.Size(1014, 689);
+            this.panelAdaugaProdus.TabIndex = 21;
             // 
             // Adauga_Produse
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1004, 701);
-            this.Controls.Add(this.textBoxDenumireSpecificatie);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.listView1);
-            this.Controls.Add(this.buttonAdaugaProdus);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBoxValoareSpecificatie);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBoxCantitate);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.comboBoxCategorie);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBoxPret);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBoxDescriere);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBoxDenumire);
-            this.Controls.Add(this.pictureBoxImagine);
+            this.ClientSize = new System.Drawing.Size(1137, 701);
+            this.Controls.Add(this.panelAdaugaProdus);
             this.Name = "Adauga_Produse";
             this.Text = "Adauga_Produse";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Adauga_Produse_FormClosed);
             this.Load += new System.EventHandler(this.Adauga_Produse_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImagine)).EndInit();
+            this.panelAdaugaProdus.ResumeLayout(false);
+            this.panelAdaugaProdus.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -266,7 +274,6 @@
         private System.Windows.Forms.PictureBox pictureBoxImagine;
         private System.Windows.Forms.TextBox textBoxDenumire;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxDescriere;
         private System.Windows.Forms.Label label3;
@@ -284,5 +291,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.TextBox textBoxDenumireSpecificatie;
+        private System.Windows.Forms.Panel panelAdaugaProdus;
     }
 }

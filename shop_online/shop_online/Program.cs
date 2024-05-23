@@ -26,7 +26,7 @@ namespace shop_online
 
         private static List<string> AutoLogin()
         {
-            string filePath = "log_info.txt";
+            string filePath = "logInfo.txt";
             try
             {
                 FileInfo fileInfo = new FileInfo(filePath);

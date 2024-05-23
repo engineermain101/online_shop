@@ -97,7 +97,7 @@ namespace shop_online
 
                 if (success)
                 {
-                    MessageBox.Show("Furnizorul a fost adăugat cu ucces.");
+                    MessageBox.Show("Furnizorul a fost adăugat cu aucces.");
                 }
                 else
                 {

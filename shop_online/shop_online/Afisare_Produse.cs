@@ -48,8 +48,8 @@ namespace shop_online
         {
             MinimumSize = new Size(520 * 2, 138 * 4);
 
-            adaugaToolStripMenuItem.Visible = true;
-            adaugaProdusToolStripMenuItem.Visible = true;
+            adaugaToolStripMenuItem.Visible = false;
+            adaugaProdusToolStripMenuItem.Visible = false;
             adaugaFurnizorToolStripMenuItem.Visible = false;
             adaugaAdminToolStripMenuItem.Visible = false;
 
