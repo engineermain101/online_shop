@@ -124,6 +124,13 @@ namespace shop_online
                 foreach (ProductControl control in flowLayoutPanelProduse.Controls)
                 {
                     lista.Add(control);
+                    int a = control.GetBucatiProdusdinCos();
+                    int b = control.GetNrBucatiCos();
+                    if (a>b)
+                    {
+                        MessageBox.Show("Nu avem asa de multe produse in stoc.");
+                        return;
+                    }
                 }
                 Aranjare.Delete_from_flowLayoutPanel(flowLayoutPanelProduse);
                 Interogari.TranzactieCumparareProdus(connectionString, utilizatorId, lista, "cash");

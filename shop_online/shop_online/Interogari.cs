@@ -177,9 +177,10 @@ namespace shop_online
         /// </summary>
         public static void InsertImagine( string connectionString, Image imagine, int id_produs, string nume_imagine_cu_extensie )
         {
-            ImageFormat format = Aranjare.GetImageFormat(nume_imagine_cu_extensie);
             try
             {
+                ImageFormat format = Aranjare.GetImageFormat(nume_imagine_cu_extensie);
+
                 byte [] imageData;// Convertirea imaginii într-un array de bytes
                 /*  using (MemoryStream ms = new MemoryStream())
                 {
@@ -297,12 +298,18 @@ namespace shop_online
             return null;
         }
 
-        public static DataTable SelectTop30Produse( string connectionString )
+        public static DataTable SelectTopProduse( string connectionString, int topN )
         {
+            if (topN <= 0)
+            {
+                MessageBox.Show("Numărul de produse trebuie să fie mai mare decât 0.");
+                return null;
+            }
+
             try
             {
                 string query = @"
-                            SELECT TOP 30 p.*
+                            SELECT TOP (@TopN) p.*
                             FROM Produse p
                             INNER JOIN (
                                 SELECT id_produs, AVG(nr_stele) AS AvgRating
@@ -316,6 +323,8 @@ namespace shop_online
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
+                        command.Parameters.AddWithValue("@TopN", topN);
+
                         using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                         {
                             DataTable dataTable = new DataTable();
@@ -324,6 +333,10 @@ namespace shop_online
                         }
                     }
                 }
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show("A SQL error occurred: " + sqlEx.Message);
             }
             catch (Exception e)
             {
@@ -811,10 +824,9 @@ namespace shop_online
                         {
                             throw new NotImplementedException("This is not implemented");
                         }*/
-                        SaveTranzactie(connection, transaction, id_user, produse, metoda_plata);
-
                         UpdateProducts(connection, transaction, produse);
                         DeleteAllUserProductsFromCart(connection, transaction, id_user);
+                        SaveTranzactie(connection, transaction, id_user, produse, metoda_plata);
 
                         // Alte operații pe care doriți să le efectuați în cadrul tranzacției
                         transaction.Commit();
@@ -1359,19 +1371,30 @@ namespace shop_online
             }
         }
 
-        public static List<string> GetCategories( string ConnectionString )
+
+        public static List<string> GetCategories( string connectionString )
         {
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                return null;
+            }
+
             List<string> categories = new List<string>();
             string query = "SELECT nume FROM Categorii";
+
             try
             {
-                using (SqlConnection connection = new SqlConnection(ConnectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-
                     using (SqlCommand command = new SqlCommand(query, connection))
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
+                        if (!reader.HasRows)
+                        {
+                            return categories;
+                        }
+
                         while (reader.Read())
                         {
                             categories.Add(reader ["nume"].ToString());
@@ -1379,42 +1402,66 @@ namespace shop_online
                     }
                 }
             }
-            catch (Exception ex)
+            catch (SqlException sqlEx)
             {
-                MessageBox.Show("A aparut o eroare la preluarea categoriilor: " + ex.Message);
+                MessageBox.Show("A SQL error occurred: " + sqlEx.Message);
                 return null;
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+                return null;
+            }
+
             return categories;
         }
-        public static DataTable GetProductsByCategory( string ConnectionString, string categorie )
+        public static DataTable GetProductsByCategory( string connectionString, string category )
         {
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                return null;
+            }
+
+            if (string.IsNullOrWhiteSpace(category))
+            {
+                return null;
+            }
+
             DataTable products = new DataTable();
             string query = @"
-                SELECT P.*
-                FROM Produse P
-                INNER JOIN Categorii C ON P.id_categorie = C.id_categorie
-                WHERE C.nume = @Category";
+            SELECT P.*
+            FROM Produse P
+            INNER JOIN Categorii C ON P.id_categorie = C.id_categorie
+            WHERE C.nume = @Category";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(ConnectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@Category", categorie);
+                        command.Parameters.AddWithValue("@Category", category);
                         using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                         {
                             adapter.Fill(products);
                         }
-
                     }
                 }
             }
-            catch (Exception e) { MessageBox.Show("Eroare la primirea produselor: " + e.Message); return null; }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show("A SQL error occurred: " + sqlEx.Message);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+                return null;
+            }
             return products;
         }
+
 
         //Claudiu
 
