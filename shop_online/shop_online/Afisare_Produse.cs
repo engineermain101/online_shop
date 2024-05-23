@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -23,11 +24,13 @@ namespace shop_online
         public Afisare_Produse()
         {
             InitializeComponent();
+            PopulateMenuStrip();
         }
 
         public Afisare_Produse( string email, string parola, string telefon )
         {
             InitializeComponent();
+            PopulateMenuStrip();
             emailUtilizator = email;
             parolaUtilizator = parola;
             telefonUtilizator = telefon;
@@ -184,6 +187,21 @@ namespace shop_online
 
         }
 
+        private void CategoryMenuItem_Click( object sender, EventArgs e )
+        {
+            string con = null;
+            try
+            {
+                con = Aranjare.GetConnectionString();
+            }
+            catch (Exception) { return; }
+
+            ToolStripMenuItem clickedItem = sender as ToolStripMenuItem;
+            string category = clickedItem.Text;
+            DataTable products = Interogari.GetProductsByCategory(con, category);
+            Aranjare.Adaugare_in_flowLayoutPanel(flowLayoutPanelProduse, products, true);
+        }
+
 
         public void ResetFlowLayoutPanelProduse()
         {
@@ -197,6 +215,22 @@ namespace shop_online
         public static string GetUtilizatorEmail()
         {
             return emailUtilizator;
+        }
+        private void PopulateMenuStrip()
+        {
+            string con = null;
+            try
+            {
+                con = Aranjare.GetConnectionString();
+            }
+            catch (Exception) { return; }
+            List<string> categories = Interogari.GetCategories(con);
+            foreach (string category in categories)
+            {
+                ToolStripMenuItem menuItem = new ToolStripMenuItem(category);
+                menuItem.Click += CategoryMenuItem_Click;
+                categorieToolStripMenuItem.DropDownItems.Add(menuItem);
+            }
         }
 
         private void adaugaToolStripMenuItem_Click(object sender, EventArgs e)

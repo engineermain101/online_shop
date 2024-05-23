@@ -1359,6 +1359,63 @@ namespace shop_online
             }
         }
 
+        public static List<string> GetCategories( string ConnectionString )
+        {
+            List<string> categories = new List<string>();
+            string query = "SELECT nume FROM Categorii";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConnectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            categories.Add(reader ["nume"].ToString());
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A aparut o eroare la preluarea categoriilor: " + ex.Message);
+                return null;
+            }
+            return categories;
+        }
+        public static DataTable GetProductsByCategory( string ConnectionString, string categorie )
+        {
+            DataTable products = new DataTable();
+            string query = @"
+                SELECT P.*
+                FROM Produse P
+                INNER JOIN Categorii C ON P.id_categorie = C.id_categorie
+                WHERE C.nume = @Category";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConnectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Category", categorie);
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        {
+                            adapter.Fill(products);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception e) { MessageBox.Show("Eroare la primirea produselor: " + e.Message); return null; }
+            return products;
+        }
+
         //Claudiu
 
         //Puia
