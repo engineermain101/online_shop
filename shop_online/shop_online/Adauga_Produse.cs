@@ -49,8 +49,6 @@ namespace shop_online
         }
 
 
-
-
         //Claudiu
         private void buttonAdaugaProdus_Click(object sender, System.EventArgs e)
         {
@@ -115,7 +113,7 @@ namespace shop_online
             string specificatie = textBoxValoareSpecificatie.Text;
             if (string.IsNullOrWhiteSpace(denumire) || string.IsNullOrWhiteSpace(specificatie))
             {
-                MessageBox.Show("Introduceti o denumire si o specificatie!");
+                MessageBox.Show("Introduceti o denumire si o specificate!");
                 return;
             }
 

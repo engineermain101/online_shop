@@ -118,14 +118,14 @@ namespace shop_online
                 connectionString = Aranjare.GetConnectionString();
             }
             catch (Exception) { return; }
-           // int id_furnizor = Interogari.GetFurnizorId(connectionString, utilizatorCurentId);
+            int id_furnizor = Interogari.GetFurnizorId(connectionString, utilizatorCurentId);
 
-           // if (id_furnizor > 0)
-           // {
+            if (id_furnizor > 0)
+            {
                 Size minimumSize = new Size(490, 535);
                 Aranjare.HideCurrentFormAndOpenNewForm(this, adauga_Produse, (object)1, minimumSize);
                 //CloseCurrentFormAndOpenAdaugaProdus(id_furnizor);
-            //}
+            }
 
         }
         private void cosToolStripMenuItem_Click( object sender, EventArgs e )
