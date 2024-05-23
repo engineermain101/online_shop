@@ -17,23 +17,27 @@ namespace shop_online
             InitializeComponent();
         }
 
-        public Adauga_Produse( int id_furnizor )
+        public Adauga_Produse(int id_furnizor)
         {
             InitializeComponent();
             user_id_furnizor = id_furnizor;
         }
 
-        private void Adauga_Produse_FormClosed( object sender, FormClosedEventArgs e )
+        private void Adauga_Produse_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.OpenForms ["Afisare_Produse"].Show();
+            if (Application.OpenForms["Afisare_Produse"] != null)
+                Application.OpenForms["Afisare_Produse"].Show();
         }
-        private void Adauga_Produse_Load( object sender, System.EventArgs e )
+        private void Adauga_Produse_Load(object sender, System.EventArgs e)
         {
+            this.AutoSize = true;
+            Aranjare.CenteredPanel(this, panelAdaugaProdus);
             LoadUser(user_id_furnizor);
+
         }
-        public void LoadUser( int id_furnizor )
+        public void LoadUser(int id_furnizor)
         {
-            InitializeComponent();
+
             user_id_furnizor = id_furnizor;
             //string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
             try
@@ -42,92 +46,10 @@ namespace shop_online
             }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
 
-
-            // Acum lista 'produse' conține obiecte ProdusItem populate cu datele din DataTable
-
-
-            {
-
-
-                /* {
-
-                cartiPanelCartiDateTimePickerAnAparitie.Format = DateTimePickerFormat.Custom;
-                cartiPanelCartiDateTimePickerAnAparitie.CustomFormat = "dd MMMM yyyy";
-                cartiPanelCartiDateTimePickerAnAparitie.Value = DateTime.Today;
-
-                List<ComboBox> comboBoxes = new List<ComboBox>
-                {
-                    cartiPanelComboBoxNume, cartiPanelComboBoxPrenume,
-                    cartiPanelComboBoxGen, cartiPanelComboBoxEditura,
-                    cartiPanelComboBoxRolAdmin
-                };
-                foreach (ComboBox comboBox in comboBoxes)
-                {
-                    comboBox.IntegralHeight = false;
-                    comboBox.MaxDropDownItems = 5;
-                }
-
-                string connectionString = ConfigurationManager.ConnectionStrings ["AdaugareDate"].ConnectionString;
-                InitializePanelStates();
-                utilizatorCurentId = GetUserID(connectionString, numeUtilizator, prenumeUtilizator, emailUtilizator, parolaUtilizator, "parola");
-                admin = VerificaAdmin(utilizatorCurentId, connectionString);
-
-                cartiPanelCartiButtonAdaugasiSterge.Text = "Imprumuta";
-                cartiPanelTextBoxNrCopii.Visible = false;
-                cartiPanelLabelNrCopii.Visible = false;
-                cartiPanelTextBoxISBN.ReadOnly = false;
-                cartiPanelCartiListBox.HorizontalScrollbar = true;
-                cartiPanelUserApasat.Visible = false;
-                cartiPanelInformatiiUserApasat.Visible = false;
-                cartiPanelCartiApasat.Visible = true;
-                cartiPanelComboBoxRolAdmin.Visible = false;
-                cartiPanelLabelRolAdmin.Visible = false;
-
-
-
-                cartiPanelTextBoxISBN.Visible = admin;
-                cartiPanelLabelISBN.Visible = admin;
-                adaugaToolStripMenuItem1.Visible = admin;
-                stergeToolStripMenuItem1.Visible = admin;
-                modificaToolStripMenuItem1.Visible = admin;
-                adminCartiToolStripMenuItem.Visible = admin;
-                adaugaToolStripMenuItem2.Visible = admin;
-                stergeToolStripMenuItem2.Visible = admin;
-
-                ConfigurarePanelCentral(cartiPanelCartiApasat);
-                ConfigurarePanelCentral(cartiPanelUserApasat);
-                ConfigurarePanelCentral(cartiPanelInformatiiUserApasat);
-
-
-                cartiPanelInformatiiUserApasat.BackColor = Color.Coral; // Setăm culoarea panelului la roz
-                cartiPanelInformatiiLabelTitlu.Text = "Informații Utilizator"; // Textul titlului
-                cartiPanelInformatiiLabelTitlu.Font = new Font("Arial", 16, FontStyle.Bold); // Stilul și dimensiunea textului
-                cartiPanelInformatiiLabelTitlu.Dock = DockStyle.Top; // Plasarea titlului în partea de sus a panelului
-                cartiPanelInformatiiLabelTitlu.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-                cartiPanelInformatiiLabelTitlu.TextAlign = ContentAlignment.MiddleCenter;
-
-
-                utilizatorSters = IsAccountDeleted(utilizatorCurentId, connectionString);
-                if (utilizatorSters)
-                {
-                    cartiCartiToolStripMenuItem.Visible = false;
-                    adminCartiToolStripMenuItem.Visible = false;
-                    adaugaToolStripMenuItem2.Visible = false;
-                    stergeToolStripMenuItem2.Visible = false;
-                    cartiPanelCartiApasat.Visible = false;
-                    cartiPanelUserApasat.Visible = false;
-                    cartiPanelInformatiiUserButtonModifica.Visible = false;
-                    cartiPanelInformatiiUserButtonStergeCont.Text = "Recupereaza Contul";
-
-                    cartiPanelInformatiiUserApasat.Visible = true;
-                }*/
-            }
         }
 
 
-
-
-        //Puia
+        //Claudiu
         private void buttonAdaugaProdus_Click(object sender, System.EventArgs e)
         {
 
@@ -146,8 +68,26 @@ namespace shop_online
             string extension = Path.GetExtension(filename);
 
 
-            string denumireS = textBoxDenumireSpecificatie.Text.ToString();
-            string valoareS = textBoxValoareSpecificatie.Text.ToString();
+            List<string> denumireS = new List<string>();
+            List<string> valoareS = new List<string>();
+
+            foreach (ListViewItem item in listView1.Items)
+            {
+                if (item.SubItems.Count > 0)
+                {
+                    denumireS.Add(item.SubItems[0].Text);
+                }
+                else { MessageBox.Show("Adaugati o denumire de specificatie!"); }
+            }
+            foreach (ListViewItem item in listView1.Items)
+            {
+                if (item.SubItems.Count > 0)
+                {
+                    valoareS.Add(item.SubItems[1].Text);
+                }
+                else { MessageBox.Show("Adaugati o valoare de specificatie!"); }
+            }
+
 
             double pret = double.Parse(textBoxPret.Text);
             if (pret <= 0) { MessageBox.Show("Pret negativ sau 0"); return; }
@@ -157,11 +97,35 @@ namespace shop_online
             if (cantitate <= 0) { MessageBox.Show("Cantitate negativa sau 0"); return; }
 
 
-            Interogari.InsertProdus(connectionString, image, denumire, cantitate, pret, descriere, denumireS, valoareS, comboBoxCategorie.SelectedIndex, filename + extension, user_id_furnizor);
+            // Interogari.InsertProdus(connectionString, image, denumire, cantitate, pret, descriere, denumireS, valoareS, comboBoxCategorie.SelectedIndex, filename + extension, user_id_furnizor);
 
 
         }
 
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string denumire = textBoxDenumireSpecificatie.Text;
+            string specificatie = textBoxValoareSpecificatie.Text;
+            if (string.IsNullOrWhiteSpace(denumire) || string.IsNullOrWhiteSpace(specificatie))
+            {
+                MessageBox.Show("Introduceti o denumire si o specificate!");
+                return;
+            }
+
+            ListViewItem listViewItem = new ListViewItem(denumire);
+            listViewItem.SubItems.Add(specificatie);
+
+            listView1.Items.Add(listViewItem);
+            textBoxDenumireSpecificatie.Clear();
+            textBoxValoareSpecificatie.Clear();
+            listView1.View = View.Details;
+
+        }
 
         //Horia
     }

@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace shop_online
 {
@@ -29,6 +30,7 @@ namespace shop_online
         }
         private void FormLogin_Load( object sender, EventArgs e )
         {
+            
             Aranjare.ToateTextBoxurileledinPanelGoale(panelSignUp);
             Aranjare.ToateTextBoxurileledinPanelGoale(panelMenu);
             panelSignUp.Hide();
@@ -135,6 +137,7 @@ namespace shop_online
             //afisare_Produse.LoadUser(email, parola, telefon);
             afisare_Produse.Show();
             afisare_Produse.Focus();
+         
         }
 
         private void SetPanelState( Aranjare config )
@@ -243,7 +246,14 @@ namespace shop_online
                 MessageBox.Show($"A apărut o eroare la autentificare automată: {ex.Message}");
             }
         }
+        private void buttonSgnFurnizor_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Adauga_Furnizor adauga_Furnizor = new Adauga_Furnizor(true);
+            adauga_Furnizor.Show();
 
+
+        }
         //Puia
 
 
@@ -279,6 +289,6 @@ namespace shop_online
             }
         }
 
-
+        
     }
 }

@@ -123,7 +123,7 @@ namespace shop_online
             if (id_furnizor > 0)
             {
                 Size minimumSize = new Size(490, 535);
-                Aranjare.HideCurrentFormAndOpenNewForm(this, adauga_Produse, (object)id_furnizor, minimumSize);
+                Aranjare.HideCurrentFormAndOpenNewForm(this, adauga_Produse, (object)1, minimumSize);
                 //CloseCurrentFormAndOpenAdaugaProdus(id_furnizor);
             }
 
@@ -197,6 +197,11 @@ namespace shop_online
         public static string GetUtilizatorEmail()
         {
             return emailUtilizator;
+        }
+
+        private void adaugaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
         //Claudiu

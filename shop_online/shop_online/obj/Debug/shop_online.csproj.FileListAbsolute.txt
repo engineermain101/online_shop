@@ -213,7 +213,8 @@ C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\nunit.framework.dll
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\nunit.framework.xml
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\obj\Debug\shop_online.Adauga_Stergere_Admin.resources
-<<<<<<< Updated upstream
+=======
+C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\obj\Debug\shop_online.Adauga_Furnizor.resources
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\shop_online.exe.config
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\shop_online.exe
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\shop_online.pdb
@@ -339,6 +340,7 @@ C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\sho
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.csproj.AssemblyReference.cache
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.csproj.SuggestedBindingRedirects.cache
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.exe.config
+C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.Adauga_Furnizor.resources
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.Adauga_Produse.resources
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.Adauga_Stergere_Admin.resources
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.Afisare_Produse.resources
@@ -353,6 +355,3 @@ C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\sho
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.csproj.CopyComplete
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.exe
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.pdb
-=======
-C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\obj\Debug\shop_online.Adauga_Furnizor.resources
->>>>>>> Stashed changes
