@@ -196,7 +196,7 @@ namespace shop_online
         //Claudiu
         private void stayLogged( string user, string parola )
         {
-            string filePath = "log_info.txt";
+            string filePath = "logInfo.txt";
             try
             {
                 using (StreamWriter writer = new StreamWriter(filePath))
@@ -212,7 +212,7 @@ namespace shop_online
         }
         private void autoLogin( object sender, EventArgs e )
         {
-            string filePath = "log_info.txt";
+            string filePath = "logInfo.txt";
             try
             {
                 FileInfo fileInfo = new FileInfo(filePath);

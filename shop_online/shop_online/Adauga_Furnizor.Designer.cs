@@ -215,7 +215,6 @@
             this.panelStergeFurnizor.Name = "panelStergeFurnizor";
             this.panelStergeFurnizor.Size = new System.Drawing.Size(415, 504);
             this.panelStergeFurnizor.TabIndex = 30;
-            this.panelStergeFurnizor.Paint += new System.Windows.Forms.PaintEventHandler(this.panelStergeFurnizor_Paint);
             // 
             // comboBoxNumefirmaDelete
             // 
