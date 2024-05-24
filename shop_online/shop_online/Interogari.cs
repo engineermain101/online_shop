@@ -297,7 +297,7 @@ namespace shop_online
             return null;
         }
 
-        public static DataTable SelectTop30Produse(string connectionString)
+        public static DataTable SelectTopProduse(string connectionString,int nr_produse)
         {
             try
             {

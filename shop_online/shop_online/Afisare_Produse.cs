@@ -233,6 +233,15 @@ namespace shop_online
             }
         }
 
+        private void stergereProdusToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string connectionString;
+            try
+            {
+                connectionString = Aranjare.GetConnectionString();
+            }catch (Exception) { MessageBox.Show("Nu s-a putut lua connection stringu"); return; }
+        }
+
 
         //Claudiu
 
