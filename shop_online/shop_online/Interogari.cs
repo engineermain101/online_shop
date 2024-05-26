@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -269,6 +270,7 @@ namespace shop_online
         /// </summary>
         public static int [] MedieRecenzii( string connectionString, int id_produs )
         {
+
             try
             {
                 string query = "SELECT AVG(nr_stele) AS AverageRating, COUNT(*) AS NumberOfReviews FROM Review WHERE id_produs = @ProductId";
@@ -295,6 +297,28 @@ namespace shop_online
                 MessageBox.Show("Eroare la Media de recenzii: " + e.Message);
             }
             return null;
+        }
+        public static int[] ReviewNotExists(string connectionString)
+        {
+            string queryCheck = $"SELECT COUNT(*) FROM Review";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(queryCheck, connection))
+                    {
+                        connection.Open();
+                        int rowCount = (int)command.ExecuteScalar();
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+
+            }
+            return new int [] { 0 };
         }
 
         public static DataTable SelectTopProduse( string connectionString, int top )
@@ -1522,7 +1546,6 @@ namespace shop_online
 
         //Claudiu
 
-        //Puia
         public static void InsertProdus( string connectionString, ProdusItem produs, List<string> fileNames, List<string> denumireS, List<string> valoareS )
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -1570,7 +1593,7 @@ namespace shop_online
                             sqlImagini.Parameters.Add("@imagine", SqlDbType.VarBinary); // Adjust the type if necessary
                             sqlImagini.Parameters.Add("@nume", SqlDbType.NVarChar);
 
-                            for (int i = 1; i < produs.Image.Count; i++)
+                            for (int i = 0; i < produs.Image.Count; i++)
                             {
                                 byte [] imageBytes = ImageToByteArray(produs.Image [i]);
                                 sqlImagini.Parameters ["@imagine"].Value = imageBytes;
@@ -1578,6 +1601,7 @@ namespace shop_online
                                 sqlImagini.ExecuteNonQuery();
                             }
                         }
+                       // string sqlReview= "INSERT INTO Review(nr_stele)"
                         /*for (int i = 0; i < produs.Image.Count; i++)
                         {
                             Interogari.InsertImagine(connectionString, produs.Image[i],produsId, fileNames[i]);
@@ -1613,6 +1637,28 @@ namespace shop_online
                 return ms.ToArray();
             }
         }
+        public static void DeleteAllProducts(string connectionString)
+        {
+            string query = $"DELETE FROM Produse";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                    MessageBox.Show("Produsele au fost sterse cu succes");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+
+    
 
 
         //Horia

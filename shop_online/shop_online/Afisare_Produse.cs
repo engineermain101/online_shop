@@ -232,7 +232,7 @@ namespace shop_online
                 categorieToolStripMenuItem.DropDownItems.Add(menuItem);
             }
         }
-
+//Claudiu
         private void stergereProdusToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string connectionString;
@@ -240,10 +240,11 @@ namespace shop_online
             {
                 connectionString = Aranjare.GetConnectionString();
             }catch (Exception) { MessageBox.Show("Nu s-a putut lua connection stringu"); return; }
+            Interogari.DeleteAllProducts(connectionString);
         }
 
 
-        //Claudiu
+        
 
         //Puia
 

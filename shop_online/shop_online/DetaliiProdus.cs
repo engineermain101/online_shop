@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace shop_online
@@ -66,6 +67,9 @@ namespace shop_online
 
         private void listBoxImaginiProdus_SelectedIndexChanged( object sender, EventArgs e )
         {
+           
+
+            
             if (listBoxImaginiProdus.SelectedIndex >= 0)
             {
                 pictureBoxImagineProdus.Image = (Image)listBoxImaginiProdus.SelectedItem;
