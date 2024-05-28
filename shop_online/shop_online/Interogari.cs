@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Data.SqlTypes;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -106,7 +104,6 @@ namespace shop_online
                         insertUserCommand.ExecuteNonQuery();
 
                         transaction.Commit();
-                        // MessageBox.Show("Utilizatorul a fost adăugat cu succes în baza de date.");
                         return true;
                     }
                     catch (Exception ex)
@@ -299,7 +296,7 @@ namespace shop_online
             }
             return null;
         }
-        public static int[] ReviewNotExists(string connectionString, int id_produs)
+        public static int [] ReviewNotExists( string connectionString, int id_produs )
         {
             string queryCheck = "SELECT COUNT(*) FROM Review WHERE id_produse=@id";
             try
@@ -314,7 +311,7 @@ namespace shop_online
                         int rowCount = (int)command.ExecuteScalar();
 
                         // Return the count of reviews as an int array with a single element
-                        return new int[] { rowCount };
+                        return new int [] { rowCount };
                     }
                 }
             }
@@ -323,7 +320,7 @@ namespace shop_online
                 Console.WriteLine("Error: " + ex.Message);
 
                 // Return an int array with a single element set to 0 in case of an error
-                return new int[] { 0 };
+                return new int [] { 0 };
             }
         }
 
@@ -1181,60 +1178,137 @@ namespace shop_online
                 return -1;
             }
         }
-        public static bool AdaugaFurnizor( string connectionString, int id_user, string iban, string nume_firma, string judet, string oras, string strada, int numar )
+        public static bool AdaugaFurnizor( string connectionString, string nume, string email, string telefon, string parola, string iban, string judet, string oras, string strada, int numar )
         {
-            if (string.IsNullOrWhiteSpace(connectionString) || string.IsNullOrWhiteSpace(iban) ||
-                string.IsNullOrWhiteSpace(nume_firma) || string.IsNullOrWhiteSpace(judet) ||
-                string.IsNullOrWhiteSpace(oras) || string.IsNullOrWhiteSpace(strada) || numar < 1 || id_user < 1)
+            if (string.IsNullOrWhiteSpace(connectionString))
             {
+                MessageBox.Show("Eroare la adăugare furnizor: conexiunea este nulă sau goală.");
                 return false;
             }
-            nume_firma = Aranjare.FormatName(nume_firma);
+
+            if (string.IsNullOrWhiteSpace(nume) || string.IsNullOrWhiteSpace(parola) ||
+                  string.IsNullOrWhiteSpace(judet) || string.IsNullOrWhiteSpace(oras) || string.IsNullOrWhiteSpace(iban) ||
+                  string.IsNullOrWhiteSpace(strada) || numar < 1)
+            {
+                MessageBox.Show("Trebuie completate toate câmpurile!");
+                return false;
+            }
+
+            if (!Aranjare.IsValidTelefon(telefon))
+            {
+                MessageBox.Show("Introduceți un telefon valid.");
+                return false;
+            }
+
+            if (!Aranjare.IsValidEmail(email))
+            {
+                MessageBox.Show("Introduceți un email valid.");
+                return false;
+            }
+            nume = Aranjare.FormatName(nume);
             judet = Aranjare.FormatName(judet);
             oras = Aranjare.FormatName(oras);
             strada = Aranjare.FormatName(strada);
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            email = Aranjare.FormatName(email);
+            try
             {
-                connection.Open();
-                using (SqlTransaction transaction = connection.BeginTransaction())
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    try
+                    connection.Open();
+                    using (SqlTransaction transaction = connection.BeginTransaction())
                     {
-                        string query = "INSERT INTO Furnizori (id_user, iban, nume_firma, id_adresa) VALUES (@IdUser, @Iban, @NumeFirma, @IdAdresa)";
-                        using (SqlCommand command = new SqlCommand(query, connection, transaction))
+                        try
                         {
-                            command.Parameters.AddWithValue("@IdUser", id_user);
-                            command.Parameters.AddWithValue("@Iban", iban);
-                            command.Parameters.AddWithValue("@NumeFirma", nume_firma);
+                            string checkQuery = @" SELECT COUNT(*)
+                                                    FROM Useri AS u
+                                                    JOIN Adresa AS a ON u.id_adresa = a.id_adresa
+                                                    WHERE u.username = @nume
+                                                        AND u.telefon = @telefon 
+                                                        AND u.email = @email
+                                                        AND u.parola = @parola 
+                                                        AND a.judet = @judet
+                                                        AND a.oras = @oras
+                                                        AND a.strada = @strada
+                                                        AND a.numar = @numar";
 
-                            int id_adresa = GetAdresaID(connectionString, transaction, judet, oras, strada, numar);
-                            if (id_adresa < 1)
+                            using (SqlCommand checkCommand = new SqlCommand(checkQuery, connection, transaction))
                             {
-                                bool adresaAdaugata = AdaugaAdresa(connectionString, transaction, judet, oras, strada, numar);
-                                if (!adresaAdaugata)
+                                checkCommand.Parameters.AddWithValue("@nume", nume);
+                                checkCommand.Parameters.AddWithValue("@telefon", telefon);
+                                checkCommand.Parameters.AddWithValue("@parola", parola);
+                                checkCommand.Parameters.AddWithValue("@email", email);
+                                checkCommand.Parameters.AddWithValue("@judet", judet);
+                                checkCommand.Parameters.AddWithValue("@oras", oras);
+                                checkCommand.Parameters.AddWithValue("@strada", strada);
+                                checkCommand.Parameters.AddWithValue("@numar", numar);
+
+                                int existingUserCount = (int)checkCommand.ExecuteScalar();
+                                if (existingUserCount > 0)
                                 {
-                                    transaction.Rollback();
+                                    MessageBox.Show("Utilizatorul există deja în baza de date.");
                                     return false;
                                 }
-
-                                id_adresa = GetAdresaID(connectionString, transaction, judet, oras, strada, numar);
                             }
-                            command.Parameters.AddWithValue("@IdAdresa", id_adresa);
 
-                            command.ExecuteNonQuery();
+
+                            string insertAddressQuery = @"INSERT INTO Adresa 
+                                                          (judet, oras, strada, numar) 
+                                                          VALUES (@judet, @oras, @strada, @numar); 
+                                                          SELECT SCOPE_IDENTITY();";
+
+                            int id_adresa;
+                            using (SqlCommand insertAddressCommand = new SqlCommand(insertAddressQuery, connection, transaction))
+                            {
+                                insertAddressCommand.Parameters.AddWithValue("@judet", judet);
+                                insertAddressCommand.Parameters.AddWithValue("@oras", oras);
+                                insertAddressCommand.Parameters.AddWithValue("@strada", strada);
+                                insertAddressCommand.Parameters.AddWithValue("@numar", numar);
+
+                                id_adresa = Convert.ToInt32(insertAddressCommand.ExecuteScalar());
+                            }
+
+                            string insertUserQuery = @"INSERT INTO Useri (username, email, parola, telefon, id_adresa)
+                                               VALUES (@nume, @email, @parola, @telefon, @id_adresa);
+                                               SELECT SCOPE_IDENTITY();";
+
+                            int userId;
+                            using (SqlCommand insertUserCommand = new SqlCommand(insertUserQuery, connection, transaction))
+                            {
+                                insertUserCommand.Parameters.AddWithValue("@nume", nume);
+                                insertUserCommand.Parameters.AddWithValue("@email", email);
+                                insertUserCommand.Parameters.AddWithValue("@parola", parola);
+                                insertUserCommand.Parameters.AddWithValue("@telefon", telefon);
+                                insertUserCommand.Parameters.AddWithValue("@id_adresa", id_adresa);
+
+                                userId = Convert.ToInt32(insertUserCommand.ExecuteScalar());
+                            }
+
+                            string insertFurnizorQuery = "INSERT INTO Furnizori (id_user, iban, nume_firma, id_adresa) VALUES (@IdUser, @Iban, @NumeFirma, @IdAdresa)";
+                            using (SqlCommand insertFurnizorCommand = new SqlCommand(insertFurnizorQuery, connection, transaction))
+                            {
+                                insertFurnizorCommand.Parameters.AddWithValue("@IdUser", userId);
+                                insertFurnizorCommand.Parameters.AddWithValue("@Iban", iban);
+                                insertFurnizorCommand.Parameters.AddWithValue("@NumeFirma", nume);
+                                insertFurnizorCommand.Parameters.AddWithValue("@IdAdresa", id_adresa);
+
+                                insertFurnizorCommand.ExecuteNonQuery();
+                            }
                             transaction.Commit();
                             return true;
                         }
-
-                    }
-                    catch (Exception ex)
-                    {
-                        transaction.Rollback();
-                        MessageBox.Show("A apărut o eroare la adăugarea furnizorului: " + ex.Message);
-                        return false;
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            MessageBox.Show("A apărut o eroare la adăugarea furnizorului: " + ex.Message);
+                            return false;
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A apărut o eroare la adăugarea furnizorului: " + ex.Message);
+                return false;
             }
         }
         public static bool StergeFurnizor( string connectionString, SqlTransaction transaction, string numeFirma = null, string emailFirma = null )
@@ -1401,63 +1475,6 @@ namespace shop_online
             }
         }
 
-        /*public static List<string> GetCategories( string ConnectionString )
-        {
-            List<string> categories = new List<string>();
-            string query = "SELECT nume FROM Categorii";
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(ConnectionString))
-                {
-                    connection.Open();
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            categories.Add(reader ["nume"].ToString());
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("A aparut o eroare la preluarea categoriilor: " + ex.Message);
-                return null;
-            }
-            return categories;
-        }
-        public static DataTable GetProductsByCategory( string ConnectionString, string categorie )
-        {
-            DataTable products = new DataTable();
-            string query = @"
-                SELECT P.*
-                FROM Produse P
-                INNER JOIN Categorii C ON P.id_categorie = C.id_categorie
-                WHERE C.nume = @Category";
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(ConnectionString))
-                {
-                    connection.Open();
-
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@Category", categorie);
-                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
-                        {
-                            adapter.Fill(products);
-                        }
-
-                    }
-                }
-            }
-            catch (Exception e) { MessageBox.Show("Eroare la primirea produselor: " + e.Message); return null; }
-            return products;
-        }
-        */
         public static List<string> GetCategories( string connectionString )
         {
             if (string.IsNullOrWhiteSpace(connectionString))
@@ -1607,14 +1624,14 @@ namespace shop_online
                                 sqlImagini.Parameters ["@nume"].Value = fileNames [i]; // You can adjust the name as needed
                                 sqlImagini.ExecuteNonQuery();
                             }
-                            
-                        }
-                       /* string sqlReview = "INSERT INTO Review (id_produs) VALUES (@id)";
-                        using (SqlCommand sqlRev = new SqlCommand(sqlReview, connection, transaction))
-                        {
-                            sqlRev.Parameters.AddWithValue("@id", produsId);
 
-                        }*/
+                        }
+                        /* string sqlReview = "INSERT INTO Review (id_produs) VALUES (@id)";
+                         using (SqlCommand sqlRev = new SqlCommand(sqlReview, connection, transaction))
+                         {
+                             sqlRev.Parameters.AddWithValue("@id", produsId);
+
+                         }*/
 
                         // string sqlReview= "INSERT INTO Review(nr_stele)"
                         /*for (int i = 0; i < produs.Image.Count; i++)
@@ -1652,7 +1669,7 @@ namespace shop_online
                 return ms.ToArray();
             }
         }
-        public static void DeleteAllProducts(string connectionString)
+        public static void DeleteAllProducts( string connectionString )
         {
             string query = $"DELETE FROM Produse";
             try
@@ -1672,7 +1689,7 @@ namespace shop_online
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
-        public static void AdaugaRecenzie(string connectionString, int user_id, int produs_id, string recenzie, int nr_stele, DateTime date)
+        public static void AdaugaRecenzie( string connectionString, int user_id, int produs_id, string recenzie, int nr_stele, DateTime date )
         {
             string query = @"
         INSERT INTO Review (id_user, comentariu, nr_stele, data, id_produs)
@@ -1707,7 +1724,7 @@ namespace shop_online
                 }
             }
         }
-        public static List<Dictionary<string, object>> GetReviews(string connectionString, int produs_id)
+        public static List<Dictionary<string, object>> GetReviews( string connectionString, int produs_id )
         {
             List<Dictionary<string, object>> reviews = new List<Dictionary<string, object>>();
 
@@ -1724,7 +1741,7 @@ namespace shop_online
                     {
                         while (reader.Read())
                         {
-                            var review = new Dictionary<string, object>
+                            Dictionary<string, object> review = new Dictionary<string, object>
                     {
                         { "UserId", reader.GetInt32(0) },
                         { "Comentariu", reader.GetString(1) },
@@ -1751,7 +1768,7 @@ namespace shop_online
 
         private static bool GestionareAdmin( string connectionString, string operatie, int idAdmin, int idUser = 0, string rol = null )
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("Nu este implementata metoda.");
             try
             {
                 string query = "";
