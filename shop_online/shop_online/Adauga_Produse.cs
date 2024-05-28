@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Drawing;
-using System.Linq;
+using System.IO;
 using System.Windows.Forms;
 
 namespace shop_online
@@ -10,6 +9,8 @@ namespace shop_online
     public partial class Adauga_Produse : Form
     {
         private int user_id_furnizor = -1;
+        private List<Image> imagesList = new List<Image>();
+        private List<string> fileNames = new List<string>();
 
         public Adauga_Produse()
         {
@@ -24,131 +25,210 @@ namespace shop_online
 
         private void Adauga_Produse_FormClosed( object sender, FormClosedEventArgs e )
         {
-            Application.OpenForms ["Afisare_Produse"].Show();
+            if (Application.OpenForms ["Afisare_Produse"] != null)
+                Application.OpenForms ["Afisare_Produse"].Show();
         }
         private void Adauga_Produse_Load( object sender, System.EventArgs e )
         {
+            AutoSize = true;
+            Aranjare.CenteredPanel(this, panelAdaugaProdus);
             LoadUser(user_id_furnizor);
+
         }
         public void LoadUser( int id_furnizor )
         {
-            InitializeComponent();
+
             user_id_furnizor = id_furnizor;
             //string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
             try
             {
                 string connectionString = Aranjare.GetConnectionString();
+                List<string> categorii = Interogari.GetCategories(connectionString);
             }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
 
-
-            // Acum lista 'produse' conține obiecte ProdusItem populate cu datele din DataTable
-
-
-            {
-
-
-                /* {
-
-                cartiPanelCartiDateTimePickerAnAparitie.Format = DateTimePickerFormat.Custom;
-                cartiPanelCartiDateTimePickerAnAparitie.CustomFormat = "dd MMMM yyyy";
-                cartiPanelCartiDateTimePickerAnAparitie.Value = DateTime.Today;
-
-                List<ComboBox> comboBoxes = new List<ComboBox>
-                {
-                    cartiPanelComboBoxNume, cartiPanelComboBoxPrenume,
-                    cartiPanelComboBoxGen, cartiPanelComboBoxEditura,
-                    cartiPanelComboBoxRolAdmin
-                };
-                foreach (ComboBox comboBox in comboBoxes)
-                {
-                    comboBox.IntegralHeight = false;
-                    comboBox.MaxDropDownItems = 5;
-                }
-
-                string connectionString = ConfigurationManager.ConnectionStrings ["AdaugareDate"].ConnectionString;
-                InitializePanelStates();
-                utilizatorCurentId = GetUserID(connectionString, numeUtilizator, prenumeUtilizator, emailUtilizator, parolaUtilizator, "parola");
-                admin = VerificaAdmin(utilizatorCurentId, connectionString);
-
-                cartiPanelCartiButtonAdaugasiSterge.Text = "Imprumuta";
-                cartiPanelTextBoxNrCopii.Visible = false;
-                cartiPanelLabelNrCopii.Visible = false;
-                cartiPanelTextBoxISBN.ReadOnly = false;
-                cartiPanelCartiListBox.HorizontalScrollbar = true;
-                cartiPanelUserApasat.Visible = false;
-                cartiPanelInformatiiUserApasat.Visible = false;
-                cartiPanelCartiApasat.Visible = true;
-                cartiPanelComboBoxRolAdmin.Visible = false;
-                cartiPanelLabelRolAdmin.Visible = false;
-
-
-
-                cartiPanelTextBoxISBN.Visible = admin;
-                cartiPanelLabelISBN.Visible = admin;
-                adaugaToolStripMenuItem1.Visible = admin;
-                stergeToolStripMenuItem1.Visible = admin;
-                modificaToolStripMenuItem1.Visible = admin;
-                adminCartiToolStripMenuItem.Visible = admin;
-                adaugaToolStripMenuItem2.Visible = admin;
-                stergeToolStripMenuItem2.Visible = admin;
-
-                ConfigurarePanelCentral(cartiPanelCartiApasat);
-                ConfigurarePanelCentral(cartiPanelUserApasat);
-                ConfigurarePanelCentral(cartiPanelInformatiiUserApasat);
-
-
-                cartiPanelInformatiiUserApasat.BackColor = Color.Coral; // Setăm culoarea panelului la roz
-                cartiPanelInformatiiLabelTitlu.Text = "Informații Utilizator"; // Textul titlului
-                cartiPanelInformatiiLabelTitlu.Font = new Font("Arial", 16, FontStyle.Bold); // Stilul și dimensiunea textului
-                cartiPanelInformatiiLabelTitlu.Dock = DockStyle.Top; // Plasarea titlului în partea de sus a panelului
-                cartiPanelInformatiiLabelTitlu.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-                cartiPanelInformatiiLabelTitlu.TextAlign = ContentAlignment.MiddleCenter;
-
-
-                utilizatorSters = IsAccountDeleted(utilizatorCurentId, connectionString);
-                if (utilizatorSters)
-                {
-                    cartiCartiToolStripMenuItem.Visible = false;
-                    adminCartiToolStripMenuItem.Visible = false;
-                    adaugaToolStripMenuItem2.Visible = false;
-                    stergeToolStripMenuItem2.Visible = false;
-                    cartiPanelCartiApasat.Visible = false;
-                    cartiPanelUserApasat.Visible = false;
-                    cartiPanelInformatiiUserButtonModifica.Visible = false;
-                    cartiPanelInformatiiUserButtonStergeCont.Text = "Recupereaza Contul";
-
-                    cartiPanelInformatiiUserApasat.Visible = true;
-                }*/
-            }
         }
 
 
-
-
-        //Puia
-        private void buttonAdaugaProdus_Click( object sender, System.EventArgs e )
+        //Claudiu
+        private void buttonAdaugaProdus_Click( object sender, EventArgs e )
         {
+            string connectionString = Aranjare.GetConnectionString();
+            string denumire = textBoxDenumire.Text.Trim();
+            string descriere = textBoxDescriere.Text.Trim();
+            int categorie = comboBoxCategorie.SelectedIndex;
+
+            if (string.IsNullOrWhiteSpace(denumire))
+            {
+                MessageBox.Show("Vă rog introduceți o denumire validă!");
+                return;
+            }
+
+            if (categorie == -1)
+            {
+                MessageBox.Show("Vă rog selectați o categorie");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(descriere))
+            {
+                MessageBox.Show("Vă rog introduceți o descriere");
+                return;
+            }
+
+            if (!decimal.TryParse(textBoxPret.Text, out decimal pret) || pret <= 0)
+            {
+                MessageBox.Show("Introduceți un preț valid (pozitiv)!");
+                return;
+            }
+
+            if (!int.TryParse(textBoxCantitate.Text, out int cantitate) || cantitate <= 0)
+            {
+                MessageBox.Show("Introduceți o cantitate validă (pozitivă)!");
+                return;
+            }
+
+            Image image = pictureBoxImagine.Image;
+            string filename = pictureBoxImagine.ImageLocation;
+            string extension = Path.GetExtension(filename);
+
+            List<string> denumireS = new List<string>();
+            List<string> valoareS = new List<string>();
+
+            foreach (ListViewItem item in listView1.Items)
+            {
+                if (item.SubItems.Count > 1)
+                {
+                    denumireS.Add(item.SubItems [0].Text);
+                    valoareS.Add(item.SubItems [1].Text);
+                }
+                else
+                {
+                    MessageBox.Show("Fiecare specificație trebuie să aibă atât o denumire cât și o valoare!");
+                    return;
+                }
+            }
+            if (denumireS.Count == 0 || valoareS.Count == 0)
+            {
+                MessageBox.Show("Listele de denumiri și valori nu trebuie să fie goale!");
+                return;
+            }
+            //id categorie nu este id-ul din combobox. Este id-ul din baza de date
+            ProdusItem produs = new ProdusItem(imagesList, denumire, pret, 0, 0, -1, cantitate, descriere, user_id_furnizor, categorie + 1);//trebuie sa faci o functie care ia Id-categorie pe baza cuvantului din combobox.
+
             try
             {
-                int Cantitate = int.Parse(textBoxCantitate.Text.Trim());
-                decimal Pret = decimal.Parse(textBoxPret.Text.Trim());
-                string Descriere = textBoxDescriere.Text.Trim();
-                List<string> Numelistaspecificatii = textBoxDenumireSpecificatie.Text.Split(',').Select(s => s.Trim()).ToList();
-                List<string> ValoareListaSpecificatii = textBoxValoareSpecificatie.Text.Split(',').Select(s => s.Trim()).ToList();
-                int id_Categorie = int.Parse(comboBoxCategorie.Text.Trim());
-                throw new Exception("Id categorie nu este acelasi cu ce e in combobox. Trebuie sa faceti o metoda get Id_categorie in clasa Interogari!");
-                Image image = pictureBoxImagine.Image;
-                string NumeProdus = textBoxDenumire.Text;
-                string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
-
-
-                Interogari.InsertProdus(connectionString, image, id_Categorie, user_id_furnizor, NumeProdus, Cantitate, Pret, Descriere, Numelistaspecificatii, ValoareListaSpecificatii);
+                Interogari.InsertProdus(connectionString, produs, fileNames, denumireS, valoareS);
+                MessageBox.Show("Produs adăugat cu succes!");
             }
-            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Eroare la adăugarea produsului: " + ex.Message);
+            }
         }
 
 
+        private void listView1_SelectedIndexChanged( object sender, EventArgs e )
+        {
+
+        }
+
+        private void button2_Click( object sender, EventArgs e )
+        {
+            string denumire = textBoxDenumireSpecificatie.Text;
+            string specificatie = textBoxValoareSpecificatie.Text;
+            if (string.IsNullOrWhiteSpace(denumire) || string.IsNullOrWhiteSpace(specificatie))
+            {
+                MessageBox.Show("Introduceti o denumire si o specificate!");
+                return;
+            }
+
+            ListViewItem listViewItem = new ListViewItem(denumire);
+            listViewItem.SubItems.Add(specificatie);
+
+            listView1.Items.Add(listViewItem);
+            textBoxDenumireSpecificatie.Clear();
+            textBoxValoareSpecificatie.Clear();
+            listView1.View = View.Details;
+
+
+        }
+
+        /* private void buttonAddImage_Click(object sender, EventArgs e)
+         {
+             OpenFileDialog openFileDialog = new OpenFileDialog();
+             openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All Files|*.*";
+             openFileDialog.Title = "Select an Image File";
+
+             if (openFileDialog.ShowDialog() == DialogResult.OK)
+             {
+                 string selectedFilePath = openFileDialog.FileName;
+                 pictureBoxImagine.ImageLocation = selectedFilePath;
+
+             }
+             int nr_imagini = int.Parse(labelCounter.Text);nr_imagini++;
+             labelCounter.Text = nr_imagini.ToString();
+             string filename = pictureBoxImagine.ImageLocation;
+             string extension = Path.GetExtension(filename);
+             imagesList.Add(pictureBoxImagine.Image);
+             fileNames.Add(filename + extension);
+
+
+         }*/
+        private void buttonAddImage_Click( object sender, EventArgs e )
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All Files|*.*",
+                Title = "Select an Image File"
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFilePath = openFileDialog.FileName;
+
+                try
+                {
+                    // Verificăm dacă fișierul selectat este o imagine validă
+                    using (Image image = Image.FromFile(selectedFilePath))
+                    {
+                        // Adăugăm imaginea doar dacă nu este deja în listă
+                        if (!fileNames.Contains(selectedFilePath))
+                        {
+                            pictureBoxImagine.ImageLocation = selectedFilePath;
+
+                            // Incrementăm contorul de imagini
+                            if (int.TryParse(labelCounter.Text, out int nr_imagini))
+                            {
+                                nr_imagini++;
+                                labelCounter.Text = nr_imagini.ToString();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Eroare la parsarea contorului de imagini.");
+                                return;
+                            }
+
+                            // Adăugăm imaginea și numele fișierului în listele respective
+                            imagesList.Add((Image)image.Clone());
+                            fileNames.Add(selectedFilePath);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Această imagine a fost deja adăugată.");
+                        }
+                    }
+                }
+                catch (OutOfMemoryException)
+                {
+                    MessageBox.Show("Fișierul selectat nu este o imagine validă.");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("A apărut o eroare la adăugarea imaginii: " + ex.Message);
+                }
+            }
+        }
         //Horia
     }
 }

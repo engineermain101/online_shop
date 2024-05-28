@@ -24,10 +24,8 @@ namespace shop_online
         {
             try
             {
-                // Obțineți conexiunea la baza de date
                 string con = Aranjare.GetConnectionString();
 
-                // Iterați prin toate controalele de produs din flowLayoutPanelProduse și adăugați-le în coșul utilizatorului în baza de date
                 foreach (ProductControl control in flowLayoutPanelProduse.Controls.OfType<ProductControl>())
                 {
                     Interogari.AdaugainCos(con, control.GetBucatiProdusdinCos(), control.GetProdus_Pret(), utilizatorId, control.GetProdus_ID());
@@ -64,7 +62,6 @@ namespace shop_online
             Aranjare.Adaugare_in_flowLayoutPanel(flowLayoutPanelProduse, data, false);
 
             CalculatePretTotal();
-
         }
         private void Cos_Click( object sender, EventArgs e )
         {
@@ -83,6 +80,10 @@ namespace shop_online
             if (id_produs < 1)
                 return;
 
+            DialogResult result = MessageBox.Show("Doriți să stergeti produsul selectat?", "Confirmare stergere", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+                return;
+
             string con = null;
             try
             {
@@ -92,14 +93,20 @@ namespace shop_online
             }
             catch (Exception) { return; }
             Aranjare.Delete_from_flowLayoutPanel(flowLayoutPanelProduse, id_produs);
-            Interogari.DeleteProdusdinCos(con, utilizatorId, id_produs);
+            bool deleted = Interogari.DeleteProdusdinCos(con, utilizatorId, id_produs);
+            if (!deleted)
+                return;
+
             CalculatePretTotal();
         }
-
 
         private void buttonCumpara_Click( object sender, EventArgs e )
         {
             if (flowLayoutPanelProduse.Controls.Count == 0)
+                return;
+
+            DialogResult result = MessageBox.Show("Doriți să cumpărați produsele selectate?", "Confirmare cumpărare", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
                 return;
 
             string connectionString = null;
@@ -111,16 +118,19 @@ namespace shop_online
             }
             catch (Exception ex) { MessageBox.Show("Eroare la cumpararea produsului." + ex.Message); return; }
 
-            DialogResult result = MessageBox.Show("Doriți să cumpărați produsele selectate?", "Confirmare cumpărare", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.No)
-                return;
-
             try
             {
                 List<ProductControl> lista = new List<ProductControl>();
                 foreach (ProductControl control in flowLayoutPanelProduse.Controls)
                 {
                     lista.Add(control);
+                    int a = control.GetBucatiProdusdinCos();
+                    int b = control.GetNrBucatiCos();
+                    if (a>b)
+                    {
+                        MessageBox.Show("Nu avem asa de multe produse in stoc.");
+                        return;
+                    }
                 }
                 Aranjare.Delete_from_flowLayoutPanel(flowLayoutPanelProduse);
                 Interogari.TranzactieCumparareProdus(connectionString, utilizatorId, lista, "cash");

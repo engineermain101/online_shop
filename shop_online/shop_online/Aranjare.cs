@@ -236,6 +236,22 @@ namespace shop_online
             //  return ConfigurationManager.ConnectionStrings [connectionName].ConnectionString;
             throw new Exception("Nu s-a găsit niciun connection string potrivit pentru acest calculator.");
         }
+        public static void CenteredPanel( Form form, Panel panel, Size? offcentered = null )
+        {
+            panel.Anchor = AnchorStyles.None;
+            panel.Dock = DockStyle.None;
+
+            int x = (form.ClientSize.Width - panel.Width) / 2;
+            int y = (form.ClientSize.Height - panel.Height) / 2;
+
+            if (offcentered != null)
+            {
+                x += offcentered.Value.Width;
+                y += offcentered.Value.Height;
+            }
+
+            panel.Location = new Point(x, y);
+        }
 
         /// <summary>
         /// Dacă idProdus este specificat, șterge elementul corespunzător din FlowLayoutPanel.
@@ -363,8 +379,14 @@ namespace shop_online
             string title = (string)row ["nume"];
             decimal pret = (decimal)row ["pret"];
             int [] medie = Interogari.MedieRecenzii(connectionString, id_produs);
-            int medie_review = medie [0];
-            int nr_recenzii = medie [1];
+            int medie_review =0;
+            int nr_recenzii = 0;
+            if (medie != null)
+            {
+                 medie_review = medie [0];
+                 nr_recenzii = medie [1];
+            }
+          
 
             int nr_bucati = 0;
             decimal total_pret = -1;
@@ -415,7 +437,7 @@ namespace shop_online
         /// <example>
         /// Aranjare.CloseCurrentFormAndOpenForm(FindForm(), detaliiProdus, produs, MinimumSize);
         /// </example>
-        public static void HideCurrentFormAndOpenNewForm<T, A>( Form oldForm, T newForm, A id, Size minimumSize )
+        public static void HideCurrentFormAndOpenNewForm<T, A>( Form oldForm, T newForm, A constructor_value, Size minimumSize )
 where T : Form
 where A : class
         {
@@ -423,15 +445,7 @@ where A : class
 
             if (newForm == null)
             {
-                /* if (newForm is Adauga_Produse)
-                 {
-                     newForm = new Adauga_Produse(id);
-                 }
-                 else if (newForm is Cos)
-                 {
-                     newForm = new Cos(id);
-                 }*/
-                newForm = (T)Activator.CreateInstance(typeof(T), id);
+                newForm = (T)Activator.CreateInstance(typeof(T), constructor_value);
 
                 newForm.MinimumSize = minimumSize;
                 newForm.Size = newForm.MinimumSize;

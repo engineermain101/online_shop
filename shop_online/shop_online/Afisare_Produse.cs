@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace shop_online
 {
     public partial class Afisare_Produse : Form
     {
-        private string emailUtilizator = "bbbb";
+        private static string emailUtilizator = "bbbb";
         private string parolaUtilizator = "0";
         private string telefonUtilizator = "01";
         private static int utilizatorCurentId = -1;
@@ -15,15 +17,20 @@ namespace shop_online
         private bool furnizor = false;
         private Adauga_Produse adauga_Produse = null;// Form nou
         private Cos cos = null;
+        private Adauga_Stergere_Admin adauga_Stergere_Admin = null;
+        private Adauga_Furnizor Adauga_Furnizor = null;
+        private FormLogin formlogin = null;
 
         public Afisare_Produse()
         {
             InitializeComponent();
+            PopulateMenuStrip();
         }
 
         public Afisare_Produse( string email, string parola, string telefon )
         {
             InitializeComponent();
+            PopulateMenuStrip();
             emailUtilizator = email;
             parolaUtilizator = parola;
             telefonUtilizator = telefon;
@@ -42,6 +49,8 @@ namespace shop_online
         }
         public void LoadUser( string email, string parola, string telefon )
         {
+            MinimumSize = new Size(520 * 2, 138 * 4);
+
             adaugaToolStripMenuItem.Visible = false;
             adaugaProdusToolStripMenuItem.Visible = false;
             adaugaFurnizorToolStripMenuItem.Visible = false;
@@ -71,7 +80,7 @@ namespace shop_online
                 Application.Exit();
                 return;
             }
-            DataTable data = Interogari.SelectTop30Produse(connectionString);
+            DataTable data = Interogari.SelectTopProduse(connectionString, 30);
             Aranjare.Adaugare_in_flowLayoutPanel(flowLayoutPanelProduse, data, true);
 
             if (Interogari.GetFurnizorId(connectionString, utilizatorCurentId) > 0)
@@ -117,108 +126,112 @@ namespace shop_online
             if (id_furnizor > 0)
             {
                 Size minimumSize = new Size(490, 535);
-                Aranjare.HideCurrentFormAndOpenNewForm(this, adauga_Produse, (object)id_furnizor, minimumSize);
+                Aranjare.HideCurrentFormAndOpenNewForm(this, adauga_Produse, (object)1, minimumSize);
                 //CloseCurrentFormAndOpenAdaugaProdus(id_furnizor);
             }
 
         }
         private void cosToolStripMenuItem_Click( object sender, EventArgs e )
         {
-            foreach (Control control in flowLayoutPanelProduse.Controls)
-            {
-                if (control is ProductControl)
-                {
-                    (control as ProductControl).ResetBackColor();
-                }
-            }
+            Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
             if (utilizatorCurentId > 0)
             {
                 Size minimumSize = new Size(750, 560);
                 Aranjare.HideCurrentFormAndOpenNewForm(this, cos, (object)utilizatorCurentId, minimumSize);
-                //CloseCurrentFormAndOpenCos(utilizatorCurentId);
             }
 
         }
 
-        public static int GetUtilizatorID()
-        {
-            return utilizatorCurentId;
-        }
-
-
-
-        private void CloseCurrentFormAndOpenAdaugaProdus( int id_furnizor )
-        {
-            Hide();
-
-            if (adauga_Produse == null)
-            {
-                adauga_Produse = new Adauga_Produse(id_furnizor)
-                {
-                    MinimumSize = new Size(490, 535)
-                };
-                adauga_Produse.Size = adauga_Produse.MinimumSize;
-                adauga_Produse.FormClosed += ( sender, e ) => { adauga_Produse = null; }; // Resetare referință când formularul este închis
-            }
-
-            if (!adauga_Produse.Visible)
-            {
-                adauga_Produse.Visible = true;
-
-                if (Application.OpenForms ["Afisare_Produse"] != null)
-                {
-                    Application.OpenForms ["Afisare_Produse"].Hide();
-                }
-            }
-            adauga_Produse.LoadUser(id_furnizor);
-            adauga_Produse.Show();
-            adauga_Produse.Focus();
-        }
-
-        /*private void CloseCurrentFormAndOpenCos( int utilizatorId )
-        {
-            Hide();
-
-            if (cos == null)
-            {
-                cos = new Cos(utilizatorId)
-                {
-                    MinimumSize = new Size(750, 560)
-                };
-                cos.Size = cos.MinimumSize;
-                cos.FormClosed += ( sender, e ) => { cos = null; }; // Resetare referință când formularul este închis
-            }
-
-            if (!cos.Visible)
-            {
-                cos.Visible = true;
-
-                if (Application.OpenForms ["Afisare_Produse"] != null)
-                {
-                    Application.OpenForms ["Afisare_Produse"].Hide();
-                }
-            }
-            cos.LoadUser(utilizatorId);
-            cos.Show();
-            cos.Focus();
-        }
-        */
         private void flowLayoutPanelProduse_DoubleClick( object sender, EventArgs e )
         {
             Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
         }
+
+        private void adaugaFurnizorToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
+            Size size = new Size(700, 500);
+            Aranjare.HideCurrentFormAndOpenNewForm(this, Adauga_Furnizor, (object)true, size);
+        }
+        private void stergereFurnizorToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
+            Size size = new Size(700, 500);
+            Aranjare.HideCurrentFormAndOpenNewForm(this, Adauga_Furnizor, (object)false, size);
+        }
+
+        private void adaugaAdminToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
+            Size size = new Size(700, 400);
+            Aranjare.HideCurrentFormAndOpenNewForm(this, adauga_Stergere_Admin, (object)true, size);
+        }
+        private void stergereAdminToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
+            Size size = new Size(700, 400);
+            Aranjare.HideCurrentFormAndOpenNewForm(this, adauga_Stergere_Admin, (object)false, size);
+        }
+
+        private void delogheazateToolStripMenuItem_Click( object sender, EventArgs e )
+        {
+            /*Hide();
+          FormLogin form2 = new FormLogin();
+           form2.Closed += ( s, args ) => Close();
+           form2.Show();*/
+            string filePath = "logInfo.txt";
+            File.WriteAllText(filePath, string.Empty);
+
+            Size size = new Size(500, 300);
+            Aranjare.HideCurrentFormAndOpenNewForm(FindForm(), formlogin, (object)-1, size);
+
+        }
+
+        private void CategoryMenuItem_Click( object sender, EventArgs e )
+        {
+            string con = null;
+            try
+            {
+                con = Aranjare.GetConnectionString();
+            }
+            catch (Exception) { return; }
+
+            ToolStripMenuItem clickedItem = sender as ToolStripMenuItem;
+            string category = clickedItem.Text.Trim();
+            DataTable products = Interogari.GetProductsByCategory(con, category);
+            Aranjare.Adaugare_in_flowLayoutPanel(flowLayoutPanelProduse, products, true);
+        }
+
 
         public void ResetFlowLayoutPanelProduse()
         {
             if (flowLayoutPanelProduse != null)
                 Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
         }
-
-        private void adaugaFurnizorToolStripMenuItem_Click( object sender, EventArgs e )
+        public static int GetUtilizatorID()
         {
-
+            return utilizatorCurentId;
         }
-
+        public static string GetUtilizatorEmail()
+        {
+            return emailUtilizator;
+        }
+        private void PopulateMenuStrip()
+        {
+            string con = null;
+            try
+            {
+                con = Aranjare.GetConnectionString();
+            }
+            catch (Exception) { return; }
+            List<string> categories = Interogari.GetCategories(con);
+            foreach (string category in categories)
+            {
+                ToolStripMenuItem menuItem = new ToolStripMenuItem(category);
+                menuItem.Click += CategoryMenuItem_Click;
+                categorieToolStripMenuItem.DropDownItems.Add(menuItem);
+            }
+        }
 
 
         //Claudiu

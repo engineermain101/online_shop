@@ -66,6 +66,7 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -89,11 +90,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adauga_Furnizor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Adauga_Furnizor.Designer.cs">
+      <DependentUpon>Adauga_Furnizor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Adauga_Produse.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Adauga_Produse.Designer.cs">
       <DependentUpon>Adauga_Produse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Adauga_Stergere_Admin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Adauga_Stergere_Admin.Designer.cs">
+      <DependentUpon>Adauga_Stergere_Admin.cs</DependentUpon>
     </Compile>
     <Compile Include="Afisare_Produse.cs">
       <SubType>Form</SubType>
@@ -136,8 +149,14 @@
     <Compile Include="Test.cs" />
     <Compile Include="TestClassAttribute.cs" />
     <Compile Include="TestMethodAttribute.cs" />
+    <EmbeddedResource Include="Adauga_Furnizor.resx">
+      <DependentUpon>Adauga_Furnizor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Adauga_Produse.resx">
       <DependentUpon>Adauga_Produse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Adauga_Stergere_Admin.resx">
+      <DependentUpon>Adauga_Stergere_Admin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Afisare_Produse.resx">
       <DependentUpon>Afisare_Produse.cs</DependentUpon>

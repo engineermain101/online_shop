@@ -54,6 +54,7 @@
             this.labelJudet = new System.Windows.Forms.Label();
             this.textBoxNume = new System.Windows.Forms.TextBox();
             this.labelNume = new System.Windows.Forms.Label();
+            this.buttonSgnFurnizor = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             this.panelSignUp.SuspendLayout();
             this.SuspendLayout();
@@ -100,7 +101,7 @@
             this.labelTelefon.AutoSize = true;
             this.labelTelefon.Location = new System.Drawing.Point(113, 61);
             this.labelTelefon.Name = "labelTelefon";
-            this.labelTelefon.Size = new System.Drawing.Size(121, 17);
+            this.labelTelefon.Size = new System.Drawing.Size(115, 16);
             this.labelTelefon.TabIndex = 3;
             this.labelTelefon.Text = "Telefon sau Email";
             // 
@@ -109,7 +110,7 @@
             this.labelParola.AutoSize = true;
             this.labelParola.Location = new System.Drawing.Point(113, 115);
             this.labelParola.Name = "labelParola";
-            this.labelParola.Size = new System.Drawing.Size(49, 17);
+            this.labelParola.Size = new System.Drawing.Size(47, 16);
             this.labelParola.TabIndex = 5;
             this.labelParola.Text = "Parola";
             // 
@@ -132,6 +133,7 @@
             // panelSignUp
             // 
             this.panelSignUp.BackColor = System.Drawing.SystemColors.Control;
+            this.panelSignUp.Controls.Add(this.buttonSgnFurnizor);
             this.panelSignUp.Controls.Add(this.labelTelefon2);
             this.panelSignUp.Controls.Add(this.buttonSignUpPanelSignUp);
             this.panelSignUp.Controls.Add(this.labelParola2);
@@ -161,7 +163,7 @@
             this.labelTelefon2.AutoSize = true;
             this.labelTelefon2.Location = new System.Drawing.Point(27, 73);
             this.labelTelefon2.Name = "labelTelefon2";
-            this.labelTelefon2.Size = new System.Drawing.Size(56, 17);
+            this.labelTelefon2.Size = new System.Drawing.Size(53, 16);
             this.labelTelefon2.TabIndex = 7;
             this.labelTelefon2.Text = "Telefon";
             // 
@@ -181,13 +183,13 @@
             this.labelParola2.AutoSize = true;
             this.labelParola2.Location = new System.Drawing.Point(27, 129);
             this.labelParola2.Name = "labelParola2";
-            this.labelParola2.Size = new System.Drawing.Size(49, 17);
+            this.labelParola2.Size = new System.Drawing.Size(47, 16);
             this.labelParola2.TabIndex = 9;
             this.labelParola2.Text = "Parola";
             // 
             // buttonBack
             // 
-            this.buttonBack.Location = new System.Drawing.Point(297, 198);
+            this.buttonBack.Location = new System.Drawing.Point(297, 182);
             this.buttonBack.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(155, 116);
@@ -225,7 +227,7 @@
             this.labelNumar_Strada.AutoSize = true;
             this.labelNumar_Strada.Location = new System.Drawing.Point(27, 409);
             this.labelNumar_Strada.Name = "labelNumar_Strada";
-            this.labelNumar_Strada.Size = new System.Drawing.Size(50, 17);
+            this.labelNumar_Strada.Size = new System.Drawing.Size(47, 16);
             this.labelNumar_Strada.TabIndex = 15;
             this.labelNumar_Strada.Text = "Număr";
             // 
@@ -242,7 +244,7 @@
             this.labelStrada.AutoSize = true;
             this.labelStrada.Location = new System.Drawing.Point(27, 353);
             this.labelStrada.Name = "labelStrada";
-            this.labelStrada.Size = new System.Drawing.Size(50, 17);
+            this.labelStrada.Size = new System.Drawing.Size(47, 16);
             this.labelStrada.TabIndex = 13;
             this.labelStrada.Text = "Stradă";
             // 
@@ -267,7 +269,7 @@
             this.labelOras.AutoSize = true;
             this.labelOras.Location = new System.Drawing.Point(27, 297);
             this.labelOras.Name = "labelOras";
-            this.labelOras.Size = new System.Drawing.Size(39, 17);
+            this.labelOras.Size = new System.Drawing.Size(36, 16);
             this.labelOras.TabIndex = 11;
             this.labelOras.Text = "Oraș";
             // 
@@ -276,7 +278,7 @@
             this.labelEmail.AutoSize = true;
             this.labelEmail.Location = new System.Drawing.Point(27, 185);
             this.labelEmail.Name = "labelEmail";
-            this.labelEmail.Size = new System.Drawing.Size(47, 17);
+            this.labelEmail.Size = new System.Drawing.Size(46, 16);
             this.labelEmail.TabIndex = 7;
             this.labelEmail.Text = "Email*";
             // 
@@ -293,7 +295,7 @@
             this.labelJudet.AutoSize = true;
             this.labelJudet.Location = new System.Drawing.Point(27, 241);
             this.labelJudet.Name = "labelJudet";
-            this.labelJudet.Size = new System.Drawing.Size(43, 17);
+            this.labelJudet.Size = new System.Drawing.Size(40, 16);
             this.labelJudet.TabIndex = 9;
             this.labelJudet.Text = "Județ";
             // 
@@ -310,9 +312,19 @@
             this.labelNume.AutoSize = true;
             this.labelNume.Location = new System.Drawing.Point(27, 17);
             this.labelNume.Name = "labelNume";
-            this.labelNume.Size = new System.Drawing.Size(45, 17);
+            this.labelNume.Size = new System.Drawing.Size(43, 16);
             this.labelNume.TabIndex = 1;
             this.labelNume.Text = "Nume";
+            // 
+            // buttonSgnFurnizor
+            // 
+            this.buttonSgnFurnizor.Location = new System.Drawing.Point(297, 326);
+            this.buttonSgnFurnizor.Name = "buttonSgnFurnizor";
+            this.buttonSgnFurnizor.Size = new System.Drawing.Size(155, 102);
+            this.buttonSgnFurnizor.TabIndex = 18;
+            this.buttonSgnFurnizor.Text = "SignUp Furnizor";
+            this.buttonSgnFurnizor.UseVisualStyleBackColor = true;
+            this.buttonSgnFurnizor.Click += new System.EventHandler(this.buttonSgnFurnizor_Click);
             // 
             // FormLogin
             // 
@@ -324,6 +336,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormLogin";
             this.Text = "Login";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormLogin_FormClosed);
             this.Load += new System.EventHandler(this.FormLogin_Load);
             this.panelMenu.ResumeLayout(false);
             this.panelMenu.PerformLayout();
@@ -361,6 +374,7 @@
         private System.Windows.Forms.Label labelParola2;
         private System.Windows.Forms.TextBox textBoxParola2;
         private System.Windows.Forms.TextBox textBoxTelefon2;
+        private System.Windows.Forms.Button buttonSgnFurnizor;
     }
 }
 

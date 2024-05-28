@@ -1,24 +1,36 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace shop_online
 {
     public partial class FormLogin : Form
     {
-        //private int height;
-        //private int width;
-        // private bool signupApasat = false;
         private Afisare_Produse afisare_Produse = null;// Form nou
 
         public FormLogin()
+        {
+            // Shown += new EventHandler(autoLogin);
+            InitializeComponent();
+        }
+        public FormLogin( int userid )
         {
             InitializeComponent();
         }
 
         //Roli   
+        private void FormLogin_FormClosed( object sender, FormClosedEventArgs e )
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                Application.Exit();
+            }
+        }
         private void FormLogin_Load( object sender, EventArgs e )
         {
+            
             Aranjare.ToateTextBoxurileledinPanelGoale(panelSignUp);
             Aranjare.ToateTextBoxurileledinPanelGoale(panelMenu);
             panelSignUp.Hide();
@@ -32,15 +44,12 @@ namespace shop_online
             Size = panelMenu.Size;
             panelMenu.Location = new Point(0, 0);
             MinimumSize = new Size(panelMenu.Width, panelMenu.Height);
+
+
             butonuldeBack();
         }
         private void butonuldeBack()
         {
-            //Width = 681;
-            //Height = 423;
-            //panelMenu.Height = 277;
-            // panelMenu.Width = 505;
-
             FormBorderStyle = FormBorderStyle.Sizable;
             panelMenu.Show();
             panelSignUp.Hide();
@@ -70,8 +79,6 @@ namespace shop_online
         }
         private void buttonAcces_Click( object sender, EventArgs e )
         {
-            //string connectionString = ConfigurationManager.ConnectionStrings ["DatadeBaza"].ConnectionString;
-
             string parola = textBoxParola.Text;
             string telefon = textBoxTelefon.Text.Trim();
             string tel = string.Empty, email_sus = string.Empty;
@@ -94,8 +101,10 @@ namespace shop_online
 
             if (Interogari.Login(connectionString, email_sus, tel, parola))
             {
+                stayLogged(telefon, parola);
                 CloseCurrentFormAndOpenNewFormAsync("", email_sus, parola, tel, "", "", "", -1);
             }
+
         }
 
 
@@ -112,10 +121,6 @@ namespace shop_online
                 {
                     MinimumSize = new Size(520 * 2, 138 * 4)
                 };
-                /*   afisare_Produse = new Afisare_Produse("a@a.a", "a", telefon)
-                   {
-                       MinimumSize = new Size(490, 535)
-                   };*/
                 afisare_Produse.Size = afisare_Produse.MinimumSize;
                 afisare_Produse.FormClosed += ( sender, e ) => { afisare_Produse = null; }; // Resetare referință când formularul este închis
             }
@@ -129,21 +134,10 @@ namespace shop_online
                     Application.OpenForms ["FormLogin"].Hide();
                 }
             }
-            afisare_Produse.LoadUser(email, parola, telefon);
-
-            /*      if (afisare_Produse == null)
-                  {
-                      afisare_Produse = new Afisare_Produse(email, parola, telefon)
-                      {
-                          MinimumSize = new Size(490, 535),
-                          Size = new Size(490, 535)
-                      };
-                      afisare_Produse.FormClosed += ( sender, e ) => { afisare_Produse = null; }; // Resetare referință când formularul este închis
-                  }*/
-
-            //afisare_Produse.LoadUser("a@a.a", "a", telefon);
+            //afisare_Produse.LoadUser(email, parola, telefon);
             afisare_Produse.Show();
             afisare_Produse.Focus();
+         
         }
 
         private void SetPanelState( Aranjare config )
@@ -200,8 +194,66 @@ namespace shop_online
         }
 
         //Claudiu
+        private void stayLogged( string user, string parola )
+        {
+            string filePath = "logInfo.txt";
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(filePath))
+                {
+                    writer.WriteLine(user);
+                    writer.WriteLine(parola);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error writing to file: " + ex.Message);
+            }
+        }
+        private void autoLogin( object sender, EventArgs e )
+        {
+            string filePath = "logInfo.txt";
+            try
+            {
+                FileInfo fileInfo = new FileInfo(filePath);
+                if (!fileInfo.Exists || fileInfo.Length == 0)
+                    return;
+
+                string [] lines = File.ReadAllLines(filePath);
+                if (lines.Length % 2 == 1)
+                    return;
+
+                string telefon = lines [0];
+                string parola = lines [1];
+                string tel = string.Empty;
+                string email_sus = string.Empty;
+
+                if (Aranjare.IsValidTelefon(telefon))
+                    tel = telefon;
+                else if (Aranjare.IsValidEmail(telefon))
+                    email_sus = telefon;
+                else
+                    return;
+
+                string connectionString = Aranjare.GetConnectionString();
+                if (Interogari.GetUserID(connectionString, email_sus, tel, parola) <= 0)
+                    return;
+
+                CloseCurrentFormAndOpenNewFormAsync("", email_sus, parola, tel, "", "", "", -1);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"A apărut o eroare la autentificare automată: {ex.Message}");
+            }
+        }
+        private void buttonSgnFurnizor_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Adauga_Furnizor adauga_Furnizor = new Adauga_Furnizor(true);
+            adauga_Furnizor.Show();
 
 
+        }
         //Puia
 
 
@@ -223,7 +275,7 @@ namespace shop_online
                 connectionString = Aranjare.GetConnectionString();
             }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
-                       
+
             if (!int.TryParse(textBoxNumar_Strada.Text, out int numar) || numar < 1)
             {
                 MessageBox.Show("Introduceți un număr valid pentru stradă.");
@@ -232,26 +284,11 @@ namespace shop_online
 
             if (Interogari.SignUp(connectionString, nume, email, parola, telefon, judet, oras, strada, numar))
             {
+                stayLogged(telefon, parola);
                 CloseCurrentFormAndOpenNewFormAsync(nume, email, parola, telefon, judet, oras, strada, numar);
             }
         }
 
-        /*  private void ShiftUpSignUpButtons() //functia asta muta text-box-urile cu tot cu label-uri mai sus pt ca sa arate mai bine ecranu de sign up
-          {
-              panelSignUp.Location = new Point(0, Location.Y - 20);
-              //panelMenu.Location = new Point(0, this.Location.Y + 65);
-
-          }
-
-          private void ShiftDownSignUpButtons() //functia asta muta text-box-urile cu tot cu label-uri mai jos pt ca sa arate mai bine ecranu de login
-          {
-              panelSignUp.Location = new Point(0, Location.Y + 20);
-              //panelMenu.Location = new Point(0, this.Location.Y - 65);
-          }
-          */
-
-
-
-
+        
     }
 }

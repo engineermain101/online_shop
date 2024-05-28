@@ -189,7 +189,7 @@ namespace shop_online
                 using (MemoryStream ms = new MemoryStream())
                 {
                     // Salvează imaginea în formatul specificat
-                    imagine.Save(ms, format);
+                    //imagine.Save(ms, format);
                     imageData = ms.ToArray();
                 }
 
@@ -297,12 +297,17 @@ namespace shop_online
             return null;
         }
 
-        public static DataTable SelectTop30Produse( string connectionString )
+        public static DataTable SelectTopProduse( string connectionString, int top )
         {
+            if (top <= 0)
+            {
+                MessageBox.Show("Numărul de produse trebuie să fie mai mare decât 0.");
+                return null;
+            }
             try
             {
                 string query = @"
-                            SELECT TOP 30 p.*
+                            SELECT TOP (@TopN) p.*
                             FROM Produse p
                             INNER JOIN (
                                 SELECT id_produs, AVG(nr_stele) AS AvgRating
@@ -316,6 +321,8 @@ namespace shop_online
                     connection.Open();
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
+                        command.Parameters.AddWithValue("@TopN", top);
+
                         using (SqlDataAdapter adapter = new SqlDataAdapter(command))
                         {
                             DataTable dataTable = new DataTable();
@@ -324,6 +331,10 @@ namespace shop_online
                         }
                     }
                 }
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show("A SQL error occurred: " + sqlEx.Message);
             }
             catch (Exception e)
             {
@@ -334,6 +345,8 @@ namespace shop_online
 
         public static int GetUserID( string connectionString, string email, string telefon, string parola )
         {
+            if (string.IsNullOrWhiteSpace(connectionString))
+                return -1;
             try
             {
                 string query = "SELECT id_user FROM Useri WHERE parola = @parola";
@@ -387,39 +400,118 @@ namespace shop_online
                 return -1;
             }
         }
-
-        public static int GetFurnizorId( string connectionString, int user_Id )
+        public static int GetUserIDbyEmail( string connectionString, string email )
         {
             try
             {
-                string query = "SELECT id_furnizor FROM Furnizori WHERE id_user=@id_user";
+                if (!Aranjare.IsValidEmail(email) || string.IsNullOrWhiteSpace(connectionString))
+                {
+                    MessageBox.Show("Adresa de email nu este validă.");
+                    return -1;
+                }
+
+                string query = "SELECT id_user FROM Useri WHERE email = @Email";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@id_user", user_Id);
+                    command.Parameters.AddWithValue("@Email", email);
                     connection.Open();
-
                     object result = command.ExecuteScalar();
 
-                    if (result != null)
+                    if (result != null && int.TryParse(result.ToString(), out int userId))
                     {
-                        return (int)result;
+                        return userId;
                     }
                     else
                     {
-                        //MessageBox.Show("Autentificare eșuată. Verificați datele de autentificare sau nu v-ați conectat încă.");
+                        MessageBox.Show("Nu există utilizator cu această adresă de email.");
                         return -1;
                     }
-
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("A apărut o eroare la autentificare: " + ex.Message);
+                MessageBox.Show("A apărut o eroare la obținerea ID-ului utilizatorului: " + ex.Message);
                 return -1;
             }
         }
+        public static List<string> GetAllUserEmails( string connectionString, string omitThisEmail = null )
+        {
+            if (string.IsNullOrWhiteSpace(connectionString))
+                return null;
+
+            List<string> emails = new List<string>();
+            try
+            {
+                string query = "SELECT email FROM Useri";
+                if (!string.IsNullOrWhiteSpace(omitThisEmail))
+                {
+                    query += " WHERE email != @OmitThisEmail";
+                }
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    if (!string.IsNullOrWhiteSpace(omitThisEmail))
+                    {
+                        command.Parameters.AddWithValue("@OmitThisEmail", omitThisEmail);
+                    }
+
+                    connection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            emails.Add(reader.GetString(0));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A apărut o eroare la extragerea adreselor de email: " + ex.Message);
+                return null;
+            }
+
+            return emails;
+        }
+        public static string GetUserEmailbyID( string connectionString, int id_user )
+        {
+            if (string.IsNullOrWhiteSpace(connectionString) || id_user < 1)
+            {
+                return null;
+            }
+
+            try
+            {
+                string query = "SELECT email FROM Useri WHERE id_user = @Id_user";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id_user", id_user);
+                    connection.Open();
+                    object result = command.ExecuteScalar();
+
+                    if (result != null && result != DBNull.Value)
+                    {
+                        return Convert.ToString(result);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A apărut o eroare la obținerea adresei de email a utilizatorului: " + ex.Message);
+                return null;
+            }
+        }
+
 
         public static int GetAdminId( string connectionString, int user_Id )
         {
@@ -453,13 +545,104 @@ namespace shop_online
                 return -1;
             }
         }
+        public static List<string> GetAllAdminRoles( string connectionString )
+        {
+            if (string.IsNullOrWhiteSpace(connectionString))
+                return null;
 
-        public static void AdaugainCos( string connectionString, int nr_bucati, decimal pret, int id_user, int id_produs )
+            List<string> roles = new List<string>();
+
+            try
+            {
+                string query = "SELECT DISTINCT rol FROM Admini";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            roles.Add(reader.GetString(0));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A apărut o eroare la obținerea rolurilor de administrator: " + ex.Message);
+                return null;
+            }
+
+            return roles;
+        }
+        public static List<string> GetAdminUserEmails( string connectionString )
+        {
+            if (string.IsNullOrWhiteSpace(connectionString))
+                return null;
+
+            List<string> adminUserEmails = new List<string>();
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string query = @"
+                SELECT U.email
+                FROM Useri U
+                INNER JOIN Admini A ON U.id_user = A.id_user";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                adminUserEmails.Add(reader ["email"].ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A apărut o eroare la obținerea emailurilor de utilizatori admin: " + ex.Message);
+            }
+
+            return adminUserEmails;
+        }
+        public static bool CheckIfAdminExists( string connectionString, int idUser )
+        {
+            try
+            {
+                string query = "SELECT COUNT(*) FROM Admini WHERE id_user = @IdUser";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@IdUser", idUser);
+                    connection.Open();
+
+                    int count = (int)command.ExecuteScalar();
+                    return count > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A apărut o eroare la verificarea existenței administratorului: " + ex.Message);
+                return false;
+            }
+        }
+
+        public static bool AdaugainCos( string connectionString, int nr_bucati, decimal pret, int id_user, int id_produs )
         {
             if (id_user <= 0 || id_produs <= 0)
             {
-                MessageBox.Show("Eroare la adaugarea in cos.");
-                return;
+                MessageBox.Show("Eroare la adaugarea in cos. Incercati inca o data.");
+                return false;
             }
             try
             {
@@ -474,7 +657,12 @@ namespace shop_online
                     AddProductToCart(connectionString, id_user, id_produs, nr_bucati, pret * nr_bucati);
                 }
             }
-            catch (Exception ex) { MessageBox.Show("Eroare la adaugare in cos. " + ex.ToString()); }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Eroare la adaugare in cos. " + ex.ToString());
+                return false;
+            }
+            return true;
         }
         private static bool CheckIfProductExistsInCart( string connectionString, int id_user, int id_produs )
         {
@@ -577,8 +765,13 @@ namespace shop_online
             return dataTable;
         }
 
-        public static void DeleteProdusdinCos( string connectionString, int id_user, int id_produs )
+        public static bool DeleteProdusdinCos( string connectionString, int id_user, int id_produs )
         {
+            if (id_user <= 0 || id_produs <= 0)
+            {
+                MessageBox.Show("Eroare la adaugarea in cos.");
+                return false;
+            }
             string query = "DELETE FROM Cos WHERE id_user = @id_user AND id_produs = @id_produs";
             try
             {
@@ -596,7 +789,9 @@ namespace shop_online
             catch (Exception ex)
             {
                 MessageBox.Show("A apărut o eroare la ștergerea produsului din coș: " + ex.Message);
+                return false;
             }
+            return true;
         }
 
 
@@ -627,10 +822,10 @@ namespace shop_online
                         {
                             throw new NotImplementedException("This is not implemented");
                         }*/
-                        SaveTranzactie(connection, transaction, id_user, produse, metoda_plata);
 
                         UpdateProducts(connection, transaction, produse);
                         DeleteAllUserProductsFromCart(connection, transaction, id_user);
+                        SaveTranzactie(connection, transaction, id_user, produse, metoda_plata);
 
                         // Alte operații pe care doriți să le efectuați în cadrul tranzacției
                         transaction.Commit();
@@ -742,118 +937,691 @@ namespace shop_online
         }
 
 
+        public static DataTable GetSpecificatiiSiRecenzii( string connectionString, int idProdus )
+        {
+            DataTable dataTable = new DataTable();
+
+            try
+            {
+                DataTable specificatii = GetSpecificatii(connectionString, idProdus);
+                DataTable recenzii = GetRecenzii(connectionString, idProdus);
+
+                foreach (DataColumn column in specificatii.Columns)
+                {
+                    dataTable.Columns.Add(column.ColumnName, column.DataType);
+                }
+
+                foreach (DataColumn column in recenzii.Columns)
+                {
+                    dataTable.Columns.Add(column.ColumnName, column.DataType);
+                }
+
+                foreach (DataRow row in specificatii.Rows)
+                {
+                    dataTable.Rows.Add(row.ItemArray);
+                }
+
+                foreach (DataRow row in recenzii.Rows)
+                {
+                    dataTable.Rows.Add(row.ItemArray);
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+            return dataTable;
+        }
         public static DataTable GetSpecificatii( string connectionString, int idProdus )
         {
-           // throw new NotImplementedException();
+            if (idProdus <= 0)
+                return null;
 
             DataTable dataTable = new DataTable();
 
-            string query = @"
-            SELECT p.*, c.nr_bucati, c.total_pret
-            FROM Produse p
-            INNER JOIN (
-                SELECT id_produs, nr_bucati, total_pret
-                FROM Cos
-                WHERE id_user = 3
-                GROUP BY id_produs, nr_bucati, total_pret
-            ) c ON p.id_produs = c.id_produs
-            ORDER BY p.id_produs DESC;";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = @"SELECT nume, valoare FROM Specificatii WHERE id_produs = @idprodus";
+                    command.Parameters.AddWithValue("@idprodus", idProdus);
+                    connection.Open();
 
-          
-
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(dataTable);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
             return dataTable;
         }
         public static DataTable GetRecenzii( string connectionString, int idProdus )
         {
-            // throw new NotImplementedException();
+            if (idProdus <= 0)
+            {
+                return null;
+            }
 
             DataTable dataTable = new DataTable();
 
-            string query = @"
-            SELECT p.*, c.nr_bucati, c.total_pret
-            FROM Produse p
-            INNER JOIN (
-                SELECT id_produs, nr_bucati, total_pret
-                FROM Cos
-                WHERE id_user = 3
-                GROUP BY id_produs, nr_bucati, total_pret
-            ) c ON p.id_produs = c.id_produs
-            ORDER BY p.id_produs DESC;";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = @"
+                    SELECT R.*, U.username
+                    FROM Review R
+                    INNER JOIN Useri U ON R.id_user = U.id_user
+                    WHERE R.id_produs = @idprodus";
 
+                    command.Parameters.AddWithValue("@idprodus", idProdus);
+                    connection.Open();
 
-
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(dataTable);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
             return dataTable;
         }
 
+        public static bool InsertAdmin( string connectionString, int idUser, string rol )
+        {
+            if (string.IsNullOrWhiteSpace(rol) || string.IsNullOrWhiteSpace(connectionString) || idUser <= 0)
+                return false;
+
+            try
+            {
+                rol = Aranjare.FormatName(rol);
+                string query = @"INSERT INTO Admini (id_user, rol) VALUES (@IdUser, @Rol)";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@IdUser", idUser);
+                    command.Parameters.AddWithValue("@Rol", rol);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A apărut o eroare la inserarea administratorului: " + ex.Message);
+                return false;
+            }
+            return true;
+        }
+        public static bool DeleteAdmin( string connectionString, int idUser )
+        {
+            if (string.IsNullOrWhiteSpace(connectionString) || idUser <= 0)
+                return false;
+
+            try
+            {
+                string query = @"DELETE FROM Admini WHERE id_user = @IdUser";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@IdUser", idUser);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A apărut o eroare la ștergerea administratorului: " + ex.Message);
+                return false;
+            }
+            return true;
+        }
+        public static bool UpdateAdmin( string connectionString, int idUser, string newrol )
+        {
+            if (string.IsNullOrWhiteSpace(connectionString) || string.IsNullOrWhiteSpace(newrol) || idUser <= 0)
+            {
+                return false;
+            }
+
+            try
+            {
+                string query = @"UPDATE Admini SET rol = @Rol WHERE id_user = @IdUser";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@IdUser", idUser);
+                    command.Parameters.AddWithValue("@Rol", newrol);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A apărut o eroare la actualizarea administratorului: " + ex.Message);
+                return false;
+            }
+
+            return true;
+        }
+
+        public static int GetFurnizorId( string connectionString, int user_Id )
+        {
+            try
+            {
+                string query = "SELECT id_furnizor FROM Furnizori WHERE id_user=@id_user";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id_user", user_Id);
+                    connection.Open();
+
+                    object result = command.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        return (int)result;
+                    }
+                    else
+                    {
+                        //MessageBox.Show("Autentificare eșuată. Verificați datele de autentificare sau nu v-ați conectat încă.");
+                        return -1;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A apărut o eroare la autentificare: " + ex.Message);
+                return -1;
+            }
+        }
+        public static bool AdaugaFurnizor( string connectionString, int id_user, string iban, string nume_firma, string judet, string oras, string strada, int numar )
+        {
+            if (string.IsNullOrWhiteSpace(connectionString) || string.IsNullOrWhiteSpace(iban) ||
+                string.IsNullOrWhiteSpace(nume_firma) || string.IsNullOrWhiteSpace(judet) ||
+                string.IsNullOrWhiteSpace(oras) || string.IsNullOrWhiteSpace(strada) || numar < 1 || id_user < 1)
+            {
+                return false;
+            }
+            nume_firma = Aranjare.FormatName(nume_firma);
+            judet = Aranjare.FormatName(judet);
+            oras = Aranjare.FormatName(oras);
+            strada = Aranjare.FormatName(strada);
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlTransaction transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        string query = "INSERT INTO Furnizori (id_user, iban, nume_firma, id_adresa) VALUES (@IdUser, @Iban, @NumeFirma, @IdAdresa)";
+                        using (SqlCommand command = new SqlCommand(query, connection, transaction))
+                        {
+                            command.Parameters.AddWithValue("@IdUser", id_user);
+                            command.Parameters.AddWithValue("@Iban", iban);
+                            command.Parameters.AddWithValue("@NumeFirma", nume_firma);
+
+                            int id_adresa = GetAdresaID(connectionString, transaction, judet, oras, strada, numar);
+                            if (id_adresa < 1)
+                            {
+                                bool adresaAdaugata = AdaugaAdresa(connectionString, transaction, judet, oras, strada, numar);
+                                if (!adresaAdaugata)
+                                {
+                                    transaction.Rollback();
+                                    return false;
+                                }
+
+                                id_adresa = GetAdresaID(connectionString, transaction, judet, oras, strada, numar);
+                            }
+                            command.Parameters.AddWithValue("@IdAdresa", id_adresa);
+
+                            command.ExecuteNonQuery();
+                            transaction.Commit();
+                            return true;
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        MessageBox.Show("A apărut o eroare la adăugarea furnizorului: " + ex.Message);
+                        return false;
+                    }
+                }
+            }
+        }
+        public static bool StergeFurnizor( string connectionString, SqlTransaction transaction, string numeFirma = null, string emailFirma = null )
+        {
+            if (string.IsNullOrWhiteSpace(connectionString) || transaction == null ||
+                (numeFirma != null && string.IsNullOrWhiteSpace(numeFirma)))
+            {
+                return false;
+            }
+            if (emailFirma != null && !Aranjare.IsValidEmail(emailFirma))
+                return false;
+
+            string query = "DELETE FROM Furnizori";
+            bool hasCondition = false;
+
+            if (!string.IsNullOrWhiteSpace(numeFirma))
+            {
+                query += " WHERE NumeFirma = @NumeFirma";
+                hasCondition = true;
+            }
+
+            if (!string.IsNullOrWhiteSpace(emailFirma))
+            {
+                query += hasCondition ? " AND" : " WHERE";
+                query += " id_user IN (SELECT id_user FROM Useri WHERE email = @Email)";
+            }
+
+            try
+            {
+                using (SqlCommand command = new SqlCommand(query, transaction.Connection, transaction))
+                {
+                    if (!string.IsNullOrWhiteSpace(numeFirma))
+                    {
+                        command.Parameters.AddWithValue("@NumeFirma", numeFirma);
+                    }
+                    if (!string.IsNullOrWhiteSpace(emailFirma))
+                    {
+                        command.Parameters.AddWithValue("@Email", emailFirma);
+                    }
+                    return command.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public static List<string> GetAllNumeFurnizori( string connectionString )
+        {
+            if (string.IsNullOrWhiteSpace(connectionString))
+                return null;
+
+            List<string> numeFirme = new List<string>();
+
+            try
+            {
+                string query = "SELECT nume_firma FROM Furnizori";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            numeFirme.Add(reader.GetString(0));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A apărut o eroare la extragerea numelor firmelor: " + ex.Message);
+                return null;
+            }
+
+            return numeFirme;
+        }
 
 
+        private static int VerificaAdresaExistenta( string connectionString, SqlTransaction transaction, string judet, string oras, string strada, int numar )
+        {
+            if (string.IsNullOrWhiteSpace(connectionString) || string.IsNullOrWhiteSpace(judet) || transaction == null ||
+                string.IsNullOrWhiteSpace(oras) || string.IsNullOrWhiteSpace(strada) || numar < 1)
+            {
+                return -1;
+            }
+            string query = "SELECT id_adresa FROM Adresa WHERE judet = @Judet AND oras = @Oras AND strada = @Strada AND numar = @Numar";
+            try
+            {
+                using (SqlCommand command = new SqlCommand(query, transaction.Connection, transaction))
+                {
+                    command.Parameters.AddWithValue("@Judet", judet);
+                    command.Parameters.AddWithValue("@Oras", oras);
+                    command.Parameters.AddWithValue("@Strada", strada);
+                    command.Parameters.AddWithValue("@Numar", numar);
 
+                    object result = command.ExecuteScalar();
+                    if (result != null && result != DBNull.Value)
+                    {
+                        return (int)result;
+                    }
+                    else
+                    {
+                        return -1;
+                    }
+                }
+            }
+            catch (Exception) { return -1; }
+        }
+        private static bool AdaugaAdresa( string connectionString, SqlTransaction transaction, string judet, string oras, string strada, int numar )
+        {
+            if (string.IsNullOrWhiteSpace(connectionString) || string.IsNullOrWhiteSpace(judet) || transaction == null ||
+                string.IsNullOrWhiteSpace(oras) || string.IsNullOrWhiteSpace(strada) || numar < 1)
+            {
+                return false;
+            }
+
+            string query = "INSERT INTO Adresa (judet, oras, strada, numar) VALUES (@Judet, @Oras, @Strada, @Numar)";
+            try
+            {
+                using (SqlCommand command = new SqlCommand(query, transaction.Connection, transaction))
+                {
+                    command.Parameters.AddWithValue("@Judet", judet);
+                    command.Parameters.AddWithValue("@Oras", oras);
+                    command.Parameters.AddWithValue("@Strada", strada);
+                    command.Parameters.AddWithValue("@Numar", numar);
+
+                    return command.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public static int GetAdresaID( string connectionString, SqlTransaction transaction, string judet, string oras, string strada, int numar )
+        {
+            if (string.IsNullOrWhiteSpace(connectionString) || string.IsNullOrWhiteSpace(judet) || transaction == null ||
+                string.IsNullOrWhiteSpace(oras) || string.IsNullOrWhiteSpace(strada) || numar < 1)
+            {
+                return -1;
+            }
+
+            string query = "SELECT id_adresa FROM Adresa WHERE judet = @Judet AND oras = @Oras AND strada = @Strada AND numar = @Numar";
+            try
+            {
+                using (SqlCommand command = new SqlCommand(query, transaction.Connection, transaction))
+                {
+                    command.Parameters.AddWithValue("@Judet", judet);
+                    command.Parameters.AddWithValue("@Oras", oras);
+                    command.Parameters.AddWithValue("@Strada", strada);
+                    command.Parameters.AddWithValue("@Numar", numar);
+
+                    object result = command.ExecuteScalar();
+                    return (result != null && result != DBNull.Value) ? (int)result : -1;
+                }
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+        }
+
+        /*public static List<string> GetCategories( string ConnectionString )
+        {
+            List<string> categories = new List<string>();
+            string query = "SELECT nume FROM Categorii";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConnectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            categories.Add(reader ["nume"].ToString());
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A aparut o eroare la preluarea categoriilor: " + ex.Message);
+                return null;
+            }
+            return categories;
+        }
+        public static DataTable GetProductsByCategory( string ConnectionString, string categorie )
+        {
+            DataTable products = new DataTable();
+            string query = @"
+                SELECT P.*
+                FROM Produse P
+                INNER JOIN Categorii C ON P.id_categorie = C.id_categorie
+                WHERE C.nume = @Category";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConnectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Category", categorie);
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        {
+                            adapter.Fill(products);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception e) { MessageBox.Show("Eroare la primirea produselor: " + e.Message); return null; }
+            return products;
+        }
+        */
+        public static List<string> GetCategories( string connectionString )
+        {
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                return null;
+            }
+
+            List<string> categories = new List<string>();
+            string query = "SELECT nume FROM Categorii";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (!reader.HasRows)
+                        {
+                            return categories;
+                        }
+
+                        while (reader.Read())
+                        {
+                            categories.Add(reader ["nume"].ToString());
+                        }
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show("A SQL error occurred: " + sqlEx.Message);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("A aparut o eroare la preluarea categoriilor: " + ex.Message);
+                return null;
+            }
+
+            return categories;
+        }
+        public static DataTable GetProductsByCategory( string connectionString, string categorie )
+        {
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                return null;
+            }
+
+            if (string.IsNullOrWhiteSpace(categorie))
+            {
+                return null;
+            }
+
+            DataTable products = new DataTable();
+            string query = @"
+            SELECT P.*
+            FROM Produse P
+            INNER JOIN Categorii C ON P.id_categorie = C.id_categorie
+            WHERE C.nume = @Category";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Category", categorie);
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        {
+                            adapter.Fill(products);
+                        }
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                MessageBox.Show("A SQL error occurred: " + sqlEx.Message);
+                return null;
+            }
+
+            catch (Exception e)
+            {
+                MessageBox.Show("Eroare la primirea produselor: " + e.Message);
+                return null;
+            }
+            return products;
+        }
 
         //Claudiu
 
         //Puia
-        public static void InsertProdus( string connectionString, Image image, int id_Categorie, int id_Furnizor, string NumeProdus, int Cantitate, decimal Pret, string Descriere, List<string> NumeListaSpecificatii, List<string> ValoareListaSpecificatii )
+        public static void InsertProdus( string connectionString, ProdusItem produs, List<string> fileNames, List<string> denumireS, List<string> valoareS )
         {
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                NumeProdus = Aranjare.FormatName(NumeProdus);
-                Descriere = Aranjare.FormatName(Descriere);
-                foreach (string s in NumeListaSpecificatii)
+                connection.Open();
+                SqlTransaction transaction = connection.BeginTransaction();
+                try
                 {
-                    string specificatieFormatata = s.ToLower().Trim();
-                    //pt fiecare numespecificatii se apelaeaza aranjare.FormatName
+                    // Insert into Produse table
+                    string sqlProdusText = "INSERT INTO Produse (nume, cantitate, pret, descriere, id_categorie, id_furnizor) " +
+                                           "VALUES (@nume, @cantitate, @pret, @descriere, @id_categorie, @id_furnizor); " +
+                                           "SELECT SCOPE_IDENTITY();";
+                    using (SqlCommand sqlProdus = new SqlCommand(sqlProdusText, connection, transaction))
+                    {
+                        sqlProdus.Parameters.AddWithValue("@nume", produs.Nume);
+                        sqlProdus.Parameters.AddWithValue("@cantitate", produs.Cantitate);
+                        sqlProdus.Parameters.AddWithValue("@pret", produs.Pret);
+                        sqlProdus.Parameters.AddWithValue("@descriere", produs.Descriere);
+                        sqlProdus.Parameters.AddWithValue("@id_categorie", produs.Id_Categorie);
+                        sqlProdus.Parameters.AddWithValue("@id_furnizor", produs.Id_Furnizor);
+
+                        int produsId = Convert.ToInt32(sqlProdus.ExecuteScalar());
+
+                        // Insert into Specificatii table
+                        string sqlSpecificatiiText = "INSERT INTO Specificatii (id_produs, nume, valoare) VALUES (@id, @nume, @valoare)";
+                        using (SqlCommand sqlSpecificatii = new SqlCommand(sqlSpecificatiiText, connection, transaction))
+                        {
+                            sqlSpecificatii.Parameters.AddWithValue("@id", produsId);
+                            sqlSpecificatii.Parameters.Add("@nume", SqlDbType.NVarChar);
+                            sqlSpecificatii.Parameters.Add("@valoare", SqlDbType.NVarChar);
+
+                            for (int i = 0; i < denumireS.Count; i++)
+                            {
+                                sqlSpecificatii.Parameters ["@nume"].Value = denumireS [i];
+                                sqlSpecificatii.Parameters ["@valoare"].Value = valoareS [i];
+                                sqlSpecificatii.ExecuteNonQuery();
+                            }
+                        }
+
+                        // Insert into Imagini table
+                        string sqlImaginiText = "INSERT INTO Imagini (id_produs, imagine, nume) VALUES (@id, @imagine, @nume)";
+                        using (SqlCommand sqlImagini = new SqlCommand(sqlImaginiText, connection, transaction))
+                        {
+                            sqlImagini.Parameters.AddWithValue("@id", produsId);
+                            sqlImagini.Parameters.Add("@imagine", SqlDbType.VarBinary); // Adjust the type if necessary
+                            sqlImagini.Parameters.Add("@nume", SqlDbType.NVarChar);
+
+                            for (int i = 1; i < produs.Image.Count; i++)
+                            {
+                                byte [] imageBytes = ImageToByteArray(produs.Image [i]);
+                                sqlImagini.Parameters ["@imagine"].Value = imageBytes;
+                                sqlImagini.Parameters ["@nume"].Value = fileNames [i]; // You can adjust the name as needed
+                                sqlImagini.ExecuteNonQuery();
+                            }
+                        }
+                        /*for (int i = 0; i < produs.Image.Count; i++)
+                        {
+                            Interogari.InsertImagine(connectionString, produs.Image[i],produsId, fileNames[i]);
+                        }*/
+                    }
+
+                    // Commit the transaction
+                    transaction.Commit();
                 }
-                foreach (string s in ValoareListaSpecificatii)
+                catch (Exception ex)
                 {
-                    string valoarespecificatie = s.ToLower().Trim();
-                    //pt fiecare numespecificatii se apelaeaza aranjare.FormatName
+                    MessageBox.Show("Error: " + ex.Message);
+
+                    try
+                    {
+                        transaction.Rollback();
+                        return;
+                    }
+
+                    catch (Exception exRollback)
+                    {
+                        MessageBox.Show("Rollback Error: " + exRollback.Message);
+                        return;
+                    }
                 }
-
-                if (string.IsNullOrWhiteSpace(NumeProdus) ||
-
-                    string.IsNullOrWhiteSpace(Descriere))
-                {
-                    MessageBox.Show("Toate câmpurile trebuie completate.");
-                    return;
-                }
-                //apelare metoda adauga imagini. verifica daca toate sunt goale nu tr lasa sa adaugi produsul
-                //implementatre intergari:-insert image apelare, -adauga specificatii (o alta functie pt adaugare specificatii) apelare foreach
-                //
-
-                string query = @"INSERT INTO Produse (nume, pret, id_categorie, cantitate, descriere, id_furnizor) " +
-                                      "VALUES (@Nume, @Pret, @Categorie, @Cantitate, @Descriere, @Furnizor)";
-
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                using (SqlCommand cmd = new SqlCommand(query, connection))
-                {
-
-                    cmd.CommandText = @"INSERT INTO Produse (nume, pret, id_categorie, cantitate, descriere, id_furnizor) " +
-                                      "VALUES (@Nume, @Pret, @Categorie, @Cantitate, @Descriere, @Furnizor)";
-
-                    cmd.Parameters.AddWithValue("@Nume", NumeProdus);
-                    cmd.Parameters.AddWithValue("@Pret", (Pret));
-                    cmd.Parameters.AddWithValue("@Categorie", id_Categorie);
-                    cmd.Parameters.AddWithValue("@Furnizor", id_Furnizor);
-                    cmd.Parameters.AddWithValue("@Cantitate", (Cantitate));
-                    cmd.Parameters.AddWithValue("@Descriere", Descriere);
-
-
-                    cmd.ExecuteNonQuery();
-
-                    MessageBox.Show("Produsul a fost adăugat cu succes în baza de date!");
-                }
-
-                throw new Exception("apelare metoda adauga imagini,implementatre intergari:-insert image apelare, -adauga specificatii ");
-
             }
-            catch (Exception ex)
+        }
+        private static byte [] ImageToByteArray( Image image )
+        {
+            using (MemoryStream ms = new MemoryStream())
             {
-                MessageBox.Show("Eroare la adăugarea produsului în baza de date: " + ex.Message);
+                image.Save(ms, ImageFormat.Jpeg); // Change ImageFormat if necessary
+                return ms.ToArray();
             }
         }
 
-        public static void GestionareAdmin( string connectionString, string operatie, int idAdmin, int idUser = 0, string rol = null )
+
+        //Horia
+
+
+
+        private static bool GestionareAdmin( string connectionString, string operatie, int idAdmin, int idUser = 0, string rol = null )
         {
+            throw new NotImplementedException();
             try
             {
                 string query = "";
@@ -871,7 +1639,7 @@ namespace shop_online
                         break;
                     default:
                         MessageBox.Show("Operația specificată nu este validă.");
-                        return;
+                        return false;
                 }
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -903,7 +1671,7 @@ namespace shop_online
                             if (rowsAffected > 0)
                                 MessageBox.Show("Adminul a fost șters cu succes din baza de date!");
                             else
-                                MessageBox.Show("Adminul cu id-ul specificat nu a fost găsit în baza de date!");
+                                throw new Exception("Adminul cu id-ul specificat nu a fost găsit în baza de date!");
                             break;
                     }
                 }
@@ -911,7 +1679,9 @@ namespace shop_online
             catch (Exception ex)
             {
                 MessageBox.Show("Eroare în gestionarea adminului în baza de date: " + ex.Message);
+                return false;
             }
+            return true;
         }
 
         //Horia

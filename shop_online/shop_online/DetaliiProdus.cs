@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -15,13 +16,7 @@ namespace shop_online
         }
         private void DetaliiProdus_FormClosed( object sender, FormClosedEventArgs e )
         {
-            /* foreach (Form form in Application.OpenForms)
-             {
-                 if (form != this) // Excludem forma curentă pentru a nu o închide accidental
-                 {
-                     form.Close();
-                 }
-             }*/
+            
             if (Application.OpenForms ["Afisare_Produse"] != null)
                 Application.OpenForms ["Afisare_Produse"].Show();
         }
@@ -50,20 +45,20 @@ namespace shop_online
                 listBoxImaginiProdus.Items.Add(miniatura);
                 //listViewImaginiProdus.Items.Add(imagine);
             }
-            /* foreach (Image imagine in imaginiProdus)
-             {
-                 // Redimensionează imaginea la o dimensiune fixă pentru miniatură
-                 Image miniatura = new Bitmap(imagine, new Size(100, 100));
-                 ListViewItem item = new ListViewItem();
-                 item.Content = new Image() { Source = ConvertBitmapToBitmapImage(miniatura) };
 
-                 // Adaugă elementul în ListView
-                 listViewImaginiProdus.Items.Add(item);
-                 listBoxImaginiProdus.Items.Add(miniatura);
-             }*/
+            string connect = null;
+            try
+            {
+                connect = Aranjare.GetConnectionString();
+                DataTable specificatiiTable = Interogari.GetSpecificatii(connect, produs.Id_Produs);
+                DataTable reviewTable = Interogari.GetRecenzii(connect, produs.Id_Produs);
 
-
-
+                foreach (DataRow row in specificatiiTable.Rows)
+                {
+                    dataGridViewSpecificatii.Rows.Add(row.ItemArray);
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); return; };
 
 
 
