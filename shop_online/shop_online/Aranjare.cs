@@ -378,16 +378,17 @@ namespace shop_online
             string descriere = (string)row ["descriere"];
             string title = (string)row ["nume"];
             decimal pret = (decimal)row ["pret"];
-            int [] medie = Interogari.MedieRecenzii(connectionString, id_produs);
+            int[] medie=Interogari.ReviewNotExists(connectionString,id_produs);
             int medie_review =0;
             int nr_recenzii = 0;
-            if (medie != null)
+            if (medie[0] != 0)
             {
-                 medie_review = medie [0];
-                 nr_recenzii = medie [1];
+                medie = null;
+                medie = Interogari.MedieRecenzii(connectionString, id_produs);
+                medie_review = medie [0];
+                nr_recenzii = medie [1];
             }
-          
-
+ 
             int nr_bucati = 0;
             decimal total_pret = -1;
             bool visible = false;

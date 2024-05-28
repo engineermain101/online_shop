@@ -15,11 +15,11 @@ namespace shop_online
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            List<string> a = AutoLogin();
+            /*List<string> a = AutoLogin();
 
             if (a != null)
-                Application.Run(new Afisare_Produse(a [0], a [1], a [0]));
-            else
+                Application.Run(new Afisare_Produse(a[0], a[1], a[0]));
+            else*/
                 Application.Run(new FormLogin());
 
         }

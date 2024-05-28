@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -269,6 +271,7 @@ namespace shop_online
         /// </summary>
         public static int [] MedieRecenzii( string connectionString, int id_produs )
         {
+
             try
             {
                 string query = "SELECT AVG(nr_stele) AS AverageRating, COUNT(*) AS NumberOfReviews FROM Review WHERE id_produs = @ProductId";
@@ -296,6 +299,34 @@ namespace shop_online
             }
             return null;
         }
+        public static int[] ReviewNotExists(string connectionString, int id_produs)
+        {
+            string queryCheck = "SELECT COUNT(*) FROM Review WHERE id_produse=@id";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(queryCheck, connection))
+                    {
+                        command.Parameters.AddWithValue("@id", id_produs);
+                        connection.Open();
+
+                        int rowCount = (int)command.ExecuteScalar();
+
+                        // Return the count of reviews as an int array with a single element
+                        return new int[] { rowCount };
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+
+                // Return an int array with a single element set to 0 in case of an error
+                return new int[] { 0 };
+            }
+        }
+
 
         public static DataTable SelectTopProduse( string connectionString, int top )
         {
@@ -1522,7 +1553,6 @@ namespace shop_online
 
         //Claudiu
 
-        //Puia
         public static void InsertProdus( string connectionString, ProdusItem produs, List<string> fileNames, List<string> denumireS, List<string> valoareS )
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -1570,14 +1600,23 @@ namespace shop_online
                             sqlImagini.Parameters.Add("@imagine", SqlDbType.VarBinary); // Adjust the type if necessary
                             sqlImagini.Parameters.Add("@nume", SqlDbType.NVarChar);
 
-                            for (int i = 1; i < produs.Image.Count; i++)
+                            for (int i = 0; i < produs.Image.Count; i++)
                             {
                                 byte [] imageBytes = ImageToByteArray(produs.Image [i]);
                                 sqlImagini.Parameters ["@imagine"].Value = imageBytes;
                                 sqlImagini.Parameters ["@nume"].Value = fileNames [i]; // You can adjust the name as needed
                                 sqlImagini.ExecuteNonQuery();
                             }
+                            
                         }
+                       /* string sqlReview = "INSERT INTO Review (id_produs) VALUES (@id)";
+                        using (SqlCommand sqlRev = new SqlCommand(sqlReview, connection, transaction))
+                        {
+                            sqlRev.Parameters.AddWithValue("@id", produsId);
+
+                        }*/
+
+                        // string sqlReview= "INSERT INTO Review(nr_stele)"
                         /*for (int i = 0; i < produs.Image.Count; i++)
                         {
                             Interogari.InsertImagine(connectionString, produs.Image[i],produsId, fileNames[i]);
@@ -1613,6 +1652,97 @@ namespace shop_online
                 return ms.ToArray();
             }
         }
+        public static void DeleteAllProducts(string connectionString)
+        {
+            string query = $"DELETE FROM Produse";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                    }
+                    MessageBox.Show("Produsele au fost sterse cu succes");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+        }
+        public static void AdaugaRecenzie(string connectionString, int user_id, int produs_id, string recenzie, int nr_stele, DateTime date)
+        {
+            string query = @"
+        INSERT INTO Review (id_user, comentariu, nr_stele, data, id_produs)
+        VALUES (@user, @review, @stele, @date, @produs_id);";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    // Add parameters with values
+                    command.Parameters.AddWithValue("@user", user_id);
+                    command.Parameters.AddWithValue("@review", recenzie);
+                    command.Parameters.AddWithValue("@stele", nr_stele);
+                    command.Parameters.AddWithValue("@date", date);
+                    command.Parameters.AddWithValue("@produs_id", produs_id);
+
+                    // Open the connection
+                    connection.Open();
+
+                    // Execute the query
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                    // Optionally, check the number of rows affected
+                    if (rowsAffected > 0)
+                    {
+                        Console.WriteLine("Review inserted successfully.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Failed to insert review.");
+                    }
+                }
+            }
+        }
+        public static List<Dictionary<string, object>> GetReviews(string connectionString, int produs_id)
+        {
+            List<Dictionary<string, object>> reviews = new List<Dictionary<string, object>>();
+
+            string query = "SELECT id_user, comentariu, nr_stele, data FROM Review WHERE id_produs = @produs_id";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@produs_id", produs_id);
+                    connection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var review = new Dictionary<string, object>
+                    {
+                        { "UserId", reader.GetInt32(0) },
+                        { "Comentariu", reader.GetString(1) },
+                        { "NrStele", reader.GetInt32(2) },
+                        { "Data", reader.GetDateTime(3) }
+                    };
+                            reviews.Add(review);
+                        }
+                    }
+                }
+            }
+
+            return reviews;
+        }
+
+
+
+
 
 
         //Horia
