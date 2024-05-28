@@ -91,7 +91,26 @@ namespace ShopOnline.Tests
             Assert.Equal(false, value);
 
         }
+        [Fact]
+        public void TestMedieRecenzii()
+        {
+         
+            string connectionString = null;
+            int productId = 1; 
+
+           
+            int[] result = Interogari.MedieRecenzii(connectionString, productId);
+
+            // Asertare
+            Assert.NotNull(result); 
+            Assert.Equal(2, result.Length); 
+
+           
+            Assert.True(result[0] >= 0); 
+            Assert.True(result[1] >= 0); 
+        }
     }
-    
-    
 }
+    
+    
+

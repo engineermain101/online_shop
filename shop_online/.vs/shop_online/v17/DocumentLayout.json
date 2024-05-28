@@ -36,7 +36,7 @@
               "RelativeDocumentMoniker": "shop_online\\Test.cs",
               "ToolTip": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\Test.cs",
               "RelativeToolTip": "shop_online\\Test.cs",
-              "ViewState": "AQIAAEUAAAAAAAAAAAAiwFgAAAAmAAAA",
+              "ViewState": "AQIAAFkAAAAAAAAAAAAMwG0AAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-10T14:14:08.896Z",
               "EditorCaption": ""
@@ -49,10 +49,9 @@
               "RelativeDocumentMoniker": "shop_online\\Interogari.cs",
               "ToolTip": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\Interogari.cs",
               "RelativeToolTip": "shop_online\\Interogari.cs",
-              "ViewState": "AQIAAHAAAAAAAAAAAAAQwBYAAAAdAAAA",
+              "ViewState": "AQIAAA0BAAAAAAAAAAAYwCgBAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T08:17:58.621Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-08T08:17:58.621Z"
             },
             {
               "$type": "Document",
@@ -63,8 +62,7 @@
               "ToolTip": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\FormLogin.cs [Design]",
               "RelativeToolTip": "shop_online\\FormLogin.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T10:35:08.275Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2024-04-17T10:35:08.275Z"
             },
             {
               "$type": "Document",
@@ -76,8 +74,7 @@
               "RelativeToolTip": "shop_online\\FormLogin.cs",
               "ViewState": "AQIAAA8AAAAAAAAAAAAAAAEBAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T09:56:43.483Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-17T09:56:43.483Z"
             }
           ]
         }
