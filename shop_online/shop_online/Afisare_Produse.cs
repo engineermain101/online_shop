@@ -242,6 +242,10 @@ namespace shop_online
             }catch (Exception) { MessageBox.Show("Nu s-a putut lua connection stringu"); return; }
             Interogari.DeleteAllProducts(connectionString);
         }
+        public static int GetCurrentUserId()
+        {
+            return utilizatorCurentId;
+        }
 
 
         
