@@ -186,18 +186,25 @@ C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_online.csproj.CoreC
 C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_onl.1721B023.Up2Date
 C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_online.exe
 C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_online.pdb
+<<<<<<< Updated upstream
 C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\nunit.framework.dll
+=======
+>>>>>>> Stashed changes
 C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\System.Threading.Tasks.Extensions.dll
 C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\xunit.abstractions.dll
 C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\xunit.assert.dll
 C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\xunit.core.dll
 C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\xunit.execution.desktop.dll
+<<<<<<< Updated upstream
 C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\nunit.framework.xml
+=======
+>>>>>>> Stashed changes
 C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\xunit.abstractions.xml
 C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\xunit.assert.xml
 C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\xunit.core.xml
 C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\xunit.execution.desktop.xml
+<<<<<<< Updated upstream
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\System.Threading.Tasks.Extensions.dll
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\xunit.abstractions.dll
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\xunit.assert.dll
@@ -210,6 +217,10 @@ C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\xunit.execution.desktop.xml
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\nunit.framework.dll
 C:\partitia d\Visual Studio\visual studio proiecte\Shop_Online\online_shop\shop_online\shop_online\bin\Debug\nunit.framework.xml
+=======
+C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_online.csproj.SuggestedBindingRedirects.cache
+C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_online.exe.config
+>>>>>>> Stashed changes
 C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\Microsoft.Win32.Primitives.dll
 C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\netstandard.dll
 C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\System.AppContext.dll
@@ -306,5 +317,8 @@ C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\System.Xml.XmlDocument.d
 C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\System.Xml.XmlSerializer.dll
 C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\System.Xml.XPath.dll
 C:\GITHUB\online_shop\shop_online\shop_online\bin\Debug\System.Xml.XPath.XDocument.dll
+<<<<<<< Updated upstream
 C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_online.csproj.SuggestedBindingRedirects.cache
 C:\GITHUB\online_shop\shop_online\shop_online\obj\Debug\shop_online.exe.config
+=======
+>>>>>>> Stashed changes

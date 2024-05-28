@@ -1,22 +1,28 @@
 ﻿using System;
 using System.Drawing;
+<<<<<<< Updated upstream
 using Xunit;
 using shop_online;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+=======
+using NUnit.Framework;
+>>>>>>> Stashed changes
 
 namespace ShopOnline.Tests
 {
+    [TestFixture]
     public class ShopOnlineTests
     {
         private ShopOnlineTests shopOnline; // Presupunând că ShopOnline este clasa care conține metoda InsertImagine
 
-        public ShopOnlineTests()
+        [SetUp]
+        public void SetUp()
         {
-            // Inițializare obiect ShopOnline în constructor
+            // Inițializare obiect ShopOnline în metoda SetUp
             shopOnline = new ShopOnlineTests();
         }
 
-        [Fact]
+        [Test]
         public void TestInsertImage()
         {
             // Definirea parametrilor necesari pentru testare
@@ -31,7 +37,12 @@ namespace ShopOnline.Tests
             // bool insertionResult = Interogari.InsertImagine(connectionString, image, productId, imageName);
 
             // Verificarea dacă inserarea a fost efectuată cu succes
+<<<<<<< Updated upstream
             // Assert.True(insertionResult, "Image insertion failed.");
+=======
+            Assert.That(insertionResult, Is.True, "Image insertion failed.");
+
+>>>>>>> Stashed changes
         }
 
         [Fact]
