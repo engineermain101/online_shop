@@ -247,7 +247,7 @@ namespace shop_online
             }
         }
 
-        private void comboBoxCategorie_SelectedIndexChanged(object sender, EventArgs e)
+       /* private void comboBoxCategorie_SelectedIndexChanged(object sender, EventArgs e)
         {
             string connectionString = null;
             try
@@ -259,7 +259,7 @@ namespace shop_online
                 MessageBox.Show( "Nu s-a putut lua connection stringu!");
             }
             Interogari.GetCategories(connectionString);
-        }
+        }*/
         //Horia
     }
 }

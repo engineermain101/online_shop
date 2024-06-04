@@ -121,7 +121,7 @@
             this.comboBoxCategorie.Name = "comboBoxCategorie";
             this.comboBoxCategorie.Size = new System.Drawing.Size(182, 24);
             this.comboBoxCategorie.TabIndex = 8;
-            this.comboBoxCategorie.SelectedIndexChanged += new System.EventHandler(this.comboBoxCategorie_SelectedIndexChanged);
+            //this.comboBoxCategorie.SelectedIndexChanged += new System.EventHandler(this.comboBoxCategorie_SelectedIndexChanged);
             // 
             // label4
             // 

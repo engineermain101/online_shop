@@ -759,7 +759,7 @@ namespace shop_online
             INNER JOIN (
                 SELECT id_produs, nr_bucati, total_pret
                 FROM Cos
-                WHERE id_user = 3
+                WHERE id_user = @idUser
                 GROUP BY id_produs, nr_bucati, total_pret
             ) c ON p.id_produs = c.id_produs
             ORDER BY p.id_produs DESC;";
@@ -1626,18 +1626,6 @@ namespace shop_online
                             }
 
                         }
-                        /* string sqlReview = "INSERT INTO Review (id_produs) VALUES (@id)";
-                         using (SqlCommand sqlRev = new SqlCommand(sqlReview, connection, transaction))
-                         {
-                             sqlRev.Parameters.AddWithValue("@id", produsId);
-
-                         }*/
-
-                        // string sqlReview= "INSERT INTO Review(nr_stele)"
-                        /*for (int i = 0; i < produs.Image.Count; i++)
-                        {
-                            Interogari.InsertImagine(connectionString, produs.Image[i],produsId, fileNames[i]);
-                        }*/
                     }
 
                     // Commit the transaction

@@ -77,7 +77,11 @@ namespace shop_online
             {
                 int id_user = Afisare_Produse.GetUtilizatorID();
                 string connectionString = Aranjare.GetConnectionString();
-                Interogari.AdaugainCos(connectionString, nr_bucati_in_cos + 1, produs.Pret, id_user, produs.Id_Produs);
+                if(!Interogari.AdaugainCos(connectionString, nr_bucati_in_cos + 1, produs.Pret, id_user, produs.Id_Produs))
+                {
+                    MessageBox.Show("Nu s-a putut adauga produsul!");
+                    return;
+                }
             }
             catch (Exception) { MessageBox.Show("Nu s-a putut adauga in cos."); }
         }
