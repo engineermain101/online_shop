@@ -190,5 +190,9 @@ namespace shop_online
             return starImage;
         }
 
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

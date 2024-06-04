@@ -37,11 +37,11 @@
             this.Specificatie = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Detalii = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageRecenzii = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.trackBarStele = new System.Windows.Forms.TrackBar();
             this.buttonAddRecenzie = new System.Windows.Forms.Button();
             this.textBoxRecenzie = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tabControlProdus.SuspendLayout();
             this.tabPageSpacificatii.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImagineProdus)).BeginInit();
@@ -160,6 +160,14 @@
             this.tabPageRecenzii.Text = "Recenzii";
             this.tabPageRecenzii.UseVisualStyleBackColor = true;
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(559, 17);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(628, 556);
+            this.flowLayoutPanel1.TabIndex = 4;
+            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -194,13 +202,6 @@
             this.textBoxRecenzie.Name = "textBoxRecenzie";
             this.textBoxRecenzie.Size = new System.Drawing.Size(347, 117);
             this.textBoxRecenzie.TabIndex = 0;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(559, 17);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(628, 556);
-            this.flowLayoutPanel1.TabIndex = 4;
             // 
             // DetaliiProdus
             // 

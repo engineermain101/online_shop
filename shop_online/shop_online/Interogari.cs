@@ -1740,6 +1740,31 @@ namespace shop_online
             return reviews;
         }
 
+        public static int GetIdByCategories(string connectionString, string categorie)
+        {
+            string query = "SELECT id_categorie FROM Categorii WHERE nume = @categorie";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@categorie", categorie);
+                    connection.Open();  // Ensure the connection is opened
+
+                    object result = command.ExecuteScalar();
+
+                    if (result != null && int.TryParse(result.ToString(), out int id))
+                    {
+                        return id;
+                    }
+                    else
+                    {
+                        return 0;  // Return 0 if no rows match the query or conversion fails
+                    }
+                }
+            }
+        }
+
+
 
 
 

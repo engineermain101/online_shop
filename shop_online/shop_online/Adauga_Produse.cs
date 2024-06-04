@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace shop_online
 {
@@ -33,7 +34,26 @@ namespace shop_online
             AutoSize = true;
             Aranjare.CenteredPanel(this, panelAdaugaProdus);
             LoadUser(user_id_furnizor);
-
+            LoadCategories();
+        }
+        public void LoadCategories()
+        {
+            string connectionString = null;
+            try
+            {
+                connectionString = Aranjare.GetConnectionString();
+            }
+            catch
+            {
+                MessageBox.Show("Nu s-a putut lua connections tringul!");
+            }
+            comboBoxCategorie.DropDownStyle = ComboBoxStyle.DropDown;
+            comboBoxCategorie.Enabled = true;
+            List<string> categori = Interogari.GetCategories(connectionString);
+            foreach (string categorie in categori)
+            {
+                comboBoxCategorie.Items.Add(categorie);
+            }
         }
         public void LoadUser( int id_furnizor )
         {
@@ -56,7 +76,7 @@ namespace shop_online
             string connectionString = Aranjare.GetConnectionString();
             string denumire = textBoxDenumire.Text.Trim();
             string descriere = textBoxDescriere.Text.Trim();
-            int categorie = comboBoxCategorie.SelectedIndex;
+            int categorie = Interogari.GetIdByCategories(connectionString,comboBoxCategorie.Text);
 
             if (string.IsNullOrWhiteSpace(denumire))
             {
@@ -64,7 +84,7 @@ namespace shop_online
                 return;
             }
 
-            if (categorie == -1)
+            if (categorie <= 0)
             {
                 MessageBox.Show("Vă rog selectați o categorie");
                 return;
@@ -128,10 +148,7 @@ namespace shop_online
         }
 
 
-        private void listView1_SelectedIndexChanged( object sender, EventArgs e )
-        {
-
-        }
+        
 
         private void button2_Click( object sender, EventArgs e )
         {
@@ -228,6 +245,20 @@ namespace shop_online
                     MessageBox.Show("A apărut o eroare la adăugarea imaginii: " + ex.Message);
                 }
             }
+        }
+
+        private void comboBoxCategorie_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string connectionString = null;
+            try
+            {
+                connectionString=Aranjare.GetConnectionString();
+            }
+            catch(Exception )
+            {
+                MessageBox.Show( "Nu s-a putut lua connection stringu!");
+            }
+            Interogari.GetCategories(connectionString);
         }
         //Horia
     }
