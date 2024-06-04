@@ -759,7 +759,7 @@ namespace shop_online
             INNER JOIN (
                 SELECT id_produs, nr_bucati, total_pret
                 FROM Cos
-                WHERE id_user = 3
+                WHERE id_user = @idUser
                 GROUP BY id_produs, nr_bucati, total_pret
             ) c ON p.id_produs = c.id_produs
             ORDER BY p.id_produs DESC;";
@@ -1626,18 +1626,6 @@ namespace shop_online
                             }
 
                         }
-                        /* string sqlReview = "INSERT INTO Review (id_produs) VALUES (@id)";
-                         using (SqlCommand sqlRev = new SqlCommand(sqlReview, connection, transaction))
-                         {
-                             sqlRev.Parameters.AddWithValue("@id", produsId);
-
-                         }*/
-
-                        // string sqlReview= "INSERT INTO Review(nr_stele)"
-                        /*for (int i = 0; i < produs.Image.Count; i++)
-                        {
-                            Interogari.InsertImagine(connectionString, produs.Image[i],produsId, fileNames[i]);
-                        }*/
                     }
 
                     // Commit the transaction
@@ -1756,6 +1744,31 @@ namespace shop_online
 
             return reviews;
         }
+
+        public static int GetIdByCategories(string connectionString, string categorie)
+        {
+            string query = "SELECT id_categorie FROM Categorii WHERE nume = @categorie";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@categorie", categorie);
+                    connection.Open();  // Ensure the connection is opened
+
+                    object result = command.ExecuteScalar();
+
+                    if (result != null && int.TryParse(result.ToString(), out int id))
+                    {
+                        return id;
+                    }
+                    else
+                    {
+                        return 0;  // Return 0 if no rows match the query or conversion fails
+                    }
+                }
+            }
+        }
+
 
 
 

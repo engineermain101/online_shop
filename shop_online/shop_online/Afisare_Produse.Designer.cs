@@ -42,6 +42,7 @@
             this.stergereAdminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.delogheazateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.threaduriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripAdaugaProduse.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,7 +67,8 @@
             this.adaugaToolStripMenuItem,
             this.stergereToolStripMenuItem,
             this.cosToolStripMenuItem,
-            this.delogheazateToolStripMenuItem});
+            this.delogheazateToolStripMenuItem,
+            this.threaduriToolStripMenuItem});
             this.menuStripAdaugaProduse.Location = new System.Drawing.Point(0, 0);
             this.menuStripAdaugaProduse.Name = "menuStripAdaugaProduse";
             this.menuStripAdaugaProduse.Size = new System.Drawing.Size(724, 28);
@@ -100,21 +102,21 @@
             // adaugaProdusToolStripMenuItem
             // 
             this.adaugaProdusToolStripMenuItem.Name = "adaugaProdusToolStripMenuItem";
-            this.adaugaProdusToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.adaugaProdusToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
             this.adaugaProdusToolStripMenuItem.Text = "Produs";
             this.adaugaProdusToolStripMenuItem.Click += new System.EventHandler(this.adaugaProdusToolStripMenuItem_Click);
             // 
             // adaugaFurnizorToolStripMenuItem
             // 
             this.adaugaFurnizorToolStripMenuItem.Name = "adaugaFurnizorToolStripMenuItem";
-            this.adaugaFurnizorToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.adaugaFurnizorToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
             this.adaugaFurnizorToolStripMenuItem.Text = "Furnizor";
             this.adaugaFurnizorToolStripMenuItem.Click += new System.EventHandler(this.adaugaFurnizorToolStripMenuItem_Click);
             // 
             // adaugaAdminToolStripMenuItem
             // 
             this.adaugaAdminToolStripMenuItem.Name = "adaugaAdminToolStripMenuItem";
-            this.adaugaAdminToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.adaugaAdminToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
             this.adaugaAdminToolStripMenuItem.Text = "Admin";
             this.adaugaAdminToolStripMenuItem.Click += new System.EventHandler(this.adaugaAdminToolStripMenuItem_Click);
             // 
@@ -133,6 +135,7 @@
             this.stergereProdusToolStripMenuItem.Name = "stergereProdusToolStripMenuItem";
             this.stergereProdusToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.stergereProdusToolStripMenuItem.Text = "Produs";
+            this.stergereProdusToolStripMenuItem.Visible = false;
             this.stergereProdusToolStripMenuItem.Click += new System.EventHandler(this.stergereProdusToolStripMenuItem_Click);
             // 
             // stergereFurnizorToolStripMenuItem
@@ -162,6 +165,14 @@
             this.delogheazateToolStripMenuItem.Size = new System.Drawing.Size(122, 24);
             this.delogheazateToolStripMenuItem.Text = "Delogheaza-te";
             this.delogheazateToolStripMenuItem.Click += new System.EventHandler(this.delogheazateToolStripMenuItem_Click);
+            // 
+            // threaduriToolStripMenuItem
+            // 
+            this.threaduriToolStripMenuItem.Name = "threaduriToolStripMenuItem";
+            this.threaduriToolStripMenuItem.Size = new System.Drawing.Size(86, 24);
+            this.threaduriToolStripMenuItem.Text = "Threaduri";
+            this.threaduriToolStripMenuItem.Visible = false;
+            this.threaduriToolStripMenuItem.Click += new System.EventHandler(this.threaduriToolStripMenuItem_Click);
             // 
             // Afisare_Produse
             // 
@@ -197,5 +208,6 @@
         private System.Windows.Forms.ToolStripMenuItem stergereAdminToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem delogheazateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem threaduriToolStripMenuItem;
     }
 }

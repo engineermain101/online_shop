@@ -34,6 +34,7 @@ namespace shop_online
             emailUtilizator = email;
             parolaUtilizator = parola;
             telefonUtilizator = telefon;
+            utilizatorCurentId = -1;
         }
         //Roli
         private void Afisare_Produse_FormClosed( object sender, FormClosedEventArgs e )
@@ -90,6 +91,7 @@ namespace shop_online
                 stergereToolStripMenuItem.Visible = true;
                 stergereProdusToolStripMenuItem.Visible = true;
                 furnizor = true;
+
                 return;
             }
 
@@ -103,6 +105,7 @@ namespace shop_online
                 stergereProdusToolStripMenuItem.Visible = true;
                 stergereFurnizorToolStripMenuItem.Visible = true;
                 stergereAdminToolStripMenuItem.Visible = true;
+                stergereProdusToolStripMenuItem.Visible = false;
 
                 return;
             }
@@ -247,8 +250,15 @@ namespace shop_online
             return utilizatorCurentId;
         }
 
+        private void threaduriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
-        
+        }
+
+
+
+
+
 
         //Puia
 
