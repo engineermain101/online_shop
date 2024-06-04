@@ -20,6 +20,7 @@ namespace shop_online
         private Adauga_Stergere_Admin adauga_Stergere_Admin = null;
         private Adauga_Furnizor Adauga_Furnizor = null;
         private FormLogin formlogin = null;
+        private bool userRequestedClose = false;
 
         public Afisare_Produse()
         {
@@ -37,9 +38,9 @@ namespace shop_online
             utilizatorCurentId = -1;
         }
         //Roli
-        private void Afisare_Produse_FormClosed( object sender, FormClosedEventArgs e )
+        private void Afisare_Produse_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (e.CloseReason == CloseReason.UserClosing)
+            if (e.CloseReason == CloseReason.UserClosing && !userRequestedClose)
             {
                 Application.Exit();
             }
@@ -187,6 +188,8 @@ namespace shop_online
 
             Size size = new Size(500, 300);
             Aranjare.HideCurrentFormAndOpenNewForm(FindForm(), formlogin, (object)-1, size);
+            userRequestedClose = true;
+            Close();
 
         }
 
@@ -238,12 +241,7 @@ namespace shop_online
 //Claudiu
         private void stergereProdusToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string connectionString;
-            try
-            {
-                connectionString = Aranjare.GetConnectionString();
-            }catch (Exception) { MessageBox.Show("Nu s-a putut lua connection stringu"); return; }
-            Interogari.DeleteAllProducts(connectionString);
+            Aranjare.HideCurrentFormAndOpenNewForm(this, new Stergere_Produs(GetUtilizatorID()),(object)true, MinimumSize);
         }
         public static int GetCurrentUserId()
         {
