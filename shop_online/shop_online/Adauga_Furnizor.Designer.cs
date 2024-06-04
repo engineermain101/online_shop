@@ -50,12 +50,16 @@
             this.labelEmailDelete = new System.Windows.Forms.Label();
             this.buttonSterge = new System.Windows.Forms.Button();
             this.labelNumeFirmaDelete = new System.Windows.Forms.Label();
+            this.labelTelefonFirma = new System.Windows.Forms.Label();
+            this.textBoxTelefon = new System.Windows.Forms.TextBox();
             this.panelAdaugaFurnizor.SuspendLayout();
             this.panelStergeFurnizor.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelAdaugaFurnizor
             // 
+            this.panelAdaugaFurnizor.Controls.Add(this.labelTelefonFirma);
+            this.panelAdaugaFurnizor.Controls.Add(this.textBoxTelefon);
             this.panelAdaugaFurnizor.Controls.Add(this.textBoxJudet);
             this.panelAdaugaFurnizor.Controls.Add(this.labelNumeFirma);
             this.panelAdaugaFurnizor.Controls.Add(this.textBoxIBAN);
@@ -73,12 +77,12 @@
             this.panelAdaugaFurnizor.Controls.Add(this.labelIBAN);
             this.panelAdaugaFurnizor.Location = new System.Drawing.Point(24, 12);
             this.panelAdaugaFurnizor.Name = "panelAdaugaFurnizor";
-            this.panelAdaugaFurnizor.Size = new System.Drawing.Size(406, 504);
+            this.panelAdaugaFurnizor.Size = new System.Drawing.Size(416, 545);
             this.panelAdaugaFurnizor.TabIndex = 0;
             // 
             // textBoxJudet
             // 
-            this.textBoxJudet.Location = new System.Drawing.Point(136, 212);
+            this.textBoxJudet.Location = new System.Drawing.Point(136, 259);
             this.textBoxJudet.Name = "textBoxJudet";
             this.textBoxJudet.Size = new System.Drawing.Size(255, 22);
             this.textBoxJudet.TabIndex = 26;
@@ -86,15 +90,15 @@
             // labelNumeFirma
             // 
             this.labelNumeFirma.AutoSize = true;
-            this.labelNumeFirma.Location = new System.Drawing.Point(21, 35);
+            this.labelNumeFirma.Location = new System.Drawing.Point(22, 35);
             this.labelNumeFirma.Name = "labelNumeFirma";
-            this.labelNumeFirma.Size = new System.Drawing.Size(80, 16);
+            this.labelNumeFirma.Size = new System.Drawing.Size(84, 17);
             this.labelNumeFirma.TabIndex = 25;
             this.labelNumeFirma.Text = "Nume Firma";
             // 
             // textBoxIBAN
             // 
-            this.textBoxIBAN.Location = new System.Drawing.Point(136, 150);
+            this.textBoxIBAN.Location = new System.Drawing.Point(136, 203);
             this.textBoxIBAN.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxIBAN.Name = "textBoxIBAN";
             this.textBoxIBAN.Size = new System.Drawing.Size(255, 22);
@@ -111,15 +115,15 @@
             // labelEmailFirma
             // 
             this.labelEmailFirma.AutoSize = true;
-            this.labelEmailFirma.Location = new System.Drawing.Point(21, 94);
+            this.labelEmailFirma.Location = new System.Drawing.Point(22, 92);
             this.labelEmailFirma.Name = "labelEmailFirma";
-            this.labelEmailFirma.Size = new System.Drawing.Size(78, 16);
+            this.labelEmailFirma.Size = new System.Drawing.Size(81, 17);
             this.labelEmailFirma.TabIndex = 28;
             this.labelEmailFirma.Text = "Email Firma";
             // 
             // buttonAdauga
             // 
-            this.buttonAdauga.Location = new System.Drawing.Point(213, 429);
+            this.buttonAdauga.Location = new System.Drawing.Point(213, 474);
             this.buttonAdauga.Name = "buttonAdauga";
             this.buttonAdauga.Size = new System.Drawing.Size(119, 57);
             this.buttonAdauga.TabIndex = 27;
@@ -129,7 +133,7 @@
             // 
             // textBoxNumar_Strada
             // 
-            this.textBoxNumar_Strada.Location = new System.Drawing.Point(136, 386);
+            this.textBoxNumar_Strada.Location = new System.Drawing.Point(136, 427);
             this.textBoxNumar_Strada.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxNumar_Strada.Name = "textBoxNumar_Strada";
             this.textBoxNumar_Strada.Size = new System.Drawing.Size(255, 22);
@@ -138,15 +142,15 @@
             // labelNumar_Strada
             // 
             this.labelNumar_Strada.AutoSize = true;
-            this.labelNumar_Strada.Location = new System.Drawing.Point(21, 389);
+            this.labelNumar_Strada.Location = new System.Drawing.Point(22, 434);
             this.labelNumar_Strada.Name = "labelNumar_Strada";
-            this.labelNumar_Strada.Size = new System.Drawing.Size(47, 16);
+            this.labelNumar_Strada.Size = new System.Drawing.Size(50, 17);
             this.labelNumar_Strada.TabIndex = 23;
             this.labelNumar_Strada.Text = "Număr";
             // 
             // textBoxStrada
             // 
-            this.textBoxStrada.Location = new System.Drawing.Point(136, 327);
+            this.textBoxStrada.Location = new System.Drawing.Point(136, 371);
             this.textBoxStrada.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxStrada.Name = "textBoxStrada";
             this.textBoxStrada.Size = new System.Drawing.Size(255, 22);
@@ -155,15 +159,15 @@
             // labelStrada
             // 
             this.labelStrada.AutoSize = true;
-            this.labelStrada.Location = new System.Drawing.Point(21, 330);
+            this.labelStrada.Location = new System.Drawing.Point(22, 377);
             this.labelStrada.Name = "labelStrada";
-            this.labelStrada.Size = new System.Drawing.Size(47, 16);
+            this.labelStrada.Size = new System.Drawing.Size(50, 17);
             this.labelStrada.TabIndex = 21;
             this.labelStrada.Text = "Stradă";
             // 
             // textBoxOras
             // 
-            this.textBoxOras.Location = new System.Drawing.Point(136, 268);
+            this.textBoxOras.Location = new System.Drawing.Point(136, 315);
             this.textBoxOras.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxOras.Name = "textBoxOras";
             this.textBoxOras.Size = new System.Drawing.Size(255, 22);
@@ -172,9 +176,9 @@
             // labelOras
             // 
             this.labelOras.AutoSize = true;
-            this.labelOras.Location = new System.Drawing.Point(21, 271);
+            this.labelOras.Location = new System.Drawing.Point(22, 320);
             this.labelOras.Name = "labelOras";
-            this.labelOras.Size = new System.Drawing.Size(36, 16);
+            this.labelOras.Size = new System.Drawing.Size(39, 17);
             this.labelOras.TabIndex = 19;
             this.labelOras.Text = "Oraș";
             // 
@@ -189,18 +193,18 @@
             // labelJudet
             // 
             this.labelJudet.AutoSize = true;
-            this.labelJudet.Location = new System.Drawing.Point(21, 212);
+            this.labelJudet.Location = new System.Drawing.Point(22, 263);
             this.labelJudet.Name = "labelJudet";
-            this.labelJudet.Size = new System.Drawing.Size(40, 16);
+            this.labelJudet.Size = new System.Drawing.Size(43, 17);
             this.labelJudet.TabIndex = 17;
             this.labelJudet.Text = "Județ";
             // 
             // labelIBAN
             // 
             this.labelIBAN.AutoSize = true;
-            this.labelIBAN.Location = new System.Drawing.Point(21, 153);
+            this.labelIBAN.Location = new System.Drawing.Point(22, 206);
             this.labelIBAN.Name = "labelIBAN";
-            this.labelIBAN.Size = new System.Drawing.Size(38, 16);
+            this.labelIBAN.Size = new System.Drawing.Size(39, 17);
             this.labelIBAN.TabIndex = 0;
             this.labelIBAN.Text = "IBAN";
             // 
@@ -213,7 +217,7 @@
             this.panelStergeFurnizor.Controls.Add(this.labelNumeFirmaDelete);
             this.panelStergeFurnizor.Location = new System.Drawing.Point(446, 12);
             this.panelStergeFurnizor.Name = "panelStergeFurnizor";
-            this.panelStergeFurnizor.Size = new System.Drawing.Size(415, 504);
+            this.panelStergeFurnizor.Size = new System.Drawing.Size(415, 545);
             this.panelStergeFurnizor.TabIndex = 30;
             // 
             // comboBoxNumefirmaDelete
@@ -237,7 +241,7 @@
             this.labelEmailDelete.AutoSize = true;
             this.labelEmailDelete.Location = new System.Drawing.Point(23, 200);
             this.labelEmailDelete.Name = "labelEmailDelete";
-            this.labelEmailDelete.Size = new System.Drawing.Size(78, 16);
+            this.labelEmailDelete.Size = new System.Drawing.Size(81, 17);
             this.labelEmailDelete.TabIndex = 28;
             this.labelEmailDelete.Text = "Email Firma";
             // 
@@ -256,9 +260,26 @@
             this.labelNumeFirmaDelete.AutoSize = true;
             this.labelNumeFirmaDelete.Location = new System.Drawing.Point(23, 138);
             this.labelNumeFirmaDelete.Name = "labelNumeFirmaDelete";
-            this.labelNumeFirmaDelete.Size = new System.Drawing.Size(80, 16);
+            this.labelNumeFirmaDelete.Size = new System.Drawing.Size(84, 17);
             this.labelNumeFirmaDelete.TabIndex = 25;
             this.labelNumeFirmaDelete.Text = "Nume Firma";
+            // 
+            // labelTelefonFirma
+            // 
+            this.labelTelefonFirma.AutoSize = true;
+            this.labelTelefonFirma.Location = new System.Drawing.Point(22, 149);
+            this.labelTelefonFirma.Name = "labelTelefonFirma";
+            this.labelTelefonFirma.Size = new System.Drawing.Size(95, 17);
+            this.labelTelefonFirma.TabIndex = 31;
+            this.labelTelefonFirma.Text = "Telefon Firma";
+            // 
+            // textBoxTelefon
+            // 
+            this.textBoxTelefon.Location = new System.Drawing.Point(136, 147);
+            this.textBoxTelefon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxTelefon.Name = "textBoxTelefon";
+            this.textBoxTelefon.Size = new System.Drawing.Size(255, 22);
+            this.textBoxTelefon.TabIndex = 32;
             // 
             // Adauga_Furnizor
             // 
@@ -303,5 +324,7 @@
         private System.Windows.Forms.Button buttonSterge;
         private System.Windows.Forms.Label labelNumeFirmaDelete;
         private System.Windows.Forms.TextBox textBoxIBAN;
+        private System.Windows.Forms.Label labelTelefonFirma;
+        private System.Windows.Forms.TextBox textBoxTelefon;
     }
 }

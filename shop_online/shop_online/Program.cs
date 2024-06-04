@@ -18,7 +18,7 @@ namespace shop_online
             List<string> a = AutoLogin();
 
             if (a != null)
-                Application.Run(new Afisare_Produse(a[0], a[1], a[2]));
+                Application.Run(new Afisare_Produse(a [0], a [1], a [2]));
             else
                 Application.Run(new FormLogin());
 
