@@ -355,3 +355,4 @@ C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\sho
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.csproj.CopyComplete
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.exe
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.pdb
+C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.Stergere_Produs.resources

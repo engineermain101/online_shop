@@ -46,6 +46,7 @@ namespace shop_online
             MinimumSize = new Size(panelMenu.Width, panelMenu.Height);
 
 
+
             butonuldeBack();
         }
         private void butonuldeBack()

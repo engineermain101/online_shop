@@ -46,7 +46,7 @@
             this.panelAdauga_Sterge_Admin.Controls.Add(this.comboBoxRol);
             this.panelAdauga_Sterge_Admin.Controls.Add(this.labelEmail);
             this.panelAdauga_Sterge_Admin.Controls.Add(this.comboBoxEmail);
-            this.panelAdauga_Sterge_Admin.Location = new System.Drawing.Point(144, 68);
+            this.panelAdauga_Sterge_Admin.Location = new System.Drawing.Point(212, 89);
             this.panelAdauga_Sterge_Admin.Name = "panelAdauga_Sterge_Admin";
             this.panelAdauga_Sterge_Admin.Size = new System.Drawing.Size(400, 300);
             this.panelAdauga_Sterge_Admin.TabIndex = 0;
@@ -66,7 +66,7 @@
             this.labelRol.AutoSize = true;
             this.labelRol.Location = new System.Drawing.Point(17, 91);
             this.labelRol.Name = "labelRol";
-            this.labelRol.Size = new System.Drawing.Size(29, 17);
+            this.labelRol.Size = new System.Drawing.Size(28, 16);
             this.labelRol.TabIndex = 3;
             this.labelRol.Text = "Rol";
             // 
@@ -83,7 +83,7 @@
             this.labelEmail.AutoSize = true;
             this.labelEmail.Location = new System.Drawing.Point(17, 20);
             this.labelEmail.Name = "labelEmail";
-            this.labelEmail.Size = new System.Drawing.Size(42, 17);
+            this.labelEmail.Size = new System.Drawing.Size(41, 16);
             this.labelEmail.TabIndex = 1;
             this.labelEmail.Text = "Email";
             // 
@@ -99,7 +99,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(715, 441);
+            this.ClientSize = new System.Drawing.Size(780, 525);
             this.Controls.Add(this.panelAdauga_Sterge_Admin);
             this.Name = "Adauga_Stergere_Admin";
             this.Text = "Adauga_Stergere_Admin";

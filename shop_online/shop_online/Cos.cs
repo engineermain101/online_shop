@@ -37,7 +37,10 @@ namespace shop_online
             }
 
             if (Application.OpenForms ["Afisare_Produse"] != null)
+            {
                 Application.OpenForms ["Afisare_Produse"].Show();
+            }
+                
         }
         private void Cos_Load( object sender, EventArgs e )
         {

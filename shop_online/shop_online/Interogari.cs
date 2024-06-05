@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -759,7 +760,7 @@ namespace shop_online
             INNER JOIN (
                 SELECT id_produs, nr_bucati, total_pret
                 FROM Cos
-                WHERE id_user = 3
+                WHERE id_user = @idUser
                 GROUP BY id_produs, nr_bucati, total_pret
             ) c ON p.id_produs = c.id_produs
             ORDER BY p.id_produs DESC;";
@@ -1626,18 +1627,6 @@ namespace shop_online
                             }
 
                         }
-                        /* string sqlReview = "INSERT INTO Review (id_produs) VALUES (@id)";
-                         using (SqlCommand sqlRev = new SqlCommand(sqlReview, connection, transaction))
-                         {
-                             sqlRev.Parameters.AddWithValue("@id", produsId);
-
-                         }*/
-
-                        // string sqlReview= "INSERT INTO Review(nr_stele)"
-                        /*for (int i = 0; i < produs.Image.Count; i++)
-                        {
-                            Interogari.InsertImagine(connectionString, produs.Image[i],produsId, fileNames[i]);
-                        }*/
                     }
 
                     // Commit the transaction
@@ -1669,26 +1658,32 @@ namespace shop_online
                 return ms.ToArray();
             }
         }
-        public static void DeleteAllProducts( string connectionString )
+        public static void DeleteProductById(string connectionString, int id)
         {
-            string query = $"DELETE FROM Produse";
+            string query = @"
+        DELETE FROM Tranzactii WHERE id_produs = @id
+        DELETE FROM Produse WHERE id_produs = @id;
+    ";
+
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
+                        command.Parameters.AddWithValue("@id", id);
                         connection.Open();
                         command.ExecuteNonQuery();
                     }
-                    MessageBox.Show("Produsele au fost sterse cu succes");
+                    MessageBox.Show("Produsele au fost șterse cu succes.");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show("A apărut o eroare: " + ex.Message);
             }
         }
+
         public static void AdaugaRecenzie( string connectionString, int user_id, int produs_id, string recenzie, int nr_stele, DateTime date )
         {
             string query = @"
@@ -1757,6 +1752,73 @@ namespace shop_online
             return reviews;
         }
 
+        public static int GetIdByCategories(string connectionString, string categorie)
+        {
+            string query = "SELECT id_categorie FROM Categorii WHERE nume = @categorie";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@categorie", categorie);
+                    connection.Open();  // Ensure the connection is opened
+
+                    object result = command.ExecuteScalar();
+
+                    if (result != null && int.TryParse(result.ToString(), out int id))
+                    {
+                        return id;
+                    }
+                    else
+                    {
+                        return 0;  // Return 0 if no rows match the query or conversion fails
+                    }
+                }
+            }
+        }
+        public static List<string> GetProduseByFurnizor(string connectionString, int furnizorId)
+        {
+            List<string> produse = new List<string>();
+
+            string query = "SELECT id_produs, nume FROM Produse WHERE id_furnizor = @idFurnizor";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    // Parametrul pentru id-ul furnizorului
+                    command.Parameters.AddWithValue("@idFurnizor", furnizorId);
+
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            // Extrage ID-ul și numele produsului din fiecare rând
+                            int idProdus = reader.GetInt32(0);
+                            string numeProdus = reader.GetString(1);
+
+                            // Construiește un string care conține ID-ul și numele produsului
+                            string produsInfo = $"{idProdus}: {numeProdus}";
+
+                            // Adaugă stringul la lista de produse
+                            produse.Add(produsInfo);
+                        }
+
+                        reader.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Eroare: " + ex.Message);
+                    }
+                }
+            }
+
+            return produse;
+        }
+
+
 
 
 
@@ -1766,70 +1828,7 @@ namespace shop_online
 
 
 
-        private static bool GestionareAdmin( string connectionString, string operatie, int idAdmin, int idUser = 0, string rol = null )
-        {
-            throw new NotImplementedException("Nu este implementata metoda.");
-            try
-            {
-                string query = "";
 
-                switch (operatie.ToLower())
-                {
-                    case "insert":
-                        query = @"INSERT INTO Admini (id_admin, id_user, rol) VALUES (@IdAdmin, @IdUser, @Rol)";
-                        break;
-                    case "update":
-                        query = @"UPDATE Admini SET id_user = @IdUser, rol = @Rol WHERE id_admin = @IdAdmin";
-                        break;
-                    case "delete":
-                        query = @"DELETE FROM Admini WHERE id_admin = @IdAdmin";
-                        break;
-                    default:
-                        MessageBox.Show("Operația specificată nu este validă.");
-                        return false;
-                }
-
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                using (SqlCommand cmd = new SqlCommand(query, connection))
-                {
-                    cmd.Parameters.AddWithValue("@IdAdmin", idAdmin);
-
-                    if (operatie.ToLower() != "delete")
-                    {
-                        cmd.Parameters.AddWithValue("@IdUser", idUser);
-                        cmd.Parameters.AddWithValue("@Rol", rol);
-                    }
-
-                    connection.Open();
-                    int rowsAffected = cmd.ExecuteNonQuery();
-
-                    switch (operatie.ToLower())
-                    {
-                        case "insert":
-                            MessageBox.Show("Adminul a fost adăugat cu succes în baza de date!");
-                            break;
-                        case "update":
-                            if (rowsAffected > 0)
-                                MessageBox.Show("Adminul a fost actualizat cu succes în baza de date!");
-                            else
-                                MessageBox.Show("Adminul cu id-ul specificat nu a fost găsit în baza de date!");
-                            break;
-                        case "delete":
-                            if (rowsAffected > 0)
-                                MessageBox.Show("Adminul a fost șters cu succes din baza de date!");
-                            else
-                                throw new Exception("Adminul cu id-ul specificat nu a fost găsit în baza de date!");
-                            break;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Eroare în gestionarea adminului în baza de date: " + ex.Message);
-                return false;
-            }
-            return true;
-        }
 
         //Horia
     }

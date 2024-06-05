@@ -49,9 +49,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.textBoxDenumireSpecificatie = new System.Windows.Forms.TextBox();
             this.panelAdaugaProdus = new System.Windows.Forms.Panel();
-            this.buttonAddImage = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
             this.labelCounter = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.buttonAddImage = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImagine)).BeginInit();
             this.panelAdaugaProdus.SuspendLayout();
             this.SuspendLayout();
@@ -117,18 +117,11 @@
             // comboBoxCategorie
             // 
             this.comboBoxCategorie.FormattingEnabled = true;
-            this.comboBoxCategorie.Items.AddRange(new object[] {
-            "Electronice",
-            "Laptopuri",
-            "Calculatoare",
-            "Mancare",
-            "Medicina",
-            "Electrocasnice",
-            "Diverse"});
             this.comboBoxCategorie.Location = new System.Drawing.Point(527, 177);
             this.comboBoxCategorie.Name = "comboBoxCategorie";
             this.comboBoxCategorie.Size = new System.Drawing.Size(182, 24);
             this.comboBoxCategorie.TabIndex = 8;
+            //this.comboBoxCategorie.SelectedIndexChanged += new System.EventHandler(this.comboBoxCategorie_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -202,7 +195,6 @@
             this.listView1.TabIndex = 18;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -259,15 +251,14 @@
             this.panelAdaugaProdus.Size = new System.Drawing.Size(1014, 689);
             this.panelAdaugaProdus.TabIndex = 21;
             // 
-            // buttonAddImage
+            // labelCounter
             // 
-            this.buttonAddImage.Location = new System.Drawing.Point(40, 31);
-            this.buttonAddImage.Name = "buttonAddImage";
-            this.buttonAddImage.Size = new System.Drawing.Size(116, 23);
-            this.buttonAddImage.TabIndex = 21;
-            this.buttonAddImage.Text = "Adauga Imagine";
-            this.buttonAddImage.UseVisualStyleBackColor = true;
-            this.buttonAddImage.Click += new System.EventHandler(this.buttonAddImage_Click);
+            this.labelCounter.AutoSize = true;
+            this.labelCounter.Location = new System.Drawing.Point(161, 250);
+            this.labelCounter.Name = "labelCounter";
+            this.labelCounter.Size = new System.Drawing.Size(14, 16);
+            this.labelCounter.TabIndex = 23;
+            this.labelCounter.Text = "0";
             // 
             // label8
             // 
@@ -278,14 +269,15 @@
             this.label8.TabIndex = 22;
             this.label8.Text = "Imagini adaugate:";
             // 
-            // labelCounter
+            // buttonAddImage
             // 
-            this.labelCounter.AutoSize = true;
-            this.labelCounter.Location = new System.Drawing.Point(161, 250);
-            this.labelCounter.Name = "labelCounter";
-            this.labelCounter.Size = new System.Drawing.Size(14, 16);
-            this.labelCounter.TabIndex = 23;
-            this.labelCounter.Text = "0";
+            this.buttonAddImage.Location = new System.Drawing.Point(40, 31);
+            this.buttonAddImage.Name = "buttonAddImage";
+            this.buttonAddImage.Size = new System.Drawing.Size(116, 23);
+            this.buttonAddImage.TabIndex = 21;
+            this.buttonAddImage.Text = "Adauga Imagine";
+            this.buttonAddImage.UseVisualStyleBackColor = true;
+            this.buttonAddImage.Click += new System.EventHandler(this.buttonAddImage_Click);
             // 
             // Adauga_Produse
             // 
