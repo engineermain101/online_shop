@@ -3,10 +3,11 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using ComponentFactory.Krypton.Toolkit;
 
 namespace shop_online
 {
-    public partial class FormLogin : Form
+    public partial class FormLogin : KryptonForm
     {
         private Afisare_Produse afisare_Produse = null;// Form nou
 
