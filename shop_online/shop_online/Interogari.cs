@@ -267,9 +267,8 @@ namespace shop_online
         /// <summary>
         /// Returneaza 2 parametri:1)AverageRating, 2)NumberOfReviews
         /// </summary>
-        public static int [] MedieRecenzii( string connectionString, int id_produs )
+        public static int[] MedieRecenzii(string connectionString, int id_produs)
         {
-
             try
             {
                 string query = "SELECT AVG(nr_stele) AS AverageRating, COUNT(*) AS NumberOfReviews FROM Review WHERE id_produs = @ProductId";
@@ -283,9 +282,10 @@ namespace shop_online
                         {
                             if (reader.Read())
                             {
-                                int averageRating = Convert.ToInt32(reader ["AverageRating"]);
-                                int numberOfReviews = Convert.ToInt32(reader ["NumberOfReviews"]);
-                                return new int [] { averageRating, numberOfReviews };
+                                decimal averageRating = reader["AverageRating"] != DBNull.Value ? Convert.ToDecimal(reader["AverageRating"]) : 0;
+                                int numberOfReviews = Convert.ToInt32(reader["NumberOfReviews"]);
+                                int roundedAverageRating = (int)Math.Round(averageRating);
+                                return new int[] { roundedAverageRating, numberOfReviews };
                             }
                         }
                     }
@@ -297,9 +297,10 @@ namespace shop_online
             }
             return null;
         }
+
         public static int [] ReviewNotExists( string connectionString, int id_produs )
         {
-            string queryCheck = "SELECT COUNT(*) FROM Review WHERE id_produse=@id";
+            string queryCheck = "SELECT COUNT(*) FROM Review WHERE id_produs=@id";
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -1571,7 +1572,7 @@ namespace shop_online
 
         //Claudiu
 
-        public static void InsertProdus( string connectionString, ProdusItem produs, List<string> fileNames, List<string> denumireS, List<string> valoareS )
+        public static bool InsertProdus( string connectionString, ProdusItem produs, List<string> fileNames, List<string> denumireS, List<string> valoareS )
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -1625,12 +1626,14 @@ namespace shop_online
                                 sqlImagini.Parameters ["@nume"].Value = fileNames [i]; // You can adjust the name as needed
                                 sqlImagini.ExecuteNonQuery();
                             }
+                            
 
                         }
                     }
 
                     // Commit the transaction
                     transaction.Commit();
+                    return true;
                 }
                 catch (Exception ex)
                 {
@@ -1639,13 +1642,13 @@ namespace shop_online
                     try
                     {
                         transaction.Rollback();
-                        return;
+                        return false;
                     }
 
                     catch (Exception exRollback)
                     {
                         MessageBox.Show("Rollback Error: " + exRollback.Message);
-                        return;
+                        return false;
                     }
                 }
             }
@@ -1770,7 +1773,7 @@ namespace shop_online
                     }
                     else
                     {
-                        return 0;  // Return 0 if no rows match the query or conversion fails
+                        return -1;  // Return 0 if no rows match the query or conversion fails
                     }
                 }
             }
@@ -1818,6 +1821,29 @@ namespace shop_online
             return produse;
         }
 
+        public static string GetNameById(string connectionString, int id)
+        {
+            string query = "SELECT username FROM Useri WHERE id_user=@id";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", id);
+                    connection.Open();
+
+                    object result = command.ExecuteScalar();
+                    if (result != null)
+                    {
+                        return result.ToString();
+                    }
+                    else
+                    {
+                        return null; // Sau aruncă o excepție, returnează un string gol, etc.
+                    }
+                }
+            }
+        }
 
 
 

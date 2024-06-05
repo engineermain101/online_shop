@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+
 
 namespace shop_online
 {
-    public partial class Adauga_Stergere_Admin : Form
+    public partial class Adauga_Stergere_Admin : KryptonForm
     {
         bool Adauga = true;
         public Adauga_Stergere_Admin()

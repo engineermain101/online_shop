@@ -4,10 +4,11 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
 
 namespace shop_online
 {
-    public partial class Adauga_Furnizor : Form
+    public partial class Adauga_Furnizor : KryptonForm
     {
         private int id_user;
         private bool adauga;
@@ -92,6 +93,7 @@ namespace shop_online
                 if (success)
                 {
                     MessageBox.Show("Furnizorul a fost adăugat cu succes.");
+                    Aranjare.ToateTextBoxurileledinPanelGoale(panelAdaugaFurnizor);
                 }
                /* else
                 {

@@ -28,18 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.productControlCos = new shop_online.ProductControl();
             this.numericUpDownNrBucati = new System.Windows.Forms.NumericUpDown();
+            this.productControlCos = new shop_online.ProductControl();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNrBucati)).BeginInit();
             this.SuspendLayout();
-            // 
-            // productControlCos
-            // 
-            this.productControlCos.BackColor = System.Drawing.Color.OrangeRed;
-            this.productControlCos.Location = new System.Drawing.Point(3, 3);
-            this.productControlCos.Name = "productControlCos";
-            this.productControlCos.Size = new System.Drawing.Size(505, 138);
-            this.productControlCos.TabIndex = 0;
             // 
             // numericUpDownNrBucati
             // 
@@ -47,6 +39,14 @@
             this.numericUpDownNrBucati.Name = "numericUpDownNrBucati";
             this.numericUpDownNrBucati.Size = new System.Drawing.Size(71, 22);
             this.numericUpDownNrBucati.TabIndex = 1;
+            // 
+            // productControlCos
+            // 
+            this.productControlCos.BackColor = System.Drawing.Color.DarkSalmon;
+            this.productControlCos.Location = new System.Drawing.Point(3, 3);
+            this.productControlCos.Name = "productControlCos";
+            this.productControlCos.Size = new System.Drawing.Size(505, 138);
+            this.productControlCos.TabIndex = 0;
             // 
             // ProdusCos
             // 

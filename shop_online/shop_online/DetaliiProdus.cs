@@ -4,10 +4,12 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+
 
 namespace shop_online
 {
-    public partial class DetaliiProdus : Form
+    public partial class DetaliiProdus : KryptonForm
     {
         private ProdusItem produs;
         public DetaliiProdus(ProdusItem produs)
@@ -31,8 +33,13 @@ namespace shop_online
         {
             this.produs = produs;
             listBoxImaginiProdus.Items.Clear();
-            listViewImaginiProdus.Items.Clear();
             List<Image> imaginiProdus = produs.Image;
+            label3.Text = produs.Nume;
+            label4.Text = produs.Pret.ToString();
+            textBoxDescriere.Text=produs.Descriere;
+            label6.Text= produs.Nota_Review.ToString();
+            label10.Text = produs.Nota_Review.ToString();
+
             if (imaginiProdus.Count > 0)
             {
                 pictureBoxImagineProdus.Image = imaginiProdus[0];
@@ -99,30 +106,7 @@ namespace shop_online
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string recenzie = textBoxRecenzie.Text;
-            if (string.IsNullOrEmpty(recenzie))
-            {
-                MessageBox.Show("Va rog introduceti un comentariu!");
-            }
-            DateTime date = DateTime.Now;
-            int nr_stele = trackBarStele.Value + 1;
-            string connectionString = null;
-            try
-            {
-                connectionString = Aranjare.GetConnectionString();
-            }
-            catch (Exception)
-            {
-                return;
-            }
-            int id_user = Afisare_Produse.GetCurrentUserId();
-
-            Interogari.AdaugaRecenzie(connectionString, id_user, produs.Id_Produs, recenzie, nr_stele, date);
-            textBoxRecenzie.Clear();
-            LoadReviews(produs.Id_Produs);
-        }
+       
         private static void DisplayReviews(FlowLayoutPanel flowLayoutPanel, List<Dictionary<string, object>> reviews)
         {
             flowLayoutPanel.Controls.Clear();
@@ -176,19 +160,77 @@ namespace shop_online
 
         private static Image GetStarRatingImage(int nrStele)
         {
-            // Create and return an image based on the star rating (nrStele)
-            // This is a placeholder implementation. Replace it with actual logic to generate or fetch star rating images.
-            Bitmap starImage = new Bitmap(100, 20);
+            // Create an image with appropriate width to hold all the stars
+            int starWidth = 20; // Width of each star
+            int starHeight = 20; // Height of each star
+            int imageWidth = nrStele * starWidth;
+            int imageHeight = starHeight;
+
+            Bitmap starImage = new Bitmap(imageWidth, imageHeight);
             using (Graphics g = Graphics.FromImage(starImage))
             {
                 g.Clear(Color.White);
+
                 for (int i = 0; i < nrStele; i++)
                 {
-                    g.FillRectangle(Brushes.Yellow, i * 20, 0, 18, 18); // Draw a simple rectangle to represent a star
+                    // Define the points of a star
+                    PointF[] starPoints = new PointF[]
+                    {
+                new PointF(10, 0),
+                new PointF(12, 7),
+                new PointF(20, 7),
+                new PointF(14, 11),
+                new PointF(16, 18),
+                new PointF(10, 14),
+                new PointF(4, 18),
+                new PointF(6, 11),
+                new PointF(0, 7),
+                new PointF(8, 7)
+                    };
+
+                    // Translate the star points to the correct position
+                    for (int j = 0; j < starPoints.Length; j++)
+                    {
+                        starPoints[j] = new PointF(starPoints[j].X + i * starWidth, starPoints[j].Y);
+                    }
+
+                    // Draw the star
+                    g.FillPolygon(Brushes.Yellow, starPoints);
+                    g.DrawPolygon(Pens.Black, starPoints); // Optional: add border to the star
                 }
             }
+
             return starImage;
         }
 
+
+        private void buttonAdaugaProdus_Click(object sender, EventArgs e)
+        {
+            string recenzie = textBoxRecenzie.Text;
+            if (string.IsNullOrEmpty(recenzie))
+            {
+                MessageBox.Show("Va rog introduceti un comentariu!");
+            }
+            DateTime date = DateTime.Now;
+            int nr_stele = trackBarStele.Value + 1;
+            string connectionString = null;
+            try
+            {
+                connectionString = Aranjare.GetConnectionString();
+            }
+            catch (Exception)
+            {
+                return;
+            }
+            int id_user = Afisare_Produse.GetCurrentUserId();
+
+            Interogari.AdaugaRecenzie(connectionString, id_user, produs.Id_Produs, recenzie, nr_stele, date);
+            textBoxRecenzie.Clear();
+            label10.Text = produs.Nota_Review.ToString();
+
+            LoadReviews(produs.Id_Produs);
+        }
+
+       
     }
 }

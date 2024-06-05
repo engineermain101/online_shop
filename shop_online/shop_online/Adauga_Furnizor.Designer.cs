@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelAdaugaFurnizor = new System.Windows.Forms.Panel();
+            this.labelTelefonFirma = new System.Windows.Forms.Label();
+            this.textBoxTelefon = new System.Windows.Forms.TextBox();
             this.textBoxJudet = new System.Windows.Forms.TextBox();
             this.labelNumeFirma = new System.Windows.Forms.Label();
             this.textBoxIBAN = new System.Windows.Forms.TextBox();
@@ -50,8 +53,7 @@
             this.labelEmailDelete = new System.Windows.Forms.Label();
             this.buttonSterge = new System.Windows.Forms.Button();
             this.labelNumeFirmaDelete = new System.Windows.Forms.Label();
-            this.labelTelefonFirma = new System.Windows.Forms.Label();
-            this.textBoxTelefon = new System.Windows.Forms.TextBox();
+            this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.panelAdaugaFurnizor.SuspendLayout();
             this.panelStergeFurnizor.SuspendLayout();
             this.SuspendLayout();
@@ -80,6 +82,23 @@
             this.panelAdaugaFurnizor.Size = new System.Drawing.Size(416, 545);
             this.panelAdaugaFurnizor.TabIndex = 0;
             // 
+            // labelTelefonFirma
+            // 
+            this.labelTelefonFirma.AutoSize = true;
+            this.labelTelefonFirma.Location = new System.Drawing.Point(22, 149);
+            this.labelTelefonFirma.Name = "labelTelefonFirma";
+            this.labelTelefonFirma.Size = new System.Drawing.Size(90, 16);
+            this.labelTelefonFirma.TabIndex = 31;
+            this.labelTelefonFirma.Text = "Telefon Firma";
+            // 
+            // textBoxTelefon
+            // 
+            this.textBoxTelefon.Location = new System.Drawing.Point(136, 147);
+            this.textBoxTelefon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxTelefon.Name = "textBoxTelefon";
+            this.textBoxTelefon.Size = new System.Drawing.Size(255, 22);
+            this.textBoxTelefon.TabIndex = 32;
+            // 
             // textBoxJudet
             // 
             this.textBoxJudet.Location = new System.Drawing.Point(136, 259);
@@ -92,7 +111,7 @@
             this.labelNumeFirma.AutoSize = true;
             this.labelNumeFirma.Location = new System.Drawing.Point(22, 35);
             this.labelNumeFirma.Name = "labelNumeFirma";
-            this.labelNumeFirma.Size = new System.Drawing.Size(84, 17);
+            this.labelNumeFirma.Size = new System.Drawing.Size(80, 16);
             this.labelNumeFirma.TabIndex = 25;
             this.labelNumeFirma.Text = "Nume Firma";
             // 
@@ -117,7 +136,7 @@
             this.labelEmailFirma.AutoSize = true;
             this.labelEmailFirma.Location = new System.Drawing.Point(22, 92);
             this.labelEmailFirma.Name = "labelEmailFirma";
-            this.labelEmailFirma.Size = new System.Drawing.Size(81, 17);
+            this.labelEmailFirma.Size = new System.Drawing.Size(78, 16);
             this.labelEmailFirma.TabIndex = 28;
             this.labelEmailFirma.Text = "Email Firma";
             // 
@@ -144,7 +163,7 @@
             this.labelNumar_Strada.AutoSize = true;
             this.labelNumar_Strada.Location = new System.Drawing.Point(22, 434);
             this.labelNumar_Strada.Name = "labelNumar_Strada";
-            this.labelNumar_Strada.Size = new System.Drawing.Size(50, 17);
+            this.labelNumar_Strada.Size = new System.Drawing.Size(47, 16);
             this.labelNumar_Strada.TabIndex = 23;
             this.labelNumar_Strada.Text = "Număr";
             // 
@@ -161,7 +180,7 @@
             this.labelStrada.AutoSize = true;
             this.labelStrada.Location = new System.Drawing.Point(22, 377);
             this.labelStrada.Name = "labelStrada";
-            this.labelStrada.Size = new System.Drawing.Size(50, 17);
+            this.labelStrada.Size = new System.Drawing.Size(47, 16);
             this.labelStrada.TabIndex = 21;
             this.labelStrada.Text = "Stradă";
             // 
@@ -178,7 +197,7 @@
             this.labelOras.AutoSize = true;
             this.labelOras.Location = new System.Drawing.Point(22, 320);
             this.labelOras.Name = "labelOras";
-            this.labelOras.Size = new System.Drawing.Size(39, 17);
+            this.labelOras.Size = new System.Drawing.Size(36, 16);
             this.labelOras.TabIndex = 19;
             this.labelOras.Text = "Oraș";
             // 
@@ -195,7 +214,7 @@
             this.labelJudet.AutoSize = true;
             this.labelJudet.Location = new System.Drawing.Point(22, 263);
             this.labelJudet.Name = "labelJudet";
-            this.labelJudet.Size = new System.Drawing.Size(43, 17);
+            this.labelJudet.Size = new System.Drawing.Size(40, 16);
             this.labelJudet.TabIndex = 17;
             this.labelJudet.Text = "Județ";
             // 
@@ -204,7 +223,7 @@
             this.labelIBAN.AutoSize = true;
             this.labelIBAN.Location = new System.Drawing.Point(22, 206);
             this.labelIBAN.Name = "labelIBAN";
-            this.labelIBAN.Size = new System.Drawing.Size(39, 17);
+            this.labelIBAN.Size = new System.Drawing.Size(38, 16);
             this.labelIBAN.TabIndex = 0;
             this.labelIBAN.Text = "IBAN";
             // 
@@ -241,7 +260,7 @@
             this.labelEmailDelete.AutoSize = true;
             this.labelEmailDelete.Location = new System.Drawing.Point(23, 200);
             this.labelEmailDelete.Name = "labelEmailDelete";
-            this.labelEmailDelete.Size = new System.Drawing.Size(81, 17);
+            this.labelEmailDelete.Size = new System.Drawing.Size(78, 16);
             this.labelEmailDelete.TabIndex = 28;
             this.labelEmailDelete.Text = "Email Firma";
             // 
@@ -260,26 +279,19 @@
             this.labelNumeFirmaDelete.AutoSize = true;
             this.labelNumeFirmaDelete.Location = new System.Drawing.Point(23, 138);
             this.labelNumeFirmaDelete.Name = "labelNumeFirmaDelete";
-            this.labelNumeFirmaDelete.Size = new System.Drawing.Size(84, 17);
+            this.labelNumeFirmaDelete.Size = new System.Drawing.Size(80, 16);
             this.labelNumeFirmaDelete.TabIndex = 25;
             this.labelNumeFirmaDelete.Text = "Nume Firma";
             // 
-            // labelTelefonFirma
+            // kryptonPalette1
             // 
-            this.labelTelefonFirma.AutoSize = true;
-            this.labelTelefonFirma.Location = new System.Drawing.Point(22, 149);
-            this.labelTelefonFirma.Name = "labelTelefonFirma";
-            this.labelTelefonFirma.Size = new System.Drawing.Size(95, 17);
-            this.labelTelefonFirma.TabIndex = 31;
-            this.labelTelefonFirma.Text = "Telefon Firma";
-            // 
-            // textBoxTelefon
-            // 
-            this.textBoxTelefon.Location = new System.Drawing.Point(136, 147);
-            this.textBoxTelefon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxTelefon.Name = "textBoxTelefon";
-            this.textBoxTelefon.Size = new System.Drawing.Size(255, 22);
-            this.textBoxTelefon.TabIndex = 32;
+            this.kryptonPalette1.FormStyles.FormMain.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
+            this.kryptonPalette1.FormStyles.FormMain.StateCommon.Back.Color2 = System.Drawing.Color.White;
+            this.kryptonPalette1.FormStyles.FormMain.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.kryptonPalette1.FormStyles.FormMain.StateCommon.Border.Rounding = 10;
+            this.kryptonPalette1.HeaderStyles.HeaderForm.StateCommon.Back.Color1 = System.Drawing.SystemColors.Info;
             // 
             // Adauga_Furnizor
             // 
@@ -289,6 +301,8 @@
             this.Controls.Add(this.panelStergeFurnizor);
             this.Controls.Add(this.panelAdaugaFurnizor);
             this.Name = "Adauga_Furnizor";
+            this.Palette = this.kryptonPalette1;
+            this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.Text = "Adauga_Furnizor";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Adauga_Furnizor_FormClosed);
             this.Load += new System.EventHandler(this.Adauga_Furnizor_Load);
@@ -326,5 +340,6 @@
         private System.Windows.Forms.TextBox textBoxIBAN;
         private System.Windows.Forms.Label labelTelefonFirma;
         private System.Windows.Forms.TextBox textBoxTelefon;
+        private ComponentFactory.Krypton.Toolkit.KryptonPalette kryptonPalette1;
     }
 }

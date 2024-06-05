@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+
 
 namespace shop_online
 {
-    public partial class Cos : Form
+    public partial class Cos : KryptonForm
     {
         private int utilizatorId = -1;
 
@@ -74,7 +76,65 @@ namespace shop_online
         {
             Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
         }
-        private void buttonElimina_Click( object sender, EventArgs e )
+
+        private void CalculatePretTotal()
+        {
+            decimal pret_total = flowLayoutPanelProduse.Controls.OfType<ProductControl>().Sum(pc => pc.GetProdus_Pret() * pc.GetNrBucatiCos());
+            labelPretTotal.Text = "Pret total: " + pret_total + " lei";
+        }
+
+        public void ResetFlowLayoutPanelProduse()
+        {
+            if (flowLayoutPanelProduse != null)
+                Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
+        }
+
+        private void buttonAddRecenzie_Click(object sender, EventArgs e)
+        {
+            if (flowLayoutPanelProduse.Controls.Count == 0)
+                return;
+
+            DialogResult result = MessageBox.Show("Doriți să cumpărați produsele selectate?", "Confirmare cumpărare", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.No)
+                return;
+
+            string connectionString = null;
+            try
+            {
+                connectionString = Aranjare.GetConnectionString();
+                if (connectionString == null)
+                    throw new Exception();
+            }
+            catch (Exception ex) { MessageBox.Show("Eroare la cumpararea produsului." + ex.Message); return; }
+
+            try
+            {
+                List<ProductControl> lista = new List<ProductControl>();
+                foreach (ProductControl control in flowLayoutPanelProduse.Controls)
+                {
+                    lista.Add(control);
+                    int a = control.GetBucatiProdusdinCos();
+                    int b = control.GetNrBucatiCos();
+                    if (a > b)
+                    {
+                        MessageBox.Show("Nu avem asa de multe produse in stoc.");
+                        return;
+                    }
+                }
+                Aranjare.Delete_from_flowLayoutPanel(flowLayoutPanelProduse);
+                Interogari.TranzactieCumparareProdus(connectionString, utilizatorId, lista, "cash");
+                MessageBox.Show("Tranzactia a fost realizata cu succes.");
+                flowLayoutPanelProduse.Controls.Clear();
+                Close();
+            }
+            catch (ArgumentException) { }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Eroare la efectuarea tranzactiei: " + ex.Message);
+            }
+        }
+
+        private void kryptonButton1_Click(object sender, EventArgs e)
         {
             if (flowLayoutPanelProduse.Controls.Count == 0)
                 return;
@@ -102,63 +162,5 @@ namespace shop_online
 
             CalculatePretTotal();
         }
-
-        private void buttonCumpara_Click( object sender, EventArgs e )
-        {
-            if (flowLayoutPanelProduse.Controls.Count == 0)
-                return;
-
-            DialogResult result = MessageBox.Show("Doriți să cumpărați produsele selectate?", "Confirmare cumpărare", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.No)
-                return;
-
-            string connectionString = null;
-            try
-            {
-                connectionString = Aranjare.GetConnectionString();
-                if (connectionString == null)
-                    throw new Exception();
-            }
-            catch (Exception ex) { MessageBox.Show("Eroare la cumpararea produsului." + ex.Message); return; }
-
-            try
-            {
-                List<ProductControl> lista = new List<ProductControl>();
-                foreach (ProductControl control in flowLayoutPanelProduse.Controls)
-                {
-                    lista.Add(control);
-                    int a = control.GetBucatiProdusdinCos();
-                    int b = control.GetNrBucatiCos();
-                    if (a>b)
-                    {
-                        MessageBox.Show("Nu avem asa de multe produse in stoc.");
-                        return;
-                    }
-                }
-                Aranjare.Delete_from_flowLayoutPanel(flowLayoutPanelProduse);
-                Interogari.TranzactieCumparareProdus(connectionString, utilizatorId, lista, "cash");
-                MessageBox.Show("Tranzactia a fost realizata cu succes.");
-                flowLayoutPanelProduse.Controls.Clear();
-                Close();
-            }
-            catch (ArgumentException) { }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Eroare la efectuarea tranzactiei: " + ex.Message);
-            }
-        }
-
-        private void CalculatePretTotal()
-        {
-            decimal pret_total = flowLayoutPanelProduse.Controls.OfType<ProductControl>().Sum(pc => pc.GetProdus_Pret() * pc.GetNrBucatiCos());
-            labelPretTotal.Text = "Pret total: " + pret_total + " lei";
-        }
-
-        public void ResetFlowLayoutPanelProduse()
-        {
-            if (flowLayoutPanelProduse != null)
-                Aranjare.ResetColorProductControl(flowLayoutPanelProduse);
-        }
-
     }
 }
