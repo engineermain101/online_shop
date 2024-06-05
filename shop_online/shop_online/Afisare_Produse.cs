@@ -232,9 +232,23 @@ namespace shop_online
                 categorieToolStripMenuItem.DropDownItems.Add(menuItem);
             }
         }
+//Claudiu
+        private void stergereProdusToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string connectionString;
+            try
+            {
+                connectionString = Aranjare.GetConnectionString();
+            }catch (Exception) { MessageBox.Show("Nu s-a putut lua connection stringu"); return; }
+            Interogari.DeleteAllProducts(connectionString);
+        }
+        public static int GetCurrentUserId()
+        {
+            return utilizatorCurentId;
+        }
 
 
-        //Claudiu
+        
 
         //Puia
 

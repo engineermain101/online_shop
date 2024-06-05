@@ -47,8 +47,8 @@
             // 
             // flowLayoutPanelProduse
             // 
-            this.flowLayoutPanelProduse.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.flowLayoutPanelProduse.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanelProduse.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.flowLayoutPanelProduse.Location = new System.Drawing.Point(0, 29);
@@ -61,7 +61,7 @@
             // menuStripAdaugaProduse
             // 
             this.menuStripAdaugaProduse.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStripAdaugaProduse.Items.AddRange(new System.Windows.Forms.ToolStripItem [] {
+            this.menuStripAdaugaProduse.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.produsToolStripMenuItem,
             this.adaugaToolStripMenuItem,
             this.stergereToolStripMenuItem,
@@ -75,7 +75,7 @@
             // 
             // produsToolStripMenuItem
             // 
-            this.produsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem [] {
+            this.produsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.categorieToolStripMenuItem});
             this.produsToolStripMenuItem.Name = "produsToolStripMenuItem";
             this.produsToolStripMenuItem.Size = new System.Drawing.Size(68, 24);
@@ -89,7 +89,7 @@
             // 
             // adaugaToolStripMenuItem
             // 
-            this.adaugaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem [] {
+            this.adaugaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.adaugaProdusToolStripMenuItem,
             this.adaugaFurnizorToolStripMenuItem,
             this.adaugaAdminToolStripMenuItem});
@@ -120,7 +120,7 @@
             // 
             // stergereToolStripMenuItem
             // 
-            this.stergereToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem [] {
+            this.stergereToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.stergereProdusToolStripMenuItem,
             this.stergereFurnizorToolStripMenuItem,
             this.stergereAdminToolStripMenuItem});
@@ -131,20 +131,21 @@
             // stergereProdusToolStripMenuItem
             // 
             this.stergereProdusToolStripMenuItem.Name = "stergereProdusToolStripMenuItem";
-            this.stergereProdusToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
+            this.stergereProdusToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.stergereProdusToolStripMenuItem.Text = "Produs";
+            this.stergereProdusToolStripMenuItem.Click += new System.EventHandler(this.stergereProdusToolStripMenuItem_Click);
             // 
             // stergereFurnizorToolStripMenuItem
             // 
             this.stergereFurnizorToolStripMenuItem.Name = "stergereFurnizorToolStripMenuItem";
-            this.stergereFurnizorToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
+            this.stergereFurnizorToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.stergereFurnizorToolStripMenuItem.Text = "Furnizor";
             this.stergereFurnizorToolStripMenuItem.Click += new System.EventHandler(this.stergereFurnizorToolStripMenuItem_Click);
             // 
             // stergereAdminToolStripMenuItem
             // 
             this.stergereAdminToolStripMenuItem.Name = "stergereAdminToolStripMenuItem";
-            this.stergereAdminToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
+            this.stergereAdminToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.stergereAdminToolStripMenuItem.Text = "Admin";
             this.stergereAdminToolStripMenuItem.Click += new System.EventHandler(this.stergereAdminToolStripMenuItem_Click);
             // 
