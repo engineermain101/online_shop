@@ -4,10 +4,12 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+
 
 namespace shop_online
 {
-    public partial class Afisare_Produse : Form
+    public partial class Afisare_Produse : KryptonForm
     {
         private static string emailUtilizator = "bbbb";
         private string parolaUtilizator = "0";
@@ -20,6 +22,7 @@ namespace shop_online
         private Adauga_Stergere_Admin adauga_Stergere_Admin = null;
         private Adauga_Furnizor Adauga_Furnizor = null;
         private FormLogin formlogin = null;
+        private bool userRequestedClose = false;
 
         public Afisare_Produse()
         {
@@ -34,18 +37,22 @@ namespace shop_online
             emailUtilizator = email;
             parolaUtilizator = parola;
             telefonUtilizator = telefon;
+            utilizatorCurentId = -1;
         }
         //Roli
-        private void Afisare_Produse_FormClosed( object sender, FormClosedEventArgs e )
+        private void Afisare_Produse_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (e.CloseReason == CloseReason.UserClosing)
+            if (e.CloseReason == CloseReason.UserClosing && !userRequestedClose)
             {
                 Application.Exit();
             }
         }
         private void Afisare_Produse_Load( object sender, EventArgs e )
         {
+
             LoadUser(emailUtilizator, parolaUtilizator, telefonUtilizator);
+            
+       
         }
         public void LoadUser( string email, string parola, string telefon )
         {
@@ -74,7 +81,13 @@ namespace shop_online
             catch (Exception) { return; }
 
             utilizatorCurentId = Interogari.GetUserID(connectionString, emailUtilizator, telefonUtilizator, parolaUtilizator);
+            label1.Text = Interogari.GetNameById(connectionString, utilizatorCurentId);
+            pictureBox1.Location = new Point(this.ClientSize.Width - pictureBox1.Width - 10, 10);
 
+            label1.Location = new Point(this.ClientSize.Width - label1.Width - 10, pictureBox1.Bottom) ;
+            // Setează ancorarea pentru PictureBox și Label
+            pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             if (utilizatorCurentId < 1)
             {
                 Application.Exit();
@@ -90,6 +103,7 @@ namespace shop_online
                 stergereToolStripMenuItem.Visible = true;
                 stergereProdusToolStripMenuItem.Visible = true;
                 furnizor = true;
+
                 return;
             }
 
@@ -103,9 +117,11 @@ namespace shop_online
                 stergereProdusToolStripMenuItem.Visible = true;
                 stergereFurnizorToolStripMenuItem.Visible = true;
                 stergereAdminToolStripMenuItem.Visible = true;
+                stergereProdusToolStripMenuItem.Visible = false;
 
                 return;
             }
+
 
         }
         private void flowLayoutPanelProduse_Click( object sender, EventArgs e )
@@ -184,6 +200,8 @@ namespace shop_online
 
             Size size = new Size(500, 300);
             Aranjare.HideCurrentFormAndOpenNewForm(FindForm(), formlogin, (object)-1, size);
+            userRequestedClose = true;
+            Close();
 
         }
 
@@ -232,9 +250,38 @@ namespace shop_online
                 categorieToolStripMenuItem.DropDownItems.Add(menuItem);
             }
         }
+//Claudiu
+        private void stergereProdusToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Aranjare.HideCurrentFormAndOpenNewForm(this, new Stergere_Produs(GetUtilizatorID()),(object)true, MinimumSize);
+        }
+        public static int GetCurrentUserId()
+        {
+            return utilizatorCurentId;
+        }
+
+        private void threaduriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Afisare_Produse_Resize(object sender, EventArgs e)
+        {
+            pictureBox1.Location = new Point(this.ClientSize.Width - pictureBox1.Width - 10, 10);
+            label1.Location = new Point(this.ClientSize.Width - label1.Width - 10, pictureBox1.Bottom );
+
+        }
+
+        
 
 
-        //Claudiu
+
+
+
+
+
+
+
 
         //Puia
 

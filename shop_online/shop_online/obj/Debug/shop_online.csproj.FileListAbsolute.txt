@@ -314,6 +314,11 @@ C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\sho
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\System.Xml.XmlSerializer.dll
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\System.Xml.XPath.dll
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\System.Xml.XPath.XDocument.dll
+C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\ComponentFactory.Krypton.Docking.dll
+C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\ComponentFactory.Krypton.Navigator.dll
+C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\ComponentFactory.Krypton.Ribbon.dll
+C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\ComponentFactory.Krypton.Toolkit.dll
+C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\ComponentFactory.Krypton.Workspace.dll
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\nunit.framework.dll
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\System.Buffers.dll
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\System.Configuration.ConfigurationManager.dll
@@ -326,6 +331,11 @@ C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\sho
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\xunit.assert.dll
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\xunit.core.dll
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\xunit.execution.desktop.dll
+C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\ComponentFactory.Krypton.Docking.pdb
+C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\ComponentFactory.Krypton.Navigator.pdb
+C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\ComponentFactory.Krypton.Ribbon.pdb
+C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\ComponentFactory.Krypton.Toolkit.pdb
+C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\ComponentFactory.Krypton.Workspace.pdb
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\nunit.framework.xml
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\System.Buffers.xml
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\bin\Debug\System.Memory.xml
@@ -350,6 +360,7 @@ C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\sho
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.ProductControl.resources
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.ProdusCos.resources
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.Properties.Resources.resources
+C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.Stergere_Produs.resources
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.csproj.GenerateResource.cache
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.csproj.CoreCompileInputs.cache
 C:\Users\claudiu\Desktop\Facultate\An3\II\OnlineShop\online_shop\shop_online\shop_online\obj\Debug\shop_online.csproj.CopyComplete

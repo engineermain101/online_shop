@@ -28,330 +28,610 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelMenu = new System.Windows.Forms.Panel();
-            this.buttonSignUpPanelMenu = new System.Windows.Forms.Button();
-            this.buttonLoginPanelMenu = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.buttonLoginPanelMenu = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.buttonSignUpPanelMenu = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.textBoxParola = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.textBoxTelefon = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.labelTelefon = new System.Windows.Forms.Label();
             this.labelParola = new System.Windows.Forms.Label();
-            this.textBoxParola = new System.Windows.Forms.TextBox();
-            this.textBoxTelefon = new System.Windows.Forms.TextBox();
             this.panelSignUp = new System.Windows.Forms.Panel();
-            this.buttonSgnFurnizor = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.buttonBack = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.buttonSignUpPanelSignUp = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.textBoxNumar_Strada = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.textBoxStrada = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.textBoxOras = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.textBoxJudet = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.textBoxEmail = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.textBoxParola2 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.textBoxTelefon2 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.textBoxNume = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.labelTelefon2 = new System.Windows.Forms.Label();
-            this.buttonSignUpPanelSignUp = new System.Windows.Forms.Button();
             this.labelParola2 = new System.Windows.Forms.Label();
-            this.buttonBack = new System.Windows.Forms.Button();
-            this.textBoxParola2 = new System.Windows.Forms.TextBox();
-            this.textBoxNumar_Strada = new System.Windows.Forms.TextBox();
-            this.textBoxTelefon2 = new System.Windows.Forms.TextBox();
             this.labelNumar_Strada = new System.Windows.Forms.Label();
-            this.textBoxStrada = new System.Windows.Forms.TextBox();
             this.labelStrada = new System.Windows.Forms.Label();
-            this.textBoxEmail = new System.Windows.Forms.TextBox();
-            this.textBoxOras = new System.Windows.Forms.TextBox();
             this.labelOras = new System.Windows.Forms.Label();
             this.labelEmail = new System.Windows.Forms.Label();
-            this.textBoxJudet = new System.Windows.Forms.TextBox();
             this.labelJudet = new System.Windows.Forms.Label();
-            this.textBoxNume = new System.Windows.Forms.TextBox();
             this.labelNume = new System.Windows.Forms.Label();
+            this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.panelMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelSignUp.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMenu
             // 
-            this.panelMenu.BackColor = System.Drawing.SystemColors.Control;
-            this.panelMenu.Controls.Add(this.buttonSignUpPanelMenu);
+            this.panelMenu.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.panelMenu.Controls.Add(this.label1);
+            this.panelMenu.Controls.Add(this.pictureBox1);
             this.panelMenu.Controls.Add(this.buttonLoginPanelMenu);
-            this.panelMenu.Controls.Add(this.labelTelefon);
-            this.panelMenu.Controls.Add(this.labelParola);
+            this.panelMenu.Controls.Add(this.buttonSignUpPanelMenu);
             this.panelMenu.Controls.Add(this.textBoxParola);
             this.panelMenu.Controls.Add(this.textBoxTelefon);
-            this.panelMenu.Location = new System.Drawing.Point(29, 11);
-            this.panelMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelMenu.Controls.Add(this.labelTelefon);
+            this.panelMenu.Controls.Add(this.labelParola);
+            this.panelMenu.Location = new System.Drawing.Point(39, 14);
+            this.panelMenu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(358, 225);
+            this.panelMenu.Size = new System.Drawing.Size(478, 458);
             this.panelMenu.TabIndex = 0;
             // 
-            // buttonSignUpPanelMenu
+            // label1
             // 
-            this.buttonSignUpPanelMenu.Location = new System.Drawing.Point(48, 154);
-            this.buttonSignUpPanelMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.buttonSignUpPanelMenu.Name = "buttonSignUpPanelMenu";
-            this.buttonSignUpPanelMenu.Size = new System.Drawing.Size(103, 34);
-            this.buttonSignUpPanelMenu.TabIndex = 1;
-            this.buttonSignUpPanelMenu.Text = "SignUp";
-            this.buttonSignUpPanelMenu.UseVisualStyleBackColor = true;
-            this.buttonSignUpPanelMenu.Click += new System.EventHandler(this.buttonSignUp_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial Narrow", 13.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(15, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(109, 27);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Welcome to";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::shop_online.Properties.Resources.image_white_bg;
+            this.pictureBox1.Location = new System.Drawing.Point(65, 55);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(365, 168);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 11;
+            this.pictureBox1.TabStop = false;
             // 
             // buttonLoginPanelMenu
             // 
-            this.buttonLoginPanelMenu.Location = new System.Drawing.Point(198, 154);
-            this.buttonLoginPanelMenu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonLoginPanelMenu.Location = new System.Drawing.Point(267, 373);
             this.buttonLoginPanelMenu.Name = "buttonLoginPanelMenu";
-            this.buttonLoginPanelMenu.Size = new System.Drawing.Size(103, 34);
-            this.buttonLoginPanelMenu.TabIndex = 0;
-            this.buttonLoginPanelMenu.Text = "Login ";
-            this.buttonLoginPanelMenu.UseVisualStyleBackColor = true;
-            this.buttonLoginPanelMenu.Click += new System.EventHandler(this.buttonAcces_Click);
+            this.buttonLoginPanelMenu.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(174)))), ((int)(((byte)(244)))));
+            this.buttonLoginPanelMenu.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
+            this.buttonLoginPanelMenu.OverrideDefault.Back.ColorAngle = 45F;
+            this.buttonLoginPanelMenu.OverrideDefault.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(174)))), ((int)(((byte)(244)))));
+            this.buttonLoginPanelMenu.OverrideDefault.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
+            this.buttonLoginPanelMenu.OverrideDefault.Border.ColorAngle = 45F;
+            this.buttonLoginPanelMenu.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.buttonLoginPanelMenu.OverrideDefault.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.buttonLoginPanelMenu.OverrideDefault.Border.Rounding = 20;
+            this.buttonLoginPanelMenu.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.ProfessionalSystem;
+            this.buttonLoginPanelMenu.Size = new System.Drawing.Size(138, 42);
+            this.buttonLoginPanelMenu.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(174)))), ((int)(((byte)(244)))));
+            this.buttonLoginPanelMenu.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
+            this.buttonLoginPanelMenu.StateCommon.Back.ColorAngle = 45F;
+            this.buttonLoginPanelMenu.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(174)))), ((int)(((byte)(244)))));
+            this.buttonLoginPanelMenu.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
+            this.buttonLoginPanelMenu.StateCommon.Border.ColorAngle = 45F;
+            this.buttonLoginPanelMenu.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.buttonLoginPanelMenu.StateCommon.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.buttonLoginPanelMenu.StateCommon.Border.Rounding = 20;
+            this.buttonLoginPanelMenu.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.buttonLoginPanelMenu.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            this.buttonLoginPanelMenu.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonLoginPanelMenu.StatePressed.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(145)))), ((int)(((byte)(198)))));
+            this.buttonLoginPanelMenu.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(121)))), ((int)(((byte)(206)))));
+            this.buttonLoginPanelMenu.StatePressed.Back.ColorAngle = 135F;
+            this.buttonLoginPanelMenu.StatePressed.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(145)))), ((int)(((byte)(198)))));
+            this.buttonLoginPanelMenu.StatePressed.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(121)))), ((int)(((byte)(206)))));
+            this.buttonLoginPanelMenu.StatePressed.Border.ColorAngle = 135F;
+            this.buttonLoginPanelMenu.StatePressed.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.buttonLoginPanelMenu.StatePressed.Border.Rounding = 20;
+            this.buttonLoginPanelMenu.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
+            this.buttonLoginPanelMenu.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(174)))), ((int)(((byte)(244)))));
+            this.buttonLoginPanelMenu.StateTracking.Back.ColorAngle = 45F;
+            this.buttonLoginPanelMenu.StateTracking.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(174)))), ((int)(((byte)(244)))));
+            this.buttonLoginPanelMenu.StateTracking.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
+            this.buttonLoginPanelMenu.StateTracking.Border.ColorAngle = 45F;
+            this.buttonLoginPanelMenu.StateTracking.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.buttonLoginPanelMenu.StateTracking.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.buttonLoginPanelMenu.StateTracking.Border.Rounding = 20;
+            this.buttonLoginPanelMenu.TabIndex = 10;
+            this.buttonLoginPanelMenu.Values.Text = "Login";
+            this.buttonLoginPanelMenu.Click += new System.EventHandler(this.buttonLoginPanelMenu_Click);
+            // 
+            // buttonSignUpPanelMenu
+            // 
+            this.buttonSignUpPanelMenu.Location = new System.Drawing.Point(73, 373);
+            this.buttonSignUpPanelMenu.Name = "buttonSignUpPanelMenu";
+            this.buttonSignUpPanelMenu.OverrideDefault.Back.Color1 = System.Drawing.Color.White;
+            this.buttonSignUpPanelMenu.OverrideDefault.Back.Color2 = System.Drawing.Color.White;
+            this.buttonSignUpPanelMenu.OverrideDefault.Back.ColorAngle = 45F;
+            this.buttonSignUpPanelMenu.OverrideDefault.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(174)))), ((int)(((byte)(244)))));
+            this.buttonSignUpPanelMenu.OverrideDefault.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
+            this.buttonSignUpPanelMenu.OverrideDefault.Border.ColorAngle = 45F;
+            this.buttonSignUpPanelMenu.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.buttonSignUpPanelMenu.OverrideDefault.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.buttonSignUpPanelMenu.OverrideDefault.Border.Rounding = 20;
+            this.buttonSignUpPanelMenu.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.ProfessionalSystem;
+            this.buttonSignUpPanelMenu.Size = new System.Drawing.Size(138, 42);
+            this.buttonSignUpPanelMenu.StateCommon.Back.Color1 = System.Drawing.Color.White;
+            this.buttonSignUpPanelMenu.StateCommon.Back.Color2 = System.Drawing.Color.White;
+            this.buttonSignUpPanelMenu.StateCommon.Back.ColorAngle = 45F;
+            this.buttonSignUpPanelMenu.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(174)))), ((int)(((byte)(244)))));
+            this.buttonSignUpPanelMenu.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
+            this.buttonSignUpPanelMenu.StateCommon.Border.ColorAngle = 45F;
+            this.buttonSignUpPanelMenu.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.buttonSignUpPanelMenu.StateCommon.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.buttonSignUpPanelMenu.StateCommon.Border.Rounding = 20;
+            this.buttonSignUpPanelMenu.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.buttonSignUpPanelMenu.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            this.buttonSignUpPanelMenu.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSignUpPanelMenu.StatePressed.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(145)))), ((int)(((byte)(198)))));
+            this.buttonSignUpPanelMenu.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(121)))), ((int)(((byte)(206)))));
+            this.buttonSignUpPanelMenu.StatePressed.Back.ColorAngle = 135F;
+            this.buttonSignUpPanelMenu.StatePressed.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(145)))), ((int)(((byte)(198)))));
+            this.buttonSignUpPanelMenu.StatePressed.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(121)))), ((int)(((byte)(206)))));
+            this.buttonSignUpPanelMenu.StatePressed.Border.ColorAngle = 135F;
+            this.buttonSignUpPanelMenu.StatePressed.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.buttonSignUpPanelMenu.StatePressed.Border.Rounding = 20;
+            this.buttonSignUpPanelMenu.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
+            this.buttonSignUpPanelMenu.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(174)))), ((int)(((byte)(244)))));
+            this.buttonSignUpPanelMenu.StateTracking.Back.ColorAngle = 45F;
+            this.buttonSignUpPanelMenu.StateTracking.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(174)))), ((int)(((byte)(244)))));
+            this.buttonSignUpPanelMenu.StateTracking.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
+            this.buttonSignUpPanelMenu.StateTracking.Border.ColorAngle = 45F;
+            this.buttonSignUpPanelMenu.StateTracking.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.buttonSignUpPanelMenu.StateTracking.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.buttonSignUpPanelMenu.StateTracking.Border.Rounding = 20;
+            this.buttonSignUpPanelMenu.TabIndex = 9;
+            this.buttonSignUpPanelMenu.Values.Text = "SignUp";
+            this.buttonSignUpPanelMenu.Click += new System.EventHandler(this.buttonSignUpPanelMenu_Click);
+            // 
+            // textBoxParola
+            // 
+            this.textBoxParola.Location = new System.Drawing.Point(267, 298);
+            this.textBoxParola.Name = "textBoxParola";
+            this.textBoxParola.PasswordChar = '*';
+            this.textBoxParola.Size = new System.Drawing.Size(163, 28);
+            this.textBoxParola.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.textBoxParola.StateCommon.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.textBoxParola.StateCommon.Border.Rounding = 10;
+            this.textBoxParola.StateCommon.Content.Color1 = System.Drawing.Color.Black;
+            this.textBoxParola.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxParola.TabIndex = 8;
+            // 
+            // textBoxTelefon
+            // 
+            this.textBoxTelefon.Location = new System.Drawing.Point(267, 237);
+            this.textBoxTelefon.Name = "textBoxTelefon";
+            this.textBoxTelefon.Size = new System.Drawing.Size(163, 28);
+            this.textBoxTelefon.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.textBoxTelefon.StateCommon.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.textBoxTelefon.StateCommon.Border.Rounding = 10;
+            this.textBoxTelefon.StateCommon.Content.Color1 = System.Drawing.Color.Black;
+            this.textBoxTelefon.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxTelefon.TabIndex = 7;
             // 
             // labelTelefon
             // 
             this.labelTelefon.AutoSize = true;
-            this.labelTelefon.Location = new System.Drawing.Point(85, 50);
-            this.labelTelefon.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelTelefon.Font = new System.Drawing.Font("Arial Narrow", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTelefon.Location = new System.Drawing.Point(112, 244);
             this.labelTelefon.Name = "labelTelefon";
-            this.labelTelefon.Size = new System.Drawing.Size(91, 13);
+            this.labelTelefon.Size = new System.Drawing.Size(124, 22);
             this.labelTelefon.TabIndex = 3;
             this.labelTelefon.Text = "Telefon sau Email";
             // 
             // labelParola
             // 
             this.labelParola.AutoSize = true;
-            this.labelParola.Location = new System.Drawing.Point(85, 93);
-            this.labelParola.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelParola.Font = new System.Drawing.Font("Arial Narrow", 10.2F);
+            this.labelParola.Location = new System.Drawing.Point(112, 298);
             this.labelParola.Name = "labelParola";
-            this.labelParola.Size = new System.Drawing.Size(37, 13);
+            this.labelParola.Size = new System.Drawing.Size(51, 22);
             this.labelParola.TabIndex = 5;
             this.labelParola.Text = "Parola";
             // 
-            // textBoxParola
-            // 
-            this.textBoxParola.Location = new System.Drawing.Point(201, 93);
-            this.textBoxParola.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBoxParola.Name = "textBoxParola";
-            this.textBoxParola.PasswordChar = '$';
-            this.textBoxParola.Size = new System.Drawing.Size(104, 20);
-            this.textBoxParola.TabIndex = 6;
-            // 
-            // textBoxTelefon
-            // 
-            this.textBoxTelefon.Location = new System.Drawing.Point(201, 48);
-            this.textBoxTelefon.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBoxTelefon.Name = "textBoxTelefon";
-            this.textBoxTelefon.Size = new System.Drawing.Size(104, 20);
-            this.textBoxTelefon.TabIndex = 4;
-            // 
             // panelSignUp
             // 
-            this.panelSignUp.BackColor = System.Drawing.SystemColors.Control;
-            this.panelSignUp.Controls.Add(this.buttonSgnFurnizor);
-            this.panelSignUp.Controls.Add(this.labelTelefon2);
-            this.panelSignUp.Controls.Add(this.buttonSignUpPanelSignUp);
-            this.panelSignUp.Controls.Add(this.labelParola2);
+            this.panelSignUp.BackColor = System.Drawing.Color.White;
+            this.panelSignUp.Controls.Add(this.label2);
             this.panelSignUp.Controls.Add(this.buttonBack);
-            this.panelSignUp.Controls.Add(this.textBoxParola2);
+            this.panelSignUp.Controls.Add(this.buttonSignUpPanelSignUp);
             this.panelSignUp.Controls.Add(this.textBoxNumar_Strada);
-            this.panelSignUp.Controls.Add(this.textBoxTelefon2);
-            this.panelSignUp.Controls.Add(this.labelNumar_Strada);
             this.panelSignUp.Controls.Add(this.textBoxStrada);
-            this.panelSignUp.Controls.Add(this.labelStrada);
-            this.panelSignUp.Controls.Add(this.textBoxEmail);
             this.panelSignUp.Controls.Add(this.textBoxOras);
+            this.panelSignUp.Controls.Add(this.textBoxJudet);
+            this.panelSignUp.Controls.Add(this.textBoxEmail);
+            this.panelSignUp.Controls.Add(this.textBoxParola2);
+            this.panelSignUp.Controls.Add(this.textBoxTelefon2);
+            this.panelSignUp.Controls.Add(this.textBoxNume);
+            this.panelSignUp.Controls.Add(this.labelTelefon2);
+            this.panelSignUp.Controls.Add(this.labelParola2);
+            this.panelSignUp.Controls.Add(this.labelNumar_Strada);
+            this.panelSignUp.Controls.Add(this.labelStrada);
             this.panelSignUp.Controls.Add(this.labelOras);
             this.panelSignUp.Controls.Add(this.labelEmail);
-            this.panelSignUp.Controls.Add(this.textBoxJudet);
             this.panelSignUp.Controls.Add(this.labelJudet);
-            this.panelSignUp.Controls.Add(this.textBoxNume);
             this.panelSignUp.Controls.Add(this.labelNume);
-            this.panelSignUp.Location = new System.Drawing.Point(440, 120);
-            this.panelSignUp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelSignUp.Location = new System.Drawing.Point(551, 28);
+            this.panelSignUp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelSignUp.Name = "panelSignUp";
-            this.panelSignUp.Size = new System.Drawing.Size(352, 366);
+            this.panelSignUp.Size = new System.Drawing.Size(577, 484);
             this.panelSignUp.TabIndex = 2;
             // 
-            // buttonSgnFurnizor
+            // label2
             // 
-            this.buttonSgnFurnizor.Location = new System.Drawing.Point(223, 265);
-            this.buttonSgnFurnizor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.buttonSgnFurnizor.Name = "buttonSgnFurnizor";
-            this.buttonSgnFurnizor.Size = new System.Drawing.Size(116, 83);
-            this.buttonSgnFurnizor.TabIndex = 18;
-            this.buttonSgnFurnizor.Text = "SignUp Furnizor";
-            this.buttonSgnFurnizor.UseVisualStyleBackColor = true;
-            this.buttonSgnFurnizor.Click += new System.EventHandler(this.buttonSgnFurnizor_Click);
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial Narrow", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(170, 50);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(291, 46);
+            this.label2.TabIndex = 28;
+            this.label2.Text = "Register Account";
+            // 
+            // buttonBack
+            // 
+            this.buttonBack.Location = new System.Drawing.Point(356, 389);
+            this.buttonBack.Name = "buttonBack";
+            this.buttonBack.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(174)))), ((int)(((byte)(244)))));
+            this.buttonBack.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
+            this.buttonBack.OverrideDefault.Back.ColorAngle = 45F;
+            this.buttonBack.OverrideDefault.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(174)))), ((int)(((byte)(244)))));
+            this.buttonBack.OverrideDefault.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
+            this.buttonBack.OverrideDefault.Border.ColorAngle = 45F;
+            this.buttonBack.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.buttonBack.OverrideDefault.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.buttonBack.OverrideDefault.Border.Rounding = 20;
+            this.buttonBack.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.ProfessionalSystem;
+            this.buttonBack.Size = new System.Drawing.Size(156, 60);
+            this.buttonBack.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(174)))), ((int)(((byte)(244)))));
+            this.buttonBack.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
+            this.buttonBack.StateCommon.Back.ColorAngle = 45F;
+            this.buttonBack.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(174)))), ((int)(((byte)(244)))));
+            this.buttonBack.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
+            this.buttonBack.StateCommon.Border.ColorAngle = 45F;
+            this.buttonBack.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.buttonBack.StateCommon.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.buttonBack.StateCommon.Border.Rounding = 20;
+            this.buttonBack.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.buttonBack.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            this.buttonBack.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonBack.StatePressed.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(145)))), ((int)(((byte)(198)))));
+            this.buttonBack.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(121)))), ((int)(((byte)(206)))));
+            this.buttonBack.StatePressed.Back.ColorAngle = 135F;
+            this.buttonBack.StatePressed.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(145)))), ((int)(((byte)(198)))));
+            this.buttonBack.StatePressed.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(121)))), ((int)(((byte)(206)))));
+            this.buttonBack.StatePressed.Border.ColorAngle = 135F;
+            this.buttonBack.StatePressed.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.buttonBack.StatePressed.Border.Rounding = 20;
+            this.buttonBack.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
+            this.buttonBack.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(174)))), ((int)(((byte)(244)))));
+            this.buttonBack.StateTracking.Back.ColorAngle = 45F;
+            this.buttonBack.StateTracking.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(174)))), ((int)(((byte)(244)))));
+            this.buttonBack.StateTracking.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
+            this.buttonBack.StateTracking.Border.ColorAngle = 45F;
+            this.buttonBack.StateTracking.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.buttonBack.StateTracking.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.buttonBack.StateTracking.Border.Rounding = 20;
+            this.buttonBack.TabIndex = 27;
+            this.buttonBack.Values.Text = "Back";
+            this.buttonBack.Click += new System.EventHandler(this.kryptonButton1_Click_1);
+            // 
+            // buttonSignUpPanelSignUp
+            // 
+            this.buttonSignUpPanelSignUp.Location = new System.Drawing.Point(132, 389);
+            this.buttonSignUpPanelSignUp.Name = "buttonSignUpPanelSignUp";
+            this.buttonSignUpPanelSignUp.OverrideDefault.Back.Color1 = System.Drawing.Color.White;
+            this.buttonSignUpPanelSignUp.OverrideDefault.Back.Color2 = System.Drawing.Color.White;
+            this.buttonSignUpPanelSignUp.OverrideDefault.Back.ColorAngle = 45F;
+            this.buttonSignUpPanelSignUp.OverrideDefault.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(174)))), ((int)(((byte)(244)))));
+            this.buttonSignUpPanelSignUp.OverrideDefault.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
+            this.buttonSignUpPanelSignUp.OverrideDefault.Border.ColorAngle = 45F;
+            this.buttonSignUpPanelSignUp.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.buttonSignUpPanelSignUp.OverrideDefault.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.buttonSignUpPanelSignUp.OverrideDefault.Border.Rounding = 20;
+            this.buttonSignUpPanelSignUp.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.ProfessionalSystem;
+            this.buttonSignUpPanelSignUp.Size = new System.Drawing.Size(150, 60);
+            this.buttonSignUpPanelSignUp.StateCommon.Back.Color1 = System.Drawing.Color.White;
+            this.buttonSignUpPanelSignUp.StateCommon.Back.Color2 = System.Drawing.Color.White;
+            this.buttonSignUpPanelSignUp.StateCommon.Back.ColorAngle = 45F;
+            this.buttonSignUpPanelSignUp.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(174)))), ((int)(((byte)(244)))));
+            this.buttonSignUpPanelSignUp.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
+            this.buttonSignUpPanelSignUp.StateCommon.Border.ColorAngle = 45F;
+            this.buttonSignUpPanelSignUp.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.buttonSignUpPanelSignUp.StateCommon.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.buttonSignUpPanelSignUp.StateCommon.Border.Rounding = 20;
+            this.buttonSignUpPanelSignUp.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.buttonSignUpPanelSignUp.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            this.buttonSignUpPanelSignUp.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSignUpPanelSignUp.StatePressed.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(145)))), ((int)(((byte)(198)))));
+            this.buttonSignUpPanelSignUp.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(121)))), ((int)(((byte)(206)))));
+            this.buttonSignUpPanelSignUp.StatePressed.Back.ColorAngle = 135F;
+            this.buttonSignUpPanelSignUp.StatePressed.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(145)))), ((int)(((byte)(198)))));
+            this.buttonSignUpPanelSignUp.StatePressed.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(121)))), ((int)(((byte)(206)))));
+            this.buttonSignUpPanelSignUp.StatePressed.Border.ColorAngle = 135F;
+            this.buttonSignUpPanelSignUp.StatePressed.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.buttonSignUpPanelSignUp.StatePressed.Border.Rounding = 20;
+            this.buttonSignUpPanelSignUp.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
+            this.buttonSignUpPanelSignUp.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(174)))), ((int)(((byte)(244)))));
+            this.buttonSignUpPanelSignUp.StateTracking.Back.ColorAngle = 45F;
+            this.buttonSignUpPanelSignUp.StateTracking.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(174)))), ((int)(((byte)(244)))));
+            this.buttonSignUpPanelSignUp.StateTracking.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(142)))), ((int)(((byte)(254)))));
+            this.buttonSignUpPanelSignUp.StateTracking.Border.ColorAngle = 45F;
+            this.buttonSignUpPanelSignUp.StateTracking.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.buttonSignUpPanelSignUp.StateTracking.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.buttonSignUpPanelSignUp.StateTracking.Border.Rounding = 20;
+            this.buttonSignUpPanelSignUp.TabIndex = 26;
+            this.buttonSignUpPanelSignUp.Values.Text = "SignUp";
+            this.buttonSignUpPanelSignUp.Click += new System.EventHandler(this.kryptonButton1_Click);
+            // 
+            // textBoxNumar_Strada
+            // 
+            this.textBoxNumar_Strada.Location = new System.Drawing.Point(402, 315);
+            this.textBoxNumar_Strada.Name = "textBoxNumar_Strada";
+            this.textBoxNumar_Strada.Size = new System.Drawing.Size(150, 28);
+            this.textBoxNumar_Strada.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.textBoxNumar_Strada.StateCommon.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.textBoxNumar_Strada.StateCommon.Border.Rounding = 10;
+            this.textBoxNumar_Strada.StateCommon.Content.Color1 = System.Drawing.Color.Black;
+            this.textBoxNumar_Strada.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxNumar_Strada.TabIndex = 25;
+            // 
+            // textBoxStrada
+            // 
+            this.textBoxStrada.Location = new System.Drawing.Point(402, 259);
+            this.textBoxStrada.Name = "textBoxStrada";
+            this.textBoxStrada.Size = new System.Drawing.Size(150, 28);
+            this.textBoxStrada.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.textBoxStrada.StateCommon.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.textBoxStrada.StateCommon.Border.Rounding = 10;
+            this.textBoxStrada.StateCommon.Content.Color1 = System.Drawing.Color.Black;
+            this.textBoxStrada.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxStrada.TabIndex = 24;
+            // 
+            // textBoxOras
+            // 
+            this.textBoxOras.Location = new System.Drawing.Point(402, 203);
+            this.textBoxOras.Name = "textBoxOras";
+            this.textBoxOras.Size = new System.Drawing.Size(150, 28);
+            this.textBoxOras.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.textBoxOras.StateCommon.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.textBoxOras.StateCommon.Border.Rounding = 10;
+            this.textBoxOras.StateCommon.Content.Color1 = System.Drawing.Color.Black;
+            this.textBoxOras.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxOras.TabIndex = 23;
+            // 
+            // textBoxJudet
+            // 
+            this.textBoxJudet.Location = new System.Drawing.Point(402, 147);
+            this.textBoxJudet.Name = "textBoxJudet";
+            this.textBoxJudet.Size = new System.Drawing.Size(150, 28);
+            this.textBoxJudet.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.textBoxJudet.StateCommon.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.textBoxJudet.StateCommon.Border.Rounding = 10;
+            this.textBoxJudet.StateCommon.Content.Color1 = System.Drawing.Color.Black;
+            this.textBoxJudet.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxJudet.TabIndex = 22;
+            // 
+            // textBoxEmail
+            // 
+            this.textBoxEmail.Location = new System.Drawing.Point(132, 312);
+            this.textBoxEmail.Name = "textBoxEmail";
+            this.textBoxEmail.Size = new System.Drawing.Size(150, 28);
+            this.textBoxEmail.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.textBoxEmail.StateCommon.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.textBoxEmail.StateCommon.Border.Rounding = 10;
+            this.textBoxEmail.StateCommon.Content.Color1 = System.Drawing.Color.Black;
+            this.textBoxEmail.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxEmail.TabIndex = 21;
+            // 
+            // textBoxParola2
+            // 
+            this.textBoxParola2.Location = new System.Drawing.Point(132, 259);
+            this.textBoxParola2.Name = "textBoxParola2";
+            this.textBoxParola2.Size = new System.Drawing.Size(150, 28);
+            this.textBoxParola2.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.textBoxParola2.StateCommon.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.textBoxParola2.StateCommon.Border.Rounding = 10;
+            this.textBoxParola2.StateCommon.Content.Color1 = System.Drawing.Color.Black;
+            this.textBoxParola2.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxParola2.TabIndex = 20;
+            // 
+            // textBoxTelefon2
+            // 
+            this.textBoxTelefon2.Location = new System.Drawing.Point(132, 203);
+            this.textBoxTelefon2.Name = "textBoxTelefon2";
+            this.textBoxTelefon2.Size = new System.Drawing.Size(150, 28);
+            this.textBoxTelefon2.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.textBoxTelefon2.StateCommon.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.textBoxTelefon2.StateCommon.Border.Rounding = 10;
+            this.textBoxTelefon2.StateCommon.Content.Color1 = System.Drawing.Color.Black;
+            this.textBoxTelefon2.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxTelefon2.TabIndex = 19;
+            // 
+            // textBoxNume
+            // 
+            this.textBoxNume.Location = new System.Drawing.Point(132, 147);
+            this.textBoxNume.Name = "textBoxNume";
+            this.textBoxNume.Size = new System.Drawing.Size(150, 28);
+            this.textBoxNume.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.textBoxNume.StateCommon.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.textBoxNume.StateCommon.Border.Rounding = 10;
+            this.textBoxNume.StateCommon.Content.Color1 = System.Drawing.Color.Black;
+            this.textBoxNume.StateCommon.Content.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxNume.TabIndex = 18;
             // 
             // labelTelefon2
             // 
             this.labelTelefon2.AutoSize = true;
-            this.labelTelefon2.Location = new System.Drawing.Point(20, 59);
-            this.labelTelefon2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelTelefon2.Font = new System.Drawing.Font("Arial Narrow", 10.2F);
+            this.labelTelefon2.Location = new System.Drawing.Point(37, 203);
             this.labelTelefon2.Name = "labelTelefon2";
-            this.labelTelefon2.Size = new System.Drawing.Size(43, 13);
+            this.labelTelefon2.Size = new System.Drawing.Size(57, 22);
             this.labelTelefon2.TabIndex = 7;
             this.labelTelefon2.Text = "Telefon";
-            // 
-            // buttonSignUpPanelSignUp
-            // 
-            this.buttonSignUpPanelSignUp.Location = new System.Drawing.Point(223, 35);
-            this.buttonSignUpPanelSignUp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.buttonSignUpPanelSignUp.Name = "buttonSignUpPanelSignUp";
-            this.buttonSignUpPanelSignUp.Size = new System.Drawing.Size(116, 94);
-            this.buttonSignUpPanelSignUp.TabIndex = 3;
-            this.buttonSignUpPanelSignUp.Text = "SignUp";
-            this.buttonSignUpPanelSignUp.UseVisualStyleBackColor = true;
-            this.buttonSignUpPanelSignUp.Click += new System.EventHandler(this.buttonSignUp2_Click);
             // 
             // labelParola2
             // 
             this.labelParola2.AutoSize = true;
-            this.labelParola2.Location = new System.Drawing.Point(20, 105);
-            this.labelParola2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelParola2.Font = new System.Drawing.Font("Arial Narrow", 10.2F);
+            this.labelParola2.Location = new System.Drawing.Point(37, 259);
             this.labelParola2.Name = "labelParola2";
-            this.labelParola2.Size = new System.Drawing.Size(37, 13);
+            this.labelParola2.Size = new System.Drawing.Size(51, 22);
             this.labelParola2.TabIndex = 9;
             this.labelParola2.Text = "Parola";
-            // 
-            // buttonBack
-            // 
-            this.buttonBack.Location = new System.Drawing.Point(223, 148);
-            this.buttonBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.buttonBack.Name = "buttonBack";
-            this.buttonBack.Size = new System.Drawing.Size(116, 94);
-            this.buttonBack.TabIndex = 17;
-            this.buttonBack.Text = "Back";
-            this.buttonBack.UseVisualStyleBackColor = true;
-            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
-            // 
-            // textBoxParola2
-            // 
-            this.textBoxParola2.Location = new System.Drawing.Point(106, 102);
-            this.textBoxParola2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBoxParola2.Name = "textBoxParola2";
-            this.textBoxParola2.Size = new System.Drawing.Size(76, 20);
-            this.textBoxParola2.TabIndex = 10;
-            // 
-            // textBoxNumar_Strada
-            // 
-            this.textBoxNumar_Strada.Location = new System.Drawing.Point(106, 330);
-            this.textBoxNumar_Strada.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBoxNumar_Strada.Name = "textBoxNumar_Strada";
-            this.textBoxNumar_Strada.Size = new System.Drawing.Size(76, 20);
-            this.textBoxNumar_Strada.TabIndex = 16;
-            // 
-            // textBoxTelefon2
-            // 
-            this.textBoxTelefon2.Location = new System.Drawing.Point(106, 57);
-            this.textBoxTelefon2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBoxTelefon2.Name = "textBoxTelefon2";
-            this.textBoxTelefon2.Size = new System.Drawing.Size(76, 20);
-            this.textBoxTelefon2.TabIndex = 8;
             // 
             // labelNumar_Strada
             // 
             this.labelNumar_Strada.AutoSize = true;
-            this.labelNumar_Strada.Location = new System.Drawing.Point(20, 332);
-            this.labelNumar_Strada.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelNumar_Strada.Font = new System.Drawing.Font("Arial Narrow", 10.2F);
+            this.labelNumar_Strada.Location = new System.Drawing.Point(321, 315);
             this.labelNumar_Strada.Name = "labelNumar_Strada";
-            this.labelNumar_Strada.Size = new System.Drawing.Size(38, 13);
+            this.labelNumar_Strada.Size = new System.Drawing.Size(54, 22);
             this.labelNumar_Strada.TabIndex = 15;
             this.labelNumar_Strada.Text = "Număr";
-            // 
-            // textBoxStrada
-            // 
-            this.textBoxStrada.Location = new System.Drawing.Point(106, 284);
-            this.textBoxStrada.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBoxStrada.Name = "textBoxStrada";
-            this.textBoxStrada.Size = new System.Drawing.Size(76, 20);
-            this.textBoxStrada.TabIndex = 14;
             // 
             // labelStrada
             // 
             this.labelStrada.AutoSize = true;
-            this.labelStrada.Location = new System.Drawing.Point(20, 287);
-            this.labelStrada.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelStrada.Font = new System.Drawing.Font("Arial Narrow", 10.2F);
+            this.labelStrada.Location = new System.Drawing.Point(321, 259);
             this.labelStrada.Name = "labelStrada";
-            this.labelStrada.Size = new System.Drawing.Size(38, 13);
+            this.labelStrada.Size = new System.Drawing.Size(51, 22);
             this.labelStrada.TabIndex = 13;
             this.labelStrada.Text = "Stradă";
-            // 
-            // textBoxEmail
-            // 
-            this.textBoxEmail.Location = new System.Drawing.Point(106, 148);
-            this.textBoxEmail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBoxEmail.Name = "textBoxEmail";
-            this.textBoxEmail.Size = new System.Drawing.Size(76, 20);
-            this.textBoxEmail.TabIndex = 8;
-            // 
-            // textBoxOras
-            // 
-            this.textBoxOras.Location = new System.Drawing.Point(106, 239);
-            this.textBoxOras.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBoxOras.Name = "textBoxOras";
-            this.textBoxOras.Size = new System.Drawing.Size(76, 20);
-            this.textBoxOras.TabIndex = 12;
             // 
             // labelOras
             // 
             this.labelOras.AutoSize = true;
-            this.labelOras.Location = new System.Drawing.Point(20, 241);
-            this.labelOras.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelOras.Font = new System.Drawing.Font("Arial Narrow", 10.2F);
+            this.labelOras.Location = new System.Drawing.Point(321, 203);
             this.labelOras.Name = "labelOras";
-            this.labelOras.Size = new System.Drawing.Size(29, 13);
+            this.labelOras.Size = new System.Drawing.Size(41, 22);
             this.labelOras.TabIndex = 11;
             this.labelOras.Text = "Oraș";
             // 
             // labelEmail
             // 
             this.labelEmail.AutoSize = true;
-            this.labelEmail.Location = new System.Drawing.Point(20, 150);
-            this.labelEmail.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelEmail.Font = new System.Drawing.Font("Arial Narrow", 10.2F);
+            this.labelEmail.Location = new System.Drawing.Point(37, 315);
             this.labelEmail.Name = "labelEmail";
-            this.labelEmail.Size = new System.Drawing.Size(36, 13);
+            this.labelEmail.Size = new System.Drawing.Size(51, 22);
             this.labelEmail.TabIndex = 7;
             this.labelEmail.Text = "Email*";
-            // 
-            // textBoxJudet
-            // 
-            this.textBoxJudet.Location = new System.Drawing.Point(106, 193);
-            this.textBoxJudet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBoxJudet.Name = "textBoxJudet";
-            this.textBoxJudet.Size = new System.Drawing.Size(76, 20);
-            this.textBoxJudet.TabIndex = 10;
             // 
             // labelJudet
             // 
             this.labelJudet.AutoSize = true;
-            this.labelJudet.Location = new System.Drawing.Point(20, 196);
-            this.labelJudet.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelJudet.Font = new System.Drawing.Font("Arial Narrow", 10.2F);
+            this.labelJudet.Location = new System.Drawing.Point(321, 147);
             this.labelJudet.Name = "labelJudet";
-            this.labelJudet.Size = new System.Drawing.Size(33, 13);
+            this.labelJudet.Size = new System.Drawing.Size(44, 22);
             this.labelJudet.TabIndex = 9;
             this.labelJudet.Text = "Județ";
-            // 
-            // textBoxNume
-            // 
-            this.textBoxNume.Location = new System.Drawing.Point(106, 11);
-            this.textBoxNume.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBoxNume.Name = "textBoxNume";
-            this.textBoxNume.Size = new System.Drawing.Size(76, 20);
-            this.textBoxNume.TabIndex = 2;
             // 
             // labelNume
             // 
             this.labelNume.AutoSize = true;
-            this.labelNume.Location = new System.Drawing.Point(20, 14);
-            this.labelNume.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelNume.Font = new System.Drawing.Font("Arial Narrow", 10.2F);
+            this.labelNume.Location = new System.Drawing.Point(37, 147);
             this.labelNume.Name = "labelNume";
-            this.labelNume.Size = new System.Drawing.Size(35, 13);
+            this.labelNume.Size = new System.Drawing.Size(49, 22);
             this.labelNume.TabIndex = 1;
             this.labelNume.Text = "Nume";
             // 
+            // kryptonPalette1
+            // 
+            this.kryptonPalette1.FormStyles.FormMain.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
+            this.kryptonPalette1.FormStyles.FormMain.StateCommon.Back.Color2 = System.Drawing.Color.White;
+            this.kryptonPalette1.FormStyles.FormMain.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.kryptonPalette1.FormStyles.FormMain.StateCommon.Border.Rounding = 10;
+            this.kryptonPalette1.HeaderStyles.HeaderForm.StateCommon.Back.Color1 = System.Drawing.SystemColors.Info;
+            // 
             // FormLogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(842, 522);
+            this.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.ClientSize = new System.Drawing.Size(1122, 642);
             this.Controls.Add(this.panelSignUp);
             this.Controls.Add(this.panelMenu);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormLogin";
-            this.Text = "Login";
+            this.Palette = this.kryptonPalette1;
+            this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.Text = " ";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormLogin_FormClosed);
             this.Load += new System.EventHandler(this.FormLogin_Load);
             this.panelMenu.ResumeLayout(false);
             this.panelMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelSignUp.ResumeLayout(false);
             this.panelSignUp.PerformLayout();
             this.ResumeLayout(false);
@@ -361,32 +641,35 @@
         #endregion
 
         private System.Windows.Forms.Panel panelMenu;
-        private System.Windows.Forms.Button buttonSignUpPanelMenu;
         private System.Windows.Forms.Panel panelSignUp;
-        private System.Windows.Forms.TextBox textBoxNumar_Strada;
         private System.Windows.Forms.Label labelNumar_Strada;
-        private System.Windows.Forms.TextBox textBoxStrada;
         private System.Windows.Forms.Label labelStrada;
-        private System.Windows.Forms.TextBox textBoxOras;
         private System.Windows.Forms.Label labelOras;
-        private System.Windows.Forms.TextBox textBoxJudet;
         private System.Windows.Forms.Label labelJudet;
-        private System.Windows.Forms.TextBox textBoxEmail;
         private System.Windows.Forms.Label labelEmail;
-        private System.Windows.Forms.TextBox textBoxParola;
         private System.Windows.Forms.Label labelParola;
-        private System.Windows.Forms.TextBox textBoxTelefon;
         private System.Windows.Forms.Label labelTelefon;
-        private System.Windows.Forms.TextBox textBoxNume;
         private System.Windows.Forms.Label labelNume;
-        private System.Windows.Forms.Button buttonLoginPanelMenu;
-        private System.Windows.Forms.Button buttonBack;
-        private System.Windows.Forms.Button buttonSignUpPanelSignUp;
         private System.Windows.Forms.Label labelTelefon2;
         private System.Windows.Forms.Label labelParola2;
-        private System.Windows.Forms.TextBox textBoxParola2;
-        private System.Windows.Forms.TextBox textBoxTelefon2;
-        private System.Windows.Forms.Button buttonSgnFurnizor;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox textBoxTelefon;
+        private ComponentFactory.Krypton.Toolkit.KryptonPalette kryptonPalette1;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton buttonSignUpPanelMenu;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox textBoxParola;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton buttonLoginPanelMenu;
+        private System.Windows.Forms.Label label1;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox textBoxNumar_Strada;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox textBoxStrada;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox textBoxOras;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox textBoxJudet;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox textBoxEmail;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox textBoxParola2;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox textBoxTelefon2;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox textBoxNume;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton buttonSignUpPanelSignUp;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton buttonBack;
+        private System.Windows.Forms.Label label2;
     }
 }
 

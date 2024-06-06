@@ -4,10 +4,11 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
 
 namespace shop_online
 {
-    public partial class Adauga_Furnizor : Form
+    public partial class Adauga_Furnizor : KryptonForm
     {
         private int id_user;
         private bool adauga;
@@ -68,20 +69,15 @@ namespace shop_online
             string oras = textBoxOras.Text;
             string strada = textBoxStrada.Text;
             string email = textBoxEmailFirma.Text;
+            string telefon = textBoxTelefon.Text;
 
             if (string.IsNullOrWhiteSpace(iban) || string.IsNullOrWhiteSpace(nume) ||
                   string.IsNullOrWhiteSpace(judet) || string.IsNullOrWhiteSpace(oras) ||
-                  string.IsNullOrWhiteSpace(strada))
+                  string.IsNullOrWhiteSpace(strada) || string.IsNullOrWhiteSpace(telefon))
             {
                 MessageBox.Show("Toate câmpurile trebuie completate.");
                 return;
             }
-
-            /*if (!Aranjare.IsValidEmail(email))
-            {
-                MessageBox.Show("Email-ul nu este valid.");
-                return;
-            }*/
 
             if (!int.TryParse(textBoxNumar_Strada.Text, out int nr_strada) || nr_strada < 1)
             {
@@ -92,17 +88,17 @@ namespace shop_online
             try
             {
                 string con = Aranjare.GetConnectionString();
-                int id_user1 = Interogari.GetUserIDbyEmail(con, email);
-                bool success = Interogari.AdaugaFurnizor(con, id_user1, iban, nume, judet, oras, strada, nr_strada);
-
+                //int id_user1 = Interogari.GetUserIDbyEmail(con, email);
+                bool success = Interogari.AdaugaFurnizor(con, nume, email, telefon, "ParolaFirmei", iban, judet, oras, strada, nr_strada);
                 if (success)
                 {
                     MessageBox.Show("Furnizorul a fost adăugat cu succes.");
+                    Aranjare.ToateTextBoxurileledinPanelGoale(panelAdaugaFurnizor);
                 }
-                else
+               /* else
                 {
                     MessageBox.Show("Nu s-a putut adăuga furnizorul.");
-                }
+                }*/
             }
             catch (Exception ex)
             {

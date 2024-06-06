@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using ComponentFactory.Krypton.Toolkit;
+
 
 namespace shop_online
 {
-    public partial class Adauga_Produse : Form
+    public partial class Adauga_Produse : KryptonForm
     {
         private int user_id_furnizor = -1;
         private List<Image> imagesList = new List<Image>();
@@ -17,25 +20,44 @@ namespace shop_online
             InitializeComponent();
         }
 
-        public Adauga_Produse( int id_furnizor )
+        public Adauga_Produse(int id_furnizor)
         {
             InitializeComponent();
             user_id_furnizor = id_furnizor;
         }
 
-        private void Adauga_Produse_FormClosed( object sender, FormClosedEventArgs e )
+        private void Adauga_Produse_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (Application.OpenForms ["Afisare_Produse"] != null)
-                Application.OpenForms ["Afisare_Produse"].Show();
+            if (Application.OpenForms["Afisare_Produse"] != null)
+                Application.OpenForms["Afisare_Produse"].Show();
         }
-        private void Adauga_Produse_Load( object sender, System.EventArgs e )
+        private void Adauga_Produse_Load(object sender, System.EventArgs e)
         {
             AutoSize = true;
             Aranjare.CenteredPanel(this, panelAdaugaProdus);
             LoadUser(user_id_furnizor);
-
+            LoadCategories();
         }
-        public void LoadUser( int id_furnizor )
+        public void LoadCategories()
+        {
+            string connectionString = null;
+            try
+            {
+                connectionString = Aranjare.GetConnectionString();
+            }
+            catch
+            {
+                MessageBox.Show("Nu s-a putut lua connections tringul!");
+            }
+            comboBoxCategorie.DropDownStyle = ComboBoxStyle.DropDown;
+            comboBoxCategorie.Enabled = true;
+            List<string> categori = Interogari.GetCategories(connectionString);
+            foreach (string categorie in categori)
+            {
+                comboBoxCategorie.Items.Add(categorie);
+            }
+        }
+        public void LoadUser(int id_furnizor)
         {
 
             user_id_furnizor = id_furnizor;
@@ -51,12 +73,14 @@ namespace shop_online
 
 
         //Claudiu
-        private void buttonAdaugaProdus_Click( object sender, EventArgs e )
+
+        private void buttonLoginPanelMenu_Click(object sender, EventArgs e)
         {
+
             string connectionString = Aranjare.GetConnectionString();
             string denumire = textBoxDenumire.Text.Trim();
             string descriere = textBoxDescriere.Text.Trim();
-            int categorie = comboBoxCategorie.SelectedIndex;
+            int categorie = Interogari.GetIdByCategories(connectionString, comboBoxCategorie.Text);
 
             if (string.IsNullOrWhiteSpace(denumire))
             {
@@ -64,7 +88,7 @@ namespace shop_online
                 return;
             }
 
-            if (categorie == -1)
+            if (categorie <= 0)
             {
                 MessageBox.Show("Vă rog selectați o categorie");
                 return;
@@ -92,6 +116,8 @@ namespace shop_online
             string filename = pictureBoxImagine.ImageLocation;
             string extension = Path.GetExtension(filename);
 
+            filename = "abracadabra" + extension;
+
             List<string> denumireS = new List<string>();
             List<string> valoareS = new List<string>();
 
@@ -99,8 +125,8 @@ namespace shop_online
             {
                 if (item.SubItems.Count > 1)
                 {
-                    denumireS.Add(item.SubItems [0].Text);
-                    valoareS.Add(item.SubItems [1].Text);
+                    denumireS.Add(item.SubItems[0].Text);
+                    valoareS.Add(item.SubItems[1].Text);
                 }
                 else
                 {
@@ -113,70 +139,25 @@ namespace shop_online
                 MessageBox.Show("Listele de denumiri și valori nu trebuie să fie goale!");
                 return;
             }
-            //id categorie nu este id-ul din combobox. Este id-ul din baza de date
-            ProdusItem produs = new ProdusItem(imagesList, denumire, pret, 0, 0, -1, cantitate, descriere, user_id_furnizor, categorie + 1);//trebuie sa faci o functie care ia Id-categorie pe baza cuvantului din combobox.
+            ProdusItem produs = new ProdusItem(imagesList, denumire, pret, 0, 0, -1, cantitate, descriere, user_id_furnizor, categorie);
 
             try
             {
-                Interogari.InsertProdus(connectionString, produs, fileNames, denumireS, valoareS);
-                MessageBox.Show("Produs adăugat cu succes!");
+                if (Interogari.InsertProdus(connectionString, produs, fileNames, denumireS, valoareS))
+                    MessageBox.Show("Produs adăugat cu succes!");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Eroare la adăugarea produsului: " + ex.Message);
-            }
-        }
-
-
-        private void listView1_SelectedIndexChanged( object sender, EventArgs e )
-        {
-
-        }
-
-        private void button2_Click( object sender, EventArgs e )
-        {
-            string denumire = textBoxDenumireSpecificatie.Text;
-            string specificatie = textBoxValoareSpecificatie.Text;
-            if (string.IsNullOrWhiteSpace(denumire) || string.IsNullOrWhiteSpace(specificatie))
-            {
-                MessageBox.Show("Introduceti o denumire si o specificate!");
                 return;
             }
-
-            ListViewItem listViewItem = new ListViewItem(denumire);
-            listViewItem.SubItems.Add(specificatie);
-
-            listView1.Items.Add(listViewItem);
-            textBoxDenumireSpecificatie.Clear();
-            textBoxValoareSpecificatie.Clear();
-            listView1.View = View.Details;
-
-
         }
 
-        /* private void buttonAddImage_Click(object sender, EventArgs e)
-         {
-             OpenFileDialog openFileDialog = new OpenFileDialog();
-             openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All Files|*.*";
-             openFileDialog.Title = "Select an Image File";
-
-             if (openFileDialog.ShowDialog() == DialogResult.OK)
-             {
-                 string selectedFilePath = openFileDialog.FileName;
-                 pictureBoxImagine.ImageLocation = selectedFilePath;
-
-             }
-             int nr_imagini = int.Parse(labelCounter.Text);nr_imagini++;
-             labelCounter.Text = nr_imagini.ToString();
-             string filename = pictureBoxImagine.ImageLocation;
-             string extension = Path.GetExtension(filename);
-             imagesList.Add(pictureBoxImagine.Image);
-             fileNames.Add(filename + extension);
 
 
-         }*/
-        private void buttonAddImage_Click( object sender, EventArgs e )
+        private void kryptonButton1_Click_2(object sender, EventArgs e)
         {
+
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All Files|*.*",
@@ -208,7 +189,16 @@ namespace shop_online
                                 MessageBox.Show("Eroare la parsarea contorului de imagini.");
                                 return;
                             }
+                            int maxLength = 45;
 
+                            if (selectedFilePath.Length <= maxLength)
+                            {
+                                selectedFilePath = selectedFilePath;
+                            }
+                            else
+                            {
+                                selectedFilePath = selectedFilePath.Substring(selectedFilePath.Length - maxLength, maxLength);
+                            }
                             // Adăugăm imaginea și numele fișierului în listele respective
                             imagesList.Add((Image)image.Clone());
                             fileNames.Add(selectedFilePath);
@@ -228,7 +218,29 @@ namespace shop_online
                     MessageBox.Show("A apărut o eroare la adăugarea imaginii: " + ex.Message);
                 }
             }
+
         }
+
+        private void kryptonButton1_Click_3(object sender, EventArgs e)
+        {
+            string denumire = textBoxDenumireSpecificatie.Text;
+            string specificatie = textBoxValoareSpecificatie.Text;
+            if (string.IsNullOrWhiteSpace(denumire) || string.IsNullOrWhiteSpace(specificatie))
+            {
+                MessageBox.Show("Introduceti o denumire si o specificate!");
+                return;
+            }
+
+            ListViewItem listViewItem = new ListViewItem(denumire);
+            listViewItem.SubItems.Add(specificatie);
+
+            listView1.Items.Add(listViewItem);
+            textBoxDenumireSpecificatie.Clear();
+            textBoxValoareSpecificatie.Clear();
+            listView1.View = View.Details;
+        }
+
+
         //Horia
     }
 }

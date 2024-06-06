@@ -5,12 +5,13 @@ using System.Windows.Forms;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;*/
+using ComponentFactory.Krypton.Toolkit;
+
 namespace shop_online
 {
     public class ProductControl : UserControl
     {
         readonly ProdusItem produs = null;
-        private Button buttonAdaugaCos;
         private PictureBox pictureBoxImagine;
         private Label labelTitle;
         private Label labelPret;
@@ -23,8 +24,11 @@ namespace shop_online
         private DetaliiProdus detaliiProdus = null;// Form nou
         private int nr_bucati_in_cos = 0;
         private decimal pret_total_cos = -1;
-        private readonly Color defaultColor = Color.OrangeRed;
-        private readonly Color selectedColor = Color.LightGray;
+        private readonly Color defaultColor = Color.DarkSalmon;
+        private Label label1;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton buttonAdaugaCos;
+        private System.ComponentModel.IContainer components;
+        private readonly Color selectedColor = System.Drawing.SystemColors.ControlDark;
 
         public ProductControl()
         {
@@ -71,151 +75,208 @@ namespace shop_online
             numericUpDownBucati_Cos.Maximum = product.Cantitate;
             numericUpDownBucati_Cos.Value = nr_bucati_in_cos;
         }
-        private void buttonAdaugaCos_Click( object sender, System.EventArgs e )
-        {
-            try
-            {
-                int id_user = Afisare_Produse.GetUtilizatorID();
-                string connectionString = Aranjare.GetConnectionString();
-                Interogari.AdaugainCos(connectionString, nr_bucati_in_cos + 1, produs.Pret, id_user, produs.Id_Produs);
-            }
-            catch (Exception) { MessageBox.Show("Nu s-a putut adauga in cos."); }
-        }
+        
 
         private void InitializeComponent()
         {
-            buttonAdaugaCos = new System.Windows.Forms.Button();
-            pictureBoxImagine = new System.Windows.Forms.PictureBox();
-            labelTitle = new System.Windows.Forms.Label();
-            labelPret = new System.Windows.Forms.Label();
-            labelStele = new System.Windows.Forms.Label();
-            labelNrRecenzii = new System.Windows.Forms.Label();
-            labelinStoc = new System.Windows.Forms.Label();
-            labelBucati = new System.Windows.Forms.Label();
-            numericUpDownBucati_Cos = new System.Windows.Forms.NumericUpDown();
-            labelBucati_cos = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(pictureBoxImagine)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(numericUpDownBucati_Cos)).BeginInit();
-            SuspendLayout();
-            // 
-            // buttonAdaugaCos
-            // 
-            buttonAdaugaCos.Location = new System.Drawing.Point(222, 96);
-            buttonAdaugaCos.Name = "buttonAdaugaCos";
-            buttonAdaugaCos.Size = new System.Drawing.Size(113, 40);
-            buttonAdaugaCos.TabIndex = 0;
-            buttonAdaugaCos.Text = "Adaugă in Coș";
-            buttonAdaugaCos.UseVisualStyleBackColor = true;
-            buttonAdaugaCos.Click += new System.EventHandler(buttonAdaugaCos_Click);
+            this.pictureBoxImagine = new System.Windows.Forms.PictureBox();
+            this.labelTitle = new System.Windows.Forms.Label();
+            this.labelPret = new System.Windows.Forms.Label();
+            this.labelStele = new System.Windows.Forms.Label();
+            this.labelNrRecenzii = new System.Windows.Forms.Label();
+            this.labelinStoc = new System.Windows.Forms.Label();
+            this.labelBucati = new System.Windows.Forms.Label();
+            this.numericUpDownBucati_Cos = new System.Windows.Forms.NumericUpDown();
+            this.labelBucati_cos = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.buttonAdaugaCos = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImagine)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBucati_Cos)).BeginInit();
+            this.SuspendLayout();
             // 
             // pictureBoxImagine
             // 
-            pictureBoxImagine.Location = new System.Drawing.Point(358, 13);
-            pictureBoxImagine.Name = "pictureBoxImagine";
-            pictureBoxImagine.Padding = new System.Windows.Forms.Padding(10);
-            pictureBoxImagine.Size = new System.Drawing.Size(144, 122);
-            pictureBoxImagine.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            pictureBoxImagine.TabIndex = 1;
-            pictureBoxImagine.TabStop = false;
-            pictureBoxImagine.Click += new System.EventHandler(pictureBoxImagine_Click);
-            pictureBoxImagine.DoubleClick += new System.EventHandler(pictureBoxImagine_DoubleClick);
+            this.pictureBoxImagine.Location = new System.Drawing.Point(358, 3);
+            this.pictureBoxImagine.Name = "pictureBoxImagine";
+            this.pictureBoxImagine.Padding = new System.Windows.Forms.Padding(10);
+            this.pictureBoxImagine.Size = new System.Drawing.Size(144, 132);
+            this.pictureBoxImagine.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxImagine.TabIndex = 1;
+            this.pictureBoxImagine.TabStop = false;
+            this.pictureBoxImagine.Click += new System.EventHandler(this.pictureBoxImagine_Click);
+            this.pictureBoxImagine.DoubleClick += new System.EventHandler(this.pictureBoxImagine_DoubleClick);
             // 
             // labelTitle
             // 
-            labelTitle.AutoSize = true;
-            labelTitle.Location = new System.Drawing.Point(16, 13);
-            labelTitle.Name = "labelTitle";
-            labelTitle.Size = new System.Drawing.Size(35, 17);
-            labelTitle.TabIndex = 2;
-            labelTitle.Text = "Titlu";
+            this.labelTitle.AutoSize = true;
+            this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTitle.ForeColor = System.Drawing.Color.Black;
+            this.labelTitle.Location = new System.Drawing.Point(16, 13);
+            this.labelTitle.Name = "labelTitle";
+            this.labelTitle.Size = new System.Drawing.Size(49, 25);
+            this.labelTitle.TabIndex = 2;
+            this.labelTitle.Text = "Titlu";
             // 
             // labelPret
             // 
-            labelPret.AutoSize = true;
-            labelPret.Location = new System.Drawing.Point(16, 59);
-            labelPret.Name = "labelPret";
-            labelPret.Size = new System.Drawing.Size(34, 17);
-            labelPret.TabIndex = 3;
-            labelPret.Text = "Pret";
+            this.labelPret.AutoSize = true;
+            this.labelPret.ForeColor = System.Drawing.Color.Black;
+            this.labelPret.Location = new System.Drawing.Point(18, 58);
+            this.labelPret.Name = "labelPret";
+            this.labelPret.Size = new System.Drawing.Size(31, 16);
+            this.labelPret.TabIndex = 3;
+            this.labelPret.Text = "Pret";
             // 
             // labelStele
             // 
-            labelStele.AutoSize = true;
-            labelStele.Location = new System.Drawing.Point(16, 108);
-            labelStele.Name = "labelStele";
-            labelStele.Size = new System.Drawing.Size(65, 17);
-            labelStele.TabIndex = 4;
-            labelStele.Text = "Nr stele: ";
+            this.labelStele.AutoSize = true;
+            this.labelStele.ForeColor = System.Drawing.Color.Black;
+            this.labelStele.Location = new System.Drawing.Point(16, 108);
+            this.labelStele.Name = "labelStele";
+            this.labelStele.Size = new System.Drawing.Size(59, 16);
+            this.labelStele.TabIndex = 4;
+            this.labelStele.Text = "Nr stele: ";
             // 
             // labelNrRecenzii
             // 
-            labelNrRecenzii.AutoSize = true;
-            labelNrRecenzii.Location = new System.Drawing.Point(87, 108);
-            labelNrRecenzii.Name = "labelNrRecenzii";
-            labelNrRecenzii.Size = new System.Drawing.Size(18, 17);
-            labelNrRecenzii.TabIndex = 5;
-            labelNrRecenzii.Text = "()";
+            this.labelNrRecenzii.AutoSize = true;
+            this.labelNrRecenzii.ForeColor = System.Drawing.Color.Black;
+            this.labelNrRecenzii.Location = new System.Drawing.Point(87, 108);
+            this.labelNrRecenzii.Name = "labelNrRecenzii";
+            this.labelNrRecenzii.Size = new System.Drawing.Size(15, 16);
+            this.labelNrRecenzii.TabIndex = 5;
+            this.labelNrRecenzii.Text = "()";
             // 
             // labelinStoc
             // 
-            labelinStoc.AutoSize = true;
-            labelinStoc.Location = new System.Drawing.Point(16, 85);
-            labelinStoc.Name = "labelinStoc";
-            labelinStoc.Size = new System.Drawing.Size(51, 17);
-            labelinStoc.TabIndex = 6;
-            labelinStoc.Text = "In Stoc";
+            this.labelinStoc.AutoSize = true;
+            this.labelinStoc.ForeColor = System.Drawing.Color.Black;
+            this.labelinStoc.Location = new System.Drawing.Point(16, 85);
+            this.labelinStoc.Name = "labelinStoc";
+            this.labelinStoc.Size = new System.Drawing.Size(47, 16);
+            this.labelinStoc.TabIndex = 6;
+            this.labelinStoc.Text = "In Stoc";
             // 
             // labelBucati
             // 
-            labelBucati.AutoSize = true;
-            labelBucati.Location = new System.Drawing.Point(87, 85);
-            labelBucati.Name = "labelBucati";
-            labelBucati.Size = new System.Drawing.Size(18, 17);
-            labelBucati.TabIndex = 7;
-            labelBucati.Text = "()";
+            this.labelBucati.AutoSize = true;
+            this.labelBucati.ForeColor = System.Drawing.Color.Black;
+            this.labelBucati.Location = new System.Drawing.Point(87, 85);
+            this.labelBucati.Name = "labelBucati";
+            this.labelBucati.Size = new System.Drawing.Size(15, 16);
+            this.labelBucati.TabIndex = 7;
+            this.labelBucati.Text = "()";
             // 
             // numericUpDownBucati_Cos
             // 
-            numericUpDownBucati_Cos.Location = new System.Drawing.Point(222, 68);
-            numericUpDownBucati_Cos.Name = "numericUpDownBucati_Cos";
-            numericUpDownBucati_Cos.Size = new System.Drawing.Size(88, 22);
-            numericUpDownBucati_Cos.TabIndex = 8;
-            numericUpDownBucati_Cos.Visible = false;
-            numericUpDownBucati_Cos.ValueChanged += new System.EventHandler(numericUpDownBucati_Cos_ValueChanged);
+            this.numericUpDownBucati_Cos.Location = new System.Drawing.Point(222, 68);
+            this.numericUpDownBucati_Cos.Name = "numericUpDownBucati_Cos";
+            this.numericUpDownBucati_Cos.Size = new System.Drawing.Size(88, 22);
+            this.numericUpDownBucati_Cos.TabIndex = 8;
+            this.numericUpDownBucati_Cos.Visible = false;
+            this.numericUpDownBucati_Cos.ValueChanged += new System.EventHandler(this.numericUpDownBucati_Cos_ValueChanged);
             // 
             // labelBucati_cos
             // 
-            labelBucati_cos.AutoSize = true;
-            labelBucati_cos.Location = new System.Drawing.Point(222, 45);
-            labelBucati_cos.Name = "labelBucati_cos";
-            labelBucati_cos.Size = new System.Drawing.Size(88, 17);
-            labelBucati_cos.TabIndex = 9;
-            labelBucati_cos.Text = "Bucati in cos";
-            labelBucati_cos.Visible = false;
+            this.labelBucati_cos.AutoSize = true;
+            this.labelBucati_cos.Location = new System.Drawing.Point(222, 45);
+            this.labelBucati_cos.Name = "labelBucati_cos";
+            this.labelBucati_cos.Size = new System.Drawing.Size(82, 16);
+            this.labelBucati_cos.TabIndex = 9;
+            this.labelBucati_cos.Text = "Bucati in cos";
+            this.labelBucati_cos.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(87, 58);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(37, 16);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "RON";
+            // 
+            // buttonAdaugaCos
+            // 
+            this.buttonAdaugaCos.Location = new System.Drawing.Point(204, 93);
+            this.buttonAdaugaCos.Name = "buttonAdaugaCos";
+            this.buttonAdaugaCos.OverrideDefault.Back.Color1 = System.Drawing.Color.White;
+            this.buttonAdaugaCos.OverrideDefault.Back.Color2 = System.Drawing.Color.White;
+            this.buttonAdaugaCos.OverrideDefault.Back.ColorAngle = 45F;
+            this.buttonAdaugaCos.OverrideDefault.Border.Color1 = System.Drawing.Color.Firebrick;
+            this.buttonAdaugaCos.OverrideDefault.Border.Color2 = System.Drawing.Color.Brown;
+            this.buttonAdaugaCos.OverrideDefault.Border.ColorAngle = 45F;
+            this.buttonAdaugaCos.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.buttonAdaugaCos.OverrideDefault.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.buttonAdaugaCos.OverrideDefault.Border.Rounding = 20;
+            this.buttonAdaugaCos.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.ProfessionalSystem;
+            this.buttonAdaugaCos.Size = new System.Drawing.Size(122, 42);
+            this.buttonAdaugaCos.StateCommon.Back.Color1 = System.Drawing.Color.White;
+            this.buttonAdaugaCos.StateCommon.Back.Color2 = System.Drawing.Color.White;
+            this.buttonAdaugaCos.StateCommon.Back.ColorAngle = 45F;
+            this.buttonAdaugaCos.StateCommon.Back.ImageStyle = ComponentFactory.Krypton.Toolkit.PaletteImageStyle.TopLeft;
+            this.buttonAdaugaCos.StateCommon.Border.Color1 = System.Drawing.Color.Firebrick;
+            this.buttonAdaugaCos.StateCommon.Border.Color2 = System.Drawing.Color.Maroon;
+            this.buttonAdaugaCos.StateCommon.Border.ColorAngle = 45F;
+            this.buttonAdaugaCos.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.buttonAdaugaCos.StateCommon.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.buttonAdaugaCos.StateCommon.Border.Rounding = 20;
+            this.buttonAdaugaCos.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.buttonAdaugaCos.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            this.buttonAdaugaCos.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAdaugaCos.StatePressed.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.buttonAdaugaCos.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.buttonAdaugaCos.StatePressed.Back.ColorAngle = 135F;
+            this.buttonAdaugaCos.StatePressed.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.buttonAdaugaCos.StatePressed.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.buttonAdaugaCos.StatePressed.Border.ColorAngle = 135F;
+            this.buttonAdaugaCos.StatePressed.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.buttonAdaugaCos.StatePressed.Border.Rounding = 20;
+            this.buttonAdaugaCos.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.buttonAdaugaCos.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.buttonAdaugaCos.StateTracking.Back.ColorAngle = 45F;
+            this.buttonAdaugaCos.StateTracking.Border.Color1 = System.Drawing.Color.Maroon;
+            this.buttonAdaugaCos.StateTracking.Border.Color2 = System.Drawing.Color.Firebrick;
+            this.buttonAdaugaCos.StateTracking.Border.ColorAngle = 45F;
+            this.buttonAdaugaCos.StateTracking.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.buttonAdaugaCos.StateTracking.Border.GraphicsHint = ComponentFactory.Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            this.buttonAdaugaCos.StateTracking.Border.Rounding = 20;
+            this.buttonAdaugaCos.TabIndex = 11;
+            this.buttonAdaugaCos.Values.Text = "Adauga Cos";
+            this.buttonAdaugaCos.Click += new System.EventHandler(this.buttonAdaugaCos_Click_1);
             // 
             // ProductControl
             // 
-            BackColor = System.Drawing.Color.OrangeRed;
-            Controls.Add(labelBucati_cos);
-            Controls.Add(numericUpDownBucati_Cos);
-            Controls.Add(labelBucati);
-            Controls.Add(labelinStoc);
-            Controls.Add(labelNrRecenzii);
-            Controls.Add(labelStele);
-            Controls.Add(labelPret);
-            Controls.Add(labelTitle);
-            Controls.Add(pictureBoxImagine);
-            Controls.Add(buttonAdaugaCos);
-            Name = "ProductControl";
-            Size = new System.Drawing.Size(505, 138);
-            Load += new System.EventHandler(ProductControl_Load);
-            Click += new System.EventHandler(ProductControl_Click);
-            DoubleClick += new System.EventHandler(ProductControl_DoubleClick);
-            Leave += new System.EventHandler(ProductControl_Leave);
-            ((System.ComponentModel.ISupportInitialize)(pictureBoxImagine)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(numericUpDownBucati_Cos)).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.BackColor = System.Drawing.Color.LightCoral;
+            this.Controls.Add(this.buttonAdaugaCos);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelBucati_cos);
+            this.Controls.Add(this.numericUpDownBucati_Cos);
+            this.Controls.Add(this.labelBucati);
+            this.Controls.Add(this.labelinStoc);
+            this.Controls.Add(this.labelNrRecenzii);
+            this.Controls.Add(this.labelStele);
+            this.Controls.Add(this.labelPret);
+            this.Controls.Add(this.labelTitle);
+            this.Controls.Add(this.pictureBoxImagine);
+            this.Name = "ProductControl";
+            this.Size = new System.Drawing.Size(505, 138);
+            this.Load += new System.EventHandler(this.ProductControl_Load);
+            this.Click += new System.EventHandler(this.ProductControl_Click);
+            this.DoubleClick += new System.EventHandler(this.ProductControl_DoubleClick);
+            this.Leave += new System.EventHandler(this.ProductControl_Leave);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxImagine)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownBucati_Cos)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
         private void ProductControl_Load( object sender, System.EventArgs e )
@@ -321,6 +382,23 @@ namespace shop_online
         {
             labelBucati_cos.Visible = vis;
             numericUpDownBucati_Cos.Visible = vis;
+        }
+
+        private void buttonAdaugaCos_Click_1(object sender, EventArgs e)
+        {
+
+            try
+            {
+                int id_user = Afisare_Produse.GetUtilizatorID();
+                string connectionString = Aranjare.GetConnectionString();
+                if (!Interogari.AdaugainCos(connectionString, nr_bucati_in_cos + 1, produs.Pret, id_user, produs.Id_Produs))
+                {
+                    MessageBox.Show("Nu s-a putut adauga produsul!");
+                    return;
+                }
+            }
+            catch (Exception) { MessageBox.Show("Nu s-a putut adauga in cos."); }
+
         }
 
 
