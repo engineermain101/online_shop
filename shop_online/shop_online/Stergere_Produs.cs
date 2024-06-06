@@ -55,10 +55,21 @@ namespace shop_online
                 Application.OpenForms["Afisare_Produse"].Show();
         }
 
-        private void buttonSignUpPanelMenu_Click(object sender, EventArgs e)
-        {
+        
 
-            string produs = listBox1.SelectedItem.ToString();
+        private void buttonSterge_Click(object sender, EventArgs e)
+        {
+            string produs;
+            try
+            {
+                 produs = listBox1.SelectedItem.ToString();
+            }
+            catch
+            {
+                MessageBox.Show("Nu a-ti selectat un produs din lista");
+                return;
+            }
+            
             if (string.IsNullOrEmpty(produs))
             {
                 MessageBox.Show("Va rog selectati un item din lista!");
@@ -97,6 +108,7 @@ namespace shop_online
             {
                 MessageBox.Show("Formatul produsului nu este valid!");
             }
+
         }
     }
 }

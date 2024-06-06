@@ -32,6 +32,7 @@ namespace shop_online
             MinimumSize = panelAdauga_Sterge_Admin.Size + new Size(0, 40);
 
             buttonAdauga_Sterge.Text = Adauga ? "Adauga" : "Sterge";
+            label2.Text = Adauga ? "Adauga Admin" : "Sterge Admin";
             string connectionString = null;
             try
             {
@@ -64,7 +65,8 @@ namespace shop_online
             }
         }
 
-        private void buttonAdauga_Sterge_Click( object sender, EventArgs e )
+
+        private void buttonAdauga_Click(object sender, EventArgs e)
         {
             string email = comboBoxEmail.Text;
             string rol = comboBoxRol.Text;
