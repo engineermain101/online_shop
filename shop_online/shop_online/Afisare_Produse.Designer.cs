@@ -98,7 +98,7 @@
             // categorieToolStripMenuItem
             // 
             this.categorieToolStripMenuItem.Name = "categorieToolStripMenuItem";
-            this.categorieToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.categorieToolStripMenuItem.Size = new System.Drawing.Size(201, 36);
             this.categorieToolStripMenuItem.Text = "Categorie";
             // 
             // adaugaToolStripMenuItem
