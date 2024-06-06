@@ -481,3 +481,9 @@ C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PRO
 C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\obj\Debug\shop_online.Cos.resources
 C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\obj\Debug\shop_online.DetaliiProdus.resources
 C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\obj\Debug\shop_online.ProdusCos.resources
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\bin\Debug\ComponentFactory.Krypton.Docking.pdb
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\bin\Debug\ComponentFactory.Krypton.Navigator.pdb
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\bin\Debug\ComponentFactory.Krypton.Ribbon.pdb
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\bin\Debug\ComponentFactory.Krypton.Toolkit.pdb
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\bin\Debug\ComponentFactory.Krypton.Workspace.pdb
+C:\Users\botah\Documents\Facultate\anul_3\Semestru_2\Informatica_Industriala\PROIECT\online_shop\shop_online\shop_online\obj\Debug\shop_online.Stergere_Produs.resources

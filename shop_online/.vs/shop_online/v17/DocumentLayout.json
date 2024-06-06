@@ -1,37 +1,37 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\GITHUB\\online_shop\\shop_online\\",
+  "WorkspaceRootPath": "C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|c:\\github\\online_shop\\shop_online\\shop_online\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|solutionrelative:shop_online\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|c:\\github\\online_shop\\shop_online\\shop_online\\test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|solutionrelative:shop_online\\test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|C:\\GITHUB\\online_shop\\shop_online\\shop_online\\interogari.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|solutionrelative:shop_online\\interogari.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|C:\\GITHUB\\online_shop\\shop_online\\shop_online\\adauga_produse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|solutionrelative:shop_online\\adauga_produse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|C:\\GITHUB\\online_shop\\shop_online\\shop_online\\adauga_produse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|solutionrelative:shop_online\\adauga_produse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|C:\\GITHUB\\online_shop\\shop_online\\shop_online\\produsitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|solutionrelative:shop_online\\produsitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|C:\\GITHUB\\online_shop\\shop_online\\shop_online\\aranjare.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\aranjare.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|solutionrelative:shop_online\\aranjare.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|C:\\GITHUB\\online_shop\\shop_online\\shop_online\\afisare_produse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\interogari.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|solutionrelative:shop_online\\interogari.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\produsitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|solutionrelative:shop_online\\produsitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|c:\\users\\botah\\documents\\facultate\\anul_3\\semestru_2\\informatica_industriala\\proiect\\online_shop\\shop_online\\shop_online\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|solutionrelative:shop_online\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|solutionrelative:shop_online\\test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\adauga_produse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|solutionrelative:shop_online\\adauga_produse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\adauga_produse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|solutionrelative:shop_online\\adauga_produse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\afisare_produse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C540005C-D7FD-46B3-A57D-E325AA26CD88}|shop_online\\shop_online.csproj|solutionrelative:shop_online\\afisare_produse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -42,15 +42,19 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "App.config",
-              "DocumentMoniker": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\App.config",
+              "DocumentMoniker": "C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\App.config",
               "RelativeDocumentMoniker": "shop_online\\App.config",
-              "ToolTip": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\App.config",
+              "ToolTip": "C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\App.config",
               "RelativeToolTip": "shop_online\\App.config",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
@@ -59,50 +63,48 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Test.cs",
-              "DocumentMoniker": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\Test.cs",
+              "DocumentMoniker": "C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\Test.cs",
               "RelativeDocumentMoniker": "shop_online\\Test.cs",
-              "ToolTip": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\Test.cs",
+              "ToolTip": "C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\Test.cs",
               "RelativeToolTip": "shop_online\\Test.cs",
               "ViewState": "AQIAAGgBAAAAAAAAAAAjwDIBAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-28T10:05:46.486Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-28T10:05:46.486Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
               "Title": "Afisare_Produse.cs",
-              "DocumentMoniker": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\Afisare_Produse.cs",
+              "DocumentMoniker": "C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\Afisare_Produse.cs",
               "RelativeDocumentMoniker": "shop_online\\Afisare_Produse.cs",
-              "ToolTip": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\Afisare_Produse.cs",
+              "ToolTip": "C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\Afisare_Produse.cs",
               "RelativeToolTip": "shop_online\\Afisare_Produse.cs",
               "ViewState": "AQIAALgAAAAAAAAAAAAqwMkAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-28T10:05:03.688Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-28T10:05:03.688Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 0,
               "Title": "Aranjare.cs",
-              "DocumentMoniker": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\Aranjare.cs",
+              "DocumentMoniker": "C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\Aranjare.cs",
               "RelativeDocumentMoniker": "shop_online\\Aranjare.cs",
-              "ToolTip": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\Aranjare.cs",
+              "ToolTip": "C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\Aranjare.cs",
               "RelativeToolTip": "shop_online\\Aranjare.cs",
-              "ViewState": "AQIAADMBAAAAAAAAAAAUwKABAAAMAAAA",
+              "ViewState": "AQIAAEoAAAAAAAAAAAAIwJUAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-28T10:05:03.861Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "ProdusItem.cs",
-              "DocumentMoniker": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\ProdusItem.cs",
+              "DocumentMoniker": "C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\ProdusItem.cs",
               "RelativeDocumentMoniker": "shop_online\\ProdusItem.cs",
-              "ToolTip": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\ProdusItem.cs",
+              "ToolTip": "C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\ProdusItem.cs",
               "RelativeToolTip": "shop_online\\ProdusItem.cs",
               "ViewState": "AQIAAAYAAAAAAAAAAAAAADgAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -111,41 +113,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Interogari.cs",
-              "DocumentMoniker": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\Interogari.cs",
+              "DocumentMoniker": "C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\Interogari.cs",
               "RelativeDocumentMoniker": "shop_online\\Interogari.cs",
-              "ToolTip": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\Interogari.cs",
+              "ToolTip": "C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\Interogari.cs",
               "RelativeToolTip": "shop_online\\Interogari.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAE4GAAAJAAAA",
+              "ViewState": "AQIAAGoAAAAAAAAAAAAgwIUAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-28T10:05:03.863Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Adauga_Produse.cs",
-              "DocumentMoniker": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\Adauga_Produse.cs",
+              "DocumentMoniker": "C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\Adauga_Produse.cs",
               "RelativeDocumentMoniker": "shop_online\\Adauga_Produse.cs",
-              "ToolTip": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\Adauga_Produse.cs",
+              "ToolTip": "C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\Adauga_Produse.cs",
               "RelativeToolTip": "shop_online\\Adauga_Produse.cs",
               "ViewState": "AQIAAAsAAAAAAAAAAAAAwHIAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-28T10:05:04.789Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-28T10:05:04.789Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "Adauga_Produse.cs [Design]",
-              "DocumentMoniker": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\Adauga_Produse.cs",
+              "DocumentMoniker": "C:\\Users\\botah\\Documents\\Facultate\\anul_3\\Semestru_2\\Informatica_Industriala\\PROIECT\\online_shop\\shop_online\\shop_online\\Adauga_Produse.cs",
               "RelativeDocumentMoniker": "shop_online\\Adauga_Produse.cs",
               "ToolTip": "C:\\GITHUB\\online_shop\\shop_online\\shop_online\\Adauga_Produse.cs [Design]",
-              "RelativeToolTip": "shop_online\\Adauga_Produse.cs [Design]",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\GITHUB\\online_shop\\shop_online\\shop_online\\Adauga_Produse.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-28T10:05:05.584Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2024-05-28T10:05:05.584Z"
             }
           ]
         }
