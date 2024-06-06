@@ -7,10 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComponentFactory.Krypton.Toolkit;
+
 
 namespace shop_online
 {
-    public partial class Stergere_Produs : Form
+    public partial class Stergere_Produs : KryptonForm
     {
         int furnizorId = -1;
         public Stergere_Produs(int furnizorId)
@@ -45,9 +47,18 @@ namespace shop_online
            
         }
 
-        private void button1_Click(object sender, EventArgs e)
+       
+
+        private void Stergere_Produs_FormClosed(object sender, FormClosedEventArgs e)
         {
-            string produs=listBox1.SelectedItem.ToString();
+            if (Application.OpenForms["Afisare_Produse"] != null)
+                Application.OpenForms["Afisare_Produse"].Show();
+        }
+
+        private void buttonSignUpPanelMenu_Click(object sender, EventArgs e)
+        {
+
+            string produs = listBox1.SelectedItem.ToString();
             if (string.IsNullOrEmpty(produs))
             {
                 MessageBox.Show("Va rog selectati un item din lista!");
@@ -69,11 +80,11 @@ namespace shop_online
                 string numarString = parts[0].Trim();
                 if (int.TryParse(numarString, out numar))
                 {
-                    DialogResult result= MessageBox.Show($"Doriti sa stergeti produsul?\n {produs}","Confirmare",MessageBoxButtons.YesNo);
+                    DialogResult result = MessageBox.Show($"Doriti sa stergeti produsul?\n {produs}", "Confirmare", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
-                        
-                        Interogari.DeleteProductById(connectionString,numar);
+
+                        Interogari.DeleteProductById(connectionString, numar);
                         listBox1.Items.Remove(listBox1.SelectedItem);
                     }
                 }
@@ -86,13 +97,6 @@ namespace shop_online
             {
                 MessageBox.Show("Formatul produsului nu este valid!");
             }
-
-        }
-
-        private void Stergere_Produs_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (Application.OpenForms["Afisare_Produse"] != null)
-                Application.OpenForms["Afisare_Produse"].Show();
         }
     }
 }

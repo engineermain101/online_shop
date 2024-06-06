@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelAdauga_Sterge_Admin = new System.Windows.Forms.Panel();
             this.buttonAdauga_Sterge = new System.Windows.Forms.Button();
             this.labelRol = new System.Windows.Forms.Label();
             this.comboBoxRol = new System.Windows.Forms.ComboBox();
             this.labelEmail = new System.Windows.Forms.Label();
             this.comboBoxEmail = new System.Windows.Forms.ComboBox();
+            this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.panelAdauga_Sterge_Admin.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -95,6 +97,16 @@
             this.comboBoxEmail.Size = new System.Drawing.Size(230, 24);
             this.comboBoxEmail.TabIndex = 0;
             // 
+            // kryptonPalette1
+            // 
+            this.kryptonPalette1.FormStyles.FormMain.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(252)))), ((int)(((byte)(252)))));
+            this.kryptonPalette1.FormStyles.FormMain.StateCommon.Back.Color2 = System.Drawing.Color.White;
+            this.kryptonPalette1.FormStyles.FormMain.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.kryptonPalette1.FormStyles.FormMain.StateCommon.Border.Rounding = 10;
+            this.kryptonPalette1.HeaderStyles.HeaderForm.StateCommon.Back.Color1 = System.Drawing.SystemColors.Info;
+            // 
             // Adauga_Stergere_Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -102,6 +114,8 @@
             this.ClientSize = new System.Drawing.Size(780, 525);
             this.Controls.Add(this.panelAdauga_Sterge_Admin);
             this.Name = "Adauga_Stergere_Admin";
+            this.Palette = this.kryptonPalette1;
+            this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.Text = "Adauga_Stergere_Admin";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Adauga_Stergere_Admin_FormClosed);
             this.Load += new System.EventHandler(this.Adauga_Stergere_Admin_Load);
@@ -119,5 +133,6 @@
         private System.Windows.Forms.Label labelEmail;
         private System.Windows.Forms.ComboBox comboBoxEmail;
         private System.Windows.Forms.Button buttonAdauga_Sterge;
+        private ComponentFactory.Krypton.Toolkit.KryptonPalette kryptonPalette1;
     }
 }
